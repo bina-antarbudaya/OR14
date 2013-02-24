@@ -1,0 +1,82 @@
+.token-entry {
+	text-align: center;
+}
+.token-entry label {
+	display: block;
+	font-size: 1.3em;
+	font-weight: 300;
+	margin-bottom: 1em;
+}
+
+.faqs, .chapters {
+	float: left;
+	width: 100%;
+	margin-top: 30px;
+}
+.faqs {
+	text-align: center;
+}
+.faqs dt {
+	margin-top: 0;
+}
+.faqs h1 {
+	display: none;
+}
+.chapters h1 {
+	border-top: 1px solid #d9ebf6;
+	margin: 0 -10px;
+	padding-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.faqs dl {
+	float: left;
+	max-width: 440px;
+}
+.faqs dl.second {
+	margin-left: 40px;
+}
+
+.chapters dl {/*
+	-moz-column-count: 4;
+	-moz-column-gap: 20px;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 20px;
+	column-count: 4;
+	column-gap: 20px;*/
+}
+.chapters dt {
+	margin: 0;
+	float: left;
+	text-align: right;
+	width: 120px;
+	margin-right: 20px;
+}
+.chapters dd {
+	float: left;
+	width: 300px;
+	margin-right: 20px;
+}
+
+.chapters ul {
+	padding-left: 0;
+	padding-bottom: 10px;
+}
+.chapters li {
+	list-style: none;
+}
+
+dl {
+	line-height: 1.5;
+}
+dt {
+	margin-top: 10px;
+	margin-bottom: 2px;
+	color: #000;
+	font-weight: 600;
+}
+
+.user-controls .activate-link {
+	display: none;
+}

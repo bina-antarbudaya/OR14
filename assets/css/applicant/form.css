@@ -1,0 +1,631 @@
+body {
+	overflow-y: scroll;
+}
+
+.message.extended {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.message {
+	margin-bottom: 1px;
+}
+
+.actions-nav.expleft {
+	text-align: right;
+}
+.actions-nav.expleft li {
+	margin-right: 0;
+	margin-left: 20px;
+}
+.actions-nav.expleft li.expires-on {
+	float: left;
+	margin-left: 0;
+}
+
+.form-nav {
+	position: relative;
+	background: white;
+	text-align: right;
+	width: 229px;
+	float: left;
+	padding-top: 30px;
+	padding-bottom: 40px;
+	border-right: 1px solid #d9ebf6;
+	margin-right: -1px;
+	margin-left: -10px;
+}
+.form-nav header h1 {
+	display: none;
+}
+.form-nav ol {
+	padding: 0;
+	margin-right: -1px;
+	position: relative;
+	z-index: 2;
+}
+.form-nav li {
+	display: block;
+	font-size: 14px;
+	list-style: decimal inside;
+	clear: both;
+}
+.form-nav li.finalize {
+	border-top: 1px solid #ecf5fb;
+	margin-right: 1px;
+	padding-top: 10px;
+}
+.form-nav li.finalize a {
+	margin-right: -1px;
+}
+.form-nav li a {
+	border-top: 1px solid transparent;
+/*	border-left: 1px solid transparent;*/
+	border-bottom: 1px solid transparent;
+	display: block;
+	color: #007ac2;
+	padding: 5px 20px;
+	margin-bottom: 10px;
+	font-weight: 300;
+}
+.form-nav li a.active {
+	font-weight: bold;
+	letter-spacing: -.05em;
+	color: #007ac2;
+	background: #fff;
+	border-color: #d9ebf6;
+}
+
+.form-fields {
+	width: 700px;
+	padding-left: 20px;
+	padding-bottom: 100px;
+	float: left;
+	border-left: 1px solid #d9ebf6;
+	position: relative;
+}
+
+.form-table {
+	width: 700px;
+}
+.form-table td.label {
+	width: 210px;
+}
+.form-table td.field {
+	width: 490px;
+}
+
+.form-table td table,
+.subform {
+	width: 700px;
+}
+.form-table td table td,
+.subform td {
+	padding: 5px 0 0;
+	border: none;
+}
+.form-table td table th,
+.subform th {
+	text-align: left;
+	font-size: 11px;
+	color: #457b9c;
+}
+
+.subform caption,
+.form-table caption {
+	border-top: 1px solid #d9ebf6;
+	padding: 10px 0;
+	text-align: left;
+}
+
+.form-table.siblings td.label {
+	width: 30%;
+	vertical-align: middle;
+}
+.form-table.siblings td.field {
+	width: 20%;
+}
+.form-table.siblings td.field.noc {
+	border-right: 1px solid #b6cee5;
+}
+.form-table.siblings td.label.nth {
+	padding-left: 20px;
+}
+.sibling-name {
+	width: 280px;
+}
+.sibling-dob {
+	width: 230px;
+}
+.sibling-job {
+	width: 190px;
+}
+.siblings-table .sibling-name input {
+	width: 260px;
+}
+.siblings-table .sibling-job input {
+	width: 180px;
+}
+.siblings-table .date-d {
+	width: 4em;
+}
+.siblings-table .date-m {
+	width: 8em;
+}
+.siblings-table .date-y {
+	width: 5.3em;
+}
+.prototype {
+	display: none;
+}
+
+
+.phone-number {
+	display: inline-block;
+	padding: 0 3px;
+	color: #dfe8ee;
+	border: 1px solid;
+	line-height: 1;
+	margin: 2px 0;
+	width: 152px;
+}
+.phone-number:hover {
+	color: #acc4d3;
+}
+.phone-number.focus {
+	color: #007ac2;
+}
+.phone-number.focus input {
+	border-color: #007ac2;
+}
+.phone-number input {
+	border: none;
+	margin: 0;
+}
+.phone-number .very-short {
+	width: 30px;
+	text-align: center;
+}
+.phone-number .short {
+	width: 95px;
+	padding-left: 5px;
+	border-left: 1px solid #dfe8ee;
+}
+
+span.number {
+	display: inline-block;
+	padding: 2px 0 2px 4px;
+	color: #b6cee5;
+	background: #fff;
+	border: 1px solid;
+	line-height: 1;
+	margin: 1px 0;
+}
+span.number.focus {
+	color: #007ac2;
+}
+span.number.focus input {
+	border-color: #007ac2;
+}
+span.number input {
+	border: none;
+	margin: 0;
+}
+
+label.inline {
+	display: inline-block;
+	width: 400px;
+	margin-right: 20px;
+}
+
+table.form-table tr td.combined {
+	width: 100%;
+	padding: 10px 0;
+}
+
+.container fieldset legend {
+	color: #005587;
+	font-size: 22px;
+	padding-top: 40px;
+	margin-bottom: 40px;
+	float: left;
+	width: 100%;
+}
+.content legend + p {
+	margin-top: 0;
+}
+
+.container fieldset legend + h1 {
+	margin-top: 0;
+}
+
+.container fieldset h1 + .form-table,
+.container fieldset legend + .form-table {
+	margin-top: 0;
+}
+
+.container fieldset h1 {
+	font-size: 15px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+fieldset h1 span {
+	font-size: 12px;
+	color: #457b9c;
+	line-height: 1.3;
+	margin-left: 5px;
+}
+
+.programs-table {
+	width: 100%;
+	margin-top: 20px;
+	line-height: 1.5;
+}
+.programs-table th {
+	color: #457b9c;
+	text-align: left;
+	padding: 10px 0;
+	width: 20%;
+}
+.programs-table th,
+.programs-table td {
+	border-top: 1px solid #d9ebf6;
+}
+.programs-table ul {
+	padding: 0;
+}
+.country-preference td.field,
+.country-preference td.field select {
+	font-size: 11px;
+}
+.country-preference td ol {
+	float: left;
+	margin-bottom: 5px;
+	width: 200px;
+}
+.country-preference ol {
+	padding-left: 2em;
+}
+.country-preference #country-pref-td span.instruction {
+	float: left;
+	display: block;
+	width: 200px;
+	line-height: 1.4;
+}
+.programs-table ul li {
+	list-style: none;
+}
+.programs-table td {
+	width: 40%;
+	padding: 10px 0;
+}
+.programs-table .program-name td {
+/*	font-size: 14px;*/
+	color: #000;
+	font-size: 15px;
+/*	letter-spacing: -.05em;*/
+}
+.programs-table .program-length td {
+	font-size: 11px;
+}
+.programs-table .program-length td span {
+	display: block;
+	color: #000;
+	font-size: 12px;
+	margin-bottom: -1.1em;
+}
+.programs-table .program-destination td.afs {
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+	column-count: 2;
+}
+.programs-table .program-info p {
+	margin: 5px 20px 5px 0;
+	font-size: 11px;
+}
+
+#reference h1 {
+	margin-bottom: 20px;
+}
+p.field {
+	margin: 0 0 20px;
+}
+p.field textarea {
+	width: 600px;
+	max-width: 600px;
+	padding: 10px;
+	display: block;
+	margin-top: 5px;
+}
+
+#personality p label {
+	font-size: 15px;
+/*	letter-spacing: -.05em;*/
+	color: #000;
+}
+#personality p textarea {
+	margin-top: 10px;
+}
+
+#kegiatan .subform .name,
+#kegiatan .subform .kind,
+#kegiatan .subform .achv,
+#kegiatan .subform .level {
+	width: 146px;
+}
+#kegiatan .subform .chmp {
+	width: 302px;
+}
+#kegiatan .subform .ngo {
+	width: 219px;
+}
+#kegiatan .subform .period {
+	width: 82px;
+}
+#kegiatan .subform .year {
+	width: 82px;
+}
+#kegiatan .subform .name input,
+#kegiatan .subform .kind input,
+#kegiatan .subform .achv input {
+	width: 136px;
+}
+#kegiatan .subform .level select {
+	width: 146px;
+	padding: 0;
+}
+#kegiatan .subform .chmp input {
+	width: 292px;
+}
+#kegiatan .subform .ngo input {
+	width: 209px;
+}
+#kegiatan .subform .year select {
+	width: 82px;
+}
+#kegiatan .subform .period input {
+	width: 72px;
+}
+#kegiatan .subform {
+	margin-bottom: 20px;
+}
+
+p.single-bool label {
+	padding-left: 5px;
+}
+
+.message.errors a {
+	color: #a00;
+}
+
+#finalisasi button {
+	font-size: 15px;
+	padding: 10px 30px;
+}
+#finalisasi li {
+	padding-left: 40px;
+	width: 600px;
+}
+#finalisasi li label.main-point {
+	line-height: 1.5;
+	font-size: 18px;
+	color: #000;
+	display: block;
+	float: none;
+	margin: 0;
+}
+#finalisasi li label.main-point strong {
+	font-size: 18px;
+	color: #a00;
+}
+#finalisasi li ul {
+	display: block;
+	clear: left;
+}
+#finalisasi li.finalize-checkbox-box {
+	font-size: 14px;
+}
+#finalisasi button:disabled {
+	visibility: hidden;
+}
+
+label.subpoint {
+	display: block;
+	display: inline-block;
+	width: 100px;
+	height: 20px;
+	margin-right: -.3em;
+}
+
+fieldset {
+	min-height: 42em;
+}
+fieldset p {
+	line-height: 1.5;
+}
+input, select {
+	line-height: 1;
+	margin: 2px 0;
+}
+.long, .large {
+	width: 400px;
+	max-width: 400px;
+}
+.extra-large {
+	width: 400px;
+	height: 200px;
+}
+.float {
+	display: block;
+	float: left;
+}
+input.required {
+	background-color: #D9EBF6;
+}
+label.descriptive {
+	line-height: 1.3;
+	margin-bottom: 5px;
+	clear: right;
+}
+
+.academics {
+	margin-top: 0;
+	border-collapse: collapse;
+	border-top: 1px solid #d9ebf6;
+	border-bottom: 1px solid #d9ebf6;
+}
+.academics .grade {
+	width: 12%;
+	border-right: 1px solid #d9ebf6;
+}
+.academics .average,
+.academics .subjects {
+	width: 22%;
+}
+.academics.sma .average,
+.academics.sma .subjects {
+	width: 44%;
+}
+.academics .term-final.average {
+	border-left: 1px solid #d9ebf6;
+}
+.academics th strong {
+	color: inherit;
+	font-weight: normal;
+	text-decoration: underline;
+}
+.academics th.term-initial,
+.academics th.term-final {
+	border-top: 1px solid #d9ebf6;
+}
+.form-table table.academics th,
+.subform.academics th {
+	padding: 5px;
+	text-align: center;
+	vertical-align: middle;
+}
+.academics td,
+.academics input {
+	font-size: 12px;
+	line-height: 14px;
+	vertical-align: middle;
+	text-align: center;
+}
+.academics td.term-initial,
+.academics td.term-final {
+	font-size: 11px;
+}
+.academics input {
+	margin: 0 5px;
+}
+.academics td {
+	padding: 5px 0;
+}
+.academics tbody tr:nth-child(odd) td {
+	background: #f9fcfe;
+}
+
+.picture-container {
+	float: left;
+	width: 100%;
+	overflow: auto;
+	border-top: 1px solid #d9ebf6;
+	padding: 10px 0;
+}
+.picture-container img {
+	display: block;
+	margin-left: 30%;
+}
+
+.form-page-nav.above {
+	margin: 0 -10px;
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #d9ebf6;
+	padding: 25px 10px 5px;
+}
+.form-page-nav.below {
+	float: left;
+	width: 100%;
+	margin-top: 40px;
+	padding: 5px 0;
+}
+.form-page-nav p {
+	margin: 0;
+	width: 240px;
+	float: left;
+	vertical-align: middle;
+	line-height: 20px;
+}
+.form-page-nav p.prev {
+	width: 200px;
+	padding-right: 40px;
+	padding-top: 4px;
+}
+.form-page-nav p.next {
+	float: right;
+	text-align: right;
+	width: 200px;
+	padding-top: 4px;
+}
+.form-page-nav .save-button {
+	margin: 0;
+}
+.form-page-nav.below p.prev {
+	margin-left: -240px;
+}
+
+.form-page-nav p.save button {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+/* Form validation */
+.invalid {
+	border-color: #b23b23 !important;
+/*	box-shadow: 0 0 5px #f00;*/
+}
+.recheck {
+	color: #c00 !important;
+}
+
+input[name=sex] {
+	margin-right: 5px;
+}
+
+@media screen and (max-width: 979px) {
+	.form-nav {
+		display: none;
+	}
+	.form-fields {
+		margin: 0 auto;
+		padding-left: 0;
+		border-left: none;
+		float: none;
+	}
+	.form-page-nav p {
+		width: 40%;
+		float: left;
+		vertical-align: middle;
+		line-height: 20px;
+		text-align: center;
+	}
+	.form-page-nav p.prev {
+		width: 30%;
+		padding-right: 0;
+		padding-top: 4px;
+		text-align: left;
+	}
+	.form-page-nav p.next {
+		width: 30%;
+		padding-top: 4px;
+	}
+	.container fieldset legend {
+		text-align: center;
+	}
+	.form-page-nav.below {
+		padding-top: 0;
+	}
+	.form-page-nav.below p.prev {
+		margin-left: 0;
+	}
+}

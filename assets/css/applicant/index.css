@@ -1,0 +1,75 @@
+table.applicants {
+	width: 960px;
+	margin: 0 -10px;
+	border-collapse: collapse;
+}
+table.applicants td {
+	padding: 5px 0;
+	border-bottom: 1px solid #d9ebf6;
+}
+table.applicants th {
+	color: #457b9c;
+	text-align: left;
+	padding: 5px 0;
+	border-bottom: 1px solid #B6CEE5;
+}
+table.applicants tr:hover td {
+	background: #f2f6fa;
+}
+table.applicants tr.unfinalized:hover td.test-id {
+	color: #B6CEE5;
+}
+
+table.applicants .checkbox {
+	width: 25px;
+	padding-left: 10px;
+}
+table.applicants .test-id {
+	width: 160px;
+}
+table.applicants .name,
+table.applicants .school {
+	width: 295px;
+}
+
+table.applicants tr.unfinalized td.test-id {
+	color: #d9ebf6;
+}
+table.applicants tr.expired td {
+	font-style: italic;
+}
+table.applicants tr.expired td.expires-on {
+	color: #b23b23;
+}
+
+span.empty {
+	font-style: italic;
+	font-weight: normal;
+	color: #d9ebf6;
+}
+
+li.page-selector {
+	float: right;
+	margin-right: 0;
+}
+li.page-selector a {
+	margin-left: 10px;
+}
+li.applicant-count {
+	float: right;
+}
+.page-selector
+.stage-selector {
+	float: left;
+}
+.filter a {
+	margin: 0 0 0 10px;
+	font-size: 14px;
+}
+.stage-selector a {
+	margin: 0 10px 0 0;
+}
+.filter  a.active {
+	letter-spacing: -0.5px;
+	font-weight: bold;
+}

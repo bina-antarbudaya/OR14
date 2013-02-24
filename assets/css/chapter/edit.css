@@ -1,0 +1,11 @@
+@import url('create.css');
+
+.yaml {
+	font-family: 'Inconsolata', 'Consolas', 'Courier', monospace;
+	height: 200px;
+	font-size: 13px;
+}
+
+.chapter-details {
+	margin-bottom: 80px;
+}

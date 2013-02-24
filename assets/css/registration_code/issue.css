@@ -1,0 +1,16 @@
+form {
+	display: block;
+}
+.container header h1 {
+	margin: 30px 0;
+} 
+table.form-table {
+	float: none;
+}
+span.instruction {
+	display: block;
+	font-size: 12px;
+}
+span.instruction strong {
+	color: inherit;
+}

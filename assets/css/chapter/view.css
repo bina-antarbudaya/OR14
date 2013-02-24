@@ -1,0 +1,104 @@
+header.page-title h1 {
+	font-size: 40px;
+	font-weight: normal;
+	letter-spacing: -3px;
+	padding-top: 30px;
+}
+
+.content section {
+	clear: both;
+	margin: 0 -20px 15px;
+	padding: 0 20px 15px 0;
+}
+.content section > article {
+	padding-bottom: 30px;
+	float: left;
+	width: 300px;
+	margin-left: 20px;
+}
+.content section + section {
+	padding-top: 15px;
+	border-top: 1px solid #d9ebf6;
+}
+.content section article header h1 {
+	font-size: 15px;
+	letter-spacing: 0;
+	margin: 0 0 15px 0;
+	color: #005587;
+}
+
+.selection-todos ol {
+	padding-left: 20px;
+}
+.selection-todos ol li {
+	margin-bottom: 10px;
+}
+
+.quick-view input {
+/*	text-transform: uppercase;*/
+}
+
+table.summary {
+	width: 300px;
+}
+table.summary td,
+table.summary th {
+	padding: 5px 0;
+}
+table.summary th.label {
+	text-align: left;
+	color: #457b9c;
+	width: 100px;
+}
+table.summary td.field {
+	width: 200px;
+}
+table.applicants td,
+table.summary th {
+	padding: 2px 0;
+}
+
+ul.counts {
+	clear: both;
+	padding: 0;
+	list-style: none;
+}
+ul.counts li {
+	float: left;
+	width: 50px;
+	font-size: 11px;
+	margin-bottom: 15px;
+	color: #457b9c;
+}
+ul.counts li + li {
+	padding-left: 20px;
+}
+ul.counts li strong {
+	display: block;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 0.9;
+	color: #000;
+}
+ul.counts li ul {
+	margin-left: -20px;
+	width: 70px;
+	margin-top: 5px;
+	border-top: 1px solid #d9ebf6;
+	list-style: none;
+	padding-left: 0;
+}
+ul.counts li ul li {
+	float: none;
+	padding-top: 5px;
+	padding-left: 9px;
+	margin-left: 10px;
+	margin-bottom: 0;
+	padding-bottom: 3px;
+	border-left: 1px solid #d9ebf6;
+	width: 100px;
+}
+ul.counts li ul li strong {
+	font-size: 12px;
+	display: inline;
+}

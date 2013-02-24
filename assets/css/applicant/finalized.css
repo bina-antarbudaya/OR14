@@ -1,0 +1,146 @@
+/* Proper grid */
+.page-title h1,
+.page-title p,
+.container {
+	width: 940px;
+}
+.what, .when, .how, .where {
+	float: left;
+}
+header.applicant-header {
+	margin-bottom: 0;
+}
+section.what {
+	width: 440px;
+	margin-right: 19px;
+	border-right: 1px solid #d9ebf6;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+section.how {
+	margin-left: -20px;
+	padding-left: 19px;
+	border-left: 1px solid #d9ebf6;
+}
+section.what > p,
+section.how > p {
+	width: 30em;
+	line-height: 1.5;
+	font-size: 12px;
+	color: #005587;
+	font-size: 15px;
+}
+dl.files {
+	margin-top: 30px;
+}
+dl.files dt {
+	margin-left: 20px;
+	counter-increment: f;
+	float: left;
+	color: #000;
+	font-size: 15px;
+}
+dl.files dt:before {
+	display: block;
+	float: left;
+	content: counter(f) ". ";
+	color: #005587;
+	margin-left: -20px;
+}
+dl.files dd.download-link {
+	padding-top: 4px;
+	float: right;
+}
+dl.files dd.download-link a {
+	padding: 4px 20px;
+	background: #0054a7 url(../global/buttongrad.png) center repeat-x;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+dl.files dd.download-link a:active {
+	background: #002a52 url(../global/buttongrad-dark.png) center repeat-x;
+}
+dl.files dd.details {
+	clear: both;
+	padding: 15px 0 0;
+	margin-bottom: 30px;
+}
+dl.files dd.details ul {
+	padding: 0 0 0 20px;
+	list-style: none;
+}
+dl.files dd.details ul li {
+	line-height: 1.4;
+	margin-bottom: 5px;
+}
+
+section.how {
+	width: 460px;
+	float: left;
+	padding-bottom: 20px;
+}
+.how p time {
+	white-space: nowrap;
+	font-weight: bold;
+}
+.how p {
+	margin-bottom: 0;
+}
+
+dl.depots {
+}
+dl.depots dt {
+	clear: both;
+	padding-top: 30px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	color: #000;
+}
+dl.depots dt.secondary:before {
+	color: #005587;
+	content: "atau ";
+	font-style: italic;
+}
+dl.depots dd.map {
+	width: 458px;
+	border: 1px solid #d9ebf6;
+	margin-bottom: 10px;
+}
+dl.depots dd.map img,
+dl.depots dd.map a {
+	display: block;
+}
+dl.depots dd.address {
+	width: 220px;
+	float: left;
+}
+dl.depots dd.address address {
+	margin: 0;
+	line-height: 1.6;
+}
+dl.depots dd.schedule {
+	width: 220px;
+	float: left;
+}
+dl.depots dd h3 {
+	margin: 0 0 5px;
+	color: #005587;
+}
+dl.depots dd.schedule ul {
+	padding: 0;
+	list-style: none;
+	line-height: 1.6;
+}
+
+section.then {
+	clear: both;
+	border-top: 1px solid #d9ebf6;
+	width: 940px;
+}
+section.then p {
+	width: 940px;
+	text-align: center;
+}

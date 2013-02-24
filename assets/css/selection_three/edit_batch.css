@@ -1,0 +1,29 @@
+table.form-table td.label {
+	width: 40%;
+}
+table.form-table td.field {
+	width: 60%;
+}
+section.details table.form-table {
+	width: 620px;
+}
+section.details {
+	width: 100%;
+	max-width: 620px;
+	float: left;
+	margin-right: 20px;
+}
+section.info {
+	float: left;
+	padding-top: 47px;
+}
+section.info p.count {
+	font-size: 13px;
+}
+section.info p.count strong {
+	display: block;
+	font-size: 30px;
+	line-height: 0.9;
+	font-weight: 600;
+	letter-spacing: -.05em;
+}

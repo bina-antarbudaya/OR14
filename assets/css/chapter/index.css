@@ -1,0 +1,52 @@
+
+table.chapters,
+table.chapters tr,
+table.chapters td {
+	display: block;
+}
+
+table.chapters {
+	margin-right: -40px;
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+table.chapters tr {
+	float: left;
+	width: 260px;
+	margin-right: 40px;
+	margin-bottom: 40px;
+}
+.chapter-code {
+	display: none;
+	font-size: 15px;
+	color: #000;
+}
+.chapter-name {
+	font-weight: 600;
+	letter-spacing: -.05em;
+	font-size: 24px;
+	color: #000;
+	margin-bottom: 5px;
+	text-indent: -.05em;
+}
+table td.chapter-address,
+table td.chapter-email {
+	display: none;
+}
+td.actions p {
+	margin-top: 0;
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+td.actions p a {
+	font-size: 15px;
+}
+td.actions p strong {
+	font-size: 20px;
+	font-weight: 600;
+	color: inherit;
+}
+.chapter-applicant-count span,
+.chapter-user-count span {
+	font-weight: bold;
+}

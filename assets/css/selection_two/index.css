@@ -1,0 +1,14 @@
+.container h1 {
+	margin-bottom: 30px;
+}
+table.batches {
+	width: 100%;
+}
+table.batches th,
+table.batches td {
+	text-align: left;
+	border-top: 1px solid #d9ebf6;
+	border-bottom: 1px solid #d9ebf6;
+	border-collapse: collapse;
+	padding: 5px 0;
+}

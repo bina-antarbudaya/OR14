@@ -1,0 +1,21 @@
+table.applicants {
+	width: 100%;
+	margin: 0 -10px;
+}
+table.applicants th, table.applicants td {
+	text-align: left;
+	padding: 7px 5px;
+}
+table.applicants th {
+	font-weight: 600;
+	color: #000;
+}
+table.applicants tr > :first-child {
+	padding-left: 10px;
+}
+table.applicants tr > :last-child {
+	padding-right: 10px;
+}
+table.applicants tr:nth-child(odd) td {
+	background: #f2f6fa;
+}

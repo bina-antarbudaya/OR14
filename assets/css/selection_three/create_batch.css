@@ -1,0 +1,56 @@
+section.intro {
+	width: 100%;
+	max-width: 360px;
+	float: left;
+	margin-right: 40px;
+}
+section.intro p {
+	line-height: 1.4;
+}
+
+section.form {
+	width: 100%;
+	max-width: 520px;
+	margin-top: 10px;
+	float: left;
+}
+section.form table.form-table.flat td {
+	display: block;
+	width: 100%;
+}
+section.form table.form-table.flat td.field {
+	border-top: 0;
+	padding-top: 0;
+}
+textarea.large {
+	width: 100%;
+	max-width: 520px;
+	resize: vertical;
+}
+section.form.list {
+	width: 100%;
+	max-height: 400px;
+	overflow-y: auto;
+}
+table.participants {
+	width: 100%;
+}
+table.participants td.no {
+	padding: 5px 10px;
+	border-bottom: 1px solid #d9ebf6;
+	color: #B6CEE5;
+	width: 7%;
+	text-align: right;
+}
+table.participants td.test-id {
+	font-weight: 600;
+	padding: 5px 0;
+	border-bottom: 1px solid #d9ebf6;
+	color: #000;
+	width: 30%;
+}
+table.participants td.full-name {
+	padding: 5px 0;
+	border-bottom: 1px solid #d9ebf6;
+	width: 63%;
+}

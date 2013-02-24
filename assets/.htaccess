@@ -1,0 +1,4 @@
+RewriteEngine Off
+
+Header set Cache-Control "public"
+Header set Expires "Thu, 15 Apr 2012 20:00:00 GMT"

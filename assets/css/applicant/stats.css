@@ -1,0 +1,128 @@
+table {
+	color: #000;
+}
+td, th {
+	padding: 5px 20px 5px 0;
+	border-bottom: 1px solid #eee;
+}
+button.use {
+	font-size: 11px;
+	padding: 2px;
+	border: none;
+}
+
+.statbox {
+	margin-bottom: 40px;
+}
+
+.statbox {
+	float: left;
+	width: 100%;
+	padding-bottom: 30px;
+}
+
+.statbox header {
+	clear: right;
+	max-width: 440px;
+	text-align: center;
+	color: #000;
+	font-size: 22px;
+	padding-top: 15px;
+	margin-bottom: 15px;
+	float: left;
+	width: 100%;
+	letter-spacing: -.05em;
+}
+
+.stat-body {
+	float: left;
+	width: 100%;
+}
+
+.leaderboard {
+	float: left;
+	max-width: 440px;
+	max-height: 440px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.chart {
+	float: left;
+	max-width: 440px;
+	margin-right: 40px;
+}
+
+.statbox table {
+	width: 400px;
+}
+
+.statbox.countries header {
+	max-width: none;
+}
+.statbox.countries table {
+	width: 100%;
+}
+
+.statbox.countries td {
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+}
+.country-name {
+	vertical-align: middle;
+	font-size: 15px;
+	text-align: center;
+}
+.statbox.countries tr.prim td.count {
+	border-bottom: none;
+}
+.statbox.countries .percentage,
+.countries .count {
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.count {
+	font-weight: bold;
+	text-align: center;
+}
+.percentage {
+	text-align: right;
+	padding-right: 30px;
+}
+
+table.tree {
+	border-top: 1px solid #bbb;
+}
+table.tree td {
+	padding: 7px 5px 3px 5px;
+	border-bottom-color: #f6f6f6;
+	color: #999;
+}
+table.tree strong {
+	font-size: 15px;
+	letter-spacing: -.05em;
+}
+table.tree td.active {
+	border-bottom-color: #bbb;
+	vertical-align: middle;
+}
+
+.chart > div {
+	width: 440px;
+	height: 440px;
+}
+
+td.rank {
+	color: #999;
+	width: 1%;
+	text-align: right;
+}
+td.rank .repeat {
+	color: #eee;
+}
+
+.application_stage strong {
+	width: 3em;
+}

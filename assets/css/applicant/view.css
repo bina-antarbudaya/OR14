@@ -1,0 +1,72 @@
+.picture-container {
+	width: 300px;
+	height: 400px;
+	margin: 0 20px 20px 0;
+	float: left;
+	margin-bottom: 40px;
+}
+
+.container h2 {
+	display: none;
+}
+
+.form-preview {
+	width: 300px;
+	float: left;
+	margin-right: 40px;
+	margin-bottom: 40px;
+}
+table {
+	width: 300px;
+}
+td {
+	padding: 5px 0;
+}
+td.label {
+	color: #457b9c;
+	width: 140px;
+}
+td.field {
+	width: 160px;
+}
+.form-preview ul {
+	margin-top: 20px;
+	border-top: 1px solid #d9ebf6;
+}
+
+.application-status {
+	width: 280px;
+	float: left;
+	margin-bottom: 40px;
+}
+span.instruction {
+	display: block;
+	margin-top: 10px;
+	text-align: center;
+}
+.confirm-button {
+	width: 280px;
+	padding-left: 0;
+	padding-right: 0;
+}
+.unfinalize-button {
+	margin-top: 20px;
+	width: 280px;
+	background: #fff;
+	border: 1px solid #d9ebf6;
+	color: inherit;
+	text-shadow: none;
+}
+button.unfinalize-button:active,
+button.unfinalize-button:focus {
+	background: none;
+	border-color: #457b9c;
+}
+
+ul.incomplete-fields {
+	margin: 5px 0;
+	max-height: 10em;
+	overflow-y: auto;
+	overflow-x: hidden;
+	font-family: 'Andale Mono', 'Monaco', 'Consolas', monospace;
+}

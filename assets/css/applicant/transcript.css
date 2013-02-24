@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:light,lightitalic,regular,italic,medium,mediumitalic,bold,bolditalic');
+
+@media print {
+	.instructions {
+		display: none;
+	}
+	@page {
+		size: portrait;
+		margin: 2cm;
+	}
+	* {
+		orphans: 5;
+		widows: 5;
+	}
+	body {
+		width: 54em;
+		margin: 1cm auto;
+	}
+}
+@media screen {
+	section {
+		max-width: 54em;
+		margin: 0 auto 40pt;
+	}
+	#cover {
+		padding-bottom: 40pt;
+	}
+	#kepribadian {
+		padding-top: 40pt;
+	}
+	body {
+		margin-bottom: 80pt;
+	}
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+
+body {
+	font-size: 10pt;
+	font-family: Open Sans, Tahoma, Arial, sans-serif;
+	color: #000;
+	line-height: 1.5;
+}
+
+.pane {
+	margin-bottom: 30pt;
+}
+.pane h1 {
+	font-size: 14pt;
+	padding: 5pt 0;
+}
+.pane h2 {
+	font-size: 10pt;
+	margin: 15pt 0 5pt;
+	font-weight: 600;
+}
+.pane h1 + h2 {
+	margin-top: 5pt;
+}
+.pane > p {
+	margin: 5pt 0;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+table.subform {
+	margin: 10pt 0;
+}
+table td, table th {
+	text-align: left;
+	border-collapse: collapse;
+	padding: 5pt 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	line-height: 1.6;
+}
+table.form-table td.label {
+	width: 30%;
+	color: #007ac2;
+}
+label, span.label, th, p.label {
+	color: #007ac2;
+}
+caption {
+	color: #000;
+	font-weight: 600;
+	text-align: left;
+	width: 100%;
+	padding: 5pt 0;
+}
+caption label {
+	color: #000;
+}
+p.label {
+	margin: 5pt 0;
+	padding-top: 5pt;
+	border-top: 1px solid #eee;
+}
+span.value {
+	color: #000;
+}
+span.tag {
+	color: #007ac2;
+	padding: 1pt 6pt;
+	border: 1px solid;
+	margin: 0 5pt 0 20pt;
+	-moz-border-radius: 3pt;
+	border-radius: 3pt;
+}
+span.tag + span.tag {
+	margin: 0 5pt;
+}
+label.subpoint {
+	display: inline-block;
+	width: 7em;
+}
+table.form-table td.field {
+	width: 70%;
+	padding-bottom: 5pt;
+}
+
+#cover {
+	text-align: center;
+	line-height: 1.4;
+}
+#cover h1 {
+	padding-top: 48pt;
+	text-align: center;
+	padding-bottom: 36pt;
+	font-size: 18pt;
+}
+#cover h1.name {
+	text-align: center;
+	padding-top: 1em;
+	font-size: 30pt;
+	line-height: 1.2;
+	font-weight: bold;
+	padding-bottom: 0;
+	letter-spacing: -.05em;
+}
+#cover h2.test-id {
+	padding-bottom: 60pt;
+	font-size: 13pt;
+}
+#cover .cover-table th {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+#cover .cover-table td {
+	border-top: 0;
+	padding-top: 0;
+	font-size: 14pt;
+}
+#cover .cover-table .programs {
+	width: 30%;
+}
+#cover .cover-table .school {
+	width: 60%;
+}
+#cover .cover-table .chapter {
+	width: 10%;
+}
+
+#cover p.programs {
+	padding-top: 1em;
+	text-align: left;
+	padding-bottom: 1em;
+	border-bottom: 0.75pt solid #000;
+}
+#cover p.programs strong {
+	font-size: 14pt;
+}
+#cover p.school {
+	padding-top: 1em;
+	text-align: left;
+	padding-bottom: 1em;
+}
+#cover p.school span {
+	font-size: 14pt;
+}
+#cover p.telkomsel {
+	border-top: 0.75pt solid #000;
+	padding-top: 1em;
+	text-align: left;
+}
+
+.pagebreak {
+	page-break-after: always;
+	clear: both;
+}
+
+.instructions {
+	background: #ffc;
+	padding: 40px 20px;
+	margin-bottom: 40pt;
+	line-height: 1.5;
+	text-align: center;
+}
+.instructions p {
+	margin: 1em 0;
+}
+
+.footer p {
+	margin-left: 50%;
+	width: 30%;
+}
+.footer p.statement {
+	padding-top: 30pt;
+	padding-bottom: 10pt;
+	margin-left: 50%;
+	width: 50%;
+}
+.footer p.date {
+	padding-bottom: 80pt;
+	border-bottom: 1px solid #007ac2;
+}
+.footer p.signature {
+	padding-top: 5pt;
+}
+
+a.print-link {
+	text-decoration: none;
+	padding: 4px 20px;
+	background: #0054a7 url(/assets/css/global/buttongrad.png) center repeat-x;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+a.print-link:active {
+	background: #002a52 url(/assets/css/global/buttongrad-dark.png) center repeat-x;
+}

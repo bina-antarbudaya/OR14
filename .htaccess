@@ -1,0 +1,10 @@
+DirectoryIndex index.php index.html
+
+Options +FollowSymlinks
+
+RewriteEngine on
+
+# any request that doesn't match an existing file or directory will be caught.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]

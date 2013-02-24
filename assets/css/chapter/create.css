@@ -1,0 +1,39 @@
+
+.form-table {
+	width: 460px;
+}
+
+fieldset {
+	width: 440px;
+	float: left;
+	margin: 10px 0 20px;
+}
+.chapter-details {
+	margin-right: 40px;
+}
+
+.chapter-details textarea.large {
+	width: 290px;
+}
+
+fieldset.save {
+	margin: 0 0 40px 0;
+}
+fieldset.save p {
+	float: left;
+	line-height: 30px;
+	vertical-align: middle;
+}
+p.save-button {
+	margin-right: 20px;
+}
+
+#chapter_code {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.container {
+	padding-bottom: 40px;
+}

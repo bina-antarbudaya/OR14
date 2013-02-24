@@ -1,0 +1,55 @@
+.result h1 {
+	margin-top: 60px;
+	font-size: 40px;
+}
+.result p {
+	font-size: 13px;
+	padding-bottom: 30px;
+	line-height: 1.5;
+	max-width: 720px;
+}
+
+header.applicant-header {
+	margin: -5px -20px;
+	padding: 0 20px 15px;
+	border-bottom: 1px solid #d9ebf6;
+	margin-bottom: 20px;
+}
+p.applicant-test-id {
+	float: right;
+	font-size: 20px;
+	margin: 0 0 0 20px;
+	font-weight: 300;
+	letter-spacing: -.05em;
+	color: #007ac2;
+}
+h1.applicant-name {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+div.container div.message.rereg {
+	margin-top: 40px !important;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+div.message.rereg h1 {
+	font-size: 18px;
+	margin-bottom: 15px;
+	letter-spacing: -.1em;
+}
+a.download-link {
+	padding: 4px 20px;
+	background: #0054a7 url(../global/buttongrad.png) center repeat-x;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+a.download-link:active {
+	background: #002a52 url(../global/buttongrad-dark.png) center repeat-x;
+}
+p.download-buttons {
+	margin: 15px 0;
+}
