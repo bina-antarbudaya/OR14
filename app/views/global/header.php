@@ -38,20 +38,29 @@ $action_css = $controller . '/' . $this->_action();
 				<?php if ($this->is_logged_in()): ?>
 					<nav class="global-nav logged-in">
 						<ul>
-							<li class="username"><?php
+							<li class="username">
+								<?php
 								echo $this->session->user->capable_of('chapter_admin') ?
 									$this->user->chapter->get_title() :
 									$this->session->user->username;
 							?></li>
 							<?php /* TODO clean this up */ ?>
-							<li class="chapter"><a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><?php echo $this->session->user->capable_of('chapter_admin') ? 'Pengelolaan' : (!$this->can_register() ? 'Pengumuman Seleksi' : 'Lanjutkan Pendaftaran') ?></a></li>
-							<li class="prefs"><a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Pengaturan</a></li>
-							<li class="logout"><a href="<?php L(array('controller' => 'auth', 'action' => 'logout')); ?>">Logout</a></li>
+							<li class="continue">
+								<a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><?php
+								echo
+								$this->session->user->capable_of('chapter_admin') ?
+									'<i class="icon-home icon-white"></i> Dashboard' :
+									(!$this->can_register() ? 'Pengumuman Seleksi' : 'Lanjutkan Pendaftaran')
+								?></a>
+							</li>
+							<li class="prefs">
+								<i class="icon-user icon-white"></i> <a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Pengaturan</a></li>
+							<li class="logout"><a class="btn btn-inverse" href="<?php L(array('controller' => 'auth', 'action' => 'logout')); ?>">Logout</a></li>
 						</ul>
 					</nav>
 				<?php elseif ($controller != 'auth'): ?>
 					
-					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" class="btn btn-primary">Login</a>
+					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" class="btn btn-inverse">Login</a>
 				<?php endif;?>
 				</div>
 			</div>
