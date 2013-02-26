@@ -65,8 +65,8 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 		<base href="<?php L('/') ?>">
 		<!-- <link rel="stylesheet" href="assets/css/applicant/transcript.css"> -->
 		<style>
-		<?php readfile(HELIUM_PARENT_PATH . '/assets/css/global/reset.css'); ?>
-		<?php readfile(HELIUM_PARENT_PATH . '/assets/css/applicant/transcript.css'); ?>
+		<?php readfile(HELIUM_PARENT_PATH . '/assets/css/deprecated/global/reset.css'); ?>
+		<?php readfile(HELIUM_PARENT_PATH . '/assets/css/deprecated/applicant/transcript.css'); ?>
 		</style>
 	</head>
 	<body>
