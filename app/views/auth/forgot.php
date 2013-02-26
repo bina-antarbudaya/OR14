@@ -1,17 +1,16 @@
-<?php $this->header('Pemulihan akun'); ?>
-<header class="page-title">
+<?php $this->print_header('Pemulihan akun'); ?>
+<header class="page-header">
 	<h1>Pemulihan akun</h1>
 </header>
-<div class="container">
 	<?php if ($success): ?>
-	<p>Sebuah surel telah dikirimkan ke alamat yang tertera pada formulir pendaftaran Adik. Petunjuk selanjutnya terdapat pada alamat tersebut.</p>
+	<div class="alert alert-success">
+		Sebuah surel telah dikirimkan ke alamat yang tertera pada formulir pendaftaran Adik. Petunjuk selanjutnya terdapat pada alamat tersebut.
+	</div>
 	<?php else: ?>
 	<?php if ($error): ?>
-	<div class="message error">
-		<header>
-			<h1>Pemulihan akun gagal</h1>
-		</header>
-		<p><?php switch ($error) {
+	<div class="alert alert-error">
+		<strong>Pemulihan Akun gagal</strong>
+		<?php switch ($error) {
 			case 'not_found':
 				echo 'Pengguna tidak ditemukan';
 				break;
@@ -26,29 +25,25 @@
 				break;
 			default:
 				echo $error;
-		} ?></p>
+		} ?>
 	</div>
 	<?php endif; ?>
-	<p>Masukkan nomor peserta atau username Adik di bawah ini untuk memulihkan akun Adik.</p> 
-	<form action="<?php L(array('action' => 'forgot')) ?>" method="POST">
-		<table class="form-table">
-			<tr>
-				<td class="label"><label for="identifier">Nomor peserta atau username</label></td>
-				<td class="field"><input type="text" class="medium" name="identifier" value="<?php echo $_POST['identifier'] ?>" autofocus></td>
-			</tr>
-			<tr>
-				<td class="label">reCAPTCHA</td>
-				<td class="field">
-					<script>var RecaptchaOptions = { theme : 'clean' };</script>
-					<?php echo $recaptcha->get_html(); ?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label"></td>
-				<td class="field"><button type="submit">Lanjutkan</button></td>
-			</tr>
-		</table>
+	<p>Isilah formulir di bawah ini untuk memulihkan password Adik.</p> 
+	<form action="<?php L(array('action' => 'forgot')) ?>" method="POST" class="form">
+		<div class="control-group">
+			<label for="identifier" class="control-label">Nomor peserta atau username</label>
+			<div class="controls">
+				<input type="text" class="medium" name="identifier" value="<?php echo $_POST['identifier'] ?>" autofocus placeholder="Nomor peserta atau username">
+			</div>
+		</div>
+		<div class="control-group">
+			<span class="control-label">reCAPTCHA</span>
+		<script>var RecaptchaOptions = { theme : 'clean' };</script>
+		<?php echo $recaptcha->get_html(); ?>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn">Lanjutkan</button>
+		</div>
 	</form>
 	<?php endif; ?>
-</div>
 <?php $this->footer(); ?>

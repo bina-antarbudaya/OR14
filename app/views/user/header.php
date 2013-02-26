@@ -1,4 +1,8 @@
 <?php
+
+if ($this->_action() == 'prefs')
+	return;
+
 	$index = $chapter ?
 				'Chapter ' . $chapter->chapter_name :
 				'Seluruh Pengguna';

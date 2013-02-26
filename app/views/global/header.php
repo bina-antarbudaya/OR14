@@ -51,13 +51,13 @@ $action_css = $controller . '/' . $this->_action();
 								echo
 								$this->session->user->capable_of('chapter_admin') ?
 									'home' :
-									(!$this->can_register() ? 'certificate' : 'pencil')
+									((!$this->can_register() || $this->user->applicant->confirmed) ? 'certificate' : 'pencil')
 								?> icon-white"></i>
 								<a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><?php
 								echo
 								$this->session->user->capable_of('chapter_admin') ?
 									'Dashboard' :
-									(!$this->can_register() ? 'Pengumuman Seleksi' : 'Pendaftaran')
+									((!$this->can_register() || $this->user->applicant->confirmed) ? 'Pengumuman' : 'Pendaftaran')
 								?></a>
 							</li>
 							<li class="prefs">

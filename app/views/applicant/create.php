@@ -17,10 +17,6 @@ $error_messages = array('username_availability' => 'Nama pengguna yang Adik pili
 	<h1>Pembuatan Akun</h1>
 </header>
 
-<div class="expiry-notice">
-	Batas waktu pendaftaran: <span><?php echo $expires_on->format('l, j F Y') ?></span>
-</div>
-
 <?php if ($error): ?>
 <div class="alert alert-error alert-block">
 	<h4>Pembuatan akun gagal</h4>
@@ -66,9 +62,10 @@ $error_messages = array('username_availability' => 'Nama pengguna yang Adik pili
 				<div id="collapseTwo" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<p>Untuk mengaktivasi kembali akun Adik, isi formulir di bawah ini:</p>
-						<form action="<?php L(array('action' => 'reactivate')) ?>" class="form-inline">
+						<form action="<?php L(array('action' => 'reactivate')) ?>" class="form-inline" method="POST">
 							<input type="text" name="username" required id="reactivate-username" class="span2" placeholder="Username">
 							<input type="password" name="password" required id="reactivate-password" class="span2" placeholder="Password">
+							<input type="hidden" name="token" value="<?php echo $token ?>">
 							<button type="submit" class="btn">Lanjut</button>
 						</form>
 

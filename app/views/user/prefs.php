@@ -1,53 +1,58 @@
-<?php $this->header('Pengaturan'); ?>
-<!-- <header class="page-title">
-	<h1>Pengaturan</h1>
-</header> -->
-<div class="container">
+<?php $this->print_header('Pengaturan Akun'); ?>
+<header class="page-header">
+	<h1>Pengaturan Akun</h1>
+</header>
 	<?php if ($error): ?>
-	<div class="message error">
-		<header>Pengubahan sandilewat gagal</header>
-		<p><?php
+	<div class="alert alert-error">
+		<strong>Pengubahan password gagal</strong>
+		<?php
 		
 		switch ($error) {
 			case 'old_password_incorrect':
-				echo 'Sandilewat lama yang Anda masukkan salah.';
+				echo 'Password lama yang Anda masukkan salah.';
 				break;
 			case 'password_mismatch':
-				echo 'Sandilewat tidak cocok.';
+				echo 'Password tidak cocok.';
 				break;
 			case 'password_too_short':
-				echo 'Sandilewat yang Anda pilih terlalu pendek.';
+				echo 'Password yang Anda pilih terlalu pendek.';
 				break;
 		}
 		
-		?></p>
+		?>
 	</div>
 	<?php elseif ($success): ?>
 	<div class="message">
-		<header>Pengubahan sandilewat berhasil</header>
-		<p>Gunakan sandilewat yang baru untuk memasuki situs ini.</p>
+		<strong>Pengubahan password berhasil</strong>
+		<p>Gunakan password yang baru untuk memasuki situs ini.</p>
 	</div>
 	<?php endif; ?>
 
-	<form action="<?php L(array('controller' => 'user', 'action' => 'prefs')) ?>" method="POST">
-		<h1>Ubah sandilewat</h1>
-		<p>
-			<label for="old_password">Sandilewat lama</label>
-			<?php $form->password('old_password', 'medium', null, true) ?>
-		</p>
-		<p>
-			<label for="password">Sandilewat baru</label>
-			<?php $form->password('password', 'medium', null, true) ?>
-			<br>
-			<span class="instruction">Sandi terdiri atas paling sedikit delapan karakter.</span>
-		</p>
-		<p>
-			<label for="retype_password">Ulangi sandilewat baru</label>
-			<?php $form->password('retype_password', 'medium', null, true) ?>
-		</p>
-		<p>
-			<button type="submit">Simpan</button>
-		</p>
+	<!-- <h4>Ubah password</h4> -->
+
+	<form action="<?php L(array('controller' => 'user', 'action' => 'prefs')) ?>" method="POST" class="form form-horizontal">
+		<div class="control-group">
+			<label for="old_password" class="control-label">Password lama</label>
+			<div class="controls">
+				<?php $form->password('old_password', 'medium', null, true) ?>
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="password" class="control-label">Password baru</label>
+			<div class="controls">
+				<?php $form->password('password', 'medium', null, true) ?>
+				<span class="help-inline">Password terdiri atas paling sedikit delapan karakter.</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="retype_password" class="control-label">Ulangi password baru</label>
+			<div class="controls">
+				<?php $form->password('retype_password', 'medium', null, true) ?>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn">Simpan</button>
+		</div>
 	</form>
 </div>
-<?php $this->footer(); ?>
+<?php $this->print_footer(); ?>

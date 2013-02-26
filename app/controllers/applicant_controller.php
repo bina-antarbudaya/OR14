@@ -111,9 +111,18 @@ class ApplicantController extends AppController {
 	 * Reactivate expired account
 	 */
 	public function reactivate() {
-		$this->require_role('applicant');
-		if (!$this->applicant->is_expired())
-			$this->auth->land();
+		if ($_POST['username'] && $_POST['password']) {
+			$this->auth->process_login($_POST['username'], $_POST['password']);
+			$user = User::find_by_username_and_password($_POST['username'], $_POST['password']);
+			if ($user && $user->capable_of('applicant')) {
+				$this->applicant = $user->applicant;
+			}
+		}
+		if (!$this->applicant)
+			$this->require_role('applicant');
+
+		//if (!$this->applicant->is_expired())
+		//	$this->auth->land();
 
 		$enable_recaptcha = $this['enable_recaptcha'] = false;
 
