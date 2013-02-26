@@ -39,6 +39,7 @@ $action_css = $controller . '/' . $this->_action();
 					<nav class="global-nav logged-in">
 						<ul>
 							<li class="username">
+								<i class="icon-user icon-white"></i>
 								<?php
 								echo $this->session->user->capable_of('chapter_admin') ?
 									$this->user->chapter->get_title() :
@@ -46,21 +47,31 @@ $action_css = $controller . '/' . $this->_action();
 							?></li>
 							<?php /* TODO clean this up */ ?>
 							<li class="continue">
+								<i class="icon-<?php
+								echo
+								$this->session->user->capable_of('chapter_admin') ?
+									'home' :
+									(!$this->can_register() ? 'certificate' : 'pencil')
+								?> icon-white"></i>
 								<a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><?php
 								echo
 								$this->session->user->capable_of('chapter_admin') ?
-									'<i class="icon-home icon-white"></i> Dashboard' :
-									(!$this->can_register() ? 'Pengumuman Seleksi' : '<i class="icon-pencil icon-white"></i> Pendaftaran')
+									'Dashboard' :
+									(!$this->can_register() ? 'Pengumuman Seleksi' : 'Pendaftaran')
 								?></a>
 							</li>
 							<li class="prefs">
-								<i class="icon-user icon-white"></i> <a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Pengaturan</a></li>
-							<li class="logout"><a class="btn btn-inverse" href="<?php L(array('controller' => 'auth', 'action' => 'logout')); ?>">Logout</a></li>
+								<i class="icon-cog icon-white"></i> <a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Pengaturan</a>
+							</li>
+							<li class="logout">
+								<i class="icon-off icon-white"></i>
+								<a href="<?php L(array('controller' => 'auth', 'action' => 'logout')); ?>">Logout</a>
+							</li>
 						</ul>
 					</nav>
 				<?php elseif ($controller != 'auth'): ?>
 					
-					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" class="btn btn-inverse">Login</a>
+					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>">Login</a>
 				<?php endif;?>
 				</div>
 			</div>

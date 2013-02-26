@@ -22,6 +22,9 @@ p strong {
 strong {
 	font-weight: 600;
 }
+[class^="icon-"], [class*=" icon-"] {
+	vertical-align: -2px;
+}
 .content {
 	margin-bottom: 90px;
 }
@@ -170,6 +173,10 @@ textarea.large {
 	padding-left: 16px;
 	border-left: 1px solid rgba(255, 255, 255, 0.3);
 	margin-left: 16px;
+}
+.global-header li i {
+	vertical-align: -2px;
+	margin-right: 5px;
 }
 .global-header li.username {
 	border-left: 0;

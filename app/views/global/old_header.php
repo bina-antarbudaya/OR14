@@ -36,7 +36,7 @@ $action_css = $controller . '/' . $this->_action();
 				<?php if ($this->is_logged_in()): ?>
 				<ul class="user-controls">
 					<li class="username"><?php echo $this->session->user->capable_of('chapter_admin') ? $this->user->chapter->get_title() : $this->session->user->username; ?></li>
-					<li class="chapter"><a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><?php echo $this->session->user->capable_of('chapter_admin') ? 'Pengelolaan' : (!$this->can_register() ? 'Pengumuman Seleksi' : 'Lanjutkan Pendaftaran') ?></a></li>
+					<li class="chapter"><a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><?php echo $this->session->user->capable_of('chapter_admin') ? 'Dashboard' : (!$this->can_register() ? 'Pengumuman Seleksi' : 'Pendaftaran') ?></a></li>
 					<li class="prefs"><a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Pengaturan</a></li>
 					<li class="logout"><a href="<?php L(array('controller' => 'auth', 'action' => 'logout')); ?>">Logout</a></li>
 				</ul>
