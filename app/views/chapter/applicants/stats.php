@@ -147,6 +147,8 @@ function print_statbox($title, $source, $label = '', $threshold = 0.01, Array $s
 charts = [];
 </script>
 
+<h3 class="search-title"><?php echo $search_title; ?></h3>
+
 <div class="stats">
 
 <?php

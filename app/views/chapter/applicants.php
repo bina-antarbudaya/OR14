@@ -67,18 +67,7 @@ function LL($target) {
 
 <!-- <?php var_dump($applicants) ?> -->
 
-<h3 class="search-title">
-	<?php
-	if ($search_title)
-		echo $search_title;
-	else {
-		$all_titles = array('active' => 'Seluruh Peserta', '') + $reg_dropdown + $sel_dropdown;
-		echo $all_titles[$current_stage];
-	}
-	?>
-</h3>
-
-<ul class="nav nav-pills pull-right">
+<ul class="nav nav-pills pull-left">
 
 	<?php
 	$views = array('list' => 'Daftar', 'stats' => 'Statistik')

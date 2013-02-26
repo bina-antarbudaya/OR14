@@ -1,4 +1,20 @@
-<table class="table">
+<div class="pagination pagination-right">
+	<?php if ($total_pages <= 20): ?>
+	<ul>
+		<?php for ($i = 1; $i <= $total_pages; $i++): ?>
+		<li<?php if ($i == $current_page) echo ' class="active"' ?>><a href="<?php LL(array('page' => $i)) ?>"><?php echo $i ?></a></li>
+		<?php endfor; ?>
+	</ul>
+	<?php else: ?>
+	<select onchange="window.location.href=this.value">
+	<?php for ($i = 1; $i <= $total_pages; $i++): ?>
+		<option value="<?php LL(array('page' => $i)) ?>"<?php if ($i == $current_page) echo ' selected' ?>><?php echo $i ?></option>
+	<?php endfor; ?>
+	</select>
+	<?php endif; ?>
+</div>
+
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="checkbox"></th>
@@ -27,3 +43,19 @@
 	<?php endforeach; ?>
 	</tbody>
 </table>
+
+<div class="pagination pagination-centered">
+	<?php if ($total_pages <= 20): ?>
+	<ul>
+		<?php for ($i = 1; $i <= $total_pages; $i++): ?>
+		<li<?php if ($i == $current_page) echo ' class="active"' ?>><a href="<?php LL(array('page' => $i)) ?>"><?php echo $i ?></a></li>
+		<?php endfor; ?>
+	</ul>
+	<?php else: ?>
+	<select onchange="window.location.href=this.value">
+	<?php for ($i = 1; $i <= $total_pages; $i++): ?>
+		<option value="<?php LL(array('page' => $i)) ?>"<?php if ($i == $current_page) echo ' selected' ?>><?php echo $i ?></option>
+	<?php endfor; ?>
+	</select>
+	<?php endif; ?>
+</div>

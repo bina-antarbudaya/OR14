@@ -257,6 +257,7 @@ class ChapterController extends AppController {
 					$applicants->narrow('(' . $constraint . ')');
 				}
 
+				$applicants->set_batch_number($page);
 				$this['applicants'] = $applicants;
 				break;
 			case 'stats':
