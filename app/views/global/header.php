@@ -51,7 +51,7 @@ $action_css = $controller . '/' . $this->_action();
 					</nav>
 				<?php elseif ($controller != 'auth'): ?>
 					
-					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" class="btn">Login</a>
+					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" class="btn btn-primary">Login</a>
 				<?php endif;?>
 				</div>
 			</div>

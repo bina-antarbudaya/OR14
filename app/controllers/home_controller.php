@@ -104,6 +104,9 @@ class HomeController extends AppController {
 
 	public function index() {
 		// $this->firstrun_check();
+		$this['chapters'] = Chapter::find('id != 1');
+		$this['chapter_count'] = $this['chapters']->count_all();
+		$this['this_year'] = Helium::conf('program_year') - 2;
 	}
 
 	public function phpinfo() {

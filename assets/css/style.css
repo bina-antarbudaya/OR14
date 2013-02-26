@@ -191,6 +191,133 @@ textarea.large {
 	line-height: 30px;
 }
 
+/* Welcome page */
+.welcome-header {
+	margin-top: 80px;
+	padding-bottom: 40px;
+}
+.welcome-header h1 {
+	font-size: 60px;
+	line-height: 60px;
+	text-align: center;	
+}
+.welcome-header h2 {
+	font-size: 16px;
+	float: none;
+	text-align: center;
+	margin: 14px 0 0;
+	padding: 0;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	border-right: none;
+}
+.welcome h3 {
+	font-weight: 300;
+	margin-bottom: 15px;
+}
+.welcome .about-us p {
+	line-height: 1.5;
+	font-size: 16px;
+}
+.welcome .registration-dates {
+	font-size: 20px;
+	font-weight: 100;
+	letter-spacing: -1px;
+	line-height: 24px;
+	margin-bottom: 14px;
+	margin-left: 40px;
+}
+.welcome .registration-dates span.pre {
+	display: block;
+	font-size: 13px;
+	letter-spacing: 0;
+	font-weight: normal;
+}
+.welcome .registration-dates span.from,
+.welcome .registration-dates span.to {
+	color: #007ac2;
+	font-weight: 600;
+}
+.welcome p.or {
+	border-top: 1px solid #f6f6f6;
+	text-align: center;
+	font-size: 11px;
+	font-style: italic;
+	color: #999;
+	margin: 20px 0;
+}
+.welcome p.or span {
+	display: block;
+	margin: -11px auto;
+	width: 40px;
+	background: white;
+}
+.welcome .big-redeem-button {
+	margin-top: -9px;
+}
+.welcome .registration-steps {
+	margin-left: 40px;
+}
+.welcome .registration-steps li {
+	margin-bottom: 14px;
+	list-style: none;
+	counter-increment: reg;
+}
+.welcome .registration-steps li:before {
+	content: counter(reg);
+	display: block;
+	float: left;
+	margin-left: -40px;
+	margin-top: -3px;
+	color: #007ac2;
+	line-height: 24px;
+	text-align: center;
+	border-right: 1px solid #eee;
+	padding: 0 10px;
+}
+.welcome .registration-steps li:first-child:before {
+	margin-top: 5px;
+}
+.welcome .registration-steps li span {
+	color: #000;
+	font-weight: 600;
+}
+
+.welcome .chapters-list {
+	border-top: 1px solid #eee;
+	margin-top: 25px;
+	padding-top: 25px;
+}
+.welcome .chapters-list h4 {
+	font-size: 13px;
+	margin: 15px 0 5px;
+}
+.welcome .chapters-list p {
+	font-size: 12px;
+	word-wrap: break-word;
+}
+
+.login-form p {
+	margin-bottom: 10px;
+	clear: both;
+}
+.login-form input {
+	margin-bottom: 0;
+}
+.login-form button {
+	float: right;
+	margin-bottom: 10px;
+}
+.login-form p.aux {
+	font-size: 12px;
+	border-top: 1px solid #eee;
+	padding-top: 10px;
+}
+.login-form p.aux a.register-link {
+	display: inline-block;
+	float: right;
+}
+
 /* MODULE: APPLICANT */
 
 .expiry-notice {
@@ -220,7 +347,6 @@ textarea.large {
 .token-redemption-form label {
 	font-size: 16px;
 	margin: 0 0 20px;
-	letter-spacing: -0.5px;
 }
 .token-redemption-form input {
 	font-size: 16.25px;
@@ -230,12 +356,13 @@ textarea.large {
 .redemption-faqs header h3,
 .redemption-chapters header h3 {
 	margin: 40px 0 20px;
+	font-weight: 300;
 }
 
 .redemption-faqs h4,
 .redemption-chapters h4 {
 	margin: 15px 0 5px;
-	font-size: inherit;
+	font-size: 14px;
 	font-weight: 600;
 }
 .redemption-chapters h4 {
@@ -244,6 +371,9 @@ textarea.large {
 
 .redemption-chapters .chapter-item {
 	margin-bottom: 15px;
+}
+.redemption-chapters p {
+	font-size: 12px;
 }
 
 /* applicant/form */

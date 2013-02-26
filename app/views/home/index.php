@@ -1,24 +1,94 @@
 <?php $this->print_header() ?>
-<header class="page-header">
-	<h1>Pendaftaran Seleksi Bina Antarbudaya 2013</h1>
+<header class="page-header welcome-header">
+	<h1>Explore the World, Explore&nbsp;Yourself</h1>
+	<h2>Pendaftaran Seleksi Bina Antarbudaya <?php echo $this_year ?></h2>
 </header>
 
 <div class="welcome">
-	<p class="intro">
-		Selamat datang di trial sistem pendaftaran seleksi Bina Antarbudaya Year Program 2014-2015.
-	</p>
-	<p>Secara umum, sistem pendaftaran tahun ini tidak jauh berbeda dengan tahun sebelumnya. Perbedaan yang paling utama terletak di balik layar dan tidak dapat terlihat secara langsung oleh Kakak. Meski demikian, terdapat beberapa perbedaan pada tampilan antarmuka yang perlu Kakak perhatikan dan kritisi. Selain itu, masih terdapat beberapa laman yang tampilannya tercampur antara tampilan lama dan tampilan baru.</p>
-	<p>Untuk informasi lebih lanjut harap hubungi Kak Rio di <a href="mailto:rio.apriyanto@afs.org">rio.apriyanto@afs.org</a>.</p>
-	<p>Sincerely,</p>
-	<p>Online Registration Team 2013</p>
-	<hr>
-	<p>
-		<a class="btn btn-large btn-primary" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Aktifkan PIN pendaftaran</a>
-	</p>
-	<p>
-		Untuk membangkitkan PIN pendaftaran, silakan <a class="btn" href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>">Login</a>
-	</p>
+	<div class="row">
+	 	<div class="span6">
+	 		<section class="about-us">
+		 		<h3>Tentang Bina Antarbudaya</h3>
+		 		<p>Bina Antarbudaya adalah lembaga nirlaba berbasis relawan yang bergerak dalam bidang pendidikan dan pertukaran antarbudaya, bermitra dengan AFS Intercultural Programs yang berkantor pusat di New York, Amerika Serikat. Misi Bina Antarbudaya adalah menciptakan pemimpin masa depan yang berkualitas pribadi, berprestasi, memiliki visi, empati sosial dan nasionalisme serta berwawasan internasional.</p>
+		 		<p>Bina Antarbudaya memiliki <?php echo $chapter_count ?> chapter (cabang) di seluruh Indonesia, berkomitmen untuk membantu mempersiapkan para pemuda membangun karakter, meningkatkan pengetahuan, sikap serta keahlian untuk menjadi para pemimpin masa depan dan membuat perubahan positif di masyarakat.</p>
+		 	</section>
+	 	</div>
+	 	<div class="span6">
+	 		<section class="registration">
+		 		<h3>Tata Cara Pendaftaran</h3>
+		 		<div class="row">
+		 			<div class="span3">
+		 				<ol class="registration-steps">
+		 					<li><span>Menghubungi</span> Chapter Bina Antarbudaya <a href="#chapters">terdekat</a></li>
+		 					<li>Mendapatkan <span>PIN pendaftaran</span></li>
+		 					<li><span>Mengaktifkan</span> PIN pendaftaran</li>
+		 					<li><span>Mengisi</span> formulir pendaftaran online</li>
+		 					<li><span>Mengumpulkan</span> berkas fisik</li>
+		 				</ol>
+
+		 				<p class="registration-dates">
+		 					<span class="pre">Masa pendaftaran:</span>
+		 					<span class="from">1 Mar</span>
+		 					&ndash;
+		 					<span class="to">14 Apr</span>
+		 					<?php echo $this_year ?>
+		 				</p>
+		 			</div>
+				 	<div class="span3">
+				 		<section class="big-redeem-button">
+				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Aktifkan PIN Pendaftaran</a></p>
+				 		</section>
+				 		<p class="or"><span>atau</span></p>
+				 		<section class="login-form">
+				 			<form action="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" method="POST" class="form">
+				 				<p>
+				 					<label for="username">Username</label>
+				 					<input type="text" name="username" id="username" class="input-block-level" placeholder="Username" value="<?php echo $this->session->flash('username'); ?>" required>
+				 				</p>
+				 				<p>
+				 					<label for="password">Password</label>
+				 					<input type="password" name="password" id="password" class="input-block-level" placeholder="Password" required>
+				 				</p>
+				 				<p>
+				 					<label class="checkbox pull-left"><input type="checkbox" name="remember" id="remember"> Ingat saya</label>
+				 					<button class="btn pull-right" type="submit">Login</button>
+				 				</p>
+				 				<p class="aux">
+									<a href="<?php L(array('controller' => 'auth', 'action' => 'forgot')) ?>">Saya lupa password saya</a>
+				 				</p>
+				 			</form>
+				 		</section>
+				 	</div>
+				 </div>
+		 	</section>
+	 	</div>
+	</div>
+	<section class="chapters-list" id="chapters">
+		<header>
+			<h3>Chapter-Chapter Bina Antarbudaya</h3>
+		</header>
+		<div class="row">
+		<?php $i = 0; foreach ($chapters as $c): ?>
+		<?php if (($i != 0) && ($i % 4 == 0)): ?>
+
+		</div>
+		
+		<div class="row">
+			
+		<?php endif; ?>
+			<div class="span3 chapter-item">
+				<h4 class="chapter-name"><?php echo $c->chapter_name ?></h4>
+				<p>
+				<?php echo nl2br($c->chapter_address) ?><br>
+					<a href="mailto:<?php echo $c->get_email() ?>?subject=Pendaftaran Seleksi"><?php echo $c->get_email() ?></a><br>
+					<?php if ($u = $c->site_url) { ?><a href="<?php echo $u ?>"><?php echo $u ?></a><?php } ?>
+				</p>
+			</div>
+		<?php $i++; endforeach; ?>
+		</div>
+	</section>
 </div>
+
 <?php $this->print_footer() ?>
 
 <?php /*
