@@ -201,6 +201,9 @@ class ChapterController extends AppController {
 			case 'incomplete':
 				$constraints[] = 'confirmed=0 AND finalized=0 AND expires_on > NOW()';
 				break;
+			case 'expired':
+				$constraints[] = 'confirmed=0 AND finalized=0 AND expires_on < NOW()';
+				break;
 			case 'confirmed':
 				$constraints[] = 'confirmed=1';
 				break;
