@@ -256,9 +256,27 @@ class ChapterController extends AppController {
 				foreach ($constraints as $constraint) {
 					$applicants->narrow('(' . $constraint . ')');
 				}
-
+				// -- Pagination --
+				$batch_length = 100;
+				$applicants->set_batch_length($batch_length);
+				if (!$this->params['page'])
+					$this->params['page'] = 1;
+				$page = $this->params['page'];
+				$count_all = $applicants->count_all();
 				$applicants->set_batch_number($page);
+				$first = (($page - 1) * $batch_length) + 1;
+				$last = ($first + $batch_length - 1) > $count_all ? $count_all : ($first + $batch_length - 1);
+
+				// Applicants is now ready for listing.
 				$this['applicants'] = $applicants;
+				$this['chapter'] = $chapter;
+				$this['total_pages'] = $applicants->get_number_of_batches();
+				$this['current_page'] = $page;
+				$this['first'] = $first;
+				$this['last'] = $last;
+				$this['count_all'] = $count_all;
+				$this['search_title'] = $search_title;
+				$this['current_stage'] = $this->params['stage'];
 				break;
 			case 'stats':
 				$stats = array(
@@ -399,7 +417,7 @@ class ChapterController extends AppController {
 
 		$this['current_stage'] = $current_stage;
 		$this['view'] = $view;
-		$this['search_title'] = implode(', ', $search_title);
+		$this['search_title'] = $search_title ? implode(', ', $search_title) : '';
 	}
 
 
