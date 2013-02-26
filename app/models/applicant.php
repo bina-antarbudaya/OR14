@@ -956,7 +956,7 @@ class Applicant extends HeliumPartitionedRecord {
 		if ($this->local_id)
 			return $this->local_id;
 		
-		$local_id = (int) $db->get_var("SELECT local_id FROM applicants WHERE chapter_id='{$this->chapter_id}' ORDER BY local_id DESC LIMIT 0,1");
+		$local_id = (int) $db->get_var("SELECT local_id FROM applicants WHERE chapter_id='{$this->chapter_id}' AND program_year='{$this->program_year}' ORDER BY local_id DESC LIMIT 0,1");
 		
 		return $local_id + 1;
 	}
@@ -970,7 +970,7 @@ class Applicant extends HeliumPartitionedRecord {
 		$chapter_code = $this->chapter->chapter_code;
 		if ($this->finalized) {
 			$base = "YBA/YP%s-%s/%s/%s";
-			$program_year = 2014;
+			$program_year = $this->program_year;
 			$start_year = $program_year - 1;
 			$ycl = substr($start_year, 2);
 			$ycr = substr($program_year, 2);
