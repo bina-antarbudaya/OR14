@@ -39,7 +39,7 @@ class HeliumConfiguration extends HeliumDefaults {
 	
 	// -- @deprecated --
 	public $program_year = 2015;
-	public $registration_deadline = '2013-04-15 23:59:59';
+	public $registration_deadline = '2013-04-14 23:59:59';
 	public $selection_one_date = '2013-04-28';
 	public $selection_two_date = '2013-05-19';
 	public $selection_three_date = '2013-06-09';
