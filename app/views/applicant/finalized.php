@@ -23,7 +23,7 @@
 			<p>Untuk menyelesaikan pendaftaran seleksi Bina Antarbudaya, Adik harus mengumpulkan berkas-berkas berikut ini:</p>
 			<dl class="files">
 				<dt class="card">Tanda Peserta Seleksi</dt>
-					<dd class="download-link"><a class="btn" href="<?php L(array('controller' => 'applicant', 'action' => 'card')) ?>">Unduh</a></dd>
+					<dd class="download-link"><a class="btn" href="<?php L(array('controller' => 'applicant', 'action' => 'card')) ?>"><i class="icon-download-alt"></i> Unduh</a></dd>
 					<dd class="details">
 						<ul>
 							<li>Dicetak di kertas HVS A4 dan digunting pada garis yang ditentukan</li>
@@ -33,7 +33,7 @@
 						</ul>
 					</dd>
 				<dt class="parents-statement">Surat Pernyataan Orang Tua</dt>
-					<dd class="download-link"><a class="btn" href="<?php L(array('controller' => 'applicant', 'action' => 'file', 'file' => 'parents_statement')) ?>">Unduh</a></dd>
+					<dd class="download-link"><a class="btn" href="<?php L(array('controller' => 'applicant', 'action' => 'file', 'file' => 'parents_statement')) ?>"><i class="icon-download-alt"></i> Unduh</a></dd>
 					<dd class="details">
 						<ul>
 							<li>Dicetak di kertas HVS A4</li>
@@ -43,7 +43,11 @@
 					</dd>
 				<?php if ($applicant->in_acceleration_class): ?>
 				<dt class="acceleration-statement">Surat Pernyataan Siswa Akselerasi</dt>
-					<dd class="download-link"><a href="<?php L(array('controller' => 'applicant', 'action' => 'file', 'file' => 'acceleration_statement')) ?>">Unduh</a></dd>
+					<dd class="download-link">
+						<a href="<?php L(array('controller' => 'applicant', 'action' => 'file', 'file' => 'acceleration_statement')) ?>">
+							<i class="icon-download-alt"></i> Unduh
+						</a>
+					</dd>
 					<dd class="details">
 						<ul>
 							<li>Khusus untuk siswa kelas akselerasi</li>
