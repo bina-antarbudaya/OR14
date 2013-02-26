@@ -219,11 +219,12 @@ class ChapterController extends AppController {
 		// Specific filters -- through a custom search query
 		$filter = $this->params['filter'];
 		if (is_array($filter)) {
+			$current_stage = 'search';
 			$search_title = array();
 
 			// Filter by school
 			if ($filter['school_name']) {
-				$constraints[] = "sanitized_high_school_name='" . $this->params['school_name'] . "'";
+				$constraints[] = "sanitized_high_school_name='" . $filter['school_name'] . "'";
 				$search_title[] = $filter['school_name'];
 				unset($filter['school_name']);
 			}
@@ -251,9 +252,9 @@ class ChapterController extends AppController {
 		switch ($view) {
 			case 'list':
 				// List-specific magic here: pagination, etc.
-				$applicants = $app::find('all');
+				$applicants = $app::find('chapter_id=5');
 				foreach ($constraints as $constraint) {
-					$applicants->narrow($constraint);
+					$applicants->narrow('(' . $constraint . ')');
 				}
 
 				$this['applicants'] = $applicants;
@@ -397,6 +398,7 @@ class ChapterController extends AppController {
 
 		$this['current_stage'] = $current_stage;
 		$this['view'] = $view;
+		$this['search_title'] = implode(', ', $search_title);
 	}
 
 

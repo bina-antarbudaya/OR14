@@ -62,8 +62,10 @@ function LL($target) {
 		</ul>
 	</li>
 
-	<li><a href="#" id="searchLink">Pencarian</a></li>
+	<li<?php if ($current_stage == 'search') echo ' class="active"' ?>><a href="#" id="searchLink">Pencarian</a></li>
 </ul>
+
+<!-- <?php var_dump($applicants) ?> -->
 
 <h3 class="search-title">
 	<?php
