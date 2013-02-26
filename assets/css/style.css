@@ -318,6 +318,32 @@ textarea.large {
 	float: right;
 }
 
+/* MODULE: CHAPTER */
+table.counts td {
+	font-size: 11px;
+	line-height: 15px;
+}
+table.counts strong {
+	font-size: 15px;
+	line-height: 17px;
+	color: #000;
+}
+
+.chapter-dashboard .current-phase {
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 24px;
+}
+.chapter-dashboard .current-phase small {
+	display: inline-block;
+	float: right;
+	font-size: 100%;
+	line-height: 1;
+	font-weight: 300;
+	color: #ccc;
+	margin-left: 5px;
+}
+
 /* MODULE: APPLICANT */
 
 .expiry-notice {

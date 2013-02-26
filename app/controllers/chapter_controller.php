@@ -26,6 +26,10 @@ class ChapterController extends AppController {
 		$this['chapters'] = $chapters;
 	}
 
+
+	/**
+	 * @deprecated
+	 */
 	public function create() {
 		$this->require_role('admin');
 
@@ -151,7 +155,142 @@ class ChapterController extends AppController {
 	}
 
 	/**
+	 * Dashboard
+	 */
+	public function dashboard() {
+		$this->require_role('chapter_staff');
+
+		if ($this->user->capable_of('national_admin')) {
+			$chapter_code = strtoupper($this->params['chapter_code']);
+			$chapter_id = $this->params['id'];
+			if ($chapter_id) {
+				$chapter = Chapter::find($chapter_id);
+			}
+			elseif ($chapter_code) {
+				$chapter = Chapter::find(compact('chapter_code'));
+				$chapter = $chapter->first();
+			}
+			else
+				$chapter = $this->user->chapter;
+		}
+		elseif ($this->user->capable_of('chapter_staff')) {
+			$chapter = $this->user->chapter;
+		}
+		else {
+			$error = 'forbidden';
+		}
+
+		if (!$error && !$chapter) {
+			$error = 'not_found';
+		}
+
+		// TODO change this
+		$current_phase = 'registration';
+
+		$this['current_phase'] = $current_phase;
+
+		if (!$error) {
+			$this['chapter'] = $chapter;
+			$this['national'] = $chapter->is_national_office();
+			foreach ($chapter->_columns() as $col) {
+				$this[$col] = $chapter->$col;
+			}
+
+			if ($this->can_register()) {
+
+				$this['registration_codes'] = $chapter->registration_codes;
+				$this['code_count'] = $chapter->registration_codes->count_all();
+
+				$ac = clone $chapter->registration_codes;
+				$ac->narrow('availability=0');
+				$this['ac'] = $ac;
+				$this['activated_code_count'] = $ac->count_all();
+
+				$now = new HeliumDateTime;
+				$ec = clone $chapter->registration_codes;
+				$ec->narrow("availability=1 AND expires_on < '$now'");
+				$this['expired_code_count'] = $ec->count_all();
+
+				$vc = clone $chapter->registration_codes;
+				$vc->narrow("availability=1 AND expires_on > '$now'");
+				$this['available_code_count'] = $vc->count_all();
+
+				$this['applicants'] = $chapter->applicants;
+				$this['total_applicant_count'] = $chapter->applicants->count_all();
+
+				$aa = clone $chapter->applicants;
+				$aa->narrow("(confirmed=1 OR expires_on > '$now')");
+				$this['active_applicant_count'] = $aa->count_all();
+
+				$ca = clone $chapter->applicants;
+				$ca->narrow('confirmed=1');
+				$this['confirmed_applicant_count'] = $ca->count_all();
+
+				$this['applicant_tipping_point'] = $ca->count_all() == $aa->count_all();
+
+				$fa = clone $chapter->applicants;
+				$fa->narrow('finalized=1');
+				$this['finalized_applicant_count'] = $fa->count_all();
+
+				$this['incomplete_applicant_count'] = $aa->count_all() - $fa->count_all();
+
+				$nca = clone $chapter->applicants;
+				$nca->narrow('finalized=1 && confirmed=0');
+				$this['not_yet_confirmed_applicant_count'] = $nca->count_all();
+
+				$ea = clone $chapter->applicants;
+				$ea->narrow("confirmed=0 AND finalized=0 AND expires_on < '$now'");
+				$this['expired_applicant_count'] = $ea->count_all();
+
+
+				// Weird
+				$na = clone $chapter->applicants;
+				$na->narrow("confirmed=0 AND finalized=1 AND expires_on <'$now'");
+				$this['anomalous_applicant_count'] = $na->count_all();
+
+				$na = clone $chapter->applicants;
+				$na->set_order_by('id');
+				$na->set_order('DESC');
+				$na->narrow("sanitized_full_name != ''");
+				$na->set_batch_length(10);
+
+				$this['na'] = $na;
+			}
+			else {
+				$db = Helium::db();
+				$pcq = 'SELECT COUNT(*) FROM participants INNER JOIN applicants ON applicants.id=participants.applicant_id WHERE 1 ';
+				if (!$this['national'])
+					$pcq .= 'AND chapter_id=' . $this->user->chapter_id;
+
+				$this['participant_count'] = $db->get_var($pcq);
+				$this['participant_count_2'] = $db->get_var($pcq . ' AND passed_selection_one=1');
+				$this['participant_count_3'] = $db->get_var($pcq . ' AND passed_selection_two=1');
+				$this['participant_count_4'] = $db->get_var($pcq . ' AND passed_selection_three=1');
+				$selection_fields = 
+
+				$selection_dates = array(
+					3 => date_create(Helium::conf('selection_three_date')),
+					2 => date_create(Helium::conf('selection_two_date')),
+					1 => date_create(Helium::conf('selection_one_date')), );
+				$now = new DateTime('now');
+				
+				foreach ($selection_dates as $n => $date) {
+					if ($now < $date)
+						$next_selection_stage = $n;
+				}
+				$this['next_selection_stage'] = $next_selection_stage;
+			}
+			
+			$this->session['chapter_back_to'] = $this->params;
+		}
+		else {
+			$this['error'] = $error;
+		}
+	}
+
+	/**
 	 * Control panel for a chapter (or national office, for that matter)
+	 * @deprecated
 	 */
 	public function view() {
 		$this->require_role('chapter_staff');
