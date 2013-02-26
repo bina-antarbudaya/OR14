@@ -322,15 +322,8 @@ class ApplicantController extends AppController {
 	}
 
 	/**
-	 * @deprecated
-	 */
-	public function status() {
-		$this->render = false;
-		$this->http_redirect(array('controller' => 'applicant', 'action' => 'form'));
-	}
-
-	/**
 	 * List applicants
+	 * @deprecated - see chapter/applicants
 	 */
 	public function index() {
 		$this->require_role('chapter_staff');
@@ -536,7 +529,7 @@ class ApplicantController extends AppController {
 		// TODO
 		// Filter by POB
 		// Filter by DOB
-			
+
 		// STAT GROUPING
 		$stats = array(
 			'sex' => array(
