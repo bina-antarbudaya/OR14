@@ -99,7 +99,9 @@
 				</tr>
 			</table>
 
-			<h4>Pencarian Peserta</h4>
+			<p>
+				<a class="btn" href="<?php L(array('action' => 'applicants')) ?>">Pengelolaan Peserta</a>
+			</p>
 
 			<?php endif; ?>
 

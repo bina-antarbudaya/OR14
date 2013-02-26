@@ -18,9 +18,9 @@ $action_css = $controller . '/' . $this->_action();
 		<meta charset="utf-8">
 		<title><?php echo $the_title; ?></title>
 		<link rel="icon" href="<?php L('/assets/icon.png'); ?>" type="image/png">
-		<link rel="stylesheet" href="<?php L('/assets/css/global/style.css'); ?>">
-		<link rel="stylesheet" href="<?php L('/assets/css/' . $controller_css . '.css'); ?>">
-		<link rel="stylesheet" href="<?php L('/assets/css/' . $action_css . '.css'); ?>">
+		<link rel="stylesheet" href="<?php L('/assets/css/deprecated/global/style.css'); ?>">
+		<link rel="stylesheet" href="<?php L('/assets/css/deprecated/' . $controller_css . '.css'); ?>">
+		<link rel="stylesheet" href="<?php L('/assets/css/deprecated/' . $action_css . '.css'); ?>">
 		<?php if ($css = $this['additional_css']): foreach ($css as $s): ?>
 		<link rel="stylesheet" href="<?php L('/assets/' . $s . '.css'); ?>">
 		<?php endforeach; endif; ?>
@@ -32,7 +32,7 @@ $action_css = $controller . '/' . $this->_action();
 	<body>
 		<header class="global-header">
 			<div class="container">
-				<header class="masthead"><a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><img src="<?php L('/assets/css/global/masthead.png'); ?>" alt="Bina Antarbudaya" width="226" height="40"></a></header>
+				<header class="masthead"><a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><img src="<?php L('/assets/css/deprecated/global/masthead.png'); ?>" alt="Bina Antarbudaya" width="226" height="40"></a></header>
 				<?php if ($this->is_logged_in()): ?>
 				<ul class="user-controls">
 					<li class="username"><?php echo $this->session->user->capable_of('chapter_admin') ? $this->user->chapter->get_title() : $this->session->user->username; ?></li>
