@@ -31,7 +31,7 @@ $action_css = $controller . '/' . $this->_action();
 			
 			<div class="container">
 				<h1 class="branding">
-					<a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>"><img src="<?php L('/assets/img/bina-antarbudaya-white.png'); ?>" alt="Bina Antarbudaya" width="226" height="40"></a>
+					<a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>">Bina Antarbudaya</a>
 				</h1>
 
 				<div class="actions">
@@ -50,7 +50,7 @@ $action_css = $controller . '/' . $this->_action();
 								echo
 								$this->session->user->capable_of('chapter_admin') ?
 									'<i class="icon-home icon-white"></i> Dashboard' :
-									(!$this->can_register() ? 'Pengumuman Seleksi' : 'Lanjutkan Pendaftaran')
+									(!$this->can_register() ? 'Pengumuman Seleksi' : '<i class="icon-pencil icon-white"></i> Pendaftaran')
 								?></a>
 							</li>
 							<li class="prefs">
