@@ -158,7 +158,7 @@ class User extends HeliumRecord {
 				return $this->applicant->applicant_email;
 			case 3:
 			case 4:
-				return $this->chapter->chapter_email;
+				return $this->chapter->get_email();
 			case 5:
 			default:
 				return $this->email;
