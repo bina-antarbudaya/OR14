@@ -393,6 +393,12 @@ $(function(){
 		$(this).parents('tr').first().removeClass('selected');
 	});
 	
+	// AFS Program force checkbox
+	$('#program_afs').change(function() {
+		$(this).attr('checked', 'checked');
+	});
+
+	// Typeahead for school names
 	typeaheadSchool = function(query, process) {
 		var schs = [];
 		$('datalist[data-for=high_school_name] option[value*="' + query + '"]').each(function() {
