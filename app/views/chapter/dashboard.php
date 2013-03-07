@@ -59,7 +59,7 @@
 				<strong><?php echo $chapter->get_title() ?></strong><br>
 				<?php echo nl2br($chapter_address) ?>
 			</p>
-			<p><a href="<?php L(array('controller' => 'registration_code', 'action' => 'edit')) ?>" class="btn btn-small">Ubah informasi ini</a></p>
+			<p><a href="<?php L(array('controller' => 'chapter', 'action' => 'edit')) ?>" class="btn btn-small">Ubah informasi ini</a></p>
 		</div>
 		<div class="span6">
 
