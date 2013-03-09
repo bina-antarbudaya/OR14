@@ -37,7 +37,7 @@
 		<tr class="<?php echo $classes; ?>">
 			<td class="checkbox"></td>
 			<?php if ($current_stage != 'expired'): ?>
-			<td class="test-id"><?php echo $a->test_id; ?></td>
+			<td class="test-id"><?php if ($a->finalized) echo $a->test_id; ?></td>
 			<?php endif; ?>
 			<td class="name"><b><a href="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $a->id)) ?>"><?php echo $a->sanitized_full_name ? $a->sanitized_full_name : '<span class="empty">(Belum diisi)</span>'; ?></a></b></td>
 			<td class="school"><?php echo $a->sanitized_high_school_name; ?></td>
