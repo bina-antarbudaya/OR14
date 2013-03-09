@@ -235,7 +235,7 @@ TODO
 			<td class="afs">
 				<span class="length">11 bulan</span>
 				<br>
-				Agustus <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?> (AS, Eropa)
+				Agustus <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?> (Amerika, Asia, Eropa)
 				<br>
 				Maret <?php echo $program_year - 1?> &ndash; Februari <?php echo $program_year ?> (Jepang)
 			</td>
@@ -249,15 +249,39 @@ TODO
 			<th class="label">Negara Tujuan</th>
 			<td class="afs">
 				<ul>
-					<li>Amerika Serikat</li>
-					<li>Belanda</li>
-					<li>Belgia</li>
-					<li>Perancis</li>
-					<li>Jerman</li>
-					<li>Italia</li>
-					<li>Jepang</li>
-					<li>Norwegia</li>
-					<li>Swiss</li>
+					<?php
+$pp = array(
+	'BRA' => 'Brazil',
+	'CAN' => 'Kanada',
+	'MEX' => 'Meksiko',
+	'USA' => 'Amerika Serikat',
+	'NED' => 'Belanda',
+	'BFL' => 'Belgia (Flanders)',
+	'BFR' => 'Belgia (Wallonia)',
+	'CZE' => 'Republik Ceko'
+	'FIN' => 'Finlandia',
+	'FRA' => 'Perancis',
+	'GER' => 'Jerman',
+	'ISL' => 'Islandia',
+	'ITA' => 'Italia',
+	'NOR' => 'Norwegia',
+	'SUI' => 'Swiss',
+	'SWE' => 'Swedia',
+	'TUR' => 'Turki',
+	'CHN' => 'Cina',
+	'JPN' => 'Jepang',
+	'PHI' => 'Filipina',
+	'THA' => 'Thailand',
+);
+
+asort($pp);
+
+foreach ($pp as $p):
+?>
+
+					<li><?php echo $p ?></li>
+
+<?php endforeach; ?>
 				</ul>
 			</td>
 			<td class="yes">
@@ -268,13 +292,41 @@ TODO
 		</tr>
 		<tr class="program-info">
 			<th class="label"></th>
-			<td class="afs" style="font-style: italic">
-				<p>One academic year abroad, hosted by a host family and go to local school while experiencing life in the local community. AFS provides real-life experiential learning in a different culture, to help young people develop knowledge, skills and understanding needed to create a more just and peaceful world.</p>
+			<td class="afs">
+<p>
+    Kalau kamu ingin mendapatkan pengalaman yang akan mengubah hidupmu, maka program AFS adalah pilihan yang tepat. Kmu akan mendapat teman baru, belajar
+    bahasa asing, budaya baru, dan mengalami kehidupan dengan cara yang baru. Di akhir program nanti kalu juga akan memperoleh keterampilan baru yang tidak
+    semua orang bisa dapatkan, yaitu: Kompetensi Antarbudaya (<em>intercultural Competence</em>). Keterampilan ini akan membuatmu memiliki kemampuan
+    beradaptasi di kebudayaan manapun. Selain itu kamu akan memperoleh banyak kemampuan lain, di antaranya kamu akan lebih mandiri, bertanggung jawab, dan
+    lebih fleksibel. Semua itu akan sangat berguna di semua jenjang kehidupanmu nanti.
+</p>
+<p>
+    Sebagai siswa AFS, kamu akan tinggal dengan keluarga angkat yang akan menerima kamu selayaknya bagian dari keluarga mereka sendiri. Seperti sebuah
+    keluarga, keluarga angkatmu akan selalu memberikan dukungan yang kamu perlukan selama masa program, memastikan bahwa kamu sehat dan selamat, serat akan
+    menjadi sumber terbaikmu untuk mempelajari budaya setempat.
+</p>
+<p>
+    Kamu juga akan berekolah di SMA setempat, dan merasakan lingkungan belajar yang berbeda dengan sekolah di Indonesia. Kamu akan mendapat teman baru dan
+    mengalami secara langsung metode belajar di luar negeri. Selama program kamu dapat melibatkan diri dalam berbagai kegiatan baik di lingkungan AFS maupun di
+    masyarakat sekitar. Berbagai eksplorasi dapat dialkukan untuk memperkaya pengalaman dan pengembangan dirimu selama program.
+</p>
 			</td>
-			<td class="yes" style="font-style: italic">
-				<p>Kennedy-Lugar Youth Exchange and Study (YES) Program was established in October, 2002 and sponsored by The Bureau of Educational and Cultural Affairs (ECA) to provide scholarships for high school students from countries with significant Muslim populations to spend up to one academic year in the U.S.</p>
-				<p>Students will spend one year in United States of America. Students live with host families, attend high school, and engage in activities to learn about American society and values, acquire leadership skills, and help educate Americans about Indonesia and our cultures. Upon their return the students will apply their leadership skills in Indonesia. In addition, alumni groups will help participants continue to be involved with many community service activities including: mentoring younger children, and much more.</p>
-				<p>YES can support students with disabilities and encourages their participation. The Bureau of Educational and Cultural Affairs (ECA) works with a separate organization to provide students with disabilities with leadership-building workshops and appropriate information and support as needed to enhance their year in the United States. The YES program is administered by the YES Consortium and its partners in each country.</p>
+			<td class="yes">
+<p>
+    Kennedy-Lugar Youth Exchange and Study Program adalah program beasiswa penuh yang diberikan oleh U.S. Department of State kepada siswa SMA atau sederajat,
+    yang bertujuan menjembatani pemahaman dan saling pengertian antara masyarakat negara-negara dengan populasi muslin yang signifikan dengan masyarakat
+    Amerika Serikat.
+</p>
+<p>
+    Program KL-YES yang telah dilaksanakan sejak tahun 2003 juga memberikan kesempatan kepada siswa difabel (tuna netra, tuna rungu, tuna wicara, tuna daksa)
+    untuk mengikuti program ini. Selama program, kamu akan tinggal dengan keluarga Amerika, dan bersekolah di SMA setempat. Kamu akan mengalami dan belajar
+    secara langsung mengenai kehidupan di Amerika Serikat. Kamu juga kan memperoleh kesempatan untuk berinteraksi secara langsung dengan masyarakat melalui
+    kegiatan-kegiatan yang dilaksanakan selama program.
+</p>
+<p>
+    Dalam program KL-YES ini kamu akan menjadi duta perdamaian dan persahabatan antara Indonesia sebagai Negara dengan jumlah penduduk muslim terbesar di dunia
+    dan Amerika Serikat.
+</p>
 			</td>
 		</tr>
 	</table>	
