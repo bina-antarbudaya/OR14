@@ -281,39 +281,40 @@ TODO
 </fieldset>
 
 <fieldset class="pane" id="countryprefs">
-	<legend>Pilihan Negara (AFS)</legend>
+	<legend>Pilihan Negara</legend>
 	<div class="country-prefs-container">
-		<span class="help-block">Pilih urutan negara tujuan yang Adik kehendaki <em>jika</em> Adik diterima di AFS Year Program. Adik wajib memilih paling sedikit <strong>tiga</strong> negara untuk masing-masing kawasan.</span>
+		<span class="help-block">Pilih urutan negara tujuan yang Adik kehendaki <em>jika</em> Adik diterima di AFS Year Program. Adik wajib menentukan urutan pilihan <strong>seluruh</strong> negara.</span>
 
 		<div class="row-fluid">
 <?php
 						
 $partners = array(
 	'americas' => array(
-		'USA' => 'Amerika Serikat',
-		'ARG' => 'Argentina',
 		'BRA' => 'Brazil',
 		'CAN' => 'Kanada',
-		'MEX' => 'Meksiko'
+		'MEX' => 'Meksiko',
+		'USA' => 'Amerika Serikat',
 	),
 	'europe' => array(
 		'NED' => 'Belanda',
 		'BFL' => 'Belgia (Flanders)',
 		'BFR' => 'Belgia (Wallonia)',
+		'CZE' => 'Republik Ceko'
+		'FIN' => 'Finlandia',
 		'FRA' => 'Perancis',
 		'GER' => 'Jerman',
+		'ISL' => 'Islandia',
 		'ITA' => 'Italia',
 		'NOR' => 'Norwegia',
 		'SUI' => 'Swiss',
+		'SWE' => 'Swedia',
 		'TUR' => 'Turki',
-		'CZE' => 'Ceko'
 	),
 	'asia' => array(
+		'CHN' => 'Cina',
 		'JPN' => 'Jepang',
 		'PHI' => 'Filipina',
 		'THA' => 'Thailand',
-		'CHN' => 'Cina',
-		'IND' => 'India'
 	)
 );
 	
