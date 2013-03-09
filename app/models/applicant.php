@@ -1208,6 +1208,44 @@ class Applicant extends HeliumPartitionedRecord {
 		$required[] = "grades_y10t1_average";
 		$required[] = "grades_y10t1_subjects";
 
+		// Country preferences
+		// This partners array should be moved somewhere...
+		$partners = array(
+			'americas' => array(
+				'BRA' => 'Brazil',
+				'CAN' => 'Kanada',
+				'MEX' => 'Meksiko',
+				'USA' => 'Amerika Serikat',
+			),
+			'europe' => array(
+				'NED' => 'Belanda',
+				'BFL' => 'Belgia (Flanders)',
+				'BFR' => 'Belgia (Wallonia)',
+				'CZE' => 'Republik Ceko'
+				'FIN' => 'Finlandia',
+				'FRA' => 'Perancis',
+				'GER' => 'Jerman',
+				'ISL' => 'Islandia',
+				'ITA' => 'Italia',
+				'NOR' => 'Norwegia',
+				'SUI' => 'Swiss',
+				'SWE' => 'Swedia',
+				'TUR' => 'Turki',
+			),
+			'asia' => array(
+				'CHN' => 'Cina',
+				'JPN' => 'Jepang',
+				'PHI' => 'Filipina',
+				'THA' => 'Thailand',
+			)
+		);
+		foreach ($partners as $c => $continent) {
+			for ($i = 1; $i <= count($continent); $i++) {
+				$required[] = 'pref_' . $c . '_' . $i;
+			}
+		}
+
+
 		foreach ($required as $f) {
 			$try = trim($this->$f, "- \t\n\r\0\x0B");
 			if (!$try) {
