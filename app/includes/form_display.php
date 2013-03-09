@@ -410,8 +410,8 @@ class FormDisplay {
 		<span class="phone-number">
 		( <?php $this->tel($name . '_phone_areacode', 'very-short area-code', 4) ?> )
 		<?php $this->tel($name . '_phone_number', 'short', 12) ?>
-		ext.
-		<?php $this->tel($name . '_phone_number', 'very-short extension', 12) ?>
+		<!-- ext.
+		<?php $this->tel($name . '_phone_number_extension', 'very-short extension', 12) ?> -->
 		</span>
 		<?php
 		endif;
