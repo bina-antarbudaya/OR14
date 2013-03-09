@@ -329,7 +329,7 @@ class ChapterController extends AppController {
 					
 					$series = array();
 					$total = 0;
-					if (is_array($results))
+					if (is_array($results)) {
 						foreach ($results as $row) {
 							$rows = $row->rows;
 							$value = $row->value;
