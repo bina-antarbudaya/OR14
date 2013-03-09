@@ -172,6 +172,7 @@ if ($this->user->chapter->is_national_office()) {
 <?php print_statbox('Asal Kota', $stats['city']['data']['series'], 'kota') ?>
 
 <!--
+<?php /*
 <article class="statbox countries">
 	<header>Pilihan Negara</header>
 		<table>
@@ -210,6 +211,7 @@ if ($this->user->chapter->is_national_office()) {
 		?>
 		</table>
 </article>
+*/ ?>
 
 <article class="statbox">
 	<header>Pilihan Negara Lainnya</header>
