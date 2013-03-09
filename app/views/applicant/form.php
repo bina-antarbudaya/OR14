@@ -154,7 +154,7 @@ TODO
 				<?php $form->date('date_of_birth', 17, 15); ?>
 				<br>
 				<?php
-				$program_year = $this->applicant->program_year;
+				// $program_year = $this->applicant->program_year;
 				$min = new HeliumDateTime;
 				$min->setDate($program_year - 17, 8, 1);
 				$max = new HeliumDateTime;
