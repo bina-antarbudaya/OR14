@@ -227,7 +227,7 @@ TODO
 		<colgroup width="40%">
 		<tr class="program-name">
 			<th class="label">Program</th>
-			<td class="afs"><input type="checkbox" name="program_afs" value="true" checked> <?php $form->label('program_afs', 'AFS Year Program') ?></td>
+			<td class="afs"><?php $form->checkbox('program_afs') ?> <?php $form->label('program_afs', 'AFS Year Program') ?></td>
 			<td class="yes"><?php $form->checkbox('program_yes') ?> <?php $form->label('program_yes', 'Kennedy-Lugar YES') ?></td>
 		</tr>
 		<tr class="program-length">
