@@ -329,17 +329,19 @@ class ChapterController extends AppController {
 					
 					$series = array();
 					$total = 0;
-					foreach ($results as $row) {
-						$rows = $row->rows;
-						$value = $row->value;
-						$value = trim($value); // perhaps more trimming could be in order
+					if (is_array($results))
+						foreach ($results as $row) {
+							$rows = $row->rows;
+							$value = $row->value;
+							$value = trim($value); // perhaps more trimming could be in order
 
-						if ($series[$value])
-							$series[$value] += $rows;
-						else
-							$series[$value] = $rows;
+							if ($series[$value])
+								$series[$value] += $rows;
+							else
+								$series[$value] = $rows;
 
-						$total += $rows;
+							$total += $rows;
+						}
 					}
 					
 					$stats[$key]['data'] = compact('series', 'total');
