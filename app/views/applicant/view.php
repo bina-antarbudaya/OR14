@@ -164,7 +164,7 @@
 			</p>
 		</form>
 		<?php
-			elseif ($applicant->is_expired()):
+			elseif ($applicant->is_expired() && $applicant->validate()):
 		?>
 		<form action="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $applicant->id)) ?>" method="POST" class="confirm-form">
 			<p>
