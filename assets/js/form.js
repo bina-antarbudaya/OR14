@@ -233,7 +233,7 @@ $(function(){
 				$('.recheck', '#finalisasi').show();
 				$('.finalize-checkbox').hide();
 				e.preventDefault();
-				$('#finalize').removeprop('checked');
+				$('#finalize').prop('checked', false);
 			}
 			else {
 				$('.recheck', '#finalisasi').hide();
@@ -259,7 +259,7 @@ $(function(){
 		.on('deactivate', function() {
 			$('p.save button').css('visibility', 'visible');
 			$('.form-page-nav.below').show();
-			$('#finalize').removeprop('checked');
+			$('#finalize').prop('checked', false);
 			toggleFinalizeButton();
 		});
 
@@ -310,7 +310,7 @@ $(function(){
 	checkAcc = function() {
 		if ($('#in_acceleration_class').is(':checked')) {								
 			previously_selected_yes = $('#program_yes').prop('checked');
-			$('#program_yes').removeprop('checked')
+			$('#program_yes').prop('checked', false)
 			$('.programs-table .yes').hide();
 			$('#country-prefs-td').attr('colspan', 1);
 		}
@@ -318,7 +318,7 @@ $(function(){
 			if (previously_selected_yes)
 				$('#program_yes').prop('checked', true);
 			else
-				$('#program_yes').removeprop('checked');
+				$('#program_yes').prop('checked', false);
 
 			$('.programs-table .yes').show();
 			$('#country-prefs-td').attr('colspan', 2);
