@@ -14,7 +14,7 @@ function LL($target) {
 }
 ?>
 <ul class="nav nav-tabs">
-	<li<?php if ($current_stage == 'active') echo ' class="active"' ?> data-toggle="tooltip" title="Hola"><a href="<?php LL(array('stage' => 'active')) ?>">Seluruh Peserta</a></li>
+	<li<?php if ($current_stage == 'active') echo ' class="active"' ?> data-toggle="tooltip" title="Seluruh peserta yang masih mengisi formulir dan belum melewati batas pendaftaran, atau yang sudah melakukan finalisasi."><a href="<?php LL(array('stage' => 'active')) ?>">Seluruh Peserta Aktif</a></li>
 	
 
 	<?php
