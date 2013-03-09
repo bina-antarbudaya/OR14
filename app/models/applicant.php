@@ -1221,7 +1221,7 @@ class Applicant extends HeliumPartitionedRecord {
 				'NED' => 'Belanda',
 				'BFL' => 'Belgia (Flanders)',
 				'BFR' => 'Belgia (Wallonia)',
-				'CZE' => 'Republik Ceko'
+				'CZE' => 'Republik Ceko',
 				'FIN' => 'Finlandia',
 				'FRA' => 'Perancis',
 				'GER' => 'Jerman',
