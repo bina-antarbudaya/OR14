@@ -90,12 +90,12 @@ recheckActivated = false;
 			afs = $('#program_afs');
 			yes = $('#program_yes');
 			$('#program_afs, #program_yes').each(function() {
-				if (!afs.attr('checked') && !yes.attr('checked')) {
+				if (!afs.prop('checked') && !yes.prop('checked')) {
 					afs.parents('tr').children('th.label').addClass('recheck');
 					$(".form-nav a[href='#program']").addClass('recheck');
 				}
 			}).change(function() {
-				if (!afs.attr('checked') && !yes.attr('checked')) {
+				if (!afs.prop('checked') && !yes.prop('checked')) {
 					$(this).parents('tr').children('th.label').addClass('recheck');
 					$(".form-nav a[href='#program']").addClass('recheck');
 				}
@@ -233,7 +233,7 @@ $(function(){
 				$('.recheck', '#finalisasi').show();
 				$('.finalize-checkbox').hide();
 				e.preventDefault();
-				$('#finalize').removeAttr('checked');
+				$('#finalize').removeprop('checked');
 			}
 			else {
 				$('.recheck', '#finalisasi').hide();
@@ -259,7 +259,7 @@ $(function(){
 		.on('deactivate', function() {
 			$('p.save button').css('visibility', 'visible');
 			$('.form-page-nav.below').show();
-			$('#finalize').removeAttr('checked');
+			$('#finalize').removeprop('checked');
 			toggleFinalizeButton();
 		});
 
@@ -306,19 +306,19 @@ $(function(){
 	$('#keluarga input[type=number]').attr('min', 1);
 
 	// YES filter: acceleration class cannot choose YES
-	previously_selected_yes = $('#program_yes').attr('checked')
+	previously_selected_yes = $('#program_yes').prop('checked')
 	checkAcc = function() {
 		if ($('#in_acceleration_class').is(':checked')) {								
-			previously_selected_yes = $('#program_yes').attr('checked');
-			$('#program_yes').removeAttr('checked')
+			previously_selected_yes = $('#program_yes').prop('checked');
+			$('#program_yes').removeprop('checked')
 			$('.programs-table .yes').hide();
 			$('#country-prefs-td').attr('colspan', 1);
 		}
 		else {
 			if (previously_selected_yes)
-				$('#program_yes').attr('checked', 'checked');
+				$('#program_yes').prop('checked', true);
 			else
-				$('#program_yes').removeAttr('checked');
+				$('#program_yes').removeprop('checked');
 
 			$('.programs-table .yes').show();
 			$('#country-prefs-td').attr('colspan', 2);
@@ -395,7 +395,7 @@ $(function(){
 	
 	// AFS Program force checkbox
 	$('#program_afs').change(function() {
-		$(this).attr('checked', 'checked');
+		$(this).prop('checked', true);
 	});
 
 	// Typeahead for school names
