@@ -1256,10 +1256,10 @@ class Applicant extends HeliumPartitionedRecord {
 
 		$check['picture'] = (bool) $this->picture;
 
-		list($a, $y, $j) = array($this->program_afs, $this->program_yes, $this->program_jenesys);
-		if (!$a && !$y && !$j) {
-			$check['program'] = false;
-		}
+		// list($a, $y, $j) = array($this->program_afs, $this->program_yes, $this->program_jenesys);
+		// if (!$a && !$y && !$j) {
+		// 	$check['program'] = false;
+		// }
 
 		$bd = $this->date_of_birth;
 		$lower = new HeliumDateTime(($this->program_year - 19) . '-08-01');
