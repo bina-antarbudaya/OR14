@@ -84,7 +84,9 @@ recheckActivated = false;
 			$(required_fields).each(function() {
 				id = '#' + this;
 				$(id).recheck();
-			})
+			});
+
+			$('[data-continent] select').recheck();
 
 			// Program check
 			afs = $('#program_afs');
