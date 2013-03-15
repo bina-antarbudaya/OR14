@@ -100,7 +100,7 @@ TODO
 		<li><a href="#keluarga">Keluarga</a></li>
 		<li><a href="#pendidikan">Pendidikan</a></li>
 		<li><a href="#kegiatan">Kegiatan</a></li>
-		<li><a href="#personality">Kepribadian</a></li>
+		<li><a href="#selfawareness">Kepribadian</a></li>
 		<li><a href="#program">Pilihan Program</a></li>
 		<li><a href="#countryprefs">Pilihan Negara</a></li>
 		<li><a href="#perjalanan">Riwayat Perjalanan</a></li>
@@ -1178,7 +1178,7 @@ foreach ($partners as $continent => $countries):
 	</table>
 </fieldset>
 
-<fieldset class="pane" id="personality">
+<fieldset class="pane" id="selfawareness">
 	<legend>Kepribadian</legend>
 	<table class="form-table">
 		<tr>
