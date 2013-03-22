@@ -78,7 +78,7 @@ class Applicant extends HeliumPartitionedRecord {
 	/**
 	 * Partitioned table magic
 	 */
-	public function map_vertical_partitions() {
+	public function _map_vertical_partitions() {
 		$start = microtime(true);
 
 		static $done;
