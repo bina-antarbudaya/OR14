@@ -114,11 +114,11 @@ $this->header(); ?>
 		<tbody>
 		<?php endif; if ($i % 2 == 0) echo '<tr>' ?>
 
-			<td class="chapter_name">
+			<td class="chapter_name"<?php if ($b->availability == false) echo ' style="opacity: 0.2"' ?>>
 				<span class="header">PIN Pendaftaran Seleksi Bina Antarbudaya</span>
 					<img src="<?php L('/assets/dove.png') ?>" alt="">
 				<span class="chapter-name">Chapter <strong><?php echo $chapter_name ?></strong></span>
-				<span class="token"><?php echo $b->token ?></span>
+				<span class="token"<?php if ($b->availability == false) echo ' style="text-decoration: line-through"' ?>><?php echo $b->token ?></span>
 				<span class="expires-on">Berlaku sampai <strong><?php echo $exp ?></strong></span>
 				<span class="footer"><?php L('/') ?></span>
 			</td>

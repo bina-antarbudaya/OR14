@@ -87,7 +87,15 @@ class Session extends HeliumRecord implements ArrayAccess {
 	
 	public function generate_token() {
 		// generate session token
-		return uniqid('', true);
+		mt_srand();
+		$parts = array(mt_rand(), $_SERVER['REMOTE_ADDR'], microtime());
+		$parts = implode('---', $parts);
+
+		$bytes = openssl_random_pseudo_bytes(20);
+		$bytes = bin2hex($bytes);
+
+		return sha1($parts) . $bytes;
+		// return uniqid('', true);
 	}
 	
 	public function make_persistent() {

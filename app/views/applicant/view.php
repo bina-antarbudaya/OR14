@@ -97,7 +97,7 @@
 				<td class="field"><?php echo $applicant->expires_on->format('j F Y') ?></td>
 			</tr>
 			<?php endif; ?>
-			<?php if ($f): ?>
+			<?php if ($f || ($this->user->capable_of('national_admin') && $applicant->local_id)): ?>
 			<tr>
 				<td class="label">Tanda Peserta</td>
 				<td class="field"><a href="<?php L(array('controller' => 'applicant', 'action' => 'card', 'id' => $applicant->id)) ?>">Cetak</a></td>
@@ -164,7 +164,7 @@
 			</p>
 		</form>
 		<?php
-			elseif ($applicant->is_expired() && $applicant->validate()):
+			elseif ($applicant->validate() && $applicant->is_expired()):
 		?>
 		<form action="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $applicant->id)) ?>" method="POST" class="confirm-form">
 			<p>
@@ -178,6 +178,23 @@
 		</form>
 		<?php
 			else:
+				if ($applicant->is_expired() && !$applicant->local_id && $this->user->capable_of('national_admin')): ?>
+		<form action="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $applicant->id)) ?>" method="POST" class="confirm-form">
+			<p>
+				<input type="hidden" name="id" value="<?php echo $applicant->id ?>">
+				<input type="hidden" name="finalized" value="0">
+				<input type="hidden" name="confirmed" value="0">
+				<input type="hidden" name="force_finalize" value="1">
+				<button type="submit" class="confirm-button">Finalisasi Paksa</button>
+				<br>
+				<span class="instruction"><strong>
+					Tindakan ini dapat mengganggu integritas data
+					dan hanya dapat dilakukan oleh administrator nasional.
+				</strong></span>
+			</p>
+		</form>
+			<?php
+				endif;
 		?>
 		<p>Siswa belum dapat melakukan finalisasi karena:</p>
 		<ul class="validation-errors">

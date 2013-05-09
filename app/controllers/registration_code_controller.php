@@ -17,6 +17,7 @@ class RegistrationCodeController extends AppController {
 
 		if (!$error) {
 			$batches = $chapter->registration_code_batches;
+			$batches->set_batch_length(0);
 			$this['chapter'] = $chapter;
 			$this['batches'] = $batches;
 		}

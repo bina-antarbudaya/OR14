@@ -915,17 +915,36 @@ class Applicant extends HeliumPartitionedRecord {
 		$participant_count = $db->get_var("SELECT COUNT(*) FROM participants");
 		if ($participant_count) {
 			// Participants have been imported. No more finalization allowed.
-			return false;
+			// 2013-04-26 Makassar Outreach workaround
+			// return false;
 		}
 		if ($this->validate()) {
 			$this->finalized = true;
-			if (!$this->local_id)
-				$this->local_id = $this->generate_local_id();
-			$this->test_id = $this->generate_test_id();
+			$this->assign_test_id();
 			return true;
 		}
 		else
 			return false;
+	}
+
+	/**
+	 * Assign test ID
+	 */
+	public function assign_test_id() {
+		if (!$this->local_id)
+			$this->local_id = $this->generate_local_id();
+		$this->test_id = $this->generate_test_id();
+	}
+
+	/**
+	 * Force finalize an applicant regardless of validity
+	 */
+	public function force_finalize() {
+		$db = Helium::db();
+
+		$this->finalized = true;
+		$this->assign_test_id();
+		return true;
 	}
 
 	/**

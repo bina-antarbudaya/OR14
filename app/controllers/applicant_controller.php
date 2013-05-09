@@ -609,7 +609,7 @@ class ApplicantController extends AppController {
 		/*
 		$countries = $db->get_col("SELECT country_preference_1, COUNT(*) AS rows  FROM applicant_program_choices WHERE country_preference_1 IS NOT NULL AND country_preference_1 != '' GROUP BY country_preference_1 ORDER BY rows DESC");
 		$country_stats = array();
-		foreach ($countries as $country) {
+		foreach (/* $countries */ array() as $country) {
 			$numbers = array();
 			for ($i = 1; $i <= 10; $i++) {
 				$cq = "SELECT COUNT(*) FROM applicant_program_choices INNER JOIN applicants ON applicants.id=applicant_program_choices.applicant_id WHERE country_preference_$i='$country' AND $constraint_string";
@@ -762,7 +762,21 @@ class ApplicantController extends AppController {
 								'applicant_other_achievements' => 'applicant_other_achievements',
 								'applicant_work_experiences' => 'applicant_work_experiences');
 
-			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+			if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['applicant_id'] != $applicant->id) {
+				// Data swapping workaround
+
+				// Data swapping detected
+
+				// Logout
+				$this->auth->process_logout();
+
+				// Redirect to login
+				$this->http_redirect(array('controller' => 'auth', 'action' => 'login', 'error' => 'Terjadi kesalahan teknis. Penyimpanan data dibatalkan.'));
+
+				file_put_contents(HELIUM_APP_PATH . '/error.log', "Dataswap detected: {$applicant->id} was logged in but form belonged to {$_POST['applicant_id']}", FILE_APPEND);
+			}
+			elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				// store the form values in the DB
 				$proc = new FormProcessor;
 				$proc->add_uneditables('id', 'applicant_id', 'user_id', 'chapter_id', 'program_year', 'expires_on', 'confirmed', 'finalized', 'local_id', 'test_id');
@@ -856,7 +870,7 @@ class ApplicantController extends AppController {
 									return $e;
 							}
 						}, $errors);
-						$this->session['form_errors'] = $errors;
+						$this->session['()_errors'] = $errors;
 						$this->session['incomplete'] = $applicant->incomplete_fields;
 					}
 				}
@@ -1059,6 +1073,9 @@ class ApplicantController extends AppController {
 			else
 				$applicant->finalized = 0;
 
+			if ($_POST['force_finalize'])
+				$applicant->force_finalize();
+
 			$applicant->confirmed = $applicant->finalized ? $_POST['confirmed'] : false;
 			$applicant->save();
 		}
@@ -1172,7 +1189,8 @@ class ApplicantController extends AppController {
 		$this['applicant'] = $applicant;
 		$this['picture'] = $picture;
 		
-		if (!$applicant->finalized)
+		// 2013-04-26: Allow national admin to override inability to view unfinalized applicant cards
+		if (!$applicant->finalized && !$this->user->capable_of('national_admin'))
 			$this->render = false;
 	}
 
@@ -1267,69 +1285,71 @@ class ApplicantController extends AppController {
 
 		$this['applicant'] = $applicant;
 
-		if (!$applicant->finalized)
-			$this->auth->land();
-		
-		$announcement_dates_original = $announcement_dates = array(
-			1 => Helium::conf('selection_one_announcement_date'),	
-			2 => Helium::conf('selection_two_announcement_date'),
-			3 => Helium::conf('selection_three_announcement_date'),
-		);
-
-		$chapter_id = $applicant->chapter_id;
-
-		$db = Helium::db();
-		
-		// for selection 2
-		$wave = $db->get_var('SELECT announcement_date FROM selection_two_batches WHERE chapter_id=' . $chapter_id . ' AND announcement_date_follows_national=0 ORDER BY announcement_date ASC LIMIT 0,1'); // may be null
-		if ($wave && $wave[0] != '0')
-			$announcement_dates[1] = $wave;
-		
-		$now = new HeliumDateTime('now');
-		
-		$selection_to_announce = 0; // no announcement yet
-		foreach ($announcement_dates as $n => $a) {
-			$a = new HeliumDateTime($a, $applicant->chapter->chapter_timezone);
-			if ($now >= $a)
-				$selection_to_announce = $n;
-		}
-		
-		$batch_count = $db->get_var('SELECT COUNT(*) FROM selection_two_batches WHERE chapter_id=' . $chapter_id);
-		if (!$batch_count)
-			$selection_to_announce = 0;
-		
-		if (!$selection_to_announce) {
-			$selection_dates = array(
-				3 => Helium::conf('selection_three_date'),
-				2 => Helium::conf('selection_two_date'),
-				1 => Helium::conf('selection_one_date'),
+		if ($applicant) {
+			if (!$applicant->finalized)
+				$this->auth->land();
+			
+			$announcement_dates_original = $announcement_dates = array(
+				1 => Helium::conf('selection_one_announcement_date'),	
+				2 => Helium::conf('selection_two_announcement_date'),
+				3 => Helium::conf('selection_three_announcement_date'),
 			);
-			foreach ($selection_dates as $n => $a) {
+
+			$chapter_id = $applicant->chapter_id;
+
+			$db = Helium::db();
+			
+			// for selection 2
+			$wave = $db->get_var('SELECT announcement_date FROM selection_two_batches WHERE chapter_id=' . $chapter_id . ' AND announcement_date_follows_national=0 ORDER BY announcement_date ASC LIMIT 0,1'); // may be null
+			if ($wave && $wave[0] != '0')
+				$announcement_dates[1] = $wave;
+			
+			$now = new HeliumDateTime('now');
+			
+			$selection_to_announce = 0; // no announcement yet
+			foreach ($announcement_dates as $n => $a) {
 				$a = new HeliumDateTime($a, $applicant->chapter->chapter_timezone);
 				if ($now >= $a)
-					$next_selection = $n;
+					$selection_to_announce = $n;
 			}
-		}
-		
-		$participant = $applicant->participant;
-		
-		$props = array(
-			1 => 'passed_selection_one',
-			2 => 'passed_selection_two',
-			3 => 'passed_selection_three'
-		);
-		
-		if ($selection_to_announce)
-			$selection_result = $participant->selection_results($selection_to_announce);
-
-		if ($selection_to_announce == 1) {
-			$next_announcement_wave_date = $db->get_var('SELECT announcement_date FROM selection_two_batches WHERE announcement_date > NOW() AND announcement_date_follows_national=0 AND chapter_id=' . $chapter_id . ' LIMIT 0,1'); // may be null
-
-			if ($next_announcement_wave_date && $next_announcement_wave_date != '0000-00-00 00:00:00') {
-				$next_announcement_wave_date = new HeliumDateTime($next_announcement_wave_date, $applicant->chapter->chapter_timezone);
-
+			
+			$batch_count = $db->get_var('SELECT COUNT(*) FROM selection_two_batches WHERE chapter_id=' . $chapter_id);
+			if (!$batch_count)
 				$selection_to_announce = 0;
-				$next_selection = 1;
+			
+			if (!$selection_to_announce) {
+				$selection_dates = array(
+					3 => Helium::conf('selection_three_date'),
+					2 => Helium::conf('selection_two_date'),
+					1 => Helium::conf('selection_one_date'),
+				);
+				foreach ($selection_dates as $n => $a) {
+					$a = new HeliumDateTime($a, $applicant->chapter->chapter_timezone);
+					if ($now >= $a)
+						$next_selection = $n;
+				}
+			}
+			
+			$participant = $applicant->participant;
+			
+			$props = array(
+				1 => 'passed_selection_one',
+				2 => 'passed_selection_two',
+				3 => 'passed_selection_three'
+			);
+			
+			if ($selection_to_announce)
+				$selection_result = $participant->selection_results($selection_to_announce);
+
+			if ($selection_to_announce == 1) {
+				$next_announcement_wave_date = $db->get_var('SELECT announcement_date FROM selection_two_batches WHERE announcement_date > NOW() AND announcement_date_follows_national=0 AND chapter_id=' . $chapter_id . ' LIMIT 0,1'); // may be null
+
+				if ($next_announcement_wave_date && $next_announcement_wave_date != '0000-00-00 00:00:00') {
+					$next_announcement_wave_date = new HeliumDateTime($next_announcement_wave_date, $applicant->chapter->chapter_timezone);
+
+					$selection_to_announce = 0;
+					$next_selection = 1;
+				}
 			}
 		}
 		

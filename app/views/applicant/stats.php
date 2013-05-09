@@ -215,7 +215,7 @@ function print_leaderboard($source, $label = '', Array $series_map = array()) {
 		</div>
 	</div>
 </article>
-
+<?php /*
 <article class="statbox countries">
 	<header>Pilihan Negara</header>
 		<table>
@@ -266,6 +266,7 @@ function print_leaderboard($source, $label = '', Array $series_map = array()) {
 		</div>
 	</div>
 </article>
+*/ ?>
 
 <!-- 
 <h1>Phone Numbers</h1>

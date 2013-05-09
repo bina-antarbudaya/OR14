@@ -89,7 +89,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 	<img src="assets/logo.png" alt="Bina Antarbudaya" style="font-size: 18pt">
 	<h1>Transkrip Formulir Pendaftaran Seleksi</h1>
 	<?php if ($picture): ?>
-	<img src="https://www.seleksi.bina-antarbudaya.info/uploads/<?php echo $picture->cropped_filename; ?>" width="300" height="400" alt="Foto 4x6">
+	<img src="http://seleksi.bina-antarbudaya.info/uploads/<?php echo $picture->cropped_filename; ?>" width="300" height="400" alt="Foto 4x6">
 	<?php else: ?>
 	<br><br><br><br>(Foto 4x6)<br><br><br><br>
 	<?php endif; ?>

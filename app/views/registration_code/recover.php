@@ -8,7 +8,8 @@
 	<p>PIN tersebut <strong>belum diaktifkan</strong>.</p>
 	<p>Masa berlaku PIN: <strong><?php echo $expires_on->format('j F Y'); ?></strong></p>
 	<?php else: ?>
-	<p>Username: <a href="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $user_id))?>"><?php echo $username ?></a></p>
+	<p>Username: <a href="<?php L(array('controller' => 'user', 'action' => 'view', 'id' => $user_id))?>"><?php echo $username ?></a></p>
+	<p><a href="<?php L(array('controller' => 'user', 'action' => 'view', 'id' => $user_id))?>">Edit akun atau ubah password</a></p>
 	<p><a href="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $applicant_id))?>">Edit pendaftar</a></p>
 	<p>Masa berlaku PIN: <strong><?php echo $expires_on->format('j F Y'); ?></strong></p>
 	<?php endif; ?>

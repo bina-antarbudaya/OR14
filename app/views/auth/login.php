@@ -27,6 +27,10 @@ if (!$destination_title)
 		<div class="alert alert-success">
 			Password berhasil diubah.
 		</div>
+		<?php elseif ($error = $this->params['error']): ?>
+		<div class="alert alert-error">
+			<?php echo $error ?>
+		</div>
 		<?php endif; ?>
  		<section class="login-form">
  			<form action="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" method="POST" class="form">

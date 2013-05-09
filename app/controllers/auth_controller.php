@@ -90,7 +90,7 @@ class AuthController extends AppController {
 			if (!$u)
 				$error = 'not_found';
 				
-			if (!$u->get_email_address())
+			if (!$error && !$u->get_email_address())
 				$error = 'no_email';
 			
 			if (!$error) {
