@@ -956,3 +956,37 @@ section.then {
 section.then p {
 	text-align: center;
 }
+
+/* results page */
+.results .applicant-header {
+	font-size: 22.75px;
+	padding-bottom: 30px;
+	margin-bottom: 45px;
+	border-bottom: 1px solid #f6f6f6;
+	letter-spacing: -.03em;
+}
+.results .applicant-header p {
+	margin: 0;
+}
+.results .applicant-header .test-id {
+	float: right;
+	font-weight: 300;
+}
+.results .applicant-header .name {
+	font-weight: 600;
+	color: #000;
+}
+
+.results .result h1 {
+	margin: 45px 0 30px;
+}
+.results .result p {
+	font-size: 16px;
+	line-height: 21px;
+}
+
+.results .rereg-notice {
+	margin-top: 30px;
+	padding-top: 30px;
+	border-top: 1px solid #f6f6f6;
+}
