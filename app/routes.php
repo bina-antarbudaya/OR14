@@ -12,6 +12,7 @@ $route('/daftar/berkas', array('controller' => 'applicant', 'action' => 'finaliz
 $route('/daftar/kartu-peserta.pdf', array('controller' => 'applicant', 'action' => 'card'));
 $route('/daftar/%file%.pdf', array('controller' => 'applicant', 'action' => 'file'));
 $route('/daftar/transkrip', array('controller' => 'applicant', 'action' => 'transcript'));
+$route('/daftar/transkrip.html', array('controller' => 'applicant', 'action' => 'transcript'));
 $route('/admin/applicant/%id%', array('controller' => 'applicant', 'action' => 'form'));
 $route('/daftar/formulir', array('controller' => 'applicant', 'action' => 'form'));
 
@@ -24,12 +25,10 @@ $route('/ac', array('controller' => 'applicant', 'action' => 'confirm'));
 
 $route('/applicant/confirm', array('controller' => 'applicant', 'action' => 'confirm'));
 
-// $route('/seleksi/hasil', array('controller' => 'selection', 'action' => 'results'));
-$route('/hasil', array('controller' => 'selection', 'action' => 'results'));
-$route('/seleksi/satu', array('controller' => 'selection', 'action' => 'index'));
-$route('/seleksi/%action%', array('controller' => 'selection'));
+$route('/hasil', array('controller' => 'home', 'action' => 'results'));
+$route('/hasil/lihat', array('controller' => 'applicant', 'action' => 'results'));
 
 $route('/%controller%/%action%/%id%');
 $route('/%controller%/%action%');
 $route('/%controller%');
-$route('/', array('controller' => 'home'));
+$route('/', array('controller' => 'home', 'action' => 'index'));

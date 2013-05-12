@@ -16,7 +16,7 @@
 			<table class="form-table">
 				<tr>
 					<td class="label">Nomor Peserta</td>
-					<td class="field"><input type="text" class="medium" value="YBA/YP/14-15/XXX/YYYY" placeholder="YBA/YP/14-15/XXX/YYYY" name="test_id"><?php // $form->text('test_id') ?></td>
+					<td class="field"><input type="text" class="medium" value="YBA/YP14-15/XXX/YYYY" placeholder="YBA/YP14-15/XXX/YYYY" name="test_id"><?php // $form->text('test_id') ?></td>
 				</tr>
 				<tr>
 					<td class="label">Tanggal Lahir</td>
@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td class="label"></td>
-					<td class="field"><input type="hidden" name="on_fail_go_to" value="<?php L(array('controller' => 'home', 'action' => 'index', 'not_found' => 1)) ?>"><button type="submit">Buka</button></td>
+					<td class="field"><input type="hidden" name="on_fail_go_to" value="<?php L(array('controller' => 'home', 'action' => 'results', 'not_found' => 1)) ?>"><button type="submit">Buka</button></td>
 				</tr>
 			</table>
 		</form>

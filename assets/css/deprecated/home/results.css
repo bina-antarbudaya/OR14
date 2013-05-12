@@ -1,0 +1,39 @@
+body {
+	background: url('../global/bg_top_blue.jpg') fixed repeat-x;
+}
+.content {
+	padding: 5% 0;
+	float: none;
+	clear: both;
+}
+.global-footer {
+	position: absolute;
+	bottom: 0;
+}
+.home-index-wrapper {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.announcement-form {
+	width: 520px;
+	margin: 0 auto;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid #d9ebf6;
+	font-size: 13px;
+}
+.announcement-form h1 {
+	font-size: 18px;
+	font-weight: 600;
+}
+.announcement-form .message {
+	margin-top: -20px;
+}
+.announcement-form table {
+	width: 100%;
+}
+
+.global-footer {
+	display: none;
+}

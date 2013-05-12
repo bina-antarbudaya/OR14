@@ -51,7 +51,7 @@
 			<div class="rereg-notice">
 				<div class="row">
 					<div class="span5">
-						<p><span class="label label-important">Penting!</span> Sebelum melanjutkan ke seleksi tahap selanjutnya, Adik harus melakukan pendaftaran ulang.
+						<p><span class="label label-important">Penting!</span> Sebelum melanjutkan ke seleksi tahap selanjutnya, Adik harus melakukan pendaftaran ulang di <strong><?php echo $applicant->chapter->get_title() ?></strong>.
 						<?php if ($applicant->participant->selection_two_batch->reregistration_start_date != $applicant->participant->selection_two_batch->reregistration_finish_date): ?>
 						Pendaftaran ulang dilakukan antara tanggal <strong><?php echo $applicant->participant->selection_two_batch->reregistration_start_date->format('j F Y') ?></strong> dan <strong><?php echo $applicant->participant->selection_two_batch->reregistration_finish_date->format('j F Y') ?></strong>.
 						<?php elseif ($applicant->participant->selection_two_batch->reregistration_start_date == $applicant->participant->selection_two_batch->reregistration_finish_date && $applicant->participant->selection_two_batch->reregistration_start_date != '0000-00-00 00:00:00'): ?>
@@ -63,8 +63,6 @@
 						$c = $applicant->chapter;
 						if ($c->contact_person_phone): ?>
 						<p>Untuk informasi selengkapnya, silakan <?php if ($cs = $c->site_url) : ?>buka <a href="<?php echo $cs ?>">situs <?php echo $c->get_title(); ?></a> atau<?php endif; ?> hubungi<?php if ($cp = $c->contact_person_name) echo '<strong> Kak ' . $cp . '</strong> di '; echo "<strong>{$c->contact_person_phone}</strong>" ?>.</p>
-						<?php else: ?>
-						<p>Kembali ke laman ini jika Adik sudah mengumpulkan berkas-berkas tersebut.</p>
 						<?php endif; ?>
 					</div>
 					<div class="span4">
