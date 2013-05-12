@@ -608,6 +608,7 @@ class ApplicantController extends AppController {
 		// country preferences - special stats
 		/*
 		$countries = $db->get_col("SELECT country_preference_1, COUNT(*) AS rows  FROM applicant_program_choices WHERE country_preference_1 IS NOT NULL AND country_preference_1 != '' GROUP BY country_preference_1 ORDER BY rows DESC");
+		*/
 		$country_stats = array();
 		foreach (/* $countries */ array() as $country) {
 			$numbers = array();
@@ -670,7 +671,6 @@ class ApplicantController extends AppController {
 				'total' => $total_afs
 			)
 		);
-		*/
 
 		$this['stats'] = $stats;
 		$this['country_stats'] = $country_stats;
@@ -1211,7 +1211,9 @@ class ApplicantController extends AppController {
 			$applicant = $this['applicant'] = $this->applicant;
 
 			if (!$applicant->finalized || $applicant->confirmed)
-				$this->auth->land();			
+				$this->auth->land();
+			elseif (!$this->can_register())
+				$this->http_redirect(array('controller' => 'applicant', 'action' => 'results'));
 		}
 	}
 
