@@ -14,6 +14,7 @@
 <nav class="actions-nav expleft">
 	<ul>
 		<li><a href="<?php L(array('action' => 'details')) ?>">Lihat Formulir Pendaftaran</a></li>
+		<li><a href="<?php L(array('action' => 'transcript')) ?>">Unduh Transkrip Pendaftaran</a></li>
 	</ul>
 </nav>
 <?php endif; ?>

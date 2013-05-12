@@ -33,6 +33,7 @@ class ChapterController extends AppController {
 	 * Dashboard
 	 */
 	public function dashboard() {
+		$this->http_redirect(array('controller' => 'chapter', 'action' => 'view', 'id' => $this->params['id']));
 		$this->require_role('chapter_staff');
 
 		if ($this->user->capable_of('national_admin')) {
