@@ -70,13 +70,13 @@ $action_css = $controller . '/' . $this->_action();
 								</a>
 							<?php elseif ($this->user->applicant->confirmed): ?>
 								<i class="icon-certificate icon-white"></i>
-								<a href="<?php L($this->session->user->get_landing_page()); ?>">
+								<a href="<?php L(array('controller' => 'applicant', 'action' => 'results')); ?>">
 									Pengumuman
 								</a>
 							</li>
 							<li>
 								<i class="icon-download-alt icon-white"></i>
-								<a href="<?php L(array('controller' => 'applicant', 'action' => 'transcript')) ?>" data-toggle="dropdown">
+								<a href="<?php L(array('controller' => 'applicant', 'action' => 'transcript')) ?>">
 									Transkrip Formulir
 								</a>
 							<?php else: ?>
