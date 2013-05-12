@@ -108,6 +108,12 @@ class HomeController extends AppController {
 		$this['chapters']->set_order_by('chapter_name');
 		$this['chapter_count'] = $this['chapters']->count_all();
 		$this['this_year'] = Helium::conf('program_year') - 2;
+		$this['form'] = new FormDisplay;
+		$this['can_register'] = $this->can_register();
+	}
+
+	public function results() {
+		$this['form'] = new FormDisplay;
 	}
 
 	public function phpinfo() {

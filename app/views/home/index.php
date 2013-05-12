@@ -35,9 +35,15 @@
 		 				</p>
 		 			</div>
 				 	<div class="span3">
+	 					<?php if ($can_register): ?>
 				 		<section class="big-redeem-button">
 				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Aktifkan PIN Pendaftaran</a></p>
 				 		</section>
+				 		<?php else: ?>
+				 		<section class="results-form">
+				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'home', 'action' => 'results')) ?>">Lihat Hasil Seleksi</a></p>
+				 		</section>
+				 		<?php endif; ?>
 				 		<p class="or"><span>atau</span></p>
 				 		<section class="login-form">
 				 			<form action="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" method="POST" class="form">
