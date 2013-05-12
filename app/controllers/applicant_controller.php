@@ -1248,11 +1248,6 @@ class ApplicantController extends AppController {
 		$this['file'] = $filename;
 	}
 
-	protected function can_register() {
-		return true;
-		return !Helium::db()->get_var('SELECT COUNT(*) FROM participants');
-	}
-
 	public function results() {
 		$db = Helium::db();
 		if ($test_id = $_POST['test_id']) {
