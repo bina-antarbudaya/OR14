@@ -72,6 +72,9 @@
 			</ul>
 			<p class="more"><a href="<?php L(array('controller' => 'participant', 'action' => 'participant_list', 'chapter_id' => $id)) ?>">Unduh daftar seluruh peserta (XLSX)</a></p>
 			<p class="more"><a href="<?php L(array('controller' => 'chapter', 'action' => 'participant_tab', 'chapter_id' => $id)) ?>">Unduh lembar tabulasi standar (XLSX)</a></p>
+			<?php if ($chapter->is_national_office()): ?>
+			<p class="more">Unduh Master XLSX: <a href="<?php L(array('controller' => 'participant', 'action' => 'participant_list_new')) ?>">Semua</a> / <a href="<?php L(array('controller' => 'participant', 'action' => 'participant_list_new', 'only_candidates' => 'true')) ?>">Hanya Kandidat Chapter</a></p>
+			<?php endif; ?>
 		</article>
 		<article class="selection-todos">
 		<?php if ($next_selection_stage): ?>
