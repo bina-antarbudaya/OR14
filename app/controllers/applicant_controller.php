@@ -1298,8 +1298,13 @@ class ApplicantController extends AppController {
 			
 			// for selection 2
 			$wave = $db->get_var('SELECT announcement_date FROM selection_two_batches WHERE chapter_id=' . $chapter_id . ' AND announcement_date_follows_national=0 ORDER BY announcement_date ASC LIMIT 0,1'); // may be null
-			if ($wave && $wave[0] != '0')
+			if ($wave && $wave{0} != '0')
 				$announcement_dates[1] = $wave;
+
+			// for selection 3
+			$wave = $db->get_var('SELECT announcement_date FROM selection_three_batches WHERE chapter_id=' . $chapter_id . ' AND announcement_date_follows_national=0 ORDER BY announcement_date ASC LIMIT 0,1'); // may be null
+			if ($wave && $wave{0} != '0')
+				$announcement_dates[2] = $wave;
 			
 			$now = new HeliumDateTime('now');
 			

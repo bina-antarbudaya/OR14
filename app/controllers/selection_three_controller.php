@@ -89,7 +89,7 @@ class SelectionThreeController extends AppController {
 					// Use a subquery to update participants table
 					$participants_update = $db->query("UPDATE participants SET passed_selection_two=1, selection_three_batch_id=$batch_id, personality_chamber_number=NULL, english_chamber_number=NULL, personality_turn_number=NULL, english_turn_number=NULL WHERE id IN $participant_ids_string");
 					
-					$participants_mask = $db->query("UPDATE participants SET passed_selection_two=0 WHERE applicant_id IN (SELECT id FROM applicants WHERE chapter_id='$batch->chapter_id') AND passed_selection_one IS NULL");
+					$participants_mask = $db->query("UPDATE participants SET passed_selection_two=0 WHERE applicant_id IN (SELECT id FROM applicants WHERE chapter_id='$batch->chapter_id') AND passed_selection_two IS NULL");
 					
 					$db->commit();
 

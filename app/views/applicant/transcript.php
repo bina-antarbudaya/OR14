@@ -264,7 +264,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 
 	<table class="siblings-table subform">
 		<caption>
-			Anak ke-<span class="value"><?php echo $a->number_of_children_in_family ?></span> dari <span class="value"><?php echo $a->nth_child ?></span> bersaudara
+			Anak ke-<span class="value"><?php echo $a->nth_child ?></span> dari <span class="value"><?php echo $a->number_of_children_in_family ?></span> bersaudara
 		</caption>
 		<thead>
 			<tr>

@@ -98,6 +98,14 @@
 				<li>Unduh <a href="<?php L(array('controller' => 'chapter', 'action' => 'participant_tab', 'chapter_id' => $id)) ?>">lembar tabulasi standar</a>, isi dengan hasil tabulasi chapter dan kirimkan ke <a href="mailto:sari.tjakra@afs.org">sari.tjakra@afs.org</a>.</li>
 				<li>Unggah <a href="<?php L(array('controller' => 'selection_three', 'action' => 'create_batch')) ?>">daftar kelulusan Seleksi Tahap Kedua</a></li>
 			</ol>
+			<hr>
+			<header>
+				<h1>To-Do List Seleksi Tahap Kedua</h1>
+			</header>
+			<ol>
+				<li>Unggah <a href="<?php L(array('controller' => 'selection_two', 'action' => 'create_batch')) ?>">daftar kelulusan Seleksi Tahap Pertama</a></li>
+				<li>Atur <a href="<?php L(array('controller' => 'selection_two', 'action' => 'index')) ?>">pembagian ruangan</a></li>
+			</ol>
 		<?php break; ?>
 		<?php endswitch; ?>
 		<?php else: ?>
