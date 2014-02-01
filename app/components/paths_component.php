@@ -7,7 +7,7 @@ class PathsComponent extends HeliumComponent {
 	static $cookie_path;
 	static $cookie_domain;
 
-	public function init($controller) {
+	public function init($controller = null) {
 		$controller->_alias_method('http_redirect', array($this, 'redirect'));
 		$controller->_alias_method(array($this, 'build_url'));
 		

@@ -13,7 +13,7 @@ class AuthComponent extends HeliumComponent {
 	public $login_action_name = 'login';
 	public $logout_action_name = 'logout';
 
-	public function init($controller) {
+	public function init($controller = null) {
 		$this->controller = $controller;
 		$this->sessions = $controller->sessions;
 		$this->session = $controller->session;

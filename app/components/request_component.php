@@ -1,7 +1,7 @@
 <?php
 
 class RequestComponent extends HeliumComponent {
-	public function init($controller) {
+	public function init($controller = null) {
 		$this->controller = $controller;
 
 		$controller->_alias_method('get_relevant_chapter', array($this, 'get_relevant_chapter'));
