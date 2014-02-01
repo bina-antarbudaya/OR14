@@ -17,7 +17,7 @@ class SessionsComponent extends HeliumComponent {
 	// callbacks/events
 	public $on_cookie_fail;
 
-	public function init($controller) {
+	public function init($controller = null) {
 		$this->cookies = $controller->cookies;
 
 		$this->cookie_name = Helium::conf('session_cookie_name');
