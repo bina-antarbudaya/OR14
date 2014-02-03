@@ -311,8 +311,11 @@ class ApplicantController extends AppController {
 				}
 				catch (HeliumException $e) {
 					$db->rollback();
-
 					$error = 'db_fail';
+
+					if (!Helium::config('production')) {
+						throw $e;
+					}
 				}
 
 				if (!$error) {

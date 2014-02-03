@@ -411,6 +411,9 @@ abstract class HeliumRecord {
 				case 'bool':
 					$value = $value ? 1 : 0;
 					break;
+				case 'int':
+					$value = $value ? strval($value) : '0';
+					break;
 				case 'datetime':
 					if (is_object($value))
 						$value = $value->mysql_datetime();
