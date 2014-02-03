@@ -31,10 +31,12 @@ else {
 		public $session_check_ip_address = false;
 
 		// Azure-specific settings
+		public $use_azure_storage = true;
 		public $azure_storage_connection_string = 'UseDevelopmentStorage=true';
+		public $azure_storage_picture_container = 'uploads';
 
 		// Replace with CDN endpoints
-		public $picture_public_path = 'http://localhost/uploads';
+		public $picture_public_path = 'http://127.0.0.1:10000/devstoreaccount1/uploads';
 		public $assets_public_path = 'http://localhost/assets';
 		
 		public $db_user = 'root';	// username
