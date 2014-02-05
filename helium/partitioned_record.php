@@ -277,20 +277,38 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 		foreach ($source as $field => $type) {
 			$value = $this->$field;
 
-			if (in_array($field, $this->_auto_serialize))
+			if ($value === null) {
+				$value = 'NULL';
+			}
+			elseif (in_array($field, $this->_auto_serialize)) {
 				$value = serialize($value);
-
-			switch ($type) {
-				case 'bool':
-					$value = $value ? 1 : 0;
-					break;
-				case 'datetime':
-					if (is_object($value))
-						$value = $value->mysql_datetime();
+				$value = $db->escape($value);
+				$value = "'$value'";
+			}
+			else {
+				switch ($type) {
+					case 'bool':
+						$value = $value ? "'1'" : "'0'";
+						break;
+					case 'int':
+						if ($value == 0)
+							$value = "'0'";
+						else
+							$value = "'" + strval($value) + "'";
+					 	break;
+					case 'datetime':
+						if (is_object($value)) {
+							$value = $value->mysql_datetime();
+							$value = "'$value'";
+						}
+						break;
+					default:
+						$value = strval($value);
+						$value = $db->escape($value);
+						$value = "'$value'";
+				}
 			}
 
-			$value = (string) $value;
-			$value = $db->escape($value);
 			$fields[$field] = $value;
 		}
 
@@ -305,7 +323,7 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 
 		$query = array();
 		foreach ($this->_db_values($table) as $field => $value) {
-			$query[] = "`$field`='$value'";
+			$query[] = "`$field`=$value";
 		}
 		if (in_array('updated_at', $this->_columns($table)))
 			$query[] = "`updated_at`=NOW()";
@@ -340,7 +358,7 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 				continue;
 
 			$fields[] = "`$field`";
-			$values[] = "'$value'";
+			$values[] = $value;
 		}
 
 		if (in_array('created_at', $this->_columns($table))) {
