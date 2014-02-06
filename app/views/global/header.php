@@ -19,38 +19,25 @@ $action_css = $controller . '/' . $this->_action();
 		<title><?php echo $the_title; ?></title>
 		
 		<link rel="icon" href="<?php L('/assets/icon.png'); ?>" type="image/png">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic:latin">
 		<link rel="stylesheet" href="<?php L('/assets/css/style.css'); ?>">
 		<?php foreach ($this->additional_css as $css): ?>
 		<link rel="stylesheet" href="<?php L('/assets/css/' . $css . '.css'); ?>">
+
 		<?php endforeach; ?>
 
-		<script type="text/javascript">
-		  WebFontConfig = {
-		    google: { families: [ 'Open+Sans:400,300,400italic,600,600italic:latin' ] }
-		  };
-		  (function() {
-		    var wf = document.createElement('script');
-		    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-		      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-		    wf.type = 'text/javascript';
-		    wf.async = 'true';
-		    var s = document.getElementsByTagName('script')[0];
-		    s.parentNode.insertBefore(wf, s);
-		  })();
-  		</script>
 	</head>
 
 	<body>
 		
 		<header class="global-header">
-			
 			<div class="container">
 				<h1 class="branding">
 					<a href="<?php L($this->is_logged_in() ? $this->session->user->get_landing_page() : ''); ?>">Bina Antarbudaya</a>
 				</h1>
 
 				<div class="actions">
-				<?php if ($this->is_logged_in()): ?>
+					<?php if ($this->is_logged_in()): ?>
 					<nav class="global-nav logged-in">
 						<ul>
 							<li class="username">
@@ -95,10 +82,10 @@ $action_css = $controller . '/' . $this->_action();
 							</li>
 						</ul>
 					</nav>
-				<?php elseif ($controller != 'auth'): ?>
+					<?php elseif ($controller != 'auth'): ?>
 					
 					<a href="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>">Login</a>
-				<?php endif;?>
+					<?php endif;?>
 				</div>
 			</div>
 		</header>
