@@ -1,20 +1,7 @@
-$(function () {
-	o = $('#pic')
-		.clone().css('max-width', '')
-		.attr('id', '').css('position', 'absolute')
-		.css('left', '-5000px').css('top', '-5000px')
-		.appendTo($('body'));
+$(window).load(function () {
+	var rx = parseInt($('#pic').attr('data-original-width'));
+	var ry = parseInt($('#pic').attr('data-original-height'));
 
-	var rx;
-	var ry;
-
-	r = function() {
-		rx = o.width() / $('#pic').innerWidth();
-		ry = o.height() / $('#pic').innerHeight();
-	}
-	$(window).resize(r);
-	r();
-	
 	w = $('#pic').innerWidth();
 	h = $('#pic').innerHeight();
 	ratio = w / h;
@@ -40,7 +27,7 @@ $(function () {
 		x1 = padding;
 		x2 = pw + padding;
 	}
-	
+
 	x1 = Math.round(x1);
 	x2 = Math.round(x2);
 	y1 = Math.round(y1);
@@ -62,11 +49,13 @@ $(function () {
 			$('#height').val(ry * selection.height);
 		}
 	});
-	
+
 	$('#x').val(Math.round(rx * x1));
 	$('#y').val(Math.round(ry * y1));
 	$('#width').val(Math.round(rx * (x2 - x1)));
 	$('#height').val(Math.round(ry * (y2 - y1)));
-	
-	$(window).scrollTop($('.page-header').offset().top + $('.page-header').outerHeight());
 });
+$(function() {
+	var ph = $('.page-header');
+	$(window).scrollTop(ph.offset().top + ph.outerHeight());
+})

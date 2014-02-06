@@ -9,9 +9,9 @@ $this->print_header();
 </header>
 
 <div class="cropper">
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span10" style="text-align: center">
-			<img id="pic" src="<?php echo $picture->get_original_url() ?>" alt="">
+			<img id="pic" src="<?php echo $picture->get_original_url() ?>" alt="" data-original-width="<?php echo $picture->original_width ?>" data-original-height="<?php echo $picture->original_height ?>">
 		</div>
 		<div class="span2">
 			<form action="<?php L($this->params) ?>" method="POST">
