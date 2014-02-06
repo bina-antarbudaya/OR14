@@ -45,41 +45,41 @@
  * Installation path (/var/www/tcpdf/).
  * By default it is automatically calculated but you can also set it as a fixed string to improve performances.
  */
-//define ('K_PATH_MAIN', '');
+define ('K_PATH_MAIN', __DIR__ . '/../');
 
 /**
  * URL path to tcpdf installation folder (http://localhost/tcpdf/).
  * By default it is automatically set but you can also set it as a fixed string to improve performances.
  */
-//define ('K_PATH_URL', '');
+define ('K_PATH_URL', 'http://localhost/tcpdf/');
 
 /**
  * Path for PDF fonts.
  * By default it is automatically set but you can also set it as a fixed string to improve performances.
  */
-//define ('K_PATH_FONTS', K_PATH_MAIN.'fonts/');
+define ('K_PATH_FONTS', K_PATH_MAIN.'fonts/');
 
 /**
  * Default images directory.
  * By default it is automatically set but you can also set it as a fixed string to improve performances.
  */
-//define ('K_PATH_IMAGES', '');
+define ('K_PATH_IMAGES', '');
 
 /**
  * Deafult image logo used be the default Header() method.
  * Please set here your own logo or an empty string to disable it.
  */
-//define ('PDF_HEADER_LOGO', '');
+define ('PDF_HEADER_LOGO', '');
 
 /**
  * Header logo image width in user units.
  */
-//define ('PDF_HEADER_LOGO_WIDTH', 0);
+define ('PDF_HEADER_LOGO_WIDTH', 0);
 
 /**
  * Cache directory for temporary files (full path).
  */
-//define ('K_PATH_CACHE', '/tmp/');
+define ('K_PATH_CACHE', '/tmp/');
 
 /**
  * Generic name for a blank image.
@@ -204,13 +204,13 @@ define('K_SMALL_RATIO', 2/3);
 /**
  * Set to true to enable the special procedure used to avoid the overlappind of symbols on Thai language.
  */
-define('K_THAI_TOPCHARS', true);
+define('K_THAI_TOPCHARS', false);
 
 /**
  * If true allows to call TCPDF methods using HTML syntax
  * IMPORTANT: For security reason, disable this feature if you are printing user HTML content.
  */
-define('K_TCPDF_CALLS_IN_HTML', true);
+define('K_TCPDF_CALLS_IN_HTML', false);
 
 /**
  * If true and PHP version is greater than 5, then the Error() method throw new exception instead of terminating the execution.
