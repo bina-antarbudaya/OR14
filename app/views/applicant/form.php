@@ -1315,7 +1315,6 @@ TODO
 			</div>
 		</div>
 	</div>
-	<button type="submit" class="btn btn-success" id="save-button">Simpan<?php if (!$admin): ?> Sementara<?php endif; ?></button>
 </form>
 
 <script>
