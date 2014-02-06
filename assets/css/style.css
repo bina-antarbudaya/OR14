@@ -647,13 +647,13 @@ label.required:after {
 }
 
 .subform {
-	border-top: 1px solid #f6f6f6;
+	border-top: 1px solid #eee;
 	margin-left: -10px;
 }
 .form-table td table td,
 .subform td {
 	padding: 5px 5px 0;
-	border-bottom: 1px solid #f6f6f6;
+	border-bottom: 1px solid #eee;
 }
 .form-table td table th,
 .subform th {
@@ -661,7 +661,7 @@ label.required:after {
 	color: #222;
 	font-weight: 600;
 	padding: 5px;
-	border-bottom: 1px solid #f6f6f6;
+	border-bottom: 1px solid #eee;
 }
 .form-table td table td:first-child,
 .subform td:first-child,
@@ -687,7 +687,7 @@ label.required:after {
 }
 .form-table {
 	width: 100%;
-	border-top: 1px solid #f6f6f6;
+	border-top: 1px solid #eee;
 	margin-left: -10px;
 	margin-right: -10px;
 }
@@ -705,14 +705,14 @@ th.label {
 .form-table td.label {
 	width: 30%;
 	padding-top: 12px;
-	border-bottom: 1px solid #f6f6f6;
+	border-bottom: 1px solid #eee;
 	padding-left: 10px;
 }
 .form-table td.field {
 	width: 70%;
 	padding-top: 7px;
 	padding-right: 10px;
-	border-bottom: 1px solid #f6f6f6;
+	border-bottom: 1px solid #eee;
 }
 .form-table tr:hover td {
 	background: #fcfcfc;
@@ -793,7 +793,7 @@ label.subpoint {
 .programs-table {
 	width: 100%;
 	margin-top: 20px;
-	border-top: 1px solid #f6f6f6;
+	border-top: 1px solid #eee;
 }
 .programs-table th {
 	text-align: left;
@@ -802,7 +802,7 @@ label.subpoint {
 }
 .programs-table th,
 .programs-table td {
-	border-bottom: 1px solid #f6f6f6;
+	border-bottom: 1px solid #eee;
 	vertical-align: top;
 }
 .programs-table ul {
@@ -821,18 +821,22 @@ label.subpoint {
 	list-style: bullet;
 }
 .programs-table th {
-	width: 10%;
+	width: 13%;
 	padding: 10px 0;
 }
 .programs-table td {
-	width: 30%;
+	width: 29%;
 	padding: 10px 0;
 }
 .programs-table .program-name td {
-/*	font-size: 14px;*/
 	color: #000;
 	font-size: 15px;
-/*	letter-spacing: -.05em;*/
+}
+.programs-table .program-name td input {
+	margin-right: 5px;
+}
+.programs-table .program-name td label {
+	font-weight: 600;
 }
 .programs-table .program-length td {
 	font-size: 12px;
@@ -851,11 +855,15 @@ label.subpoint {
 	list-style: none;
 	margin-bottom: 3px;
 }
+.programs-table .program-destination td.afs {
+	padding-right: 10px;
+}
 .programs-table .program-destination td.afs ul {
 	font-size: 12px;
-	-moz-column-count: 2;
-	-webkit-column-count: 2;
-	column-count: 2;
+	line-height: 1;
+	-moz-column-count: 3;
+	-webkit-column-count: 3;
+	column-count: 3;
 }
 .programs-table .program-info p {
 	margin: 5px 20px 5px 0;
