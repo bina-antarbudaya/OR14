@@ -107,10 +107,10 @@ TODO
 	</header>
 	<ol>
 		<li><a href="#pribadi">Data Pribadi</a></li>
-		<li><a href="#foto">Foto</a></li>
+		<li><a href="#foto">Pas Foto</a></li>
 		<li><a href="#keluarga">Keluarga</a></li>
-		<li><a href="#pendidikan">Pendidikan</a></li>
-		<li><a href="#kegiatan">Kegiatan</a></li>
+		<li><a href="#pendidikan">Riwayat Pendidikan</a></li>
+		<li><a href="#kegiatan">Riwayat Kegiatan</a></li>
 		<li><a href="#selfawareness">Kepribadian</a></li>
 		<li><a href="#program">Pilihan Program</a></li>
 		<li><a href="#countryprefs">Pilihan Negara</a></li>
@@ -147,15 +147,18 @@ TODO
 		</tr> */ ?>
 		<tr>
 			<td class="label"><?php $form->label('first_name', 'Nama Depan', 'required') ?></td>
-			<td class="field"><?php $form->text('first_name', 'input-block-level'); ?></td>
+			<td class="field"><?php $form->text('first_name', 'input-block-level'); ?>
+			<span class="help-block">Isilah sesuai akta kelahiran dan tanpa menggunakan singkatan.</span></td>
 		</tr>
 		<tr>
 			<td class="label"><?php $form->label('middle_name', 'Nama Tengah') ?></td>
-			<td class="field"><?php $form->text('middle_name', 'input-block-level'); ?></td>
+			<td class="field"><?php $form->text('middle_name', 'input-block-level'); ?>
+			<span class="help-block">Isilah sesuai akta kelahiran dan tanpa menggunakan singkatan.</span></td>
 		</tr>
 		<tr>
 			<td class="label"><?php $form->label('last_name', 'Nama Belakang') ?></td>
-			<td class="field"><?php $form->text('last_name', 'input-block-level'); ?></td>
+			<td class="field"><?php $form->text('last_name', 'input-block-level'); ?>
+			<span class="help-block">Isilah sesuai akta kelahiran dan tanpa menggunakan singkatan.</span></td>
 		</tr>
 		<tr>
 			<td class="label"><?php $form->label('place_of_birth', 'Tempat Kelahiran', 'required') ?></td>
@@ -172,8 +175,17 @@ TODO
 				$min->setDate($program_year - 17, 8, 1);
 				$max = new HeliumDateTime;
 				$max->setDate($program_year - 19, 8, 1);
+				$yes_max = new HeliumDateTime;
+				$yes_max->setDate($program_year - 18, 1, 1);
 				?>
-				<span class="help-block">Untuk mengikuti program pertukaran pelajar Bina Antarbudaya, Adik harus berusia antara 15 tahun hingga 16 tahun 8 bulan (lahir antara tanggal <?php echo $max->format('j F Y') ?> dan <?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>)</span>
+				<span class="help-block">
+					Untuk mengikuti program AFS Year Program dan Green Academy Short Programme periode <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?>,
+					Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $max->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>.
+				</span>
+				<span class="help-block">
+					Untuk mengikuti program Kennedy-Lugar YES periode <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?>,
+					Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $yes_max->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>.
+				</span>
 			</td>
 		</tr>
 		<tr>
@@ -231,9 +243,6 @@ TODO
 
 <fieldset class="pane" id="program">
 	<legend>Pilihan Program</legend>
-
-	<h4>Tentang masing-masing program</h4>
-
 	<table class="programs-table">
 		<tr class="program-name">
 			<th class="label">Nama Program</th>
@@ -241,12 +250,24 @@ TODO
 			<td class="yes"><?php $form->checkbox('program_yes') ?> <?php $form->label('program_yes', 'Kennedy-Lugar YES') ?></td>
 			<td class="green-academy"><?php $form->checkbox('program_green_academy') ?> <?php $form->label('program_green_academy', 'Green Academy Short Programme') ?></td>
 		</tr>
+		<tr class="program-age-limit">
+			<th class="label">Batas Umur</th>
+			<td class="afs">
+				Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $max->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>
+			</td>
+			<td class="yes">
+				Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $yes_max->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>
+			</td>
+			<td class="green-academy">
+				Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $max->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>
+			</td>
+		</tr>
 		<tr class="program-length">
 			<th class="label">Lama Program</th>
 			<td class="afs">
 				<span class="length">11 bulan</span>
 				<br>
-				Agt <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?> (kecuali Jepang)
+				Agustus <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?> (kecuali Jepang)
 				<br>
 				Maret <?php echo $program_year - 1?> &ndash; Februari <?php echo $program_year ?> (Jepang)
 			</td>
@@ -255,7 +276,7 @@ TODO
 				<br>
 				Agustus <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?>
 			</td>
-			<td class="yes">
+			<td class="green-academy">
 				<span class="length">1 bulan</span>
 				<br>
 				Desember <?php echo $program_year - 1?> &ndash; Januari <?php echo $program_year ?>
@@ -307,7 +328,7 @@ TODO
 					<li>Amerika Serikat</li>
 				</ul>
 			</td>
-			<td class="yes">
+			<td class="green-academy">
 				<ul>
 					<li>Jerman</li>
 				</ul>
@@ -351,6 +372,7 @@ TODO
 				    dan Amerika Serikat.
 				</p>
 			</td>
+			<td class="green-academy"></td>
 		</tr>
 	</table>	
 </fieldset>
@@ -515,11 +537,11 @@ foreach ($partners as $continent => $countries):
 			<td class="label"><?php $form->label('guardian_address_street', 'Alamat Wali') ?></td>
 			<td class="field"><?php $form->address('guardian', true, true, false, true, true, false, false) ?></td>
 		</tr>
-		<!-- The field below is in the DB schema but not the original form -->
-		<!-- <tr>
+		<?php /* The field below is in the DB schema but not the original form */ ?>
+		<tr>
 			<td class="label"><?php $form->label('guardian_education', 'Pendidikan Terakhir') ?></td>
 			<td class="field"><?php $form->text('guardian_education', 'long'); ?></td>
-		</tr> -->
+		</tr>
 		<tr>
 			<td class="label"><?php $form->label('guardian_occupation', 'Pekerjaan/Jabatan Wali') ?></td>
 			<td class="field">
@@ -591,9 +613,7 @@ foreach ($partners as $continent => $countries):
 </fieldset>
 
 <fieldset class="pane" id="pendidikan">
-	<legend>Pendidikan</legend>
-	<!-- poin 12–14 -->
-
+	<legend>Riwayat Pendidikan</legend>
 	<h4>SMA, SMK, MA, atau sederajat</h4>
 	<table class="form-table">
 		<tr>
@@ -803,7 +823,7 @@ foreach ($partners as $continent => $countries):
 		'national' => 'Nasional',
 		'international' => 'Internasional'
 	); ?>
-	<legend>Kegiatan</legend>
+	<legend>Riwayat Kegiatan</legend>
 	<!-- poin 15-19 -->
 	<h4>Organisasi</h4>
 	<table class="achievements subform">
@@ -1236,13 +1256,19 @@ foreach ($partners as $continent => $countries):
 <!-- end form -->
 
 <fieldset class="pane" id="foto">
-	<legend>Foto</legend>
-	<?php if ($picture): ?>
-	<div class="picture-container"><img src="<?php echo $picture->get_cropped_url(); ?>" width="300" height="400"></div>
-	<?php endif; ?>
+	<legend>Pas Foto</legend>
+
 	<table class="form-table">
+		<?php if ($picture): ?>
 		<tr>
-			<td class="label"><?php $form->label('picture', 'Unggah foto'  . ($picture ? ' baru' : ''),  ($picture ? '' : ' required')) ?></td>
+			<td class="label">Foto Saat Ini</td>
+			<td class="field">
+				<img src="<?php echo $picture->get_cropped_url(); ?>" width="300" height="400">
+			</td>
+		</tr>
+		<?php endif; ?>
+		<tr>
+			<td class="label"><?php $form->label('picture', 'Unggah Foto'  . ($picture ? ' Baru' : ''),  ($picture ? '' : ' required')) ?></td>
 			<td class="field">
 				<input type="hidden" name="MAX_FILE_SIZE" value="2048000">
 				<input type="file" name="picture" id="picture" class="medium">
