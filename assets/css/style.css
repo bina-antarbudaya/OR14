@@ -8,12 +8,12 @@ body {
 	color: #888;
 }
 .help-inline, .help-block {
-	font-size: .9em;
+	/*font-size: .9em;*/
 }
 h1, h2, h3, h4, h5, h6 {
 	color: #000;
 }
-h1, h2, h3, h4 {
+h1, h2, h3 {
 	letter-spacing: -.03em;
 }
 p strong {
@@ -200,6 +200,9 @@ textarea.large {
 	font-size: 30px;
 	line-height: 30px;
 }
+.page-header h1 span {
+	font-weight: 300;
+}
 .page-header h2 {
 	padding: 20px 20px 20px 0;
 	margin: -20px 20px 0 0;
@@ -340,29 +343,67 @@ textarea.large {
 }
 
 /* MODULE: CHAPTER */
+table.counts {
+	border-bottom: 1px solid #ddd;
+	border-right: 1px dotted #ddd;
+}
 table.counts td {
-	font-size: 11px;
-	line-height: 15px;
+	vertical-align: middle;
+	border-left: 1px dotted #ddd;
 }
 table.counts strong {
-	font-size: 15px;
-	line-height: 17px;
+	font-size: 28px;
+	line-height: 32px;
+	/*color: #000;*/
+	display: block;
+}
+table.counts strong:not([class]) {
 	color: #000;
 }
+table.counts.four-col td {
+	width: 25%;
+}
 
+.chapter-dashboard .quick-links {
+	margin-top: -18px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 18px;
+}
+.chapter-dashboard .quick-links ul {
+	margin-bottom: 10px;
+}
 .chapter-dashboard .current-phase {
 	font-weight: normal;
 	font-size: 24px;
 	line-height: 24px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+.chapter-dashboard .current-phase span {
+	font-weight: 500;
 }
 .chapter-dashboard .current-phase small {
-	display: inline-block;
-	float: right;
 	font-size: 100%;
 	line-height: 1;
 	font-weight: 300;
-	color: #ccc;
-	margin-left: 5px;
+	color: #666;
+}
+
+.chapter-dashboard .applicant-search form {
+	margin-bottom: 4px;
+}
+.chapter-dashboard .applicant-search form p {
+	margin: 0;
+}
+.chapter-dashboard .applicant-search form input {
+	margin-bottom: 4px;
+}
+.chapter-dashboard .applicant-search h5 {
+	color: #007AC2;
+	margin-bottom: 3px;
+}
+.chapter-dashboard > .row {
+	padding-bottom: 18px;
 }
 
 .search-title {
@@ -453,13 +494,15 @@ table.counts strong {
 /* applicant/form */
 #appform {
 	margin-top: -27px;
-	padding: 30px 0;
-	background: #fcfcfc;
+	background: #f6f6f6;
+	border-bottom: 1px solid #ddd;
 }
 #appform > .alert {
-	margin-top: -11px;
-	margin-right: 20px;
-	margin-left: 20px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-radius: 0;
+	margin: 0;
 }
 #appform .alert-block p {
 	max-width: 65em;
@@ -472,30 +515,39 @@ table.counts strong {
 	display: none;
 }
 .form-nav ol {
-	padding: 30px 0 0;
+	margin-right: -20px;
+	padding: 20px 0 0;
 	position: relative;
 	z-index: 2;
 	text-align: right;
 }
 .form-nav li {
 	display: block;
-	font-size: 14px;
 	clear: both;
-	margin-left: -10px;
-	padding-left: 10px;
+	margin-left: -20px;
+	padding-left: 20px;
+	padding-top: 5px;
 }
 .form-nav li.finalize {
 	border-top: 1px solid #eee;
 	margin-right: 1px;
-	padding-top: 10px;
+	padding-top: 5px;
+	margin-top: 5px;
 }
 .form-nav li a {
 	display: block;
 	color: #007ac2;
-	padding: 10px 15px 10px 0;
+	padding: 5px 20px 10px 0;
 	margin-left: -10px;
-	margin-bottom: 5px;
-	font-weight: 300;
+	text-decoration: none;
+}
+@media (min-width: 1200px) {
+	.form-nav ol {
+		margin-right: -30px;
+	}
+	.form-nav li a {
+		padding-right: 30px;
+	}
 }
 .form-nav li a:hover {
 	background: #eee;
@@ -503,23 +555,18 @@ table.counts strong {
 }
 .form-nav li a.active {
 	font-weight: 600;
-	letter-spacing: -.1em;
 	color: #fff;
 	background: #007ac2;
 }
 
 .form-fields {
-	margin-left: 0;
-	margin-right: -1px;
-	border-left: 1px solid #eee;
-	padding-left: 29px;
-	border-top: 1px solid #eee;
-	border-bottom: 1px solid #eee;
-	border-right: 1px solid #eee;
-	box-shadow: -5px 5px 3px rgba(0, 0, 0, 0.01);
+	margin-left: -2px;
+	border-left: 1px solid #ddd;
+	padding-left: 20px;
 	position: relative;
 	z-index: 2;
 	background: white;
+	min-height: 560px;
 }
 .form-fields label {
 	display: inline;
@@ -533,13 +580,15 @@ table.counts strong {
 .form-fields fieldset > label.checkbox {
 	margin-bottom: 1em;
 }
+label.required {
+	font-weight: 600;
+}
 label.required:after {
-	content: ' •';
-	color: #a00;
+	content: ' *';
+	color: #c00;
 }
 .form-fields fieldset {
-	padding-top: 16px;
-	padding-right: 30px;
+	padding-top: 24px;
 	padding-bottom: 30px;
 }
 .form-fields .pager {
@@ -560,6 +609,9 @@ label.required:after {
 	line-height: 36px;
 	border: none;
 	letter-spacing: -.03em;
+}
+.form-fields fieldset > .help-block {
+	font-size: 14px;
 }
 
 .form-fields input,
@@ -590,7 +642,7 @@ label.required:after {
 .form-fields h3,
 .form-fields h4 {
 	margin-top: 30px;
-	font-weight: 300;
+	/*font-weight: 300;*/
 	letter-spacing: 0;
 }
 
@@ -756,6 +808,7 @@ label.subpoint {
 .programs-table ul {
 	padding: 0;
 }
+
 .country-preference td ol {
 	float: left;
 	margin-bottom: 5px;
@@ -767,8 +820,12 @@ label.subpoint {
 .programs-table ul li {
 	list-style: bullet;
 }
+.programs-table th {
+	width: 10%;
+	padding: 10px 0;
+}
 .programs-table td {
-	width: 40%;
+	width: 30%;
 	padding: 10px 0;
 }
 .programs-table .program-name td {
@@ -778,15 +835,24 @@ label.subpoint {
 /*	letter-spacing: -.05em;*/
 }
 .programs-table .program-length td {
-	font-size: 11px;
+	font-size: 12px;
 }
 .programs-table .program-length td span {
 	display: block;
 	color: #000;
-	font-size: 12px;
+	font-size: 13px;
 	margin-bottom: -1.1em;
 }
-.programs-table .program-destination td.afs {
+.programs-table .program-destination ul {
+	padding-left: 0;
+	margin: 0;
+}
+.programs-table .program-destination li {
+	list-style: none;
+	margin-bottom: 3px;
+}
+.programs-table .program-destination td.afs ul {
+	font-size: 12px;
 	-moz-column-count: 2;
 	-webkit-column-count: 2;
 	column-count: 2;
@@ -796,20 +862,39 @@ label.subpoint {
 	font-size: 11px;
 }
 
+.country-pref-options h4 {
+	text-align: center;
+}
+select.country-pref option {
+	font-size: 15px;
+	line-height: 20px;
+	color: #000;
+}
+select.country-pref option[disabled] {
+	color: #999;
+}
+
 .form-tools {
 	position: relative;
+	height: 49px;
 }
 .form-tools-container {
 	position: absolute;
 	top: 0;
-	padding-top: 20px;
-	padding-right: 20px;
+	background: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
 }
 .form-tools-container.fixed {
 	position: fixed;
+	top: 0;
+	z-index: 300;
 }
-.form-tools-container button {
-	margin-bottom: 20px;
+.form-tools-container p {
+	font-size: 14px;
+	line-height: 28px;
+	margin: 0;
 }
 .recheck,
 .form-nav li a.recheck {

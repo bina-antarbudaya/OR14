@@ -85,8 +85,18 @@ TODO
 	</div>
 	<?php endif; ?>
 
-	<div class="alert">
-		Batas waktu pendaftaran Adik adalah <strong><?php echo $expires_on->format('l, j F Y') ?></strong>. Selesaikan seluruh formulir dan lakukan <i>Finalisasi</i> sebelum tanggal tersebut.
+	<div class="form-tools">
+		<div class="form-tools-container">
+			<div class="row">
+				<div class="span9">
+					<p>Batas waktu pendaftaran: <strong><?php echo $expires_on->format('l, j F Y') ?></strong></p>
+				</div>
+				<div class="span3">
+					<input type="hidden" name="applicant_id" value="<?php echo $applicant->id ?>">
+					<button type="submit" class="btn btn-block btn-success"><i class="icon-ok icon-white"></i> Simpan<?php if (!$admin): ?> Sementara<?php endif; ?></button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 <div class="row">
@@ -97,6 +107,7 @@ TODO
 	</header>
 	<ol>
 		<li><a href="#pribadi">Data Pribadi</a></li>
+		<li><a href="#foto">Foto</a></li>
 		<li><a href="#keluarga">Keluarga</a></li>
 		<li><a href="#pendidikan">Pendidikan</a></li>
 		<li><a href="#kegiatan">Kegiatan</a></li>
@@ -106,14 +117,14 @@ TODO
 		<li><a href="#perjalanan">Riwayat Perjalanan</a></li>
 		<li><a href="#referensi">Referensi</a></li>
 		<li><a href="#rekomendasi">Rekomendasi</a></li>
-		<li><a href="#foto">Foto</a></li>
 		<?php if (!$readonly && !$admin): ?>
 		<li class="finalize"><a href="#finalisasi">Finalisasi</a></li>
 		<?php endif; ?>
 	</ol>
 </nav>
 
-<div class="form-fields span8">
+<div class="span10">
+<div class="form-fields">
 
 	<!-- <ul class="pager above">
 		<li class="previous">
@@ -130,27 +141,29 @@ TODO
 	<legend>Data Pribadi</legend>
 	
 	<table class="form-table">
-		<!-- <tr>
+		<?php /* <tr>
 			<td class="label"><?php $form->label('full_name', 'Nama Lengkap', 'required') ?></td>
 			<td class="field"><?php $form->text('full_name', 'long'); ?> <span class="help-block">Isi sesuai dengan Akte Kelahiran.</span></td>
-		</tr> -->
+		</tr> */ ?>
 		<tr>
 			<td class="label"><?php $form->label('first_name', 'Nama Depan', 'required') ?></td>
-			<td class="field"><?php $form->text('first_name', 'medium'); ?></td>
+			<td class="field"><?php $form->text('first_name', 'input-block-level'); ?></td>
 		</tr>
 		<tr>
 			<td class="label"><?php $form->label('middle_name', 'Nama Tengah') ?></td>
-			<td class="field"><?php $form->text('middle_name', 'medium'); ?></td>
+			<td class="field"><?php $form->text('middle_name', 'input-block-level'); ?></td>
 		</tr>
 		<tr>
 			<td class="label"><?php $form->label('last_name', 'Nama Belakang') ?></td>
-			<td class="field"><?php $form->text('last_name', 'medium'); ?></td>
+			<td class="field"><?php $form->text('last_name', 'input-block-level'); ?></td>
 		</tr>
 		<tr>
-			<td class="label"><?php $form->label('place_of_birth', 'Tempat dan Tanggal Lahir', 'required') ?></td>
+			<td class="label"><?php $form->label('place_of_birth', 'Tempat Kelahiran', 'required') ?></td>
+			<td class="field"><?php $form->text('place_of_birth', 'input-block-level') ?></td>
+		</tr>
+		<tr>
+			<td class="label"><?php $form->label('date_of_birth', 'Tanggal Lahir', 'required') ?></td>
 			<td class="field">
-				<?php $form->text('place_of_birth', 'medium') ?>
-				<br>
 				<?php $form->date('date_of_birth', 17, 15); ?>
 				<br>
 				<?php
@@ -175,30 +188,28 @@ TODO
 			<td class="label"><?php $form->label('sex', 'Jenis Kelamin', 'required') ?></td>
 			<td class="field">
 				<?php $form->select('sex', array('' => '', 'F' => 'Perempuan', 'M' => 'Laki-laki'), 'medium-short') ?>
-				<!-- <?php $form->radio('sex', 'F') ?> <label for="sex-F">Perempuan</label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<?php $form->radio('sex', 'M') ?> <label for="sex-M">Laki-laki</label> -->
 			</td>
 		</tr>
 		<tr>
-			<td class="label"></td>
+			<td class="label"><?php $form->label('body_height', 'Tinggi Badan', 'required') ?></td>
 			<td class="field">
-				<div class="subpoint">
-					<?php $form->label('body_height', 'Tinggi Badan', 'control-label subpoint required') ?>
-					<?php $form->number('body_height', 'very-short') ?>
-					cm
-				</div>
-				<div>
-					<?php $form->label('body_weight', 'Berat Badan', 'subpoint required') ?>
-					<?php $form->number('body_weight', 'very-short') ?>
-					kg
-				</div>
-				<div>
-					<?php $form->label('blood_type', 'Gol. Darah', 'subpoint required') ?>
-					<?php $form->select('blood_type', array('' => '',
-						'O+' => 'O+', 'A+' => 'A+', 'B+' => 'B+', 'AB+' => 'AB+',
-						'O-' => 'O-', 'A-' => 'A-', 'B-' => 'B-', 'AB-' => 'AB-'), 'very-short')?>
-				</div>
+				<?php $form->number('body_height', 'short') ?>
+				cm
+			</td>
+		</tr>
+		<tr>
+			<td class="label"><?php $form->label('body_weight', 'Berat Badan', 'required') ?></td>
+			<td class="field">
+				<?php $form->number('body_weight', 'short') ?>
+				kg
+			</td>
+		</tr>
+		<tr>
+			<td class="label"><?php $form->label('blood_type', 'Golongan Darah', 'required') ?></td>
+			<td class="field">
+				<?php $form->select('blood_type', array('' => '',
+					'O+' => 'O+', 'A+' => 'A+', 'B+' => 'B+', 'AB+' => 'AB+',
+					'O-' => 'O-', 'A-' => 'A-', 'B-' => 'B-', 'AB-' => 'AB-'), 'short')?>
 			</td>
 		</tr>
 		<tr>
@@ -220,22 +231,22 @@ TODO
 
 <fieldset class="pane" id="program">
 	<legend>Pilihan Program</legend>
-	<!-- poin 20–26 -->
+
+	<h4>Tentang masing-masing program</h4>
+
 	<table class="programs-table">
-		<colgroup width="20%">
-		<colgroup width="40%">
-		<colgroup width="40%">
 		<tr class="program-name">
-			<th class="label">Program</th>
+			<th class="label">Nama Program</th>
 			<td class="afs"><?php $form->checkbox('program_afs') ?> <?php $form->label('program_afs', 'AFS Year Program') ?></td>
 			<td class="yes"><?php $form->checkbox('program_yes') ?> <?php $form->label('program_yes', 'Kennedy-Lugar YES') ?></td>
+			<td class="green-academy"><?php $form->checkbox('program_green_academy') ?> <?php $form->label('program_green_academy', 'Green Academy Short Programme') ?></td>
 		</tr>
 		<tr class="program-length">
 			<th class="label">Lama Program</th>
 			<td class="afs">
 				<span class="length">11 bulan</span>
 				<br>
-				Agustus <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?> (Amerika, Asia, Eropa)
+				Agt <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?> (kecuali Jepang)
 				<br>
 				Maret <?php echo $program_year - 1?> &ndash; Februari <?php echo $program_year ?> (Jepang)
 			</td>
@@ -244,44 +255,51 @@ TODO
 				<br>
 				Agustus <?php echo $program_year - 1?> &ndash; Juni <?php echo $program_year ?>
 			</td>
+			<td class="yes">
+				<span class="length">1 bulan</span>
+				<br>
+				Desember <?php echo $program_year - 1?> &ndash; Januari <?php echo $program_year ?>
+			</td>
 		</tr>
 		<tr class="program-destination">
 			<th class="label">Negara Tujuan</th>
 			<td class="afs">
 				<ul>
 					<?php
-$pp = array(
-	'BRA' => 'Brazil',
-	'CAN' => 'Kanada',
-	'MEX' => 'Meksiko',
-	'USA' => 'Amerika Serikat',
-	'NED' => 'Belanda',
-	'BFL' => 'Belgia (Flanders)',
-	'BFR' => 'Belgia (Wallonia)',
-	'CZE' => 'Republik Ceko',
-	'FIN' => 'Finlandia',
-	'FRA' => 'Perancis',
-	'GER' => 'Jerman',
-	'ISL' => 'Islandia',
-	'ITA' => 'Italia',
-	'NOR' => 'Norwegia',
-	'SUI' => 'Swiss',
-	'SWE' => 'Swedia',
-	'TUR' => 'Turki',
-	'CHN' => 'Cina',
-	'JPN' => 'Jepang',
-	'PHI' => 'Filipina',
-	'THA' => 'Thailand',
-);
+					$pp = array(
+						'ARG' => 'Argentina',
+						'BRA' => 'Brazil',
+						'CAN' => 'Kanada',
+						'MEX' => 'Meksiko',
+						'USA' => 'Amerika Serikat',
+						'NED' => 'Belanda',
+						'BFL' => 'Belgia',
+						'CZE' => 'Republik Ceko',
+						'FIN' => 'Finlandia',
+						'FRA' => 'Perancis',
+						'GER' => 'Jerman',
+						'ISL' => 'Islandia',
+						'ITA' => 'Italia',
+						'LAT' => 'Latvia',
+						'NOR' => 'Norwegia',
+						'SUI' => 'Swiss',
+						'SWE' => 'Swedia',
+						'TUR' => 'Turki',
+						'CHN' => 'Cina',
+						'JPN' => 'Jepang',
+						'PHI' => 'Filipina',
+						'RUS' => 'Rusia',
+						'THA' => 'Thailand',
+					);
 
-asort($pp);
+					asort($pp);
 
-foreach ($pp as $p):
-?>
+					foreach ($pp as $p):
+					?>
 
-					<li><?php echo $p ?></li>
+						<li><?php echo $p ?></li>
 
-<?php endforeach; ?>
+					<?php endforeach; ?>
 				</ul>
 			</td>
 			<td class="yes">
@@ -289,44 +307,49 @@ foreach ($pp as $p):
 					<li>Amerika Serikat</li>
 				</ul>
 			</td>
+			<td class="yes">
+				<ul>
+					<li>Jerman</li>
+				</ul>
+			</td>
 		</tr>
 		<tr class="program-info">
 			<th class="label"></th>
 			<td class="afs">
-<p>
-    Kalau kamu ingin mendapatkan pengalaman yang akan mengubah hidupmu, maka program AFS adalah pilihan yang tepat. Kmu akan mendapat teman baru, belajar
-    bahasa asing, budaya baru, dan mengalami kehidupan dengan cara yang baru. Di akhir program nanti kalu juga akan memperoleh keterampilan baru yang tidak
-    semua orang bisa dapatkan, yaitu: Kompetensi Antarbudaya (<em>intercultural Competence</em>). Keterampilan ini akan membuatmu memiliki kemampuan
-    beradaptasi di kebudayaan manapun. Selain itu kamu akan memperoleh banyak kemampuan lain, di antaranya kamu akan lebih mandiri, bertanggung jawab, dan
-    lebih fleksibel. Semua itu akan sangat berguna di semua jenjang kehidupanmu nanti.
-</p>
-<p>
-    Sebagai siswa AFS, kamu akan tinggal dengan keluarga angkat yang akan menerima kamu selayaknya bagian dari keluarga mereka sendiri. Seperti sebuah
-    keluarga, keluarga angkatmu akan selalu memberikan dukungan yang kamu perlukan selama masa program, memastikan bahwa kamu sehat dan selamat, serat akan
-    menjadi sumber terbaikmu untuk mempelajari budaya setempat.
-</p>
-<p>
-    Kamu juga akan berekolah di SMA setempat, dan merasakan lingkungan belajar yang berbeda dengan sekolah di Indonesia. Kamu akan mendapat teman baru dan
-    mengalami secara langsung metode belajar di luar negeri. Selama program kamu dapat melibatkan diri dalam berbagai kegiatan baik di lingkungan AFS maupun di
-    masyarakat sekitar. Berbagai eksplorasi dapat dialkukan untuk memperkaya pengalaman dan pengembangan dirimu selama program.
-</p>
+				<p>
+				    Kalau kamu ingin mendapatkan pengalaman yang akan mengubah hidupmu, maka program AFS adalah pilihan yang tepat. Kmu akan mendapat teman baru, belajar
+				    bahasa asing, budaya baru, dan mengalami kehidupan dengan cara yang baru. Di akhir program nanti kalu juga akan memperoleh keterampilan baru yang tidak
+				    semua orang bisa dapatkan, yaitu: Kompetensi Antarbudaya (<em>intercultural Competence</em>). Keterampilan ini akan membuatmu memiliki kemampuan
+				    beradaptasi di kebudayaan manapun. Selain itu kamu akan memperoleh banyak kemampuan lain, di antaranya kamu akan lebih mandiri, bertanggung jawab, dan
+				    lebih fleksibel. Semua itu akan sangat berguna di semua jenjang kehidupanmu nanti.
+				</p>
+				<p>
+				    Sebagai siswa AFS, kamu akan tinggal dengan keluarga angkat yang akan menerima kamu selayaknya bagian dari keluarga mereka sendiri. Seperti sebuah
+				    keluarga, keluarga angkatmu akan selalu memberikan dukungan yang kamu perlukan selama masa program, memastikan bahwa kamu sehat dan selamat, serat akan
+				    menjadi sumber terbaikmu untuk mempelajari budaya setempat.
+				</p>
+				<p>
+				    Kamu juga akan berekolah di SMA setempat, dan merasakan lingkungan belajar yang berbeda dengan sekolah di Indonesia. Kamu akan mendapat teman baru dan
+				    mengalami secara langsung metode belajar di luar negeri. Selama program kamu dapat melibatkan diri dalam berbagai kegiatan baik di lingkungan AFS maupun di
+				    masyarakat sekitar. Berbagai eksplorasi dapat dialkukan untuk memperkaya pengalaman dan pengembangan dirimu selama program.
+				</p>
 			</td>
 			<td class="yes">
-<p>
-    Kennedy-Lugar Youth Exchange and Study Program adalah program beasiswa penuh yang diberikan oleh U.S. Department of State kepada siswa SMA atau sederajat,
-    yang bertujuan menjembatani pemahaman dan saling pengertian antara masyarakat negara-negara dengan populasi muslin yang signifikan dengan masyarakat
-    Amerika Serikat.
-</p>
-<p>
-    Program KL-YES yang telah dilaksanakan sejak tahun 2003 juga memberikan kesempatan kepada siswa difabel (tuna netra, tuna rungu, tuna wicara, tuna daksa)
-    untuk mengikuti program ini. Selama program, kamu akan tinggal dengan keluarga Amerika, dan bersekolah di SMA setempat. Kamu akan mengalami dan belajar
-    secara langsung mengenai kehidupan di Amerika Serikat. Kamu juga kan memperoleh kesempatan untuk berinteraksi secara langsung dengan masyarakat melalui
-    kegiatan-kegiatan yang dilaksanakan selama program.
-</p>
-<p>
-    Dalam program KL-YES ini kamu akan menjadi duta perdamaian dan persahabatan antara Indonesia sebagai Negara dengan jumlah penduduk muslim terbesar di dunia
-    dan Amerika Serikat.
-</p>
+				<p>
+				    Kennedy-Lugar Youth Exchange and Study Program adalah program beasiswa penuh yang diberikan oleh U.S. Department of State kepada siswa SMA atau sederajat,
+				    yang bertujuan menjembatani pemahaman dan saling pengertian antara masyarakat negara-negara dengan populasi muslin yang signifikan dengan masyarakat
+				    Amerika Serikat.
+				</p>
+				<p>
+				    Program KL-YES yang telah dilaksanakan sejak tahun 2003 juga memberikan kesempatan kepada siswa difabel (tuna netra, tuna rungu, tuna wicara, tuna daksa)
+				    untuk mengikuti program ini. Selama program, kamu akan tinggal dengan keluarga Amerika, dan bersekolah di SMA setempat. Kamu akan mengalami dan belajar
+				    secara langsung mengenai kehidupan di Amerika Serikat. Kamu juga kan memperoleh kesempatan untuk berinteraksi secara langsung dengan masyarakat melalui
+				    kegiatan-kegiatan yang dilaksanakan selama program.
+				</p>
+				<p>
+				    Dalam program KL-YES ini kamu akan menjadi duta perdamaian dan persahabatan antara Indonesia sebagai Negara dengan jumlah penduduk muslim terbesar di dunia
+				    dan Amerika Serikat.
+				</p>
 			</td>
 		</tr>
 	</table>	
@@ -334,14 +357,16 @@ foreach ($pp as $p):
 
 <fieldset class="pane" id="countryprefs">
 	<legend>Pilihan Negara</legend>
+	<p>Pilih urutan negara tujuan yang Adik kehendaki <em>jika</em> Adik diterima di AFS Year Program.</p>
+	<p>Adik wajib menentukan <strong>seluruh</strong> urutan pilihan negara.</p>
 	<div class="country-prefs-container">
-		<span class="help-block">Pilih urutan negara tujuan yang Adik kehendaki <em>jika</em> Adik diterima di AFS Year Program. Adik wajib menentukan urutan pilihan <strong>seluruh</strong> negara.</span>
 
 		<div class="row-fluid">
 <?php
 						
 $partners = array(
 	'americas' => array(
+		'ARG' => 'Argentina',
 		'BRA' => 'Brazil',
 		'CAN' => 'Kanada',
 		'MEX' => 'Meksiko',
@@ -349,15 +374,17 @@ $partners = array(
 	),
 	'europe' => array(
 		'NED' => 'Belanda',
-		'BFL' => 'Belgia (Flanders)',
-		'BFR' => 'Belgia (Wallonia)',
+		'BFL' => 'Belgia &ndash; Flanders',
+		'BFR' => 'Belgia &ndash; Wallonia/Perancis',
 		'CZE' => 'Republik Ceko',
 		'FIN' => 'Finlandia',
 		'FRA' => 'Perancis',
 		'GER' => 'Jerman',
 		'ISL' => 'Islandia',
 		'ITA' => 'Italia',
+		'LAT' => 'Latvia',
 		'NOR' => 'Norwegia',
+		'RUS' => 'Russia',
 		'SUI' => 'Swiss',
 		'SWE' => 'Swedia',
 		'TUR' => 'Turki',
@@ -371,9 +398,9 @@ $partners = array(
 );
 	
 $continents = array(
-	'americas' => 'Amerika',
-	'europe' => 'Eropa',
-	'asia' => 'Asia'
+	'americas' => 'Benua Amerika',
+	'europe' => 'Benua Eropa',
+	'asia' => 'Benua Asia'
 );
 	
 foreach ($partners as $continent => $countries):
@@ -387,7 +414,7 @@ foreach ($partners as $continent => $countries):
 				<ol>
 					<?php for ($i = 1; $i <= count($countries); $i++) {
 						echo '<li>';
-						$form->select($basename . $i, $select, 'medium-short country-pref');
+						$form->select($basename . $i, $select, 'input-block-level country-pref');
 						echo "</li>\n";
 					} ?>
 				</ol>
@@ -400,7 +427,7 @@ foreach ($partners as $continent => $countries):
 		<tr>
 			<td class="label"><?php $form->label('country_preference_other', 'Pilihan Negara Lainnya') ?></td>
 			<td class="field">
-			<?php $form->text('country_preference_other', 'medium') ?>
+			<?php $form->text('country_preference_other', 'input-block-level') ?>
 			<br>
 			<span class="help-block">Isilah dengan negara lain yang ingin Adik kunjungi untuk pertukaran pelajar di luar pilihan negara di atas, bila ada.</span>
 			</td>
@@ -516,17 +543,19 @@ foreach ($partners as $continent => $countries):
 	</table>
 
 	<h4>Saudara Kandung</h4>
-	<table class="form-table siblings">
+	<table class="form-table">
 		<tr>
-			<td class="label noc"><?php $form->label('number_of_children_in_family', 'Jumlah anak dalam keluarga', 'required') ?></td>
-			<td class="field noc"><?php $form->number('number_of_children_in_family', 'very-short'); ?></td>
-			<td class="label nth"><?php $form->label('nth_child', 'Adik anak nomor', 'required') ?></td>
-			<td class="field nth"><?php $form->number('nth_child', 'very-short'); ?></td>
+			<td class="label"><?php $form->label('number_of_children_in_family', 'Jumlah Anak dalam Keluarga') ?></td>
+			<td class="field"><?php $form->number('number_of_children_in_family', 'short'); ?></td>
+		</tr>
+		<tr>
+			<td class="label"><?php $form->label('nth_child', 'Adik adalah anak ke-...') ?></td>
+			<td class="field"><?php $form->number('nth_child', 'short'); ?></td>
 		</tr>
 	</table>
 	<table class="siblings-table subform">
 		<caption>
-			<span>Nama, umur, dan sekolah/pekerjaan saudara kandung (selain Adik sendiri)</span>
+			<span>Nama, umur, dan sekolah/pekerjaan saudara kandung: (selain Adik sendiri)</span>
 		</caption>
 		<thead>
 			<tr>
@@ -1270,11 +1299,6 @@ foreach ($partners as $continent => $countries):
 
 </div>
 
-<div class="form-tools span2">
-	<div class="form-tools-container">
-		<input type="hidden" name="applicant_id" value="<?php echo $applicant->id ?>">
-		<button type="submit" class="btn btn-success">Simpan<?php if (!$admin): ?> Sementara<?php endif; ?></button>
-	</div>
 </div>
 
 </div>
