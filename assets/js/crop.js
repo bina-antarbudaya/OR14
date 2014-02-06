@@ -1,9 +1,11 @@
 $(window).load(function () {
-	var rx = parseInt($('#pic').attr('data-original-width'));
-	var ry = parseInt($('#pic').attr('data-original-height'));
+	var ow = parseInt($('#pic').attr('data-original-width'));
+	var oh = parseInt($('#pic').attr('data-original-height'));
 
 	w = $('#pic').innerWidth();
 	h = $('#pic').innerHeight();
+	var rx = ow / w;
+	var ry = oh / h;
 	ratio = w / h;
 	ideal = 0.75;
 	padding = 10;
@@ -43,10 +45,10 @@ $(window).load(function () {
 		aspectRatio: '3:4',
 		handles: true,
 		onSelectEnd: function (img, selection) {
-			$('#x').val(rx * selection.x1);
-			$('#y').val(ry * selection.y1);
-			$('#width').val(rx * selection.width);
-			$('#height').val(ry * selection.height);
+			$('#x').val(Math.round(rx * selection.x1));
+			$('#y').val(Math.round(ry * selection.y1));
+			$('#width').val(Math.round(rx * selection.width));
+			$('#height').val(Math.round(ry * selection.height));
 		}
 	});
 
