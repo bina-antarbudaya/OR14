@@ -592,6 +592,7 @@ class ApplicantController extends AppController {
 			
 			$series = array();
 			$total = 0;
+			if (!$results) $results = array();
 			foreach ($results as $row) {
 				$rows = $row->rows;
 				$value = $row->value;
@@ -646,6 +647,7 @@ class ApplicantController extends AppController {
 			'/selandia baru|nz/i' => 'New Zealand'
 		);
 		
+		if (!is_array($other_countries)) $other_countries = array();
 		foreach ($other_countries as $list_of_countries) {
 			$split_countries = preg_split($split_pattern, $list_of_countries);
 			foreach ($split_countries as $country_name) {
