@@ -305,7 +305,6 @@ $(function(){
 	$('#number_of_children_in_family').click(fac);
 	$('#number_of_children_in_family').change(fac);
 	$('#number_of_children_in_family').keyup(fac);
-	$('#keluarga input[type=number]').attr('min', 1);
 
 	// YES filter: acceleration class cannot choose YES
 	previously_selected_yes = $('#program_yes').prop('checked')
