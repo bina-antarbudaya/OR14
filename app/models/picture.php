@@ -321,7 +321,12 @@ class Picture extends HeliumRecord {
 	}
 	
 	public function get_cropped_path() {
-		return $this->upload_path . '/' . $this->cropped_filename;
+		if ($this->use_azure) {
+			return $this->get_cropped_url();
+		}
+		else {
+			return $this->upload_path . '/' . $this->cropped_filename;
+		}
 	}
 
 	public function get_thumbnail_url() {
