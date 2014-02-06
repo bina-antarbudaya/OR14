@@ -87,7 +87,7 @@ $action_css = $controller . '/' . $this->_action();
 							<?php endif; ?>
 							</li>
 							<li class="prefs">
-								<i class="icon-cog icon-white"></i> <a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Pengaturan</a>
+								<i class="icon-cog icon-white"></i> <a href="<?php L(array('controller' => 'user', 'action' => 'prefs')); ?>">Ubah Password</a>
 							</li>
 							<li class="logout">
 								<i class="icon-off icon-white"></i>
