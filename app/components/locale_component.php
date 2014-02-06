@@ -75,6 +75,7 @@ class LocaleComponent extends HeliumComponent {
 			'Kalimantan Tengah',
 			'Kalimantan Selatan',
 			'Kalimantan Timur',
+			'Kalimantan Utara',
 			'Sulawesi Utara',
 			'Sulawesi Tengah',
 			'Sulawesi Selatan',
@@ -84,7 +85,8 @@ class LocaleComponent extends HeliumComponent {
 			'Maluku',
 			'Maluku Utara',
 			'Papua Barat',
-			'Papua'
+			'Papua',
+			'(Luar Negeri)'
 		);
 		
 		function __($string) {
