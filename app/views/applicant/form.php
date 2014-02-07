@@ -185,7 +185,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('date_of_birth', 'Tanggal Lahir', 'required') ?></td>
 								<td class="field">
-									<?php $form->date('date_of_birth', 17, 15); ?>
+									<span class="applicant-dob"><?php $form->date('date_of_birth', 17, 15); ?></span>
 									<br>
 									<span class="help-block">
 										Untuk mengikuti program AFS Year Program dan Green Academy Short Programme periode <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?>,

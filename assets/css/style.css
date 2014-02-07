@@ -74,13 +74,13 @@ textarea.large {
 	width: 48px;
 }
 .date-d {
-	width: 4em;
+	width: 6em;
 }
 .date-m {
-	width: 10em;
+	width: 11em;
 }
 .date-y {
-	width: 7em;
+	width: 8em;
 }
 
 .date-combo {
@@ -912,7 +912,8 @@ select.country-pref option[disabled] {
 	background-color: #b94a48;
 }
 input.invalid,
-textarea.invalid {
+textarea.invalid,
+select.invalid {
     color: #b94a48;
     border-color: #ee5f5b;
 }

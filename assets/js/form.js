@@ -21,7 +21,7 @@ recheckActivated = false;
 			return false;
 	}
 	// Invoked from an input control
-	$.fn.recheck = function() {
+	$.fn.recheck = function(altFor) {
 		// the corresponding label
 		l = $('label[for=' + this.attr('id') + ']');
 		s = this.parents('fieldset');
@@ -66,20 +66,7 @@ recheckActivated = false;
 	
 	activateRecheck = function() {
 		if (!recheckActivated) {
-			// $('label.required').each(function() {
-			// 	e = $('#' + $(this).attr('for'));
-			// 	console.log(this, e);
-			// 	if (!e.length) {
-			// 		$(this).addClass('recheck');
-			// 		$('input[name=' + $(this).attr('for') + ']').change(function() {
-			// 			$('label[for=' + $(this).attr('name') + ']').removeClass('recheck');
-			// 		});
-			// 	}
-			// 	else
-			// 		e.recheck();
-			// });
-
-			// required_fields = ["first_name","place_of_birth","applicant_email","applicant_address_street","sex","body_height","body_weight","blood_type","citizenship","religion","father_full_name","mother_full_name","number_of_children_in_family","nth_child","high_school_name","high_school_admission_year","high_school_graduation_year","junior_high_school_name","junior_high_school_graduation_year","elementary_school_name","elementary_school_graduation_year","years_speaking_english","favorite_subject","dream","arts_hobby","sports_hobby","motivation","hopes","recommendations_school_name","recommendations_school_address","recommendations_school_occupation","recommendations_school_work_address","recommendations_school_relationship","recommendations_nonschool_name","recommendations_nonschool_address","recommendations_nonschool_occupation","recommendations_nonschool_relationship","recommendations_close_friend_name","recommendations_close_friend_address","recommendations_close_friend_relationship","personality","strengths_and_weaknesses","stressful_conditions","biggest_life_problem","plans","grades_y1t1_average","grades_y1t1_subjects","grades_y1t2_average","grades_y1t2_subjects","grades_y2t1_average","grades_y2t1_subjects","grades_y2t2_average","grades_y2t2_subjects","grades_y3t1_average","grades_y3t1_subjects","grades_y3t2_average","grades_y3t2_subjects","grades_y4t1_average","grades_y4t1_subjects","grades_y4t2_average","grades_y4t2_subjects","grades_y5t1_average","grades_y5t1_subjects","grades_y5t2_average","grades_y5t2_subjects","grades_y7t1_average","grades_y7t1_subjects","grades_y7t2_average","grades_y7t2_subjects","grades_y8t1_average","grades_y8t1_subjects","grades_y8t2_average","grades_y8t2_subjects","grades_y10t1_average","grades_y10t1_subjects"];
+			// The required_fields global variable is fed by PHP
 			$(required_fields).each(function() {
 				id = '#' + this;
 				$(id).recheck();
@@ -105,18 +92,27 @@ recheckActivated = false;
 					$(".form-nav a[href='#program']").removeClass('recheck');
 				}
 			});
-			
-			// // Grades check
-			// for (i=1; i<=8; i++) {
-			// 	if (i != 6) {
-			// 		$('#grades_y' + i + 't1_average').recheck();
-			// 		$('#grades_y' + i + 't1_subjects').recheck();
-			// 		$('#grades_y' + i + 't2_average').recheck();
-			// 		$('#grades_y' + i + 't2_subjects').recheck();
-			// 	}
-			// }
-			// $('#grades_y10t1_rank').recheck();
-			// $('#grades_y10t1_total').recheck();
+
+			// DOB check
+			dob_fields = $('.applicant-dob #date_of_birth-day-, .applicant-dob #date_of_birth-month-, .applicant-dob #date_of_birth-year-');
+			dob_fields.check = function() {
+				$('label[for=date_of_birth]').removeClass('recheck');
+				dob_fields.each(function() {
+					var t = $(this);
+					if (!t.val() || t.val() == '0') {
+						t.addClass('invalid');
+						$('label[for=date_of_birth]').addClass('recheck');
+						console.log('invalid: ' + t.attr('id') + ' ' + t.val());
+					}
+					else {
+						t.removeClass('invalid');
+					}
+				});
+			}
+			dob_fields.check();
+			dob_fields.change(function() {
+				dob_fields.check();
+			})
 		}
 
 		recheckActivated = true;
@@ -392,7 +388,7 @@ $(function(){
 	});
 	
 	// AFS Program force checkbox
-	$('#program_afs').change(function() {
+	$('#program_afs').prop('checked', true).change(function() {
 		$(this).prop('checked', true);
 	});
 
@@ -409,4 +405,8 @@ $(function(){
 		source: typeaheadSchool,
 		items: 20
 	});
+
+	getDateValue = function(field_name) {
+		var year = $('')
+	}
 });
