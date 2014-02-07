@@ -1188,17 +1188,7 @@ class Applicant extends HeliumPartitionedRecord {
 		return $try->first();
 	}
 
-	/**
-	 * Validate details
-	 *
-	 * Make sure all the required fields are filled in.
-	 */
-	public function validate() {
-		$check = $errors = array();
-
-		$applicant_id = $this->id;
-		$d = $this->applicant_detail;
-
+	public static function required_fields() {
 		$required = array('first_name', 'place_of_birth', 'applicant_email', 'applicant_address_street',
 			'sex', 'body_height', 'body_weight', 'blood_type', 'citizenship', 'religion',
 			'father_full_name', 'mother_full_name', 'number_of_children_in_family', 'nth_child',
@@ -1228,42 +1218,28 @@ class Applicant extends HeliumPartitionedRecord {
 		$required[] = "grades_y10t1_subjects";
 
 		// Country preferences
-		// This partners array should be moved somewhere...
-		$partners = array(
-			'americas' => array(
-				'BRA' => 'Brazil',
-				'CAN' => 'Kanada',
-				'MEX' => 'Meksiko',
-				'USA' => 'Amerika Serikat',
-			),
-			'europe' => array(
-				'NED' => 'Belanda',
-				'BFL' => 'Belgia (Flanders)',
-				'BFR' => 'Belgia (Wallonia)',
-				'CZE' => 'Republik Ceko',
-				'FIN' => 'Finlandia',
-				'FRA' => 'Perancis',
-				'GER' => 'Jerman',
-				'ISL' => 'Islandia',
-				'ITA' => 'Italia',
-				'NOR' => 'Norwegia',
-				'SUI' => 'Swiss',
-				'SWE' => 'Swedia',
-				'TUR' => 'Turki',
-			),
-			'asia' => array(
-				'CHN' => 'Cina',
-				'JPN' => 'Jepang',
-				'PHI' => 'Filipina',
-				'THA' => 'Thailand',
-			)
-		);
+		$partners = Helium::conf('partners');
 		foreach ($partners as $c => $continent) {
 			for ($i = 1; $i <= count($continent); $i++) {
 				$required[] = 'pref_' . $c . '_' . $i;
 			}
 		}
 
+		return $required;
+	}
+
+	/**
+	 * Validate details
+	 *
+	 * Make sure all the required fields are filled in.
+	 */
+	public function validate() {
+		$check = $errors = array();
+
+		$applicant_id = $this->id;
+		$d = $this->applicant_detail;
+
+		$required = self::required_fields();
 
 		foreach ($required as $f) {
 			$try = trim($this->$f, "- \t\n\r\0\x0B");
@@ -1282,9 +1258,13 @@ class Applicant extends HeliumPartitionedRecord {
 
 		$bd = $this->date_of_birth;
 		$lower = new HeliumDateTime(($this->program_year - 19) . '-08-01');
+		$lower_yes = new HeliumDateTime(($this->program_year - 18) . '-01-01');
 		$upper = new HeliumDateTime(($this->program_year - 17) . '-08-01');
+
 		$check['birth_date'] = $bd >= $lower && $bd <= $upper;
 		// $check['birth_date'] = $bd->later_than($lower) && $bd->earlier_than($upper);
+
+		$check['birth_date_yes'] = $bd >= $lower_yes && $bd <= $upper;
 
 		foreach ($check as $c => $v) {
 			if (!$v)

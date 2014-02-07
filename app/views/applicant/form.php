@@ -5,6 +5,14 @@ TODO
 * Admin mode
 * JS cleanup
 */
+
+$dob_upper_limit = new HeliumDateTime;
+$dob_upper_limit->setDate($program_year - 17, 8, 1);
+$dob_lower_limit = new HeliumDateTime;
+$dob_lower_limit->setDate($program_year - 19, 8, 1);
+$dob_lower_limit_yes = new HeliumDateTime;
+$dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
+
 ?>
 
 <?php $this->print_header('Formulir Pendaftaran'); ?>
@@ -56,7 +64,21 @@ TODO
 		<div class="alert alert-error">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			<h4>Finalisasi Gagal</h4>
-			<?php foreach ($errors as $error): ?>
+			<?php
+			$errors = array_map(function($e) {
+				switch ($e) {
+					case 'incomplete':
+						return 'Formulir belum lengkap. Pastikan seluruh bagian formulir ini telah terisi.';
+					case 'picture':
+						return 'Adik belum mengunggah (upload) foto.';
+					case 'birth_date':
+						return 'Tanggal lahir Adik harus di antara <strong>1 Agustus 1995</strong> dan <strong>1 Agustus 1997</strong>';
+					default:
+						return $e;
+				}
+			}, $errors);
+			
+			foreach ($errors as $error): ?>
 			<p><?php echo $error; ?></p>
 			<?php endforeach; ?>
 			<script>console.log('Skynet: Finalization failed because the following fields were not filled in:', <?php echo json_encode ($incomplete) ?>)</script>
@@ -165,22 +187,13 @@ TODO
 								<td class="field">
 									<?php $form->date('date_of_birth', 17, 15); ?>
 									<br>
-									<?php
-									// $program_year = $this->applicant->program_year;
-									$min = new HeliumDateTime;
-									$min->setDate($program_year - 17, 8, 1);
-									$max = new HeliumDateTime;
-									$max->setDate($program_year - 19, 8, 1);
-									$yes_max = new HeliumDateTime;
-									$yes_max->setDate($program_year - 18, 1, 1);
-									?>
 									<span class="help-block">
 										Untuk mengikuti program AFS Year Program dan Green Academy Short Programme periode <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?>,
-										Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $max->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>.
+										Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $dob_lower_limit->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $dob_upper_limit->format('j F Y')) ?>.
 									</span>
 									<span class="help-block">
 										Untuk mengikuti program Kennedy-Lugar YES periode <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?>,
-										Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $yes_max->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>.
+										Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $dob_lower_limit_yes->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $dob_upper_limit->format('j F Y')) ?>.
 									</span>
 								</td>
 							</tr>
@@ -249,13 +262,13 @@ TODO
 							<tr class="program-age-limit">
 								<th class="label">Batas Umur</th>
 								<td class="afs">
-									Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $max->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>
+									Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $dob_lower_limit->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $dob_upper_limit->format('j F Y')) ?>
 								</td>
 								<td class="yes">
-									Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $yes_max->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>
+									Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $dob_lower_limit_yes->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $dob_upper_limit->format('j F Y')) ?>
 								</td>
 								<td class="green-academy">
-									Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $max->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $min->format('j F Y')) ?>
+									Siswa kelahiran antara <?php echo str_replace(' ', '&nbsp;', $dob_lower_limit->format('j F Y')) ?>&nbsp;dan&nbsp;<?php echo str_replace(' ', '&nbsp;', $dob_upper_limit->format('j F Y')) ?>
 								</td>
 							</tr>
 							<tr class="program-length">
@@ -381,39 +394,8 @@ TODO
 
 							<div class="row-fluid">
 						<?php
-												
-						$partners = array(
-							'americas' => array(
-								'ARG' => 'Argentina',
-								'BRA' => 'Brazil',
-								'CAN' => 'Kanada',
-								'MEX' => 'Meksiko',
-								'USA' => 'Amerika Serikat',
-							),
-							'europe' => array(
-								'NED' => 'Belanda',
-								'BFL' => 'Belgia &ndash; Flanders',
-								'BFR' => 'Belgia &ndash; Wallonia/Perancis',
-								'CZE' => 'Republik Ceko',
-								'FIN' => 'Finlandia',
-								'FRA' => 'Perancis',
-								'GER' => 'Jerman',
-								'ISL' => 'Islandia',
-								'ITA' => 'Italia',
-								'LAT' => 'Latvia',
-								'NOR' => 'Norwegia',
-								'RUS' => 'Russia',
-								'SUI' => 'Swiss',
-								'SWE' => 'Swedia',
-								'TUR' => 'Turki',
-							),
-							'asia' => array(
-								'CHN' => 'Cina',
-								'JPN' => 'Jepang',
-								'PHI' => 'Filipina',
-								'THA' => 'Thailand',
-							)
-						);
+
+						// $partners is loaded from controller
 							
 						$continents = array(
 							'americas' => 'Benua Amerika',
@@ -1369,10 +1351,11 @@ TODO
 </form>
 
 <script>
-	last_pane = '<?php echo $last_pane ? $last_pane : '' ?>';
-	firstTime = <?php echo $new ? 'true' : 'false' ?>;
-	incomplete = <?php echo json_encode($incomplete) ?>;
-	programYear = <?php echo $applicant->program_year ?>;
+	var last_pane = '<?php echo $last_pane ? $last_pane : '' ?>';
+	var firstTime = <?php echo $new ? 'true' : 'false' ?>;
+	var incomplete = <?php echo json_encode($incomplete) ?>;
+	var programYear = <?php echo $applicant->program_year ?>;
+	var required_fields = <?php echo json_encode(Applicant::required_fields()) ?>;
 </script>
 <?php
 $this->require_js('form');

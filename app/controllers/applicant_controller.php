@@ -863,19 +863,7 @@ class ApplicantController extends AppController {
 					}
 					else {
 						$errors = $applicant->validation_errors;
-						$errors = array_map(function($e) {
-							switch ($e) {
-								case 'incomplete':
-									return 'Formulir belum lengkap. Pastikan seluruh bagian formulir ini telah terisi.';
-								case 'picture':
-									return 'Adik belum mengunggah (upload) foto.';
-								case 'birth_date':
-									return 'Tanggal lahir Adik harus di antara <strong>1 Agustus 1995</strong> dan <strong>1 Agustus 1997</strong>';
-								default:
-									return $e;
-							}
-						}, $errors);
-						$this->session['()_errors'] = $errors;
+						$this->session['errors'] = $errors;
 						$this->session['incomplete'] = $applicant->incomplete_fields;
 					}
 				}
@@ -900,6 +888,8 @@ class ApplicantController extends AppController {
 			$this['success'] = $this->session->flash('success');
 			
 			$this['schools'] = self::get_schools();
+
+			$this['partners'] = Helium::conf('partners');
 
 			$applicant_siblings = $applicant->applicant_siblings;
 			$applicant_siblings->set_order_by('date_of_birth');

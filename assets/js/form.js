@@ -65,7 +65,6 @@ recheckActivated = false;
 	}
 	
 	activateRecheck = function() {
-		console.log('hello');
 		if (!recheckActivated) {
 			// $('label.required').each(function() {
 			// 	e = $('#' + $(this).attr('for'));
@@ -80,7 +79,7 @@ recheckActivated = false;
 			// 		e.recheck();
 			// });
 
-			required_fields = ["first_name","place_of_birth","applicant_email","applicant_address_street","sex","body_height","body_weight","blood_type","citizenship","religion","father_full_name","mother_full_name","number_of_children_in_family","nth_child","high_school_name","high_school_admission_year","high_school_graduation_year","junior_high_school_name","junior_high_school_graduation_year","elementary_school_name","elementary_school_graduation_year","years_speaking_english","favorite_subject","dream","arts_hobby","sports_hobby","motivation","hopes","recommendations_school_name","recommendations_school_address","recommendations_school_occupation","recommendations_school_work_address","recommendations_school_relationship","recommendations_nonschool_name","recommendations_nonschool_address","recommendations_nonschool_occupation","recommendations_nonschool_relationship","recommendations_close_friend_name","recommendations_close_friend_address","recommendations_close_friend_relationship","personality","strengths_and_weaknesses","stressful_conditions","biggest_life_problem","plans","grades_y1t1_average","grades_y1t1_subjects","grades_y1t2_average","grades_y1t2_subjects","grades_y2t1_average","grades_y2t1_subjects","grades_y2t2_average","grades_y2t2_subjects","grades_y3t1_average","grades_y3t1_subjects","grades_y3t2_average","grades_y3t2_subjects","grades_y4t1_average","grades_y4t1_subjects","grades_y4t2_average","grades_y4t2_subjects","grades_y5t1_average","grades_y5t1_subjects","grades_y5t2_average","grades_y5t2_subjects","grades_y7t1_average","grades_y7t1_subjects","grades_y7t2_average","grades_y7t2_subjects","grades_y8t1_average","grades_y8t1_subjects","grades_y8t2_average","grades_y8t2_subjects","grades_y10t1_average","grades_y10t1_subjects"];
+			// required_fields = ["first_name","place_of_birth","applicant_email","applicant_address_street","sex","body_height","body_weight","blood_type","citizenship","religion","father_full_name","mother_full_name","number_of_children_in_family","nth_child","high_school_name","high_school_admission_year","high_school_graduation_year","junior_high_school_name","junior_high_school_graduation_year","elementary_school_name","elementary_school_graduation_year","years_speaking_english","favorite_subject","dream","arts_hobby","sports_hobby","motivation","hopes","recommendations_school_name","recommendations_school_address","recommendations_school_occupation","recommendations_school_work_address","recommendations_school_relationship","recommendations_nonschool_name","recommendations_nonschool_address","recommendations_nonschool_occupation","recommendations_nonschool_relationship","recommendations_close_friend_name","recommendations_close_friend_address","recommendations_close_friend_relationship","personality","strengths_and_weaknesses","stressful_conditions","biggest_life_problem","plans","grades_y1t1_average","grades_y1t1_subjects","grades_y1t2_average","grades_y1t2_subjects","grades_y2t1_average","grades_y2t1_subjects","grades_y2t2_average","grades_y2t2_subjects","grades_y3t1_average","grades_y3t1_subjects","grades_y3t2_average","grades_y3t2_subjects","grades_y4t1_average","grades_y4t1_subjects","grades_y4t2_average","grades_y4t2_subjects","grades_y5t1_average","grades_y5t1_subjects","grades_y5t2_average","grades_y5t2_subjects","grades_y7t1_average","grades_y7t1_subjects","grades_y7t2_average","grades_y7t2_subjects","grades_y8t1_average","grades_y8t1_subjects","grades_y8t2_average","grades_y8t2_subjects","grades_y10t1_average","grades_y10t1_subjects"];
 			$(required_fields).each(function() {
 				id = '#' + this;
 				$(id).recheck();
@@ -205,7 +204,6 @@ $(function(){
 		}
 	}
 	if (last_pane) {
-		console.log('here');
 		window.onhashchange = function(e) { e.preventDefault(); $(document).scrollTop(0); return false; }
 		window.location.hash = last_pane;
 		$(document).scrollTop(0);
@@ -227,7 +225,6 @@ $(function(){
 	}
 
 	toggleFinalizeButton = function(e) {
-
 		if ($('#finalize').is(':checked')) {
 			activateRecheck();
 			if ($('.form-nav li a.recheck').length) {

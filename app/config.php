@@ -59,6 +59,38 @@ else {
 		public $selection_three_announcement_date = '2014-05-13 00:00:00'; // chapter time
 
 		public $programs = array('afs', 'yes');
+		public $partners = array(
+							'americas' => array(
+								'ARG' => 'Argentina',
+								'BRA' => 'Brazil',
+								'CAN' => 'Kanada',
+								'MEX' => 'Meksiko',
+								'USA' => 'Amerika Serikat',
+							),
+							'europe' => array(
+								'NED' => 'Belanda',
+								'BFL' => 'Belgia &ndash; Flanders',
+								'BFR' => 'Belgia &ndash; Wallonia/Perancis',
+								'CZE' => 'Republik Ceko',
+								'FIN' => 'Finlandia',
+								'FRA' => 'Perancis',
+								'GER' => 'Jerman',
+								'ISL' => 'Islandia',
+								'ITA' => 'Italia',
+								'LAT' => 'Latvia',
+								'NOR' => 'Norwegia',
+								'RUS' => 'Russia',
+								'SUI' => 'Swiss',
+								'SWE' => 'Swedia',
+								'TUR' => 'Turki',
+							),
+							'asia' => array(
+								'CHN' => 'Cina',
+								'JPN' => 'Jepang',
+								'PHI' => 'Filipina',
+								'THA' => 'Thailand',
+							)
+						);
 
 		// @deprecated
 		public $picture_upload_path = PICTURE_UPLOAD_PATH;
