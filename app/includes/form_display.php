@@ -290,7 +290,7 @@ class FormDisplay {
 	}
 
 	public function select_day($name) {
-		$this->select_number($name, 0, 31, 'very-short date-d');
+		$this->select_number($name, 1, 31, 'very-short date-d');
 	}
 
 	public function select_month($name) {
