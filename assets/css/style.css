@@ -929,6 +929,23 @@ textarea.invalid:focus {
 	text-align: center;
 }
 
+.promotional p, .promotional li {
+	line-height: 1.5;
+}
+.promotional h5 {
+	color: #007AC2;
+}
+.promotional p.checkbox {
+	margin: 12px 0 15px;
+	padding: 11px 0 9px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+.promotional p.checkbox label {
+	color: #000;
+	font-weight: 600;
+}
+
 /* Finalized */
 .finalized .what {
 	padding-bottom: 20px;

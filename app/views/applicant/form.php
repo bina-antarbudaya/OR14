@@ -112,6 +112,7 @@ TODO
 					<li><a href="#perjalanan">Riwayat Perjalanan</a></li>
 					<li><a href="#referensi">Referensi</a></li>
 					<li><a href="#rekomendasi">Rekomendasi</a></li>
+					<li><a href="#volunteering">Volunteering &amp; Hosting</a></li>
 					<?php if (!$readonly && !$admin): ?>
 					<li class="finalize"><a href="#finalisasi">Finalisasi</a></li>
 					<?php endif; ?>
@@ -1248,7 +1249,57 @@ TODO
 						</table>
 					</fieldset>
 
-					<!-- end form -->
+					<fieldset class="pane" id="volunteering">
+						<legend>Volunteering &amp; Hosting</legend>
+
+						<div class="promotional">
+							<p><span>Bina Antarbudaya adalah organisasi nirlaba berbasis relawan.</span> Seluruh panitia yang terlibat dalam proses
+							pendaftaran dan seleksi Bina Antarbudaya adalah relawan dari berbagai kalangan yang bekerja secara sukarela.
+							Kami mengundang Adik untuk terlibat dalam kegiatan kerelawanan di Bina Antarbudaya setelah rangkaian seleksi selesai.</p>
+							<p class="checkbox"><label class="checkbox"><?php $form->checkbox('interested_volunteering') ?> <?php $form->label('interested_volunteering', 'Saya tertarik untuk menjadi relawan Bina Antarbudaya') ?></label></p>
+						</div>
+						
+						<h4>Program Hosting</h4>
+						<div class="promotional">
+							<div class="row-fluid">
+								<div class="span6">
+									<h5>Apa itu program hosting?</h5>
+									<p>Setiap tahunnya Bina Antarbudaya menerima siswa dan relawan asing untuk tinggal dan bersekolah di Indonesia
+									selama kurang lebih 10 bulan. Selama di Indonesia, setiap siswa/relawan asing akan tinggal
+									bersama satu keluarga angkat (host family) dan menjalani kehidupan layaknya seorang pelajar/relawan lokal.</p>
+									
+									<h5>Siapa saja yang bisa kami host?</h5>
+									<ul>
+										<li>Siswa/siswi program pertukaran pelajar AFS dan YES, berusia 15-18 tahun</li>
+										<li>Relawan peserta program Community Service, berusia diatas 18 tahun</li>
+									</ul>
+
+									<h5>Apa keuntungan menjadi keluarga angkat?</h5>
+									<ul>
+										<li>Memperkenalkan Indonesia kepada dunia</li>
+										<li>Mengetahui dan memahami budaya, agama dan kebiasaan serta cara hidup di Negara lain melalui siswa/relawan asing untuk membantu mengembangkan pengetahuan dan wawasan seluruh anggota keluarga, tanpa harus bepergian ke luar negeri</li>
+										<li>Menciptakan hubungan kekeluargaan antar negara</li>
+										<li>Menjadi lebih sensitif terhadap permasalahan global</li>
+										<li>Mendapatkan pendidikan informal untuk seluruh anggota keluarga karena dengan menjadi keluarga angkat, keluarga anda akan terlibat dalam suatu proses komunikasi antar budaya, juga membangun pemahaman dan kedewasaan bagi putra/putri Anda juga bagi peserta program pertukaran pelajar/relawan.</li>
+									</ul>
+								</div>
+								<div class="span6">
+									<h5>Siapa saja yang bisa menjadi Host Family?</h5>
+									<p>Pada dasarnya setiap keluarga yang tertarik, bersedia dan memiliki waktu untuk memperkenalkan kehidupan keluarga Anda kepada peserta program dapat menjadi Host Family. Akan tetapi, berdasarkan pengalaman Bina Antarbudaya ada beberapa kriteria ideal yang sebaiknya dimiliki calon Host Family, yaitu:</p>
+									<ul>
+										<li>Seluruh anggota keluarga menyatakan ketertarikan dan kesediaannya untuk menerima siswa/relawan asing di rumah dan menjadi bagian dari anggota keluarga.</li>
+										<li>Salah satu atau kedua orang tua berusia diatas 30 tahun.</li>
+										<li>Terdapat putra/putri berusia 15 – 18 tahun atau berusia kira-kira sama dengan siswa/relawan asing di keluarga.</li>
+										<li>Salah satu anggota keluarga mampu berkomunikasi dalam bahasa Inggris.</li>
+										<li>Keluarga masih memegang teguh nilai dan budaya Indonesia, tetapi juga terbuka untuk mengenal dan belajar budaya lain.</li>
+										<li>Keluarga mampu dan bersedia meluangkan waktu, kasih sayang dan kesempatan untuk meluangkan waktu bersama siswa/relawan asing.</li>
+										<li>Keluarga memiliki ikatan kekeluargaan yang kuat, hangat dan terbuka.</li>
+									</ul>
+								</div>
+							</div>
+							<p class="checkbox"><label class="checkbox"><?php $form->checkbox('interested_hosting') ?> <?php $form->label('interested_hosting', 'Keluarga saya tertarik untuk menjadi host family') ?></label></p>
+						</fieldset>
+					</fieldset>
 
 					<fieldset class="pane" id="foto">
 						<legend>Pas Foto</legend>
