@@ -29,6 +29,7 @@ class LocaleComponent extends HeliumComponent {
 		'(Day)' => '(Tanggal)',
 		'(Month)' => '(Bulan)',
 		'(Year)' => '(Tahun)',
+		'Street' => 'Alamat',
 		'Town' => 'Kota',
 		'State/Province' => 'Provinsi',
 		'Postcode' => 'Kode Pos',

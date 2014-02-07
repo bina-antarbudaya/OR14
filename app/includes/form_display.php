@@ -375,9 +375,8 @@ class FormDisplay {
 
 	public function address($name, $kota = true, $provinsi = true, $kodepos = true, $telepon = true, $hp = true, $fax = true, $email = true) {
 		?>
-		<?php $this->textarea($name . '_address_street') ?>
+		<?php $this->textarea($name . '_address_street', 'input-block-level') ?>
 		<?php if ($kota): ?>
-		<br>
 		<?php $this->label($name . '_address_city', 'Town', 'subpoint') ?>
 		<?php $this->text($name . '_address_city', 'medium') ?>
 		<?php
