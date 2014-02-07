@@ -35,7 +35,18 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 		<div class="alert alert-block alert-success">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			<h4>Selamat datang</h4>
-			<p>Formulir sepanjang sepuluh halaman ini berisi informasi yang dibutuhkan tentang Adik untuk mengikuti rangkaian seleksi pertukaran pelajar Bina Antarbudaya. Gunakan menu di sebelah kiri untuk berpindah halaman. Formulir ini dapat diisi secara bertahap; gunakan tombol <span class="btn">Simpan&nbsp;Sementara</span> di sebelah kanan untuk menyimpan isian formulir Adik. Isian yang bertanda &bull; wajib diisi.</p>
+			<p>
+				Formulir sepanjang sepuluh halaman ini berisi informasi tentang Adik yang dibutuhkan 
+				untuk mengikuti rangkaian seleksi pertukaran pelajar Bina Antarbudaya.
+				Gunakan menu di sebelah kiri untuk berpindah halaman.
+			</p>
+			<p>
+				Formulir ini dapat diisi secara bertahap. Gunakan tombol <b>Simpan&nbsp;Sementara</b> di sebelah kanan untuk menyimpan isian formulir Adik agar dapat dilanjutkan.
+				Setelah seluruh formulir selesai, lakukan <b>Finalisasi</b> melalui menu di sebelah kiri.
+			</p>
+			<p>
+				Kolom yang bertanda <span class="required-sample">*</span> wajib diisi.
+			</p>
 		</div>
 
 		<?php elseif ($admin && $error): ?>
@@ -1342,6 +1353,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 					</fieldset>
 					<?php endif; ?>
 
+					<p class="required-fields-help help-block">
+						Kolom bertanda <span class="required-sample">*</span> wajib diisi.
+					</p>
 					<ul class="pager">
 						<li class="previous">
 							<a href="#_prev">&larr; Halaman Sebelumnya</a>

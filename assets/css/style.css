@@ -504,9 +504,6 @@ table.counts.four-col td {
 	border-radius: 0;
 	margin: 0;
 }
-#appform .alert-block p {
-	max-width: 65em;
-}
 .form-page-nav {
 	display: none;
 }
@@ -586,6 +583,10 @@ label.required {
 label.required:after {
 	content: ' *';
 	color: #c00;
+}
+span.required-sample {
+	color: #c00;
+	font-weight: 600;
 }
 .form-fields fieldset {
 	padding-top: 24px;
@@ -717,7 +718,7 @@ th.label {
 	background: #fcfcfc;
 }
 .form-table tr.selected td {
-	background: #f9f9f9;
+	background: #f6f6f6;
 }
 td.label:empty,
 th.label:empty {
@@ -903,6 +904,7 @@ select.country-pref option[disabled] {
 	font-size: 14px;
 	line-height: 28px;
 	margin: 0;
+	padding-left: 10px;
 }
 .recheck,
 .form-nav li a.recheck {
