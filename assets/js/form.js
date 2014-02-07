@@ -300,26 +300,43 @@ $(function(){
 	$('#number_of_children_in_family').keyup(fac);
 
 	// YES filter: acceleration class cannot choose YES
-	previously_selected_yes = $('#program_yes').prop('checked')
-	checkAcc = function() {
-		if ($('#in_acceleration_class').is(':checked')) {								
+	previously_selected_yes = $('#program_yes').prop('checked');
+	toggleYES = function(toggle) {
+		if (toggle) {
 			previously_selected_yes = $('#program_yes').prop('checked');
 			$('#program_yes').prop('checked', false)
-			$('.programs-table .yes').hide();
-			$('#country-prefs-td').attr('colspan', 1);
+			$('#program_yes').prop('disabled', true);
+			$('.program-name .yes').addClass('disabled');
+			$('.program-age-limit .yes').addClass('recheck');
 		}
 		else {
 			if (previously_selected_yes)
 				$('#program_yes').prop('checked', true);
 			else
 				$('#program_yes').prop('checked', false);
-
-			$('.programs-table .yes').show();
-			$('#country-prefs-td').attr('colspan', 2);
+			$('#program_yes').prop('disabled', false);
+			$('.program-name .yes').removeClass('disabled');
+			$('.program-age-limit .yes').removeClass('recheck');
 		}
 	}
+	checkAcc = function() {
+		toggleYES($('#in_acceleration_class').is(':checked'));
+	}
 	checkAcc();
-	$('#in_acceleration_class').click(checkAcc);
+	$('#in_acceleration_class').change(checkAcc);
+
+	getDateValue = function(selector_base) {
+		var year = $(selector_base + '-year-').val();
+		var month = $(selector_base + '-month-').val();
+		var day = $(selector_base + '-day-').val();
+		return new Date(year, month, day);
+	}
+	checkYESDOB = function() {
+		var currentDOBValue = getDateValue('.applicant-dob #date_of_birth');
+		toggleYES((currentDOBValue < dob_lower_limit_yes) || (currentDOBValue > dob_upper_limit));
+	}
+	checkYESDOB();
+	$('.applicant-dob #date_of_birth-day-, .applicant-dob #date_of_birth-month-, .applicant-dob #date_of_birth-year-').change(checkYESDOB);
 
 	$('input[type=file]').change(function() { $(this).parents('form').submit() });
 	
@@ -405,8 +422,4 @@ $(function(){
 		source: typeaheadSchool,
 		items: 20
 	});
-
-	getDateValue = function(field_name) {
-		var year = $('')
-	}
 });

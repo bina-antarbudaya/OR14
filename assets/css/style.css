@@ -816,9 +816,6 @@ label.subpoint {
 .country-preference ol {
 	padding-left: 2em;
 }
-.programs-table ul li {
-	list-style: bullet;
-}
 .programs-table th {
 	width: 13%;
 	padding: 10px 0;
@@ -836,6 +833,10 @@ label.subpoint {
 }
 .programs-table .program-name td label {
 	font-weight: 600;
+}
+.programs-table .program-name td.disabled label {
+	text-decoration: line-through;
+	color: #888;
 }
 .programs-table .program-length td {
 	font-size: 12px;

@@ -72,7 +72,13 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 					case 'picture':
 						return 'Adik belum mengunggah (upload) foto.';
 					case 'birth_date':
-						return 'Tanggal lahir Adik harus di antara <strong>1 Agustus 1995</strong> dan <strong>1 Agustus 1997</strong>';
+						$lower = $dob_lower_limit->format('j F Y');
+						$upper = $dob_upper_limit->format('j F Y');
+						return "Tanggal lahir Adik harus di antara <strong>$lower</strong> dan <strong>$upper</strong>";
+					case 'birth_date_yes':
+						$lower_yes = $dob_lower_limit_yes->format('j F Y');
+						$upper = $dob_upper_limit->format('j F Y');
+						return "Untuk mendaftar program YES, tanggal lahir Adik harus di antara <strong>$lower_yes</strong> dan <strong>$upper</strong>";
 					default:
 						return $e;
 				}
@@ -1356,6 +1362,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 	var incomplete = <?php echo json_encode($incomplete) ?>;
 	var programYear = <?php echo $applicant->program_year ?>;
 	var required_fields = <?php echo json_encode(Applicant::required_fields()) ?>;
+	var dob_upper_limit = new Date('<?php echo $dob_upper_limit->format('r') ?>');
+	var dob_lower_limit = new Date('<?php echo $dob_lower_limit->format('r') ?>');
+	var dob_lower_limit_yes = new Date('<?php echo $dob_lower_limit_yes->format('r') ?>');
 </script>
 <?php
 $this->require_js('form');
