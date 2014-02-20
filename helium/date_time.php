@@ -36,7 +36,7 @@ class HeliumDateTime extends DateTime {
 	}
 	
 	public function setDate($year, $month, $day) {
-		if ($this->zero && $month && $day)
+		if ($this->zero && $year >= 0 && $month > 0 && $day > 0)
 			$this->zero = false;
 
 		parent::setDate($year, $month, $day);
@@ -57,11 +57,16 @@ class HeliumDateTime extends DateTime {
 	}
 
 	public function mysql_datetime() {
-		if ($this->zero)
+		if ($this->zero) {
 			return self::zero_datetime;
-		else
+		}
+		elseif (intval($this->format('Y')) <= 0) {
+			return self::zero_datetime;
+		}
+		else {
 			// Using parent:: would be faster
 			return parent::format(self::MYSQL);
+		}
 	}
 
 	public function __toString() {
