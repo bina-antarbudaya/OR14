@@ -620,39 +620,38 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 									<datalist id="high-schools" data-for="high_school_name">
 										<?php foreach ($schools as $school): ?>
 										<option value="<?php echo $school ?>">
-											
+
 										<?php endforeach; ?>
 									</datalist>
 									<script>
 									var high_schools = <?php echo json_encode($schools) ?>
 									</script>
 								</td>
-								<tr>
-									<td class="label"></td>
-									<td class="field">
-										<label class="checkbox"><?php $form->checkbox('in_pesantren') ?> Sekolah saya adalah Pesantren/Madrasah</label>
-									</td>
-								</tr>
-								<tr>
-									<td class="label"><?php $form->label('high_school_address_street', 'Alamat Sekolah') ?></td>
-									<td class="field"><?php $form->address('high_school', false, false, false, true, false, true, false); ?></td>
-								</tr>
-								<tr>
-									<td class="label"><?php $form->label('high_school_admission_year', 'Tahun Masuk', 'required') ?></td>
-									<td class="field"><?php $form->select_year('high_school_admission_year', $program_year - 5, $program_year - 3, false); ?></td>
-								</tr>
-								<tr>
-									<td class="label"><?php $form->label('high_school_graduation_year', 'Tahun Keluar', 'required') ?></td>
-									<td class="field"><?php $form->select_year('high_school_graduation_year', $program_year - 1 /* Acceleration */, $program_year /* Regular */); ?></td>
-								</tr>
-									<tr>
-										<td class="label"></td>
-										<td class="field">
-											<label class="checkbox"><?php $form->checkbox('in_acceleration_class') ?> Saya adalah siswa kelas Akselerasi</label>
-											<span class="help-block">Program YES tidak tersedia bagi siswa kelas akselerasi.</span>
-										</td>
-									</tr>
-
+							</tr>
+							<tr>
+								<td class="label"></td>
+								<td class="field">
+									<label class="checkbox"><?php $form->checkbox('in_pesantren') ?> Sekolah saya adalah Pesantren/Madrasah</label>
+								</td>
+							</tr>
+							<tr>
+								<td class="label"><?php $form->label('high_school_address_street', 'Alamat Sekolah') ?></td>
+								<td class="field"><?php $form->address('high_school', false, false, false, true, false, true, false); ?></td>
+							</tr>
+							<tr>
+								<td class="label"><?php $form->label('high_school_admission_year', 'Tahun Masuk', 'required') ?></td>
+								<td class="field"><?php $form->select_year('high_school_admission_year', $program_year - 5, $program_year - 3, false); ?></td>
+							</tr>
+							<tr>
+								<td class="label"><?php $form->label('high_school_graduation_year', 'Tahun Keluar', 'required') ?></td>
+								<td class="field"><?php $form->select_year('high_school_graduation_year', $program_year - 1 /* Acceleration */, $program_year /* Regular */); ?></td>
+							</tr>
+							<tr>
+								<td class="label"></td>
+								<td class="field">
+									<label class="checkbox"><?php $form->checkbox('in_acceleration_class') ?> Saya adalah siswa kelas Akselerasi</label>
+									<span class="help-block">Program YES tidak tersedia bagi siswa kelas akselerasi.</span>
+								</td>
 							</tr>
 						</table>
 						
@@ -1297,7 +1296,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								</div>
 							</div>
 							<p class="checkbox"><label class="checkbox"><?php $form->checkbox('interested_hosting') ?> <?php $form->label('interested_hosting', 'Keluarga saya tertarik untuk menjadi host family') ?></label></p>
-						</fieldset>
+						</div>
 					</fieldset>
 
 					<fieldset class="pane" id="foto">
