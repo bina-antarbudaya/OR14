@@ -147,6 +147,7 @@ $(function(){
 			$(activeTab).trigger('activate');
 			
 			if (direct) {
+				// Don't fade in
 				$(window).scrollTop($('.page-header').offset().top);
 				$(activeTab).addClass('active').show();
 			}
@@ -156,6 +157,34 @@ $(function(){
 			}
 		}
 	}
+
+	// History handling
+	if (history.pushState) {
+		window.onpopstate = function(e) {
+			e.preventDefault();
+			if (e.state)
+				switchToTab(e.state);
+			else if (window.location.hash)
+				switchToTab(window.location.hash, true);
+		}
+	}
+
+	// Handle current window.location.hash
+	if (last_pane) {
+		last_pane = '#' + last_pane;
+		switchToTab(last_pane, true);
+		window.location.replace(last_pane);
+	}
+	else if (window.location.hash) {
+		switchToTab(window.location.hash, true);
+	}
+	else {
+		switchToTab('#pribadi', true);
+		window.location.replace('#pribadi');
+	}
+	$(window).load(function() {
+		$(window).scrollTop(0);
+	});
 
 	// Click Events
 	$(".form-nav li a").click(function(e) {
@@ -167,7 +196,6 @@ $(function(){
 		if (history.pushState)
 			history.pushState(activeTab, $(this).text(), activeTab);
 	});
-	
 
 	// Pagination
 	function getNextTab() {
@@ -189,37 +217,6 @@ $(function(){
 		switchToTab(getPrevTab());
 	})
 
-	// History manipulation
-	if (history.pushState) {
-		window.onpopstate = function(e) {
-			e.preventDefault();
-			if (e.state)
-				switchToTab(e.state);
-			else if (window.location.hash)
-				switchToTab(window.location.hash, true);
-		}
-	}
-	if (last_pane) {
-		window.onhashchange = function(e) { e.preventDefault(); $(document).scrollTop(0); return false; }
-		window.location.hash = last_pane;
-		$(document).scrollTop(0);
-		$(document).load(function() {
-			$(this).scrollTop(0);
-		});
-		$(document).scrollTop(0);
-		if (!history.pushState)
-			switchToTab(last_pane, true);
-	}
-	else if (window.location.hash) {
-		switchToTab(window.location.hash, true);
-		$(window).scrollTop(0);
-	}
-	else {
-		window.onhashchange = function(e) { e.preventDefault(); $(document).scrollTop(0); return false; }
-		window.location.replace('#pribadi');
-		switchToTab('#pribadi', true);
-	}
-
 	toggleFinalizeButton = function(e) {
 		if ($('#finalize').is(':checked')) {
 			activateRecheck();
@@ -240,7 +237,6 @@ $(function(){
 			$('#finalize-button:parent').hide();
 	}
 	$('#finalize').change(toggleFinalizeButton);
-
 
 	$('fieldset#finalisasi')
 		.on('activate', function() {
@@ -384,6 +380,7 @@ $(function(){
 		});
 	});
 	
+	// Form tools (Simpan Sementara button) - keep afloat
 	$(window).scroll(function(e) {
 		el = $('.form-tools-container');
 		t = $('.form-tools').offset().top;
@@ -392,11 +389,12 @@ $(function(){
 		if (y >= t) {
 			el.addClass('fixed');
 		} else {
-			console.log('no more');
+			// console.log('no more');
 			el.removeClass('fixed');
 		}
 	})
 	
+	// Highlight the row containing the currently-focused form control
 	$('#appform input, #appform select, #appform textarea').focus(function() {
 		$(this).parents('tr').first().addClass('selected');
 	});
