@@ -38,7 +38,7 @@ $pdf->setLanguageArray($l);
 $pdf->AddPage();
 
 // Load template
-$pdf->setSourceFile(HELIUM_PARENT_PATH . '/assets/kartu-peserta-tpl-alt.pdf');
+$pdf->setSourceFile(HELIUM_APP_PATH . '/templates/kartu-peserta.pdf');
 $pdf->useTemplate($pdf->importPage(1));
 
 // Set line height
@@ -52,10 +52,10 @@ $pdf->MultiCell(180, 30, $code, 0, 'L', false, 1, 8.8, 28);
 // Print applicant info
 $pdf->setFont('helvetica', 'B', 12);
 $pdf->MultiCell(120, 30, $applicant->sanitized_full_name, 0, 'L', false, 1, 8.8, 57.5);
-$pdf->MultiCell(120, 30, $applicant->sanitized_high_school_name, 0, 'L', false, 1, 8.8, 69);
-$pdf->MultiCell(120, 30, $applicant->expires_on->format('l, j F Y'), 0, 'L', false, 1, 8.8, 93);
 $pdf->MultiCell(100, 30, $applicant->chapter->chapter_name, 0, 'L', false, 1, 98.8, 57.5);
+$pdf->MultiCell(120, 30, $applicant->sanitized_high_school_name, 0, 'L', false, 1, 8.8, 69);
 $pdf->MultiCell(100, 30, $applicant->applicant_mobilephone, 0, 'L', false, 1, 98.8, 69);
+$pdf->MultiCell(120, 30, $applicant->expires_on->format('l, j F Y'), 0, 'L', false, 1, 8.8, 93);
 
 // Print address
 $st = str_replace("\n", ', ', $applicant->applicant_address_street);
@@ -68,16 +68,16 @@ if (strlen($address_oneline) > 60) {
 }
 else {
 	// Short addresses
-	$pdf->setFont('helvetica', '', 12);
-	$pdf->MultiCell(140, 30, $address_oneline, 0, 'L', false, 1, 8.8, 81);
+	$pdf->setFont('helvetica', 'B', 12);
+	$pdf->MultiCell(140, 30, $address_oneline, 0, 'L', false, 1, 8.8, 81.5);
 }
 
-// Print QR code of applicant control URI
-$code = PathsComponent::build_url(array('controller' => 'applicant', 'action' => 'view', 'id' => $applicant->id));
+// Print QR code of profile URI
+$code = PathsComponent::build_url(array('controller' => 'applicant', 'action' => 'view', 'test_id' => $applicant->test_id));
 $pdf->write2DBarcode($code, 'QRCODE', 152, 94, 20, 20);
 
 // Print 1D barcode of test ID
-$pdf->write1DBarcode($applicant->test_id . chr(13), 'C93', 10, 42, 120, 8);
+$pdf->write1DBarcode($applicant->test_id . chr(13), 'C93', 10, 42, 60, 8);
 
 // Print participant photo
 if ($picture) {
