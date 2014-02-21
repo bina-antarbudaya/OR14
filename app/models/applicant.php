@@ -1264,7 +1264,7 @@ class Applicant extends HeliumPartitionedRecord {
 		$check['birth_date'] = $bd >= $lower && $bd <= $upper;
 		// $check['birth_date'] = $bd->later_than($lower) && $bd->earlier_than($upper);
 
-		$check['birth_date_yes'] = $this->program_yes && ($bd >= $lower_yes && $bd <= $upper);
+		$check['birth_date_yes'] = ($this->program_yes && ($bd >= $lower_yes && $bd <= $upper)) || !$this->program_yes;
 
 		foreach ($check as $c => $v) {
 			if (!$v)
