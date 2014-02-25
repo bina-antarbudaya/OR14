@@ -25,7 +25,7 @@ else {
 
 		// Session settings
 		public $session_cookie_name = 'or14';
-		public $session_length = '1 week';
+		public $session_length = '20 minutes';
 		public $session_check_password_hash = true;
 		public $session_check_user_agent = true;
 		public $session_check_ip_address = false;
