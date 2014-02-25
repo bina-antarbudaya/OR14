@@ -10,8 +10,6 @@
 
 // all files are saved under the path defined in conf picture_upload_path
 
-require __DIR__ . '/../vendor/autoload.php';
-
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\ServiceException;
 
