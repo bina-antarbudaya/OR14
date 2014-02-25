@@ -1,6 +1,7 @@
 {
     "require": {
-        "microsoft/windowsazure": "*"
+        "microsoft/windowsazure": "*",
+        "sendgrid/sendgrid": "2.0.3"
     },          
     "repositories": [
         {
