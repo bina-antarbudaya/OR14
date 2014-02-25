@@ -70,30 +70,31 @@ else {
 								'BRA' => 'Brazil',
 								'CAN' => 'Kanada',
 								'MEX' => 'Meksiko',
-								'USA' => 'Amerika Serikat',
+								'USA' => 'Amerika Serikat'
 							),
 							'europe' => array(
-								'NED' => 'Belanda',
-								'BFL' => 'Belgia &ndash; Flanders',
-								'BFR' => 'Belgia &ndash; Wallonia/Perancis',
+								'BEL' => 'Belgia',
 								'CZE' => 'Republik Ceko',
+								'DEN' => 'Denmark',
 								'FIN' => 'Finlandia',
 								'FRA' => 'Perancis',
 								'GER' => 'Jerman',
+								'HUN' => 'Hungaria',
 								'ISL' => 'Islandia',
 								'ITA' => 'Italia',
-								'LAT' => 'Latvia',
+								'NED' => 'Belanda',
 								'NOR' => 'Norwegia',
 								'RUS' => 'Russia',
 								'SUI' => 'Swiss',
 								'SWE' => 'Swedia',
-								'TUR' => 'Turki',
+								'TUR' => 'Turki'
 							),
 							'asia' => array(
 								'CHN' => 'Cina',
+								'IND' => 'India',
 								'JPN' => 'Jepang',
 								'PHI' => 'Filipina',
-								'THA' => 'Thailand',
+								'THA' => 'Thailand'
 							)
 						);
 
