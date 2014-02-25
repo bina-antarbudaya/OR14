@@ -863,7 +863,7 @@ class ApplicantController extends AppController {
 					}
 					else {
 						$errors = $applicant->validation_errors;
-						$this->session['errors'] = $errors;
+						$this->session['form_errors'] = $errors;
 						$this->session['incomplete'] = $applicant->incomplete_fields;
 					}
 				}
