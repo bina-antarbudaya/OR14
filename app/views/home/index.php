@@ -1,7 +1,7 @@
 <?php $this->print_header() ?>
 <header class="page-header welcome-header">
-	<h1>Explore the World, Explore&nbsp;Yourself</h1>
-	<h2>Pendaftaran Seleksi Bina Antarbudaya <?php echo $this_year ?></h2>
+	<h1>Explore&nbsp;the&nbsp;World, Explore&nbsp;Yourself</h1>
+	<h2>Pendaftaran Seleksi Bina Antarbudaya <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?></h2>
 </header>
 
 <div class="welcome">
@@ -30,7 +30,7 @@
 		 					<span class="pre">Masa pendaftaran:</span>
 		 					<span class="from">1 Mar</span>
 		 					&ndash;
-		 					<span class="to">14 Apr</span>
+		 					<span class="to">13 Apr</span>
 		 					<?php echo $this_year ?>
 		 				</p>
 		 			</div>
@@ -75,17 +75,17 @@
 		</header>
 		<div class="row">
 		<?php $i = 0; foreach ($chapters as $c): ?>
-		<?php if (($i != 0) && ($i % 4 == 0)): ?>
+		<?php if (($i != 0) && ($i % 3 == 0)): ?>
 
 		</div>
 		
 		<div class="row">
 			
 		<?php endif; ?>
-			<div class="span3 chapter-item">
+			<div class="span4 chapter-item">
 				<h4 class="chapter-name"><?php echo $c->chapter_name ?></h4>
-				<p>
-				<?php echo nl2br($c->chapter_address) ?><br>
+				<p class="address"><?php echo nl2br($c->chapter_address) ?></p>
+				<p class="links">
 					<a href="mailto:<?php echo $c->get_email() ?>?subject=Pendaftaran Seleksi"><?php echo $c->get_email() ?></a><br>
 					<?php if ($u = $c->site_url) { ?><a href="<?php echo $u ?>"><?php echo $u ?></a><?php } ?>
 				</p>

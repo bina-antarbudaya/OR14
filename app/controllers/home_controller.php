@@ -110,6 +110,8 @@ class HomeController extends AppController {
 		$this['this_year'] = Helium::conf('program_year') - 2;
 		$this['form'] = new FormDisplay;
 		$this['can_register'] = $this->can_register();
+
+		$this['program_year'] = Helium::conf('program_year');
 	}
 
 	public function results() {
