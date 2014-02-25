@@ -68,8 +68,8 @@ else {
 							'americas' => array(
 								'ARG' => 'Argentina',
 								'BRA' => 'Brazil',
-								'CAN' => 'Kanada',
-								'MEX' => 'Meksiko',
+								'CAN' => 'Canada',
+								'MEX' => 'Mexico',
 								'USA' => 'Amerika Serikat'
 							),
 							'europe' => array(
@@ -84,13 +84,13 @@ else {
 								'ITA' => 'Italia',
 								'NED' => 'Belanda',
 								'NOR' => 'Norwegia',
-								'RUS' => 'Russia',
+								'RUS' => 'Rusia',
 								'SUI' => 'Swiss',
 								'SWE' => 'Swedia',
 								'TUR' => 'Turki'
 							),
 							'asia' => array(
-								'CHN' => 'Cina',
+								'CHN' => 'China',
 								'IND' => 'India',
 								'JPN' => 'Jepang',
 								'PHI' => 'Filipina',
