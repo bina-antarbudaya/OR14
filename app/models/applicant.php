@@ -1169,7 +1169,7 @@ class Applicant extends HeliumPartitionedRecord {
 	/**
 	 * Find by user
 	 */
-	public function find_by_user($user_id) {
+	public static function find_by_user($user_id) {
 		if (is_object($user_id))
 			$user_id = $user_id->id;
 
@@ -1181,7 +1181,7 @@ class Applicant extends HeliumPartitionedRecord {
 	/**
 	 * Find by test ID
 	 */
-	public function find_by_test_id($test_id) {
+	public static function find_by_test_id($test_id) {
 		$test_id = strtoupper($test_id);
 		$try = Applicant::find(compact('test_id'));
 
