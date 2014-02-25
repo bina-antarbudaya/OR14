@@ -48,6 +48,11 @@ else {
 		public $recaptcha_public_key = '6LeuJ8ISAAAAAI8CHltLLYj6i-SuNOaYOd9hgfVc';
 		public $recaptcha_private_key = '6LeuJ8ISAAAAANw4cl3_OSQUG5sDrEs1fmQPv0qh';
 
+		public $sendgrid_username = '<sendgrid username>';
+		public $sendgrid_password = '<sendgrid password>';
+		public $from_address = 'help@localhost';
+		public $from_name = 'Bina Antarbudaya';
+
 		public $program_year = 2016;
 		public $registration_start = '2014-03-01 00:00:00';
 		public $registration_deadline = '2014-04-14 23:59:59';

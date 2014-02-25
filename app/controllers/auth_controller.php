@@ -123,64 +123,36 @@ class AuthController extends AppController {
 
 		$expires_on = $key->expires_on->format('j F Y');
 
-		// load Swift and php-liquid
-		require_once HELIUM_APP_PATH . '/includes/swift/swift_required.php';
-		new Liquid;
-
-		$tpl_plain = <<<EOF
-Halo {{ name }},
-
-{{ pronoun }} menerima surel ini karena {{ pronoun }} meminta pergantian password untuk akun {{ pronoun }}.
-
-Username {{ pronoun }} adalah {{ username }}.
-
-Untuk mengubah password {{ pronoun }}, silakan buka tautan di bawah ini:
-{{ recover_url }}
-
-Abaikan surel ini jika tidak pernah merasa meminta penggantian password.
-
-EOF;
-
-		$tpl_html = <<<EOF
-<p>Halo {{ name }},</p>
-
-<p>{{ pronoun }} menerima surel ini karena {{ pronoun }} meminta pergantian password untuk akun {{ pronoun }}.</p>
-
-<p>Username {{ pronoun }} adalah <strong>{{ username }}</strong>.</p>
-
-<p>Untuk mengubah password {{ pronoun }}, silakan buka <strong><a href="{{ recover_url }}">tautan ini</a></strong>.</p>
-
-<p>Abaikan surel ini jika tidak pernah merasa meminta penggantian password.</p>
-
-EOF;
+		$tpl_plain = file_get_contents(HELIUM_APP_PATH . '/templates/forgot-password-email.txt.mustache');
+		$tpl_html = file_get_contents(HELIUM_APP_PATH . '/templates/forgot-password-email.html.mustache');
 
 		$vars = compact('pronoun', 'username', 'recover_url', 'name');
-		$tpl = new LiquidTemplate;
-		$body_plain = $tpl->parse($tpl_plain)->render($vars);
-		$body_html = $tpl->parse($tpl_html)->render($vars);
-		
+
+		$mustache = new Mustache_Engine;
+		$body_plain = $mustache->render($tpl_plain, $vars);
+		$body_html = $mustache->render($tpl_html, $vars);
+
 		// Create the message
-		$message = Swift_Message::newInstance()
-		  ->setSubject('Penggantian password Seleksi Bina Antarbudaya')
-		  ->setFrom(array('noreply@seleksi.bina-antarbudaya.info' => 'Bina Antarbudaya'))
-		  ->setTo(array($email => $name))
-		  ->setBody($body_plain)
-		  ->addPart($body_html, 'text/html');
+		$sendgrid_username = Helium::conf('sendgrid_username');
+		$sendgrid_password = Helium::conf('sendgrid_password');
+		$from_address = Helium::conf('from_address');
+		$from_name = Helium::conf('from_name');
 
-		// $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
-		//   ->setUsername('national@binabudbdg.org')
-		//   ->setPassword('#tcE^(F_=3s8');
-		$transport = Swift_MailTransport::newInstance();
+		// Initialise SendGrid
+		$sendgrid = new SendGrid($sendgrid_username, $sendgrid_password, array('turn_off_ssl_verification' => true));
 
-		try {
-			$mailer = Swift_Mailer::newInstance($transport);
-			$mailer->send($message);
-		}
-		catch (Exception $e) {
-			$e->output();
-			return false;
-		}
-		
-		return true;
+		// Prepare message
+		$message = new SendGrid\Email();
+		$message->addTo($email)
+			->setFrom($from_address)
+			->setFromName($from_name)
+			->setText($body_plain)
+			->setHtml($body_html)
+			->addCategory('Password Recovery');
+
+		// Send message
+		$attempt = $sendgrid->send($message);
+
+		return $attempt;
 	}
 }
