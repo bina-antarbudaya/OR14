@@ -1,4 +1,4 @@
-<?php $this->print_header('Pemulihan akun'); ?>
+<?php $this->print_header('Pemulihan Akun'); ?>
 <header class="page-header">
 	<h1>Pemulihan Akun</h1>
 </header>
