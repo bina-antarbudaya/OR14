@@ -1,6 +1,6 @@
 // Form validation logic
 
-recheckActivated = false;
+var recheckActivated = false;
 
 // Recheck plugin
 (function ($) {
@@ -15,10 +15,15 @@ recheckActivated = false;
 	}
 	$.fn.isPracticallyEmpty = function() {
 		// v = $('#appform').getVal(this.attr('name'));
-		if (this.val().match(/^[\s-.]+$|^$/))
+		if (this.val().match(/^[\s\-.]+$|^$/)) {
 			return true;
-		else
+		}
+		else if (this.attr('type') == 'number' && parseInt(this.val()) <= 0) {
+			return true;
+		}
+		else {
 			return false;
+		}
 	}
 	// Invoked from an input control
 	$.fn.recheck = function(altFor) {
@@ -94,25 +99,45 @@ recheckActivated = false;
 			});
 
 			// DOB check
-			dob_fields = $('.applicant-dob #date_of_birth-day-, .applicant-dob #date_of_birth-month-, .applicant-dob #date_of_birth-year-');
+			var dob_fields = $('.applicant-dob #date_of_birth-day-, .applicant-dob #date_of_birth-month-, .applicant-dob #date_of_birth-year-');
 			dob_fields.check = function() {
-				$('label[for=date_of_birth]').removeClass('recheck');
+				l = $('label[for=date_of_birth]');
+				s = this.parents('fieldset');
+				n = $(".form-nav a[href='#" + s.attr('id') + "']");
+
+				// Remove recheck class
+				l.removeClass('recheck');
+				n.removeClass('recheck');
+
+				// Check for empty date fields
 				dob_fields.each(function() {
 					var t = $(this);
 					if (!t.val() || t.val() == '0') {
 						t.addClass('invalid');
-						$('label[for=date_of_birth]').addClass('recheck');
+						l.addClass('recheck');
+						n.addClass('recheck');
 						console.log('invalid: ' + t.attr('id') + ' ' + t.val());
 					}
 					else {
 						t.removeClass('invalid');
 					}
 				});
+
+				// Check for dates outside DOB range
+				var currentDOBValue = getDateValue('.applicant-dob #date_of_birth');
+				var isValidDOB = (currentDOBValue >= dob_lower_limit) && (currentDOBValue <= dob_upper_limit);
+				$('#invalid-dob-alert').hide();
+				if (!isValidDOB) {
+					dob_fields.addClass('invalid');
+					l.addClass('recheck');
+					n.addClass('recheck');
+					$('#invalid-dob-alert').show();
+				}
 			}
 			dob_fields.check();
 			dob_fields.change(function() {
 				dob_fields.check();
-			})
+			});
 		}
 
 		recheckActivated = true;
@@ -322,10 +347,10 @@ $(function(){
 	$('#in_acceleration_class').change(checkAcc);
 
 	getDateValue = function(selector_base) {
-		var year = $(selector_base + '-year-').val();
-		var month = $(selector_base + '-month-').val();
-		var day = $(selector_base + '-day-').val();
-		return new Date(year, month, day);
+		var year = parseInt($(selector_base + '-year-').val());
+		var month = parseInt($(selector_base + '-month-').val()) - 1;
+		var day = parseInt($(selector_base + '-day-').val());
+		return new Date(year, month, day, 12, 0, 0, 0);
 	}
 	checkYESDOB = function() {
 		var currentDOBValue = getDateValue('.applicant-dob #date_of_birth');

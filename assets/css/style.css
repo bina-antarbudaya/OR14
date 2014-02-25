@@ -928,6 +928,11 @@ textarea.invalid:focus {
 	-moz-box-shadow: 0 0 6px #f8b9b7;
 	box-shadow: 0 0 6px #f8b9b7;
 }
+#invalid-dob-alert {
+	display: none;
+	color: #b94a48;
+	font-weight: 600;
+}
 
 .picture-container {
 	padding-bottom: 18px;

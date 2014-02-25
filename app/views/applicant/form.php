@@ -75,28 +75,29 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 		<div class="alert alert-error">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			<h4>Finalisasi Gagal</h4>
-			<?php
-			$errors = array_map(function($e) {
-				switch ($e) {
+			<?php foreach ($errors as $error): ?>
+			<p><?php
+				switch ($error) {
 					case 'incomplete':
-						return 'Formulir belum lengkap. Pastikan seluruh bagian formulir ini telah terisi.';
+						echo 'Formulir belum lengkap. Pastikan seluruh bagian formulir ini telah terisi.';
+						break;
 					case 'picture':
-						return 'Adik belum mengunggah (upload) foto.';
+						echo 'Adik belum mengunggah (upload) foto.';
+						break;
 					case 'birth_date':
 						$lower = $dob_lower_limit->format('j F Y');
 						$upper = $dob_upper_limit->format('j F Y');
-						return "Tanggal lahir Adik harus di antara <strong>$lower</strong> dan <strong>$upper</strong>";
+						echo "Untuk berpartisipasi dalam Seleksi Pertukaran Pelajar Bina Antarbudaya, tanggal lahir Adik harus di antara <strong>$lower</strong> dan <strong>$upper</strong>.";
+						break;
 					case 'birth_date_yes':
 						$lower_yes = $dob_lower_limit_yes->format('j F Y');
 						$upper = $dob_upper_limit->format('j F Y');
-						return "Untuk mendaftar program YES, tanggal lahir Adik harus di antara <strong>$lower_yes</strong> dan <strong>$upper</strong>";
+						echo "Untuk mendaftar program YES, tanggal lahir Adik harus di antara <strong>$lower_yes</strong> dan <strong>$upper</strong>.";
+						break;
 					default:
-						return $e;
+						echo $err;
 				}
-			}, $errors);
-			
-			foreach ($errors as $error): ?>
-			<p><?php echo $error; ?></p>
+			?></p>
 			<?php endforeach; ?>
 			<script>console.log('Skynet: Finalization failed because the following fields were not filled in:', <?php echo json_encode ($incomplete) ?>)</script>
 		</div>
@@ -204,6 +205,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								<td class="field">
 									<span class="applicant-dob"><?php $form->date('date_of_birth', 17, 15); ?></span>
 									<br>
+									<div id="invalid-dob-alert">Tanggal lahir Adik di luar batasan usia program Bina Antarbudaya.</div>
 									<span class="help-block">
 										Untuk mengikuti program AFS Year Program dan Green Academy Short Programme periode <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?>,
 										Adik harus lahir antara tanggal <?php echo str_replace(' ', '&nbsp;', $dob_lower_limit->format('j F Y')) ?> dan <?php echo str_replace(' ', '&nbsp;', $dob_upper_limit->format('j F Y')) ?>.
@@ -415,9 +417,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						// $partners is loaded from controller
 							
 						$continents = array(
-							'americas' => 'Benua Amerika',
-							'europe' => 'Benua Eropa',
-							'asia' => 'Benua Asia'
+							'americas' => 'Kawasan Amerika',
+							'europe' => 'Kawasan Eropa',
+							'asia' => 'Kawasan Asia'
 						);
 							
 						foreach ($partners as $continent => $countries):
@@ -563,11 +565,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('number_of_children_in_family', 'Jumlah Anak dalam Keluarga', 'required') ?></td>
-								<td class="field"><?php $form->number('number_of_children_in_family', 'short', 'required'); ?></td>
+								<td class="field"><?php $form->number('number_of_children_in_family', 'short required'); ?></td>
 							</tr>
 							<tr>
-								<td class="label"><?php $form->label('nth_child', 'Adik adalah anak ke-...') ?></td>
-								<td class="field"><?php $form->number('nth_child', 'short'); ?></td>
+								<td class="label"><?php $form->label('nth_child', 'Adik adalah anak ke-...', 'required') ?></td>
+								<td class="field"><?php $form->number('nth_child', 'short required'); ?></td>
 							</tr>
 						</table>
 						<table class="siblings-table subform">
