@@ -193,11 +193,12 @@ table.form-table td.field {
 	font-weight: bold;
 	padding-bottom: 0;
 	letter-spacing: -.05em;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 #cover h2.test-id {
-	padding-bottom: 60pt;
-	font-size: 18pt;
+	padding-bottom: 45pt;
+	font-size: 24pt;
+	font-weight: 300;
 }
 #cover .cover-table th {
 	padding-bottom: 0;
