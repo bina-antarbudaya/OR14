@@ -532,14 +532,18 @@ $(function(){
 	ajaxSaveWithFallback = ajaxSave.bind(undefined, function() {
 		$('#application-form').submit();
 	});
-	$('#application-form input, #application-form textarea, #application-form select').change(function() {
-		ajaxSave();
-	});
-	$('#save-button')
-		.click(function(e) {
-			e.preventDefault();
-			ajaxSaveWithFallback();
-			this.blur();
-		})
-		.tooltip({placement: 'bottom'});
+
+	if (autoSave) {
+		$('#application-form input, #application-form textarea, #application-form select').change(function() {
+			ajaxSave();
+		});
+		$('#save-button')
+			.click(function(e) {
+				e.preventDefault();
+				ajaxSaveWithFallback();
+				this.blur();
+			})
+			.tooltip({placement: 'bottom'});
+	}
+	
 });

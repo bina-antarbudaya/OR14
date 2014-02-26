@@ -1384,6 +1384,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 	var dob_lower_limit = new Date('<?php echo $dob_lower_limit->format('r') ?>');
 	var dob_lower_limit_yes = new Date('<?php echo $dob_lower_limit_yes->format('r') ?>');
 	var ajax_save_endpoint = "<?php L(array('controller' => 'applicant', 'action' => 'form_save_json')) ?>";
+	var autoSave = <?php echo $admin ? 'false' : 'true' ?>;
 </script>
 <?php
 $this->require_js('moment.min');
