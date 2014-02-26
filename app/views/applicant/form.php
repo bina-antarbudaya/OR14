@@ -1380,9 +1380,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 	var incomplete = <?php echo json_encode($incomplete) ?>;
 	var programYear = <?php echo $applicant->program_year ?>;
 	var required_fields = <?php echo json_encode(Applicant::required_fields()) ?>;
-	var dob_upper_limit = new Date('<?php echo $dob_upper_limit->format('r') ?>');
-	var dob_lower_limit = new Date('<?php echo $dob_lower_limit->format('r') ?>');
-	var dob_lower_limit_yes = new Date('<?php echo $dob_lower_limit_yes->format('r') ?>');
+	var dob_upper_limit_string = '<?php echo $dob_upper_limit->format('Y-m-d') ?>';
+	var dob_lower_limit_string = '<?php echo $dob_lower_limit->format('Y-m-d') ?>';
+	var dob_lower_limit_yes_string = '<?php echo $dob_lower_limit_yes->format('Y-m-d') ?>';
 	var ajax_save_endpoint = "<?php L(array('controller' => 'applicant', 'action' => 'form_save_json')) ?>";
 	var autoSave = <?php echo $admin ? 'false' : 'true' ?>;
 </script>
