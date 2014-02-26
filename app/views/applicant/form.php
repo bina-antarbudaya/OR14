@@ -29,7 +29,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 <?php endif; ?>
 <!-- <div class="container"> -->
 
-<form action="<?php L($this->params) ?>" enctype="multipart/form-data" method="POST" novalidate>
+<form action="<?php L($this->params) ?>" enctype="multipart/form-data" method="POST" novalidate id="application-form">
 	<div id="appform">
 		<?php if ($new && !$admin): ?>
 		<div class="alert alert-block alert-success">
@@ -124,12 +124,15 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 		<div class="form-tools">
 			<div class="form-tools-container">
 				<div class="row">
-					<div class="span9">
+					<div class="span6">
 						<p>Batas waktu pendaftaran: <strong><?php echo $expires_on->format('l, j F Y') ?></strong></p>
 					</div>
 					<div class="span3">
+						<p id="save-status" title="Isi formulir disimpan sementara setiap perpindahan halaman"></p>
+					</div>
+					<div class="span3">
 						<input type="hidden" name="applicant_id" value="<?php echo $applicant->id ?>">
-						<button type="submit" class="btn btn-block btn-success" id="save-button"><i class="icon-ok icon-white"></i> Simpan<?php if (!$admin): ?> Sementara<?php endif; ?></button>
+						<button type="submit" title="Simpan sementara isi formulir ini. Formulir yang telah disimpan sementara dapat diedit kembali selama belum melakukan finalisasi." class="btn btn-success btn-block" id="save-button"><i class="icon-ok icon-white"></i> Simpan Sementara</button>
 					</div>
 				</div>
 			</div>
@@ -1380,8 +1383,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 	var dob_upper_limit = new Date('<?php echo $dob_upper_limit->format('r') ?>');
 	var dob_lower_limit = new Date('<?php echo $dob_lower_limit->format('r') ?>');
 	var dob_lower_limit_yes = new Date('<?php echo $dob_lower_limit_yes->format('r') ?>');
+	var ajax_save_endpoint = "<?php L(array('controller' => 'applicant', 'action' => 'form_save_json')) ?>";
 </script>
 <?php
+$this->require_js('moment.min');
 $this->require_js('form');
 $this->print_footer();
 ?>

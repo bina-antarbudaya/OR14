@@ -932,6 +932,48 @@ class ApplicantController extends AppController {
 	}
 
 	/**
+	 * Save the applicant's form and return results in JSON format
+	 * 
+	 * This is useful for AJAX.
+	 */
+	public function form_save_json() {
+		// Disable rendering
+		$this->render = false;
+
+		// This array will be JSON-encoded and returned.
+		$output = array('timestamp' => date('c'));
+
+		if (!$this->is_logged_in()) {
+			$status_code = '401 Unauthorized';
+			$output['status'] = 'error';
+			$output['error'] = 'unauthorized';
+		}
+		else {
+			// Get rid of POST parameters which should not exist on non-final saves
+			$_POST['finalize'] = false;
+			$_FILES = array();
+
+			// Call the form() method to handle the form
+			$this->form();
+
+			if ($this['errors']) {
+				$status_code = '500 Internal Server Error';
+				$output['status'] = 'error';
+				$output['errors'] = $this['errors'];
+			}
+			else {
+				$output['status'] = 'success';
+			}
+		}
+
+		@header('HTTP/1.1 ' . $status_code);
+		@header('Content-type: application/json');
+		echo json_encode($output);
+		
+		return $output;
+	}
+
+	/**
 	 * View a read-only, complete version of an applicant's application form.
 	 *
 	 * Accessible either as an applicant or as an admin, with slight UI differences.

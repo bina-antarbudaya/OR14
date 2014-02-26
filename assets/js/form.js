@@ -1,8 +1,10 @@
-// Form validation logic
+// The application form JS
 
-var recheckActivated = false;
+// Setup moment locale
+moment.lang('id');
 
 // Recheck plugin
+var recheckActivated = false;
 (function ($) {
 	$.fn.getVal = function(fieldname) {
 		var b;
@@ -220,6 +222,10 @@ $(function(){
 		switchToTab(activeTab);
 		if (history.pushState)
 			history.pushState(activeTab, $(this).text(), activeTab);
+
+		ajaxSave();
+
+		this.blur();
 	});
 
 	// Pagination
@@ -235,11 +241,15 @@ $(function(){
 		e.preventDefault();
 		$(window).scrollTop(0);
 		switchToTab(getNextTab());
+		ajaxSave();
+		this.blur();
 	})
 	$("a[href='#_prev']").click(function(e) {
 		e.preventDefault();
 		$(window).scrollTop(0);
 		switchToTab(getPrevTab());
+		ajaxSave();
+		this.blur();
 	})
 
 	toggleFinalizeButton = function(e) {
@@ -445,4 +455,93 @@ $(function(){
 		source: typeaheadSchool,
 		items: 20
 	});
+
+	// callback is in function(err, data) format.
+	handleAjaxSave = function(callback) {
+		var form = $('#application-form');
+		var postdata = form.serialize();
+
+		var endpoint = ajax_save_endpoint;
+
+		$.post(endpoint, postdata, null, 'json')
+			.done(function(data, textStatus, jqXHR) {
+				if (textStatus != 'parsererror') {
+					// Request seems to have gone fine
+					if (data.status == 'success') {
+						// Saving succeeded
+						callback(null, data, jqXHR);
+					}
+					else {
+						// Saving did not succeed
+						callback('saving_error', data, jqXHR);
+					}
+				}
+				else {
+					callback('parser_error', data, jqXHR);
+				}
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+				callback(errorThrown, jqXHR);
+			});
+	};
+
+	var lastSavedAt = moment();
+	var isSaving;
+	var saveAgain;
+
+	$('#save-status').text('Terakhir disimpan pada pukul ' + lastSavedAt.format('HH.mm'));
+
+	ajaxSave = function(fallback) {
+		if (isSaving) {
+			// Another save is in progress, abort this one.
+			saveAgain = true;
+		}
+		else {
+			isSaving = true;
+			saveAgain = false;
+
+			$('#save-status').text('Menyimpan isi formulir...');
+			$('#save-status').addClass('loading').removeClass('text-success').removeClass('text-error');
+			handleAjaxSave(function(err, data) {
+				// console.log([err, data]);
+				if (err) {
+					if (fallback) {
+						fallback();
+						$('#save-status').removeClass('loading');
+						isSaving = false;
+					}
+					else {
+						$('#save-status').removeClass('loading');
+						$('#save-status').text('Penyimpanan gagal.');
+						$('#save-status').addClass('text-error');
+						isSaving = false;
+
+						if (saveAgain) ajaxSave();
+					}
+				}
+				else {
+					$('#save-status').removeClass('loading');
+					lastSavedAt = moment(data.timestamp);
+					$('#save-status').text('Terakhir disimpan pada pukul ' + lastSavedAt.format('HH.mm'));
+					$('#save-status').addClass('text-success');
+					isSaving = false;
+
+					if (saveAgain) ajaxSave();
+				}
+			});
+		}
+	};
+	ajaxSaveWithFallback = ajaxSave.bind(undefined, function() {
+		$('#application-form').submit();
+	});
+	$('#application-form input, #application-form textarea, #application-form select').change(function() {
+		ajaxSave();
+	});
+	$('#save-button')
+		.click(function(e) {
+			e.preventDefault();
+			ajaxSaveWithFallback();
+			this.blur();
+		})
+		.tooltip({placement: 'bottom'});
 });
