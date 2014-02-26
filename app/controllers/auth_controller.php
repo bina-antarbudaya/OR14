@@ -24,8 +24,7 @@ class AuthController extends AppController {
 				$this['mode'] = 'fail';
 			}
 		}
-		$dates = Helium::conf('dates');
-		$reg_deadline = $dates['registration_deadline'];
+		$reg_deadline = Helium::conf('registration_deadline');
 		$now = new HeliumDateTime;
 		$this['can_register'] = $now->earlier_than($reg_deadline);
 
