@@ -223,8 +223,6 @@ $(function(){
 		if (history.pushState)
 			history.pushState(activeTab, $(this).text(), activeTab);
 
-		ajaxSave();
-
 		this.blur();
 	});
 
@@ -241,14 +239,12 @@ $(function(){
 		e.preventDefault();
 		$(window).scrollTop(0);
 		switchToTab(getNextTab());
-		ajaxSave();
 		this.blur();
 	})
 	$("a[href='#_prev']").click(function(e) {
 		e.preventDefault();
 		$(window).scrollTop(0);
 		switchToTab(getPrevTab());
-		ajaxSave();
 		this.blur();
 	})
 
@@ -444,17 +440,19 @@ $(function(){
 
 	// Typeahead for school names
 	typeaheadSchool = function(query, process) {
-		var schs = [];
+		var schs = [query];
 		$('datalist[data-for=high_school_name] option[value*="' + query + '"]').each(function() {
 			schs.push($(this).attr('value'));
 		})
 
 		return schs;
 	}
-	$('#high_school_name').typeahead({
-		source: typeaheadSchool,
-		items: 20
-	});
+	$('#high_school_name')
+		.attr('autocomplete', 'off')
+		.typeahead({
+			source: typeaheadSchool,
+			items: 20
+		});
 
 	// callback is in function(err, data) format.
 	handleAjaxSave = function(callback) {
