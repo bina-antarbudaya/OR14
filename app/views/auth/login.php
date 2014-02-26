@@ -23,13 +23,17 @@ if (!$destination_title)
 		<div class="alert alert-error">
 			Perpaduan nama pengguna dan sandi yang Anda masukkan tidak cocok.
 		</div>
+		<?php elseif ($error = $this->params['error']): ?>
+		<div class="alert alert-error">
+			<?php echo $error ?>
+		</div>
 		<?php elseif ($this->params['recovered']): ?>
 		<div class="alert alert-success">
 			Password berhasil diubah.
 		</div>
-		<?php elseif ($error = $this->params['error']): ?>
-		<div class="alert alert-error">
-			<?php echo $error ?>
+		<?php elseif ($destination_name == 'applicant::form'): ?>
+		<div class="alert alert-warning">
+			Demi keamanan Adik, akun Adik telah otomatis ter-logout. Silakan login kembali untuk melanjutkan mengisi formulir.
 		</div>
 		<?php endif; ?>
  		<section class="login-form">
