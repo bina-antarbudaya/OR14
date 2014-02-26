@@ -66,7 +66,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 		<!-- <link rel="stylesheet" href="assets/css/applicant/transcript.css"> -->
 		<style>
 		<?php readfile(HELIUM_PARENT_PATH . '/assets/css/deprecated/global/reset.css'); ?>
-		<?php readfile(HELIUM_PARENT_PATH . '/assets/css/deprecated/applicant/transcript.css'); ?>
+		<?php readfile(HELIUM_APP_PATH . '/templates/transcript.css'); ?>
 		</style>
 	</head>
 	<body>
@@ -74,14 +74,11 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 <!-- begin form -->
 
 <div class="instructions">
-	Cetaklah transkrip ini dengan orientasi <strong>portrait</strong> pada kertas <strong>HVS A4</strong>.
-	Gunakan <strong>Firefox/Safari/Chrome/Internet Explorer</strong> untuk mencetak, <strong>dilarang</strong> menggunakan Word.
-	<br>
-	Untuk menyimpan transkrip ini, tekan Ctrl+S (atau Cmd+S di Mac) dan pilih jenis '<em>Web page, complete</em>'.
-	<br>
-	Pada saat mencetak, pastikan tulisan pada formulir ini terbaca seluruhnya (tidak terlalu kecil).
-	Petunjuk ini tidak akan ditampilkan saat mencetak.
-	<br>
+	<p>Cetaklah transkrip ini dengan orientasi <strong>portrait</strong> pada kertas <strong>HVS A4</strong>.
+	Gunakan <strong>Firefox/Safari/Chrome/Internet Explorer</strong> untuk mencetak, <strong>dilarang</strong> menggunakan Word.</p>
+	<p>Untuk menyimpan transkrip ini, tekan Ctrl+S (atau Cmd+S di Mac) dan pilih jenis '<em>Web page, complete</em>'.</p>
+	<p>Pada saat mencetak, pastikan tulisan pada formulir ini terbaca seluruhnya (tidak terlalu kecil).
+	Petunjuk ini tidak akan ditampilkan saat mencetak.</p>
 	<p><a class="print-link" href="javascript:window.print()">Cetak laman ini</a></p>
 </div>
 
@@ -89,7 +86,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 	<img src="assets/logo.png" alt="Bina Antarbudaya" style="font-size: 18pt">
 	<h1>Transkrip Formulir Pendaftaran Seleksi</h1>
 	<?php if ($picture): ?>
-	<img src="http://seleksi.bina-antarbudaya.info/uploads/<?php echo $picture->cropped_filename; ?>" width="300" height="400" alt="Foto 4x6">
+	<img src="<?php echo $picture->get_cropped_url(); ?>" width="300" height="400" alt="Foto 4x6">
 	<?php else: ?>
 	<br><br><br><br>(Foto 4x6)<br><br><br><br>
 	<?php endif; ?>
@@ -104,7 +101,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 		<tr>
 			<td class="programs"><?php
 			$p = array();
-			$v = array('program_afs' => 'AFS', 'program_yes' => 'YES', 'program_jenesys' => 'JENESYS');
+			$v = array('program_afs' => 'AFS', 'program_yes' => 'YES', 'program_jenesys' => 'JENESYS', 'program_green_academy' => 'GA-SP');
 			foreach ($v as $i => $j) {
 				if ($form->values[$i])
 					$p[] = $j;
@@ -112,12 +109,13 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 			echo implode(', ', $p);
 			?></td>
 			<td class="school"><?php echo $applicant->sanitized_high_school_name . ' ';
-			if ($a->in_pesantren)
-				echo 'AFS';
-			if ($a->in_pesantren && $a->in_acceleration_class)
-				echo ', ';
-			if ($a->in_acceleration_class)
-				echo 'YES';
+			if ($a->in_pesantren || $a->in_acceleration_class) {
+				echo '<br>';
+				if ($a->in_pesantren)
+					echo '<span class="school-flag">Pesantren</span>';
+				if ($a->in_acceleration_class)
+					echo '<span class="school-flag">Akselerasi</span>';
+			}
 			?></td>
 			<td class="chapter"><?php echo $applicant->chapter->chapter_code ?></td>
 	</table>
@@ -144,7 +142,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 			<td class="field"><span class="value"><?php echo $a->place_of_birth . ', ' . $a->date_of_birth->format('j F Y') ?></td>
 		</tr>
 		<tr>
-			<td class="label">Alamat Surel (E-mail)</td>
+			<td class="label">Alamat E-mail</td>
 			<td class="field"><span class="value"><?php echo $a->applicant_email ?></span></td>
 		</tr>
 		<tr>
@@ -207,7 +205,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 			<td class="field"><?php $v = $n . '_occupation'; echo $a->$v; ?></td>
 		</tr>
 		<tr>
-			<td class="label">Alamat Surel (E-mail)</td>
+			<td class="label">Alamat E-mail</td>
 			<td class="field"><?php $v = $n . '_office_email'; echo $a->$v; ?></td>
 		</tr>
 		<tr>
@@ -240,7 +238,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 			<td class="field"><span class="value"><?php echo $a->guardian_relationship_to_applicant ?></span></td>
 		</tr>
 		<tr>
-			<td class="label"><?php $form->label('guardian_email', 'Alamat Surel (E-mail)') ?></td>
+			<td class="label"><?php $form->label('guardian_email', 'Alamat E-mail') ?></td>
 			<td class="field"><span class="value"><?php echo $a->guardian_email ?></span></td>
 		</tr>
 		<tr>
@@ -288,7 +286,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 </section>
 
 <section class="pane" id="pendidikan">
-	<h1>Pendidikan</h1>
+	<h1>Riwayat Pendidikan</h1>
 	<!-- <p>Seluruh kolom pada halaman ini <strong>wajib diisi</strong>.</p> -->
 	<!-- poin 12–14 -->
 
@@ -457,9 +455,9 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 </section>
 
 <section class="pane" id="kegiatan">
-	<h1>Kegiatan</h1>
+	<h1>Riwayat Kegiatan</h1>
 	<!-- poin 15-19 -->
-	<h2>Organisasi</h2>
+	<h2>Pengalaman Organisasi</h2>
 	<table class="achievements subform">
 		<caption>Organisasi yang pernah diikuti, baik di lingkungan sekolah maupun di luar lingkungan sekolah</caption>
 		<thead>
@@ -700,6 +698,37 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 		Apa yang diharapkan Adik dengan keikutsertaan Adik dalam seleksi dan program Bina Antarbudaya?
 	</p>
 		<?php $form->textarea('hopes', 'extra-large');  ?>
+</section>
+
+<section class="pane" id="reference">
+	<h1>Pilihan Negara</h1>
+	<table class="form-table">
+	<?php
+	$region_labels = array('americas' => 'Kawasan Amerika', 'europe' => 'Kawasan Eropa', 'asia' => 'Kawasan Asia');
+	?>
+		<tr class=" country-preferences">
+			<?php foreach(Helium::conf('partners') as $region => $countries) echo "<td class='label'>$region_labels[$region]</td>"; ?>
+		</tr>
+		<tr class=" country-preferences">
+	<?php
+	foreach (Helium::conf('partners') as $region => $countries): ?>
+			<!-- <td class="label"><?php echo $region_labels[$region] ?></td> -->
+			<td class="field">
+				<ol>
+				<?php
+					for ($i = 1; $i <= count($countries); ++$i) {
+						$prop_name = 'pref_' . $region . '_' . $i;
+						$choice = $a->$prop_name;
+						$country_code = $choice;
+						$country_name = $countries[$choice];
+						echo "<li><kbd>$country_code</kbd> $country_name</li>";
+					}
+				?>
+				</ol>
+			</td>
+	<?php endforeach; ?>
+		</tr>
+	</table>
 </section>
 
 <section class="pane pagebreak" id="rekomendasi">
