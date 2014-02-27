@@ -42,7 +42,7 @@ $error_messages = array('username_availability' => 'Nama pengguna yang Adik pili
 		</p>
 		
 		<h5>Saya sudah pernah membuat akun, namun saya lupa password saya.</h5>
-		<p>Jika Adik lupa password Adik, silakan kunjungi halaman <a href="<?php L(array('controller' => 'auth', 'action' => 'forgot')) ?>">pengembalian password</a>.</p>
+		<p>Jika Adik lupa password Adik, silakan kunjungi halaman <a href="<?php L(array('controller' => 'auth', 'action' => 'forgot')) ?>">pemulihan akun</a>.</p>
 
 		<h5>Saya sudah pernah membuat akun, namun akun saya telah kadaluarsa.</h5>
 		<p>Untuk mengaktifkan kembali akun Adik, isi formulir di bawah ini:</p>

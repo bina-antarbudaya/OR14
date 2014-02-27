@@ -60,7 +60,7 @@
 				 		</section>
 	 					<?php else: ?>
 				 		<section class="big-redeem-button">
-				 			<p><a class="btn btn-success btn-large btn-block" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Mulai Pendaftaran</a></p>
+				 			<p><a class="btn btn-success btn-large btn-block" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Aktifkan PIN Pendaftaran</a></p>
 				 		</section>
 				 		<?php endif; ?>
 				 		<p class="or"><span>atau</span></p>

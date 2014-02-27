@@ -29,7 +29,7 @@
 				Masing-masing PIN pendaftaran berlaku untuk sekali pakai dan memiliki batas waktu pendaftaran.
 			</p>
 			<p>
-				PIN pendaftaran dapat Adik dapatkan di Chapter Bina Antarbudaya terdekat.
+				PIN pendaftaran dapat Adik dapatkan di Chapter Bina Antarbudaya terdekat. <a href="<?php L('/') ?>#chapters">Lihat daftar Chapter</a>
 			</p>
 		</div>
 		<div class="span6 redeem-now">
