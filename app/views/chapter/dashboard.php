@@ -75,12 +75,12 @@
 						<span title="Siswa yang sudah melakukan finalisasi pada formulirnya"><strong class="text-success"><?php echo $finalized_applicant_count ?></strong> sudah finalisasi</span>
 					</td>
 					<td>
-						<span title="Siswa yang sudah diverifikasi bahwa berkasnya sudah diterma"><strong class="text-success"><?php echo $confirmed_applicant_count ?></strong> sudah diverifikasi</span>
+						<span title="Siswa yang sudah diverifikasi bahwa berkasnya sudah diterma"><strong class="text-success"><?php echo $confirmed_applicant_count ?></strong> sudah verifikasi berkas</span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<span title="Siswa yang sudah melakukan finalisasi, namun belum diverifikasi bahwa berkasnya sudah diterma"><strong class="text-warning"><?php echo $not_yet_confirmed_applicant_count ?></strong> belum diverifikasi</span>
+						<span title="Siswa yang sudah melakukan finalisasi, namun belum diverifikasi bahwa berkasnya sudah diterma"><strong class="text-warning"><?php echo $not_yet_confirmed_applicant_count ?></strong> belum verifikasi berkas</span>
 					</td>
 				</tr>
 				<tr>
@@ -129,7 +129,7 @@
 				</p>
 			</form>
 			<p>
-				<a class="btn btn-primary" href="<?php L(array('controller' => 'applicants', 'action' => 'index')) ?>">Telusuri seluruh pendaftar</a>
+				<a class="btn btn-primary" href="<?php L(array('controller' => 'applicant', 'action' => 'index')) ?>">Telusuri seluruh pendaftar</a>
 			</p>
 		</div>
 	</div>
@@ -149,22 +149,22 @@
 		</div>
 		<div class="span4">
 			<h4>Pendaftaran Offline</h4>
+			<div class="alert alert-warning">Fitur ini masih dalam pengembangan</div>
 			<p>
 				Untuk melayani pendaftar yang kesulitan mengakses internet untuk mengisi formulir,
 				disediakan formulir dalam bentuk berkas Excel yang dapat disimpan, diisi, kemudian diunggah oleh Kakak Chapter.
 			</p>
-			<p><a class="btn btn-block btn-primary" href=""><b>Unduh</b> formulir Excel kosong</a></p>
-			<p><a class="btn btn-block" href=""><b>Unggah</b> formulir Excel yang sudah diisi</a></p>
+			<p><a class="btn btn-block btn-primary disabled" href="#"><b>Unduh</b> kit pendaftaran offline</a></p>
+			<p><a class="btn btn-block disabled" href="#"><b>Unggah</b> formulir Excel yang sudah diisi</a></p>
 		</div>
 		<div class="span4">
 			<h4>Bantuan</h4>
 			<p>Untuk permasalahan teknis, hubungi:<br>
-			<b>Kak Rio (rio.apriyanto@afs.org)</b>,<br>
-			<b>Kak Pandu (pandu@seleksi.bina-antarbudaya.info</b>, atau<br>
-			<b>Kak Gici (andhika@binabudbdg.org)</b>.<p>
+			<b>Kak Rio (IT Helpdesk Kantor Nasional)</b>,<br>
+			<b>Kak Pandu (Tim OR)</b>, atau <b>Kak Gici (Tim OR)</b> di <strong>chapterhelp@seleksi.bina-antarbudaya.or.id</strong>.<p>
 			<p>Untuk permasalahan nonteknis (syarat pendaftaran, kasus-kasus khusus), harap hubungi:<br>
 			<b>Kak Sari (sari.tjakra@afs.org)</b>.</p>
-			<p><a class="btn btn-block btn-primary">Alur Pendaftaran Seleksi YP 2015/2016</a></p>
+			<p><span class="btn btn-block btn-primary disabled">Alur Pendaftaran Seleksi YP 2015/2016</span></p>
 		</div>
 	</div>
 	<?php endif; ?>
