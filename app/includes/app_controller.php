@@ -1,7 +1,7 @@
 <?php
 
 abstract class AppController extends HeliumController {
-	public $components = array('cookies', 'sessions', 'auth', 'links', 'locale', 'paths', 'request');
+	public $components = array('locale', 'cookies', 'sessions', 'auth', 'links', 'paths', 'request');
 	
 	protected $additional_js = array();
 	protected $additional_css = array();	
