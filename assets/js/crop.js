@@ -56,8 +56,24 @@ $(window).load(function () {
 	$('#y').val(Math.round(ry * y1));
 	$('#width').val(Math.round(rx * (x2 - x1)));
 	$('#height').val(Math.round(ry * (y2 - y1)));
+
+	var selectArea = $('.imgareaselect-selection');
+	if (selectArea.css('background-size')) {
+		$('.imgareaselect-selection').addClass('guide-enabled');	
+	}
+	else {
+		$('#guide-checkbox').parents('p').detach();
+	}
 });
 $(function() {
 	var ph = $('.page-header');
 	$(window).scrollTop(ph.offset().top + ph.outerHeight());
+
+	$('#guide-checkbox').change(function() {
+		alert('a');
+		if (this.checked)
+			$('.imgareaselect-selection').addClass('guide-enabled');
+		else
+			$('.imgareaselect-selection').removeClass('guide-enabled');
+	})
 })

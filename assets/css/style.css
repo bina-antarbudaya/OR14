@@ -1118,3 +1118,8 @@ section.then p {
 	padding-top: 30px;
 	border-top: 1px solid #f6f6f6;
 }
+
+.imgareaselect-selection.guide-enabled {
+	background-image: url(../img/selection-overlay.png) !important;
+	background-size: 100% 100% !important;
+}

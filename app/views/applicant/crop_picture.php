@@ -22,6 +22,8 @@ $this->print_header();
 				<button type="submit" class="btn btn-large btn-success btn-block">Simpan</button>
 			</form>
 			<p class="instruction">Lakukan <i>cropping</i> pada foto Adik dengan menekan tombol pada <i>mouse</i> dan menggesernya. <i>(click and drag)</i></p>
+			<p class="checkbox"><label><input type="checkbox" checked id="guide-checkbox"> Gunakan panduan</label></p>
+			<p class="instruction">Sesuaikan foto Adik dengan gambar panduan yang tersedia untuk mendapatkan hasil yang optimal.</p>
 		</div>
 	</div>
 </div>
