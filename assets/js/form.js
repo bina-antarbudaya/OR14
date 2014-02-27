@@ -8,11 +8,17 @@ moment.lang('id');
 $(function(){
 
 	/***** VARIABLES *****/
+	var isPinging = false;
 	var isSaving = false;
 	var saveAgain = false;
 	var formValidationIsActivated = false;
 	var lastSavedAt = moment();
 	var previously_selected_yes = $('#program_yes').prop('checked');
+
+	var sessionLifetimeArray = sessionLifetime.split(' ');
+	var sessionLifetimeDuration = moment.duration(parseInt(sessionLifetimeArray[0]), sessionLifetimeArray[1]);
+	var sessionLifetimeMilliseconds = sessionLifetimeDuration.asMilliseconds();
+	var sessionLifetimeTimeout;
 
 	var dob_upper_limit = moment.utc(dob_upper_limit_string);
 	var dob_lower_limit = moment.utc(dob_lower_limit_string);
@@ -287,6 +293,17 @@ $(function(){
 		return saveStatus;
 	}
 
+	// Ping the server
+	function ping() {
+		if (!isPinging) {
+			window.clearTimeout(sessionLifetimeTimeout);
+			$.get(ajax_ping_endpoint, '', function() {
+				isPinging = false;
+				sessionLifetimeTimeout = window.setTimeout(handleAjaxSave, sessionLifetimeMilliseconds);
+			});
+		}
+	}
+
 	// Commit saving the form through AJAX
 	// @param callback The callback to call on success/fail of the request, in function(err, data, jqXHR) format
 	function commitAjaxSave(callback) {
@@ -336,6 +353,7 @@ $(function(){
 		else {
 			isSaving = true;
 			saveAgain = false;
+			window.clearTimeout(sessionLifetimeTimeout);
 
 			setSaveStatus('Menyimpan isi formulir...', true);
 			commitAjaxSave(function(err, data) {
@@ -352,7 +370,10 @@ $(function(){
 						setSaveStatus('Penyimpanan gagal.');
 						isSaving = false;
 
-						if (saveAgain) handleAjaxSave();
+						if (saveAgain)
+							handleAjaxSave();
+						else
+							sessionLifetimeTimeout = window.setTimeout(handleAjaxSave, sessionLifetimeMilliseconds);
 					}
 				}
 				else {
@@ -360,7 +381,10 @@ $(function(){
 					setSaveStatus('Terakhir disimpan pada pukul ' + lastSavedAt.format('HH.mm'));
 					isSaving = false;
 
-					if (saveAgain) handleAjaxSave();
+					if (saveAgain)
+						handleAjaxSave();
+					else
+						sessionLifetimeTimeout = window.setTimeout(handleAjaxSave, sessionLifetimeMilliseconds);
 				}
 			});
 		}
@@ -634,8 +658,17 @@ $(function(){
 			handleAjaxSave();
 		}
 		$('#application-form input, #application-form textarea, #application-form select').change(onChange);
+		$('#application-form input, #application-form textarea, #application-form select').focus(ping);
 		$('#finalize, input[type=file]').off('change', onChange);
 		$('#save-button').click(handleSaveButtonAjax);
+
+		// First ping
+		ping();
+
+		$(window).on('load', function() {
+			ping();
+			$(window).focus(ping);
+		});
 	}
 	
 });

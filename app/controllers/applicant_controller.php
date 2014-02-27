@@ -973,6 +973,13 @@ class ApplicantController extends AppController {
 		return $output;
 	}
 
+	public function form_ping() {
+		$this->render = false;
+		@header('HTTP/1.1 200 OK');
+		@header('Content-type: text/plain');
+		echo 'Pong';
+	}
+
 	/**
 	 * View a read-only, complete version of an applicant's application form.
 	 *

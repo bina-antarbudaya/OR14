@@ -1384,7 +1384,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 	var dob_lower_limit_string = '<?php echo $dob_lower_limit->format('Y-m-d') ?>';
 	var dob_lower_limit_yes_string = '<?php echo $dob_lower_limit_yes->format('Y-m-d') ?>';
 	var ajax_save_endpoint = "<?php L(array('controller' => 'applicant', 'action' => 'form_save_json')) ?>";
+	var ajax_ping_endpoint = "<?php L(array('controller' => 'applicant', 'action' => 'form_ping')) ?>";
 	var autoSave = <?php echo $admin ? 'false' : 'true' ?>;
+	var sessionLifetime = '<?php echo Helium::conf('session_length') ?>';
 </script>
 <?php
 $this->require_js('moment.min');
