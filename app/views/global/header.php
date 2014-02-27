@@ -66,6 +66,11 @@ $action_css = $controller . '/' . $this->_action();
 								<a href="<?php L(array('controller' => 'applicant', 'action' => 'transcript')) ?>">
 									Transkrip Formulir
 								</a>
+							<?php elseif ($this->user->applicant->finalized): ?>
+								<i class="icon-download-alt icon-white"></i>
+								<a href="<?php L(array('controller' => 'applicant', 'action' => 'transcript')) ?>">
+									Transkrip Formulir
+								</a>
 							<?php else: ?>
 								<i class="icon-pencil icon-white"></i>
 								<a href="<?php L($this->session->user->get_landing_page()); ?>">

@@ -44,7 +44,7 @@
 				<?php if ($applicant->in_acceleration_class): ?>
 				<dt class="acceleration-statement">Surat Pernyataan Siswa Akselerasi</dt>
 					<dd class="download-link">
-						<a href="<?php L(array('controller' => 'applicant', 'action' => 'file', 'file' => 'acceleration_statement')) ?>">
+						<a class="btn" href="<?php L(array('controller' => 'applicant', 'action' => 'file', 'file' => 'acceleration_statement')) ?>">
 							<i class="icon-download-alt"></i> Unduh
 						</a>
 					</dd>
