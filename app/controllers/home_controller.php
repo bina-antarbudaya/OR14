@@ -104,12 +104,14 @@ class HomeController extends AppController {
 
 	public function index() {
 		// $this->firstrun_check();
-		$this['chapters'] = Chapter::find('id != 1');
+		$this['chapters'] = Chapter::find("id != 1 && chapter_name != 'Ambon' && chapter_name != 'Pontianak'");
 		$this['chapters']->set_order_by('chapter_name');
 		$this['chapter_count'] = $this['chapters']->count_all();
 		$this['this_year'] = Helium::conf('program_year') - 2;
 		$this['form'] = new FormDisplay;
 		$this['can_register'] = $this->can_register();
+		$this['reg_start'] = new HeliumDateTime(Helium::conf('registration_start'));
+		$this['reg_end'] = new HeliumDateTime(Helium::conf('registration_deadline'));
 
 		$this['program_year'] = Helium::conf('program_year');
 	}
@@ -123,6 +125,7 @@ class HomeController extends AppController {
 //		phpinfo();
 
 		// For the moment, this function generates a merge query for convenience.
+
 
 		$tables = array('applicant_activities', 'applicant_contact_info', 'applicant_education', 'applicant_fathers', 'applicant_guardians', 'applicant_high_schools', 'applicant_mothers', 'applicant_family', 'applicant_personal_details', 'applicant_personality', 'applicant_primary_school_grade_history', 'applicant_program_choices', 'applicant_recommendations', 'applicant_referral', 'applicant_secondary_school_grade_history', 'applicant_selection_progress', 'applicant_travel_history');
 		
@@ -160,6 +163,16 @@ class HomeController extends AppController {
 		echo var_export($colmap);
 		echo ';';
 		
+		// $view_q = "CREATE VIEW better_applicants AS SELECT applicants.*";
+		// foreach ($colmap as $f => $t) {
+		// 	$view_q .= ",\n$t.$f";
+		// }
+		// $view_q .=  "\nFROM applicants";
+		// foreach ($tables as $table) {
+		// 	$view_q .=  "\nINNER JOIN $table ON $table.applicant_id=applicants.id";
+		// }
+		// $db->query($view_q);
+
 		$query = $db->get_results("SHOW COLUMNS FROM better_applicants");
 
 		// Exclude primary keys for partitions
@@ -224,18 +237,5 @@ class HomeController extends AppController {
 		echo ';';
 		
 		echo "\n\n\n";
-		
-		exit;
-		
-		echo "CREATE VIEW better_applicants AS SELECT applicants.*";
-		foreach ($colmap as $f => $t) {
-			echo ",\n$t.$f";
-		}
-		echo "\nFROM applicants";
-		foreach ($tables as $table) {
-			echo "\nINNER JOIN $table ON $table.applicant_id=applicants.id";
-		}
-
-		exit;
 	}
 }

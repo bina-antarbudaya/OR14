@@ -1,7 +1,7 @@
 <?php $this->print_header() ?>
 <header class="page-header welcome-header">
-	<h1>Explore&nbsp;the&nbsp;World, Explore&nbsp;Yourself</h1>
-	<h2>Pendaftaran Seleksi Bina Antarbudaya <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?></h2>
+	<h1>Pendaftaran Seleksi Bina Antarbudaya <?php echo $program_year - 1 ?>&ndash;<?php echo $program_year ?></h1>
+	<h2>Explore&nbsp;the&nbsp;World, Explore&nbsp;Yourself</h2>
 </header>
 
 <div class="welcome">
@@ -9,8 +9,23 @@
 	 	<div class="span6">
 	 		<section class="about-us">
 		 		<h3>Tentang Bina Antarbudaya</h3>
-		 		<p>Bina Antarbudaya adalah lembaga nirlaba berbasis relawan yang bergerak dalam bidang pendidikan dan pertukaran antarbudaya, bermitra dengan AFS Intercultural Programs yang berkantor pusat di New York, Amerika Serikat. Misi Bina Antarbudaya adalah menciptakan pemimpin masa depan yang berkualitas pribadi, berprestasi, memiliki visi, empati sosial dan nasionalisme serta berwawasan internasional.</p>
-		 		<p>Bina Antarbudaya memiliki <?php echo $chapter_count ?> chapter (cabang) di seluruh Indonesia, berkomitmen untuk membantu mempersiapkan para pemuda membangun karakter, meningkatkan pengetahuan, sikap serta keahlian untuk menjadi para pemimpin masa depan dan membuat perubahan positif di masyarakat.</p>
+		 		<p>
+		 			<strong>Bina Antarbudaya</strong> adalah organisasi pendidikan
+					antarbudaya berbasis relawan, yang memberikan
+					kesempatan untuk memperoleh pendidikan
+					antarbudaya secara global. Sejak didirikan pada
+					tahun 1985, Bina Antarbudaya telah mengirim lebih
+					dari 3000 siswa Indonesia dan menerima lebih
+					dari 1500 siswa asing dari berbagai Negara. Saat
+					ini Bina Antarbudaya telah memiliki <?php echo $chapter_count ?> chapter di
+					seluruh Indonesia.
+				</p>
+				<p>
+					Bina Antarbudaya merupakan mitra AFS
+					Intercultural Programs, salah satu organisasi
+					pertukaran antarbudaya terbesar di dunia yang
+					beroperasi di lebih dari 60 negara di lima benua.
+				</p>
 		 	</section>
 	 	</div>
 	 	<div class="span6">
@@ -19,29 +34,33 @@
 		 		<div class="row">
 		 			<div class="span3">
 		 				<ol class="registration-steps">
-		 					<li><span>Menghubungi</span> Chapter Bina Antarbudaya <a href="#chapters">terdekat</a></li>
-		 					<li>Mendapatkan <span>PIN pendaftaran</span></li>
-		 					<li><span>Mengaktifkan</span> PIN pendaftaran</li>
+		 					<li>Mendapatkan <span>PIN pendaftaran</span> dari Chapter Bina Antarbudaya <a href="#chapters">terdekat</a></li>
+		 					<li><span>Mengaktifkan</span> PIN pendaftaran dan membuat <span>username dan password</span></li>
 		 					<li><span>Mengisi</span> formulir pendaftaran online</li>
-		 					<li><span>Mengumpulkan</span> berkas fisik</li>
+		 					<li><span>Mengumpulkan</span> berkas-berkas pendaftaran ke Chapter</li>
 		 				</ol>
 
 		 				<p class="registration-dates">
 		 					<span class="pre">Masa pendaftaran:</span>
-		 					<span class="from">1 Mar</span>
+		 					<span class="from"><?php echo $reg_start->format('j M') ?></span>
 		 					&ndash;
-		 					<span class="to">13 Apr</span>
-		 					<?php echo $this_year ?>
+		 					<span class="to"><?php echo $reg_end->format('j M') ?></span>
+		 					<?php echo $program_year - 2 ?>
 		 				</p>
 		 			</div>
 				 	<div class="span3">
-	 					<?php if ($can_register): ?>
-				 		<section class="big-redeem-button">
-				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Aktifkan PIN Pendaftaran</a></p>
-				 		</section>
-				 		<?php else: ?>
+				 		<?php if (!$can_register): ?>
 				 		<section class="results-form">
 				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'home', 'action' => 'results')) ?>">Lihat Hasil Seleksi</a></p>
+				 		</section>
+				 		<?php elseif ($this->is_logged_in() && $this->user->applicant):
+				 		?>
+				 		<section class="big-redeem-button">
+				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L($this->session->user->get_landing_page()) ?>">Lanjutkan Pendaftaran</a></p>
+				 		</section>
+	 					<?php else: ?>
+				 		<section class="big-redeem-button">
+				 			<p><a class="btn btn-success btn-large btn-block" href="<?php L(array('controller' => 'applicant', 'action' => 'redeem')) ?>">Mulai Pendaftaran</a></p>
 				 		</section>
 				 		<?php endif; ?>
 				 		<p class="or"><span>atau</span></p>
@@ -49,7 +68,7 @@
 				 			<form action="<?php L(array('controller' => 'auth', 'action' => 'login')) ?>" method="POST" class="form">
 				 				<p>
 				 					<label for="username">Username</label>
-				 					<input type="text" name="username" id="username" class="input-block-level" placeholder="Username" value="<?php echo $this->session->flash('username'); ?>" required>
+				 					<input type="text" name="username" id="username" class="input-block-level" placeholder="Username" value="<?php echo $this->session->flash('username'); ?>" autofocus required>
 				 				</p>
 				 				<p>
 				 					<label for="password">Password</label>
@@ -59,8 +78,9 @@
 				 					<label class="checkbox pull-left"><input type="checkbox" name="remember" id="remember"> Ingat saya</label>
 				 					<button class="btn pull-right" type="submit">Login</button>
 				 				</p>
-				 				<p class="aux">
-									<a href="<?php L(array('controller' => 'auth', 'action' => 'forgot')) ?>">Saya lupa password saya</a>
+				 				<p class="or"><span>atau</span></p>
+				 				<p>
+									<a href="<?php L(array('controller' => 'auth', 'action' => 'forgot')) ?>" class="btn btn-danger btn-block">Saya lupa password saya</a>
 				 				</p>
 				 			</form>
 				 		</section>
@@ -87,7 +107,7 @@
 				<p class="address"><?php echo nl2br($c->chapter_address) ?></p>
 				<p class="links">
 					<a href="mailto:<?php echo $c->get_email() ?>?subject=Pendaftaran Seleksi"><?php echo $c->get_email() ?></a><br>
-					<?php if ($u = $c->site_url) { ?><a href="<?php echo $u ?>"><?php echo $u ?></a><?php } ?>
+					<?php if ($u = $c->twitter_username) { ?><a href="http://twitter.com/<?php echo $u ?>">@<?php echo $u ?></a><?php } ?>
 				</p>
 			</div>
 		<?php $i++; endforeach; ?>
