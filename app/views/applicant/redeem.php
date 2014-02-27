@@ -1,7 +1,7 @@
 <?php $this->print_header('Pengaktifan PIN Pendaftaran'); ?>
 
 <header class="page-header">
-	<h2><span>Tahap </span>1</h1>
+	<h2>Tahap 1 dari 4</h1>
 	<h1>Pengaktifan PIN Pendaftaran</h1>
 </header>
 
@@ -20,62 +20,49 @@
 	</div>
 	<?php endif; ?>
 
-	<section class="token-redemption">
-		<form action="<?php L($this->params) ?>" method="POST" class="token-redemption-form">
-			<?php if ($enable_recaptcha): ?>
+	<div class="row redeem-pin">
+		<div class="span6 about-pins">
+			<h4>Apa itu PIN Pendaftaran?</h4>
 			<p>
-				<script>var RecaptchaOptions = { theme : 'clean' };</script>
-				<?php echo $recaptcha->get_html(); ?>
+				PIN pendaftaran adalah sebuah kode yang terdiri dari 16 huruf (tanpa angka, tanpa spasi)
+				yang digunakan untuk mendaftar untuk seleksi pertukaran pelajar Bina Antarbudaya.
+				Masing-masing PIN pendaftaran berlaku untuk sekali pakai dan memiliki batas waktu pendaftaran.
 			</p>
-			<?php endif; ?>
-			<div class="control-group">
-				<label for="token" class="control-label">Untuk memulai pendaftaran, masukkan enam belas huruf PIN pendaftaran Adik.</label>
-				<div class="input-append">
-					<input type="text" name="token" id="token" width="16" maxlength="16" autofocus required placeholder="PIN Pendaftaran">
-					<button type="submit" class="btn btn-large btn-primary">Lanjut</button>
-				</div>
+			<p>
+				PIN pendaftaran dapat Adik dapatkan di Chapter Bina Antarbudaya terdekat.
 			</p>
-		</form>
-	</section>
-
-	<div class="row">
-		
-		<section class="redemption-faqs span3">
-			<header>
-				<h3>FAQs</h3>
-			</header>
-			
-			<h4>Apa itu PIN pendaftaran?</h4>
-			<p>PIN pendaftaran adalah sebuah kode yang terdiri dari enam belas huruf (tanpa angka, tanpa spasi) yang digunakan untuk mendaftar untuk seleksi pertukaran pelajar Bina Antarbudaya.</p>
-			
-			<h4>Dari mana saya bisa mendapatkan PIN pendaftaran?</h4>
-			<p>PIN pendaftaran dapat Adik dapatkan di Chapter-Chapter Bina Antarbudaya yang tersebar di seluruh Indonesia. Di bawah ini terdapat alamat-alamat Chapter tersebut.</p>
-		</section>
-
-		<section class="redemption-chapters span9">
-			<header>
-				<h3>Chapter-Chapter Bina Antarbudaya</h3>
-			</header>
-			<div class="row">
-			<?php $i = 0; foreach ($chapters as $c): ?>
-			<?php if (($i != 0) && ($i % 3 == 0)): ?>
-
-			</div>
-			
-			<div class="row">
-				
-			<?php endif; ?>
-				<div class="span3 chapter-item">
-					<h4 class="chapter-name"><?php echo $c->chapter_name ?></h4>
-					<p>
-					<?php echo nl2br($c->chapter_address) ?><br>
-						<a href="mailto:<?php echo $c->get_email() ?>?subject=Pendaftaran Seleksi"><?php echo $c->get_email() ?></a><br>
-						<?php if ($u = $c->site_url) { ?><a href="<?php echo $u ?>"><?php echo $u ?></a><?php } ?>
-					</p>
+		</div>
+		<div class="span6 redeem-now">
+			<h4>Saya sudah memiliki PIN Pendaftaran</h4>
+			<form action="<?php L($this->params) ?>" method="POST" class="token-redemption-form">
+				<?php if ($enable_recaptcha): ?>
+				<p>
+					<script>var RecaptchaOptions = { theme : 'clean' };</script>
+					<?php echo $recaptcha->get_html(); ?>
+				</p>
+				<?php endif; ?>
+				<div class="control-group">
+					<label for="token" class="control-label">Untuk memulai pendaftaran, masukkan enam belas huruf PIN pendaftaran Adik.</label>
+					<div class="input-append">
+						<input type="text" name="token" id="token" width="16" maxlength="16" autofocus required placeholder="PIN Pendaftaran">
+						<button type="submit" class="btn btn-large btn-success">Aktifkan</button>
+					</div>
 				</div>
-			<?php $i++; endforeach; ?>
-			</div>
-		</section>
+			</form>
+			<h4>Saya sudah pernah mengaktifkan PIN pendaftaran,<br>namun telah&nbsp;kadaluarsa</h4>
+			<p>
+				Untuk mengaktifkan kembali akun yang telah kadaluarsa, isilah formulir berikut:
+			</p>
+			<form action="<?php L(array('action' => 'reactivate')) ?>" class="form-inline" method="POST">
+				<div class="control-group">
+					<input type="text" name="username" required id="reactivate-username" class="span2" placeholder="Username">
+					<input type="password" name="password" required id="reactivate-password" class="span2" placeholder="Password">
+				</div>
+				<div class="control-group">
+					<input type="text" name="token" id="token" maxlength="16" class="span2" required placeholder="PIN pendaftaran baru">
+					<button type="submit" class="btn">Aktifkan kembali</button>
+				</div>
+			</form>
+		</div>
 	</div>
-
 <?php $this->print_footer(); ?>

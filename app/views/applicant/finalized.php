@@ -1,6 +1,6 @@
 <?php $this->print_header('Pengumpulan Berkas') ?>
 <header class="page-header">
-	<h2>Tahap 4</h2>
+	<h2>Tahap 4 dari 4</h2>
 	<h1>Pengumpulan Berkas</h1>
 </header>
 <!--

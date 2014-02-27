@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6 {
 	color: #000;
 }
 h1, h2, h3 {
-	letter-spacing: -.03em;
+	letter-spacing: -.015em;
 }
 p strong {
 	color: #000;
@@ -453,6 +453,16 @@ table.counts.four-col td {
 }
 
 /* applicant/redeem */
+.redeem-pin h4 {
+	margin-bottom: 15px;
+	color: #007ac2;
+	font-size: 16px;
+	line-height: 1.2;
+}
+.redeem-pin .about-pins p {
+	line-height: 1.5;
+	font-size: 16px;
+}
 .token-redemption {
 	padding: 40px 0 40px;
 	border-bottom: 1px solid #eee;
@@ -461,35 +471,16 @@ table.counts.four-col td {
 	margin: 0;
 }
 .token-redemption-form label {
-	font-size: 16px;
-	margin: 0 0 20px;
+	margin: 0 0 15px;
 }
 .token-redemption-form input {
-	font-size: 16.25px;
+	font-size: 16px;
 	height: 32px;
 }
 
-.redemption-faqs header h3,
-.redemption-chapters header h3 {
-	margin: 40px 0 20px;
-	font-weight: 300;
-}
-
-.redemption-faqs h4,
-.redemption-chapters h4 {
-	margin: 15px 0 5px;
-	font-size: 14px;
-	font-weight: 600;
-}
-.redemption-chapters h4 {
-	margin-top: 0;
-}
-
-.redemption-chapters .chapter-item {
-	margin-bottom: 15px;
-}
-.redemption-chapters p {
-	font-size: 12px;
+.account-creation-intro h5 {
+	color: #007ac2;
+	margin-top: 24px;
 }
 
 /* applicant/form */

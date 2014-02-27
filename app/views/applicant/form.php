@@ -23,7 +23,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 </header>
 <?php else: ?>
 <header class="page-header">
-	<h2>Tahap 3/4</h2>
+	<h2>Tahap 3 dari 4</h2>
 	<h1>Formulir Pendaftaran</h1>
 </header>
 <?php endif; ?>
