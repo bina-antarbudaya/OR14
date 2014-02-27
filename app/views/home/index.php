@@ -35,7 +35,7 @@
 		 			<div class="span3">
 		 				<ol class="registration-steps">
 		 					<li>Mendapatkan <span>PIN pendaftaran</span> dari Chapter Bina Antarbudaya <a href="#chapters">terdekat</a></li>
-		 					<li><span>Mengaktifkan</span> PIN pendaftaran dan membuat <span>username dan password</span></li>
+		 					<li><span>Mengaktifkan</span> PIN pendaftaran dan <span>membuat akun</span></li>
 		 					<li><span>Mengisi</span> formulir pendaftaran online</li>
 		 					<li><span>Mengumpulkan</span> berkas-berkas pendaftaran ke Chapter</li>
 		 				</ol>

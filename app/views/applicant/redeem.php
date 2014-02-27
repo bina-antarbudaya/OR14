@@ -29,7 +29,11 @@
 				Masing-masing PIN pendaftaran berlaku untuk sekali pakai dan memiliki batas waktu pendaftaran.
 			</p>
 			<p>
-				PIN pendaftaran dapat Adik dapatkan di Chapter Bina Antarbudaya terdekat. <a href="<?php L('/') ?>#chapters">Lihat daftar Chapter</a>
+				PIN pendaftaran dapat juga digunakan untuk mengaktifkan kembali akun yang telah kadaluarsa,
+				tanpa menghilangkan data yang telah tersimpan sebelumnya.
+			</p>
+			<p>
+				PIN pendaftaran dapat Adik dapatkan dengan menghubungi <a href="<?php L('/') ?>#chapters">Chapter&nbsp;Bina&nbsp;Antarbudaya terdekat</a>.
 			</p>
 		</div>
 		<div class="span6 redeem-now">
@@ -42,7 +46,7 @@
 				</p>
 				<?php endif; ?>
 				<div class="control-group">
-					<label for="token" class="control-label">Untuk memulai pendaftaran, masukkan enam belas huruf PIN pendaftaran Adik.</label>
+					<label for="token" class="control-label">Masukkan enam belas huruf PIN pendaftaran Adik untuk memulai pendaftaran:</label>
 					<div class="input-append">
 						<input type="text" name="token" id="token" width="16" maxlength="16" autofocus required placeholder="PIN Pendaftaran">
 						<button type="submit" class="btn btn-large btn-success">Aktifkan</button>
