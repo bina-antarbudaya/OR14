@@ -3,6 +3,10 @@
 define('PICTURE_UPLOAD_PATH', HELIUM_PARENT_PATH . '/uploads');
 define('HELIUM_LOG_FILE', HELIUM_PARENT_PATH . '/helium.log');
 
+define('HOST', $_SERVER['HTTP_HOST']);
+define('BASE_URI', 'http://' . HOST);
+define('ASSETS_URI', BASE_URI . '/assets');
+
 /**
  * Common app configuration
  */
@@ -13,7 +17,7 @@ class HeliumCommonConfiguration extends HeliumDefaults {
 	public $production = false;		// set to true to disable debugging
 	
 	// URI settings
-	public $base_uri = 'http://localhost';
+	public $base_uri = BASE_URI;
 	public $force_https = false;
 
 	// Log settings
@@ -33,7 +37,7 @@ class HeliumCommonConfiguration extends HeliumDefaults {
 
 	// Replace with CDN endpoints
 	public $picture_public_path = 'http://127.0.0.1:10000/devstoreaccount1/uploads';
-	public $assets_public_path = 'http://localhost/assets';
+	public $assets_public_path = ASSETS_URI;
 	
 	// Database settings
 	public $db_user = 'root';	// username
@@ -99,6 +103,9 @@ class HeliumCommonConfiguration extends HeliumDefaults {
 							'THA' => 'Thailand'
 						)
 					);
+
+	// Analytics tracking code
+	public $tracking_code = ''; // Analytics tracking code
 
 	// @deprecated
 	public $picture_upload_path = PICTURE_UPLOAD_PATH;

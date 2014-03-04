@@ -11,6 +11,7 @@
 		<?php foreach ($this->additional_js as $js): ?>
 	 	<script src="<?php L('assets/js/' . $js . '.js') ?>"></script>
 		<?php endforeach; ?>
+		<?php if ($tracking_code = Helium::conf('tracking_code')) echo $tracking_code ?>
 	</body>
 
 </html>
