@@ -47,7 +47,7 @@ $(function(){
 		}
 	}
 	// Invoked from an input control
-	$.fn.recheck = function(altFor) {
+	$.fn.recheck = function() {
 		// the corresponding label
 		var l = $('label[for=' + this.attr('id') + ']');
 		var s = this.parents('fieldset');
@@ -403,7 +403,7 @@ $(function(){
 			$('#application-form').submit();
 		}
 		else {
-			handleAjaxSave(function(err) {
+			handleAjaxSave(function() {
 				$('#application-form').submit();
 			})
 		}
@@ -465,7 +465,7 @@ $(function(){
 	function checkDOBForYES() {
 		var currentDOBValue = getDateValue('.applicant-dob');
 		var eligible = validateDate(currentDOBValue, dob_lower_limit_yes, dob_upper_limit);
-		toggleYESEligibility((currentDOBValue < dob_lower_limit_yes) || (currentDOBValue > dob_upper_limit));
+		toggleYESEligibility(!eligible);
 	}
 
 	// Check whether the applicant is in acceleration class or not
@@ -475,7 +475,7 @@ $(function(){
 	}
 
 	// Handle Bootstrap typeahead for school names
-	function typeaheadSchool(query, process) {
+	function typeaheadSchool(query) {
 		var schs = [query];
 		$('datalist[data-for=high_school_name] option[value*="' + query + '"]').each(function() {
 			schs.push($(this).attr('value'));
@@ -608,7 +608,7 @@ $(function(){
 	});
 	
 	// Form tools (Simpan Sementara button) - keep afloat
-	$(window).scroll(function(e) {
+	$(window).scroll(function() {
 		el = $('.form-tools-container');
 		t = $('.form-tools').offset().top;
 		y = $(this).scrollTop();
@@ -654,7 +654,7 @@ $(function(){
 	$('#save-status').text('Terakhir disimpan pada pukul ' + lastSavedAt.format('HH.mm'));
 
 	if (autoSave) {
-		var onChange = function(e) {
+		var onChange = function() {
 			handleAjaxSave();
 		}
 		$('#application-form input, #application-form textarea, #application-form select').change(onChange);
