@@ -18,14 +18,13 @@ $action_css = $controller . '/' . $this->_action();
 		<meta charset="utf-8">
 		<title><?php echo $the_title; ?></title>
 		
-		<link rel="icon" href="<?php L('/assets/icon.png'); ?>" type="image/png">
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic:latin">
 		<link rel="stylesheet" href="<?php L('/assets/css/style.css'); ?>">
 		<?php foreach ($this->additional_css as $css): ?>
 		<link rel="stylesheet" href="<?php L('/assets/css/' . $css . '.css'); ?>">
 
 		<?php endforeach; ?>
-
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic:latin">
+		<link rel="icon" href="<?php L('/assets/icon.png'); ?>" type="image/png">
 	</head>
 
 	<body>
