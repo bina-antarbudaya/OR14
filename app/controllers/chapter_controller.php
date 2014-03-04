@@ -215,48 +215,71 @@ class ChapterController extends AppController {
 				$constraints[] = 'expires_on <= NOW() AND confirmed=0 AND finalized=1';
 				break;
 			case 'active':
-			case 'selection_1':
 				$constraints[] = 'expires_on > NOW() OR finalized=1';
+				break;
+			case 'selection_1':
+				$constraints[] = 'finalized=1';
+				break;
+			case 'selection_2':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_one=1)';
+				break;
+			case 'selection_3':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_two=1)';
+				break;
+			case 'national_selection':
+				break;
+			case 'national_candidate':
 				break;
 		}
 
-		// Specific filters -- through a custom search query
-		$filter = $this->params['filter'];
-		if (is_array($filter)) {
+		// Other, free-text filters
+		$filter = $this->params;
+		if ($filter['name'] || $filter['school_name'] || $filter['combo']) {
 			$current_stage = 'search';
+			$search_active = true;
 			$search_title = array();
 
 			// Filter by school
 			if ($filter['school_name']) {
-				$constraints[] = "sanitized_high_school_name='" . $filter['school_name'] . "'";
-				$search_title[] = $filter['school_name'];
-				unset($filter['school_name']);
+				$sanitized_school_name = Applicant::sanitize_school($filter['school_name']);
+				$disjunctions = array();
+				$disjunctions[] = $db->prepare("sanitized_high_school_name='%s'", $sanitized_school_name);
+				$disjunctions[] = $db->prepare("`sanitized_high_school_name` LIKE '%%%s%%'", str_replace(' ', '%', $filter['school_name']));
+				$constraints[] = '(' . implode(') OR (', $disjunctions) . ')';
+				$search_title[] = $school_name;
+				// unset($filter['school_name']);
 			}
 
 			// Filter by name
 			if ($filter['name']) {
-				$constraints[] = $db->prepare("`sanitized_full_name` LIKE '%%%s%%'", str_replace(' ', '%', $this->params['name']));
+				$constraints[] = $db->prepare("`sanitized_full_name` LIKE '%%%s%%'", str_replace(' ', '%', $filter['name']));
 				$search_title = $filter['name'];
-				unset($filter['name']);
+				// unset($filter['name']);
 			}
 
-			// For other filters, merge them into constraints
-			foreach ($filter as $k => $v) {
-				$constraints[$k] = $v;
+			// Filter by name OR username OR test_id
+			if ($filter['combo']) {
+				$disjunctions = array();
+				$disjunctions[] = $db->prepare("`sanitized_full_name` LIKE '%%%s%%'", str_replace(' ', '%', $filter['combo']));
+				$disjunctions[] = $db->prepare("`user_id` IN (SELECT id FROM users WHERE username='%s')", $filter['combo']);
+				$disjunctions[] = $db->prepare("`test_id`='%s'", $filter['combo']);
+				$constraints[] = '(' . implode(') OR (', $disjunctions) . ')';
+				$search_title = $filter['name'];
+				// unset($filter['name']);
 			}
 		}
 
 		// View selection
 		$view = $this->params['view'];
 		$acceptable_views = array('list', 'stats');
-		if (!$view && !in_array($view, $acceptable_views)) {
+		if (!$view || !in_array($view, $acceptable_views)) {
 			$view = 'list';
 		}
 
 		switch ($view) {
 			case 'list':
 				// List-specific magic here: pagination, etc.
-				$applicants = $app::find('chapter_id=5');
+				$applicants = $app::find();
 				foreach ($constraints as $constraint) {
 					$applicants->narrow('(' . $constraint . ')');
 				}
@@ -271,6 +294,11 @@ class ChapterController extends AppController {
 				$first = (($page - 1) * $batch_length) + 1;
 				$last = ($first + $batch_length - 1) > $count_all ? $count_all : ($first + $batch_length - 1);
 
+				// -- Ordering --
+				$order_by = $this->params['order_by'] ? $this->params['order_by'] : 'test_id';
+				$order = $this->params['order'] == 'desc' ? 'desc' : 'asc';
+				$applicants->set_order_by($order_by);
+
 				// Applicants is now ready for listing.
 				$this['applicants'] = $applicants;
 				$this['chapter'] = $chapter;
@@ -281,8 +309,12 @@ class ChapterController extends AppController {
 				$this['count_all'] = $count_all;
 				$this['search_title'] = $search_title;
 				$this['current_stage'] = $this->params['stage'];
+				$this['count_all'] = $applicants->count_all();
+				$this['current_order'] = $order;
+				$this['current_order_by'] = $order_by;
 				break;
 			case 'stats':
+
 				$stats = array(
 					'sex' => array(
 						'type' => 'pie',
@@ -308,6 +340,41 @@ class ChapterController extends AppController {
 						'type' => 'pie',
 						'field' => "CONCAT(applicant_address_city, ', ', applicant_address_province)",
 						'partition' => 'applicant_contact_info',
+					),
+					'acceleration_class' => array(
+						'type' => 'pie',
+						'field' => 'in_acceleration_class',
+						'partition' => 'applicant_program_choices'
+					),
+					'program_choices' => array(
+						'type' => 'pie',
+						'field' => "IF(program_afs, IF(program_green_academy, IF(program_yes, 'AFS, YES, dan GA-SP', 'AFS dan GA-SP'), IF(program_yes, 'AFS dan YES', 'AFS saja')), 'Tidak mengisi program')",
+						'partition' => 'applicant_program_choices'
+					),
+					'school_funding_type' => array(
+						'type' => 'pie',
+						'field' => "IF(sanitized_high_school_name != '', sanitized_high_school_name LIKE '%Negeri%', '')",
+					),
+					'school_education_type' => array(
+						'type' => 'pie',
+						'field' => "
+IF(in_pesantren,
+	'Pesantren',
+	IF(sanitized_high_school_name != '',
+		IF(sanitized_high_school_name LIKE 'SMA %',
+			'SMA',
+			IF (sanitized_high_school_name LIKE 'SMK %',
+				'SMK',
+				IF(sanitized_high_school_name LIKE 'MA %',
+					'MA',
+					'Sekolah internasional, home schooling, atau jenis sekolah lainnya'
+				)
+			)
+		),
+		''
+	)
+)",
+						'partition' => 'applicant_program_choices'
 					),
 				);
 
@@ -386,6 +453,8 @@ class ChapterController extends AppController {
 					'/selandia baru|nz/i' => 'New Zealand'
 				);
 				
+				if (!$other_countries)
+					$other_countries = array();
 				foreach ($other_countries as $list_of_countries) {
 					$split_countries = preg_split($split_pattern, $list_of_countries);
 					foreach ($split_countries as $country_name) {
@@ -420,12 +489,15 @@ class ChapterController extends AppController {
 				$this['total_afs'] = $total_afs;
 				$this['chapter'] = $chapter;
 				$this['search_title'] = $search_title;
+				$this['count_all'] = $db->get_var("SELECT COUNT(*) FROM applicants WHERE $constraint_string");
 				break;
 		}
 
+		$this['search'] = $this->params;
 		$this['current_stage'] = $current_stage;
 		$this['view'] = $view;
-		$this['search_title'] = $search_title ? implode(', ', $search_title) : '';
+		// $this['search_title'] = $search_title ? implode(', ', $search_title) : '';
+		$this['search_active'] = $search_active;
 	}
 
 

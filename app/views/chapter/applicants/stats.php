@@ -3,7 +3,7 @@
 global $p;
 $p = $this->params;
 
-function print_pie_chart($source, $threshold = 0.01, Array $series_map = array()) {
+function print_pie_chart($source, $threshold = 0.01, $series_map = array()) {
 	global $p;
 	static $i;
 
@@ -12,10 +12,11 @@ function print_pie_chart($source, $threshold = 0.01, Array $series_map = array()
 	$total = array_sum($source);
 
 	$labeled_data = array();
+	$blank_label = 'Tidak diisi';
 	foreach ($source as $key => $value) {
 		$key = $series_map[$key] ? $series_map[$key] : $key;
 		if (!$key)
-			$key = 'Kosong';
+			$key = 'Tidak diisi';
 
 		$entry = array(
 			'label' => $key,
@@ -28,7 +29,7 @@ function print_pie_chart($source, $threshold = 0.01, Array $series_map = array()
 	$id = 'graph' . ++$i;
 	
 	?>
-	<div id="<?php echo $id ?>">
+	<div id="<?php echo $id ?>" class="pie-chart">
 	</div>
 	<script>
 	charts.push(function(){
@@ -44,11 +45,13 @@ function print_pie_chart($source, $threshold = 0.01, Array $series_map = array()
 					radius: 1,
 					innerRadius: 0.3,
 					label: {
-						show: false,
+						show: true,
 						radius: 2/3,
-						//formatter: function(label, series){
-						//	return '<div style="font-size:8pt;text-align:center;padding:5px;color:white">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
-						//},
+						formatter: function(label, series){
+							if (label == "<?php echo $blank_label ?>")
+								return '<div style="font-size:8pt;text-align:center;padding:6px 12px;color:white;line-height:1.2"><i>'+label+'</i><br/>'+Math.round(series.percent)+'%</div>';
+							return '<div style="font-size:8pt;text-align:center;padding:6px 12px;color:white;line-height:1.2"><b>'+label+'</b><br/>'+Math.round(series.percent)+'%</div>';
+						},
 						threshold: 0.05,
 						background: { 
 	                        opacity: 0.4,
@@ -107,8 +110,12 @@ function print_leaderboard($source, $label = '', Array $series_map = array()) {
 				}
 				else
 					echo ++$i; 
-			} ?></td>
-			<td><?php echo $n; if (!$n): ?><i>(unspecified)</i><?php endif; ?></td>
+			}
+			elseif ($i == 0) {
+				++$i;
+			}
+			?></td>
+			<td><?php echo $n; if (!$n): ?><i>Tidak diisi</i><?php endif; ?></td>
 			<td class="count"><strong><?php echo $s; ?></strong></td>
 			<td class="percentage"><?php echo $p ?>%</td>
 		</tr>
@@ -133,7 +140,7 @@ function print_statbox($title, $source, $label = '', $threshold = 0.01, Array $s
 		<div class="span6 leaderboard">
 			<?php print_leaderboard($source, $label, $series_map)?>
 		</div>
-		<div class="span6 chart">
+		<div class="span6">
 			<?php print_pie_chart($source, $threshold, $series_map)?>
 		</div>
 	</div>
@@ -165,13 +172,20 @@ if ($this->user->chapter->is_national_office()) {
 
 <?php print_statbox('Jenis Kelamin', $stats['sex']['data']['series'], '', 0.01, array('M' => 'Laki-laki', 'F' => 'Perempuan')) ?>
 
+<?php print_statbox('Pilihan Program', $stats['program_choices']['data']['series'], '') ?>
+
 <?php print_statbox('Asal Sekolah', $stats['school']['data']['series'], 'sekolah') ?>
+
+<?php print_statbox('Jenis Sekolah: Negeri/Swasta', $stats['school_funding_type']['data']['series'], '', 0.01, array('Swasta', 'Negeri')) ?>
+
+<?php print_statbox('Jenis Sekolah: SMA/SMK/MA/Pesantren', $stats['school_education_type']['data']['series'], '', 0.01, array('Swasta', 'Negeri')) ?>
+
+<?php print_statbox('Kelas Akselerasi', $stats['acceleration_class']['data']['series'], '', 0.01, array('Kelas reguler atau tidak diisi', 'Kelas akselerasi')) ?>
 
 <?php print_statbox('Asal Provinsi', $stats['province']['data']['series'], 'provinsi') ?>
 
 <?php print_statbox('Asal Kota', $stats['city']['data']['series'], 'kota') ?>
 
-<!--
 <?php /*
 <article class="statbox countries">
 	<header>Pilihan Negara</header>
@@ -211,7 +225,6 @@ if ($this->user->chapter->is_national_office()) {
 		?>
 		</table>
 </article>
-*/ ?>
 
 <article class="statbox">
 	<header>Pilihan Negara Lainnya</header>
@@ -224,8 +237,7 @@ if ($this->user->chapter->is_national_office()) {
 		</div>
 	</div>
 </article>
-
--->
+*/ ?>
 
 </div>
 
@@ -234,37 +246,3 @@ $this->require_js('flot/jquery.flot');
 $this->require_js('flot/jquery.flot.pie');
 $this->require_js('stats');
 ?>
-<?php
-/*
-<!-- 
-<h1>Phone Numbers</h1>
-
-<p>
-<?php
-
-// $addresses = $db->get_col("SELECT alamat_lengkap FROM applicant_details LEFT JOIN applicants ON applicants.id=applicant_details.applicant_id WHERE submitted=1");
-// foreach ($addresses as $a) {
-// 	$a = unserialize($a);
-// 	$hp = $a['hp'];
-// 	if ($hp) echo $hp . ', ';
-// }
-
-?>
-</p>
-
-<h1>Email Addresses</h1>
-
-<p>
-
-<?php
-
-// foreach ($addresses as $a) {
-// 	$a = unserialize($a);
-// 	$email = $a['email'];
-// 	if ($email) echo $email . ', ';
-// }
-
-?>
-</p>
--->
-*/ ?>

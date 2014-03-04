@@ -16,13 +16,13 @@
 		<ul class="nav nav-pills">
 		<?php if ($current_phase == 'registration'): ?>
 		<?php if ($chapter->is_national_office()): ?>
-			<li><a href="<?php L(array('controller' => 'chapter', 'action' => 'index')) ?>">Daftar Chapter</a></li>
-			<li><a href="<?php L(array('controller' => 'applicant', 'action' => 'index')) ?>">Daftar Pendaftar Nasional</a></li>
-			<li><a href="<?php L(array('controller' => 'applicant', 'action' => 'stats', 'chapter_id' => $id)) ?>">Statistik Pendaftar Nasional</a></li>
+			<li><a href="<?php L(array('controller' => 'registration_code', 'action' => 'issue')) ?>">Terbitkan PIN Pendaftaran</a></li>
+			<li><a href="<?php L(array('controller' => 'chapter', 'action' => 'applicants')) ?>">Daftar Pendaftar Nasional</a></li>
+			<li><a href="<?php L(array('controller' => 'chapter', 'action' => 'applicants', 'view' => 'stats')) ?>">Statistik Pendaftar Nasional</a></li>
 		<?php else: // Registration phase ?>
 			<li><a href="<?php L(array('controller' => 'registration_code', 'action' => 'issue')) ?>">Terbitkan PIN Pendaftaran</a></li>
-			<li><a href="<?php L(array('controller' => 'applicant', 'action' => 'index', 'chapter_id' => $id)) ?>">Daftar Pendaftar</a></li>
-			<li><a href="<?php L(array('controller' => 'applicant', 'action' => 'stats', 'chapter_id' => $id)) ?>">Statistik Pendaftar</a></li>
+			<li><a href="<?php L(array('controller' => 'chapter', 'action' => 'applicants')) ?>">Daftar Pendaftar</a></li>
+			<li><a href="<?php L(array('controller' => 'chapter', 'action' => 'applicants', 'view' => 'stats', 'chapter_id' => $id)) ?>">Statistik Pendaftar</a></li>
 			<li><a href="<?php L(array('controller' => 'chapter', 'action' => 'edit', 'id' => $id)) ?>">Edit Informasi Chapter</a></li>
 		<?php endif; ?>
 		<?php endif; ?>
@@ -68,28 +68,28 @@
 					<td rowspan="4">
 						<span title="Siswa yang sudah pernah mengaktifkan PIN pendaftaran dan membuat akun"><strong><?php echo $total_applicant_count ?></strong> pendaftar total</span>
 					</td>
-					<td rowspan="3">
+					<td rowspan="3" data-stage="active">
 						<span title="Siswa yang akun pendaftarannya belum kadaluarsa"><strong class="text-info"><?php echo $active_applicant_count ?></strong> pendaftar aktif</span>
 					</td>
-					<td rowspan="2">
+					<td rowspan="2" data-stage="finalized">
 						<span title="Siswa yang sudah melakukan finalisasi pada formulirnya"><strong class="text-success"><?php echo $finalized_applicant_count ?></strong> sudah finalisasi</span>
 					</td>
-					<td>
+					<td data-stage="confirmed">
 						<span title="Siswa yang sudah diverifikasi bahwa berkasnya sudah diterma"><strong class="text-success"><?php echo $confirmed_applicant_count ?></strong> sudah verifikasi berkas</span>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td data-stage="not_yet_confirmed">
 						<span title="Siswa yang sudah melakukan finalisasi, namun belum diverifikasi bahwa berkasnya sudah diterma"><strong class="text-warning"><?php echo $not_yet_confirmed_applicant_count ?></strong> belum verifikasi berkas</span>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" data-stage="incomplete">
 						<span title="Siswa yang formulirnya belum lengkap dan belum melakukan finalisasi"><strong class="text-warning"><?php echo $incomplete_applicant_count ?></strong> masih mengisi formulir</span>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="3" data-stage="expired">
 						<span title="Siswa yang akun pendaftarannya sudah kadaluarsa"><strong class="text-error"><?php echo $expired_applicant_count ?></strong> kadaluarsa</span>
 					</td>
 				</tr>
@@ -105,9 +105,9 @@
 				</p>
 			</form>
 			<h5>Berdasarkan nama dan/atau asal sekolah</h5>
-			<form action="<?php L(array('controller' => 'applicant', 'action' => 'index')) ?>">
+			<form action="<?php L(array('controller' => 'chapter', 'action' => 'applicants')) ?>">
 				<div>
-					<input type="text" class="span2" value="" name="name" placeholder="Nama peserta">
+					<input type="text" class="span2" value="" name="combo" placeholder="Nama peserta">
 					<input type="text" class="span2" value="" name="school_name" placeholder="Nama sekolah">
 				</div>
 				<p>
@@ -129,7 +129,7 @@
 				</p>
 			</form>
 			<p>
-				<a class="btn btn-primary" href="<?php L(array('controller' => 'applicant', 'action' => 'index')) ?>">Telusuri seluruh pendaftar</a>
+				<a class="btn btn-primary" href="<?php L(array('controller' => 'chapter', 'action' => 'applicants')) ?>">Telusuri seluruh pendaftar</a>
 			</p>
 		</div>
 	</div>
@@ -161,9 +161,9 @@
 			<h4>Bantuan</h4>
 			<p>Untuk permasalahan teknis, hubungi:<br>
 			<b>Kak Rio (IT Helpdesk Kantor Nasional)</b>,<br>
-			<b>Kak Pandu (Tim OR)</b>, atau <b>Kak Gici (Tim OR)</b> di <strong>chapterhelp@seleksi.bina-antarbudaya.or.id</strong>.<p>
-			<p>Untuk permasalahan nonteknis (syarat pendaftaran, kasus-kasus khusus), harap hubungi:<br>
-			<b>Kak Sari (sari.tjakra@afs.org)</b>.</p>
+			<b>Kak Pandu (Tim OR)</b>, atau <b>Kak Gici (Tim OR)</b> di <strong>seleksi@bina-antarbudaya.or.id</strong>.<p>
+			<p>Untuk permasalahan nonteknis (syarat pendaftaran, kasus-kasus khusus), harap hubungi<br>
+			<strong>Kak Sari (sari.tjakra@afs.org)</strong>.</p>
 			<p><span class="btn btn-block btn-primary disabled">Alur Pendaftaran Seleksi YP 2015/2016</span></p>
 		</div>
 	</div>

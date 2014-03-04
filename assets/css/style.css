@@ -412,6 +412,21 @@ table.counts.four-col td {
 	font-weight: 300;
 	margin-top: 0;
 }
+.search-pane {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 15px;
+}
+.search-pane form {
+	margin-bottom: 0;
+}
+.search-pane .search-button {
+	padding-bottom: 15px;
+	text-align: right;
+}
+.search-pane .search-button button {
+	padding-left: 60px;
+	padding-right: 60px;
+}
 
 /* Stats */
 
@@ -425,13 +440,21 @@ table.counts.four-col td {
 }
 .statbox h3 {
 	margin: 0;
+	padding-bottom: 15px;
+	text-align: center;
 }
 .leaderboard {
 	max-height: 400px;
 	overflow: auto;
 }
 .chart, .chart div {
-	height: 400px;
+	height: 500px;
+}
+.chart div {
+}
+.pie-chart {
+	height: 500px;
+	width: 500px;
 }
 
 /* MODULE: APPLICANT */

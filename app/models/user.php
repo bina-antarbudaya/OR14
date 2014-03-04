@@ -109,10 +109,8 @@ class User extends HeliumRecord {
 			case 2:
 			case 3:
 			case 4:
-				$land = array('controller' => 'chapter', 'action' => 'dashboard');
-				break;
 			case 5:
-				$land = array('controller' => 'chapter', 'action' => 'view', 'id' => 1);
+				$land = array('controller' => 'chapter', 'action' => 'dashboard');
 				break;
 		}
 
