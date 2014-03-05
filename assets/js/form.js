@@ -362,6 +362,7 @@ $(function(){
 					console.log([err, data]);
 					if (fallback) {
 						isSaving = false;
+						fallback();
 					}
 					else if (err == 'unauthorized') {
 						$('#application-form').submit();
