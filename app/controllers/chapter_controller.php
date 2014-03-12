@@ -33,7 +33,7 @@ class ChapterController extends AppController {
 	 * Dashboard
 	 */
 	public function dashboard() {
-		// $this->http_redirect(array('controller' => 'chapter', 'action' => 'view', 'id' => $this->params['id']));
+		$this->require_authentication();
 		$this->require_role('chapter_staff');
 
 		if ($this->user->capable_of('national_admin')) {
@@ -95,7 +95,7 @@ class ChapterController extends AppController {
 				$this['total_applicant_count'] = $chapter->applicants->count_all();
 
 				$aa = clone $chapter->applicants;
-				$aa->narrow("(confirmed=1 OR expires_on > '$now')");
+				$aa->narrow("(finalized=1 OR expires_on > '$now')");
 				$this['active_applicant_count'] = $aa->count_all();
 
 				$ca = clone $chapter->applicants;
@@ -115,9 +115,8 @@ class ChapterController extends AppController {
 				$this['not_yet_confirmed_applicant_count'] = $nca->count_all();
 
 				$ea = clone $chapter->applicants;
-				$ea->narrow("confirmed=0 AND finalized=0 AND expires_on < '$now'");
+				$ea->narrow("finalized=0 AND expires_on < '$now'");
 				$this['expired_applicant_count'] = $ea->count_all();
-
 
 				// Weird
 				$na = clone $chapter->applicants;
@@ -168,9 +167,11 @@ class ChapterController extends AppController {
 	 * Everything about applicants/participants, all in one
 	 */
 	public function applicants() {
+		$this->require_authentication();
+
 		// Utility variables
 		$db = Helium::db();
-		$app = 'Applicant'; // change to BetterApplicant for optimization
+		$constraints = array();
 
 		// Here's how this works:
 		// 1. Read filter from query string
@@ -212,7 +213,7 @@ class ChapterController extends AppController {
 				$constraints[] = 'finalized=1';
 				break;
 			case 'not_yet_confirmed':
-				$constraints[] = 'expires_on <= NOW() AND confirmed=0 AND finalized=1';
+				$constraints[] = 'confirmed=0 AND finalized=1';
 				break;
 			case 'active':
 				$constraints[] = 'expires_on > NOW() OR finalized=1';
@@ -227,6 +228,7 @@ class ChapterController extends AppController {
 				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_two=1)';
 				break;
 			case 'national_selection':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_three=1)';
 				break;
 			case 'national_candidate':
 				break;
@@ -247,14 +249,12 @@ class ChapterController extends AppController {
 				$disjunctions[] = $db->prepare("`sanitized_high_school_name` LIKE '%%%s%%'", str_replace(' ', '%', $filter['school_name']));
 				$constraints[] = '(' . implode(') OR (', $disjunctions) . ')';
 				$search_title[] = $school_name;
-				// unset($filter['school_name']);
 			}
 
 			// Filter by name
 			if ($filter['name']) {
 				$constraints[] = $db->prepare("`sanitized_full_name` LIKE '%%%s%%'", str_replace(' ', '%', $filter['name']));
 				$search_title = $filter['name'];
-				// unset($filter['name']);
 			}
 
 			// Filter by name OR username OR test_id
@@ -265,7 +265,6 @@ class ChapterController extends AppController {
 				$disjunctions[] = $db->prepare("`test_id`='%s'", $filter['combo']);
 				$constraints[] = '(' . implode(') OR (', $disjunctions) . ')';
 				$search_title = $filter['name'];
-				// unset($filter['name']);
 			}
 		}
 
@@ -279,10 +278,11 @@ class ChapterController extends AppController {
 		switch ($view) {
 			case 'list':
 				// List-specific magic here: pagination, etc.
-				$applicants = $app::find();
+				$applicants = Applicant::find();
 				foreach ($constraints as $constraint) {
 					$applicants->narrow('(' . $constraint . ')');
 				}
+
 				// -- Pagination --
 				$batch_length = 100;
 				$applicants->set_batch_length($batch_length);
@@ -298,6 +298,7 @@ class ChapterController extends AppController {
 				$order_by = $this->params['order_by'] ? $this->params['order_by'] : 'test_id';
 				$order = $this->params['order'] == 'desc' ? 'desc' : 'asc';
 				$applicants->set_order_by($order_by);
+				$applicants->set_order($order);
 
 				// Applicants is now ready for listing.
 				$this['applicants'] = $applicants;
@@ -361,7 +362,7 @@ class ChapterController extends AppController {
 IF(in_pesantren,
 	'Pesantren',
 	IF(sanitized_high_school_name != '',
-		IF(sanitized_high_school_name LIKE 'SMA %',
+		IF(sanitized_high_school_name LIKE 'SMA%',
 			'SMA',
 			IF (sanitized_high_school_name LIKE 'SMK %',
 				'SMK',
@@ -379,7 +380,7 @@ IF(in_pesantren,
 				);
 
 				if ($constraints)
-					$constraint_string = implode(' AND ', $constraints);
+					$constraint_string = '(' . implode(') AND (', $constraints) . ')';
 				else
 					$constraint_string = '1';
 				
@@ -387,7 +388,7 @@ IF(in_pesantren,
 					unset($type, $field, $partition, $base_query, $join_string);
 					extract($group);
 					if (!$base_query)
-						$base_query = "SELECT COUNT(*) AS rows, %s AS value FROM applicants %s WHERE %s AND (applicants.expires_on > NOW() or applicants.finalized=1) GROUP BY %s ORDER BY rows DESC";
+						$base_query = "SELECT COUNT(*) AS rows, %s AS value FROM applicants %s WHERE %s GROUP BY %s ORDER BY rows DESC";
 
 					if ($partition)
 						$join_string = $db->prepare("INNER JOIN `%s` ON `%s`.applicant_id = applicants.id", $partition, $partition);
