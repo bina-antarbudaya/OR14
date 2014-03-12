@@ -10,7 +10,7 @@ $error_messages = array('username_availability' => 'Nama pengguna yang Adik pili
 						'db_fail' => 'Cobalah sesaat lagi.')
 
 ?>
-<?php $this->print_header('Buat Akun'); ?>
+<?php $this->print_header('Pembuatan Akun'); ?>
 
 <header class="page-header">
 	<h2>Tahap 2 dari 4</h2>
