@@ -12,8 +12,8 @@
 		<tr>	
 			<td><form action="<?php L($this->params) ?>" method="POST"><input type="hidden" name="user_id" value="<?php echo $row->user_id; ?>"><button class="use">Use</button></form></td>
 			<td><strong><?php echo $row->username; ?></strong></td>
-			<td><?php echo $row->nama_lengkap; ?></td>
-			<td><?php echo $row->pendidikan_sma_nama_sekolah; ?></td>
+			<td><?php echo $row->sanitized_full_name; ?></td>
+			<td><?php echo $row->sanitized_high_school_name; ?></td>
 		</tr>
 		<?php endforeach; ?>
 	</table>

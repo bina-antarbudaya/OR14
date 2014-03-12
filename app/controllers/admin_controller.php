@@ -27,12 +27,13 @@ class AdminController extends AppController {
 		$q = "SELECT
 		user_id,
 		username,
-		nama_lengkap,
-		pendidikan_sma_nama_sekolah
+		sanitized_full_name,
+		sanitized_high_school_name
 		FROM `users`
 		LEFT JOIN applicants ON applicants.user_id = users.id
-		LEFT JOIN applicant_details ON applicant_details.applicant_id = applicants.id
-		WHERE 1";
+		WHERE 1
+		ORDER BY username
+		LIMIT 0,10000";
 		$rows = $this['rows'] = $db->get_results($q);
 	}
 
