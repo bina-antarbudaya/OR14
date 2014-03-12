@@ -2,7 +2,7 @@
 
 $the_title = 'Pendaftaran Seleksi Bina Antarbudaya';
 if ($page_title)
-	$the_title .= ': ' . $page_title;
+	$the_title = $page_title . ' | ' . $the_title;
 
 $controller = $this->params['controller'];
 
