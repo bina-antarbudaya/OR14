@@ -1,3 +1,4 @@
 .DS_Store
 uploads/
 /app/config.cloud.php
+app/error.log
