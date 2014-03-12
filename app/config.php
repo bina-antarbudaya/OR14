@@ -104,8 +104,8 @@ class HeliumCommonConfiguration extends HeliumDefaults {
 						)
 					);
 
-	// Analytics tracking code
-	public $tracking_code = ''; // Analytics tracking code
+	// PIWIK Settings
+	public $piwik_server = 'analytics.bina-antarbudaya.or.id';
 
 	// @deprecated
 	public $picture_upload_path = PICTURE_UPLOAD_PATH;
