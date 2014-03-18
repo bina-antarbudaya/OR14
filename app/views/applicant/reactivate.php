@@ -10,10 +10,11 @@ $error_messages = array('token_nonexistent' => 'PIN pendaftaran yang Adik masukk
 						'token_unavailable' => 'PIN pendaftaran yang Adik masukkan sudah terpakai.',
 						'token_expired' => 'PIN pendaftaran yang Adik masukkan telah habis masa pakainya.',
 						'incomplete' => 'Adik belum memasukkan PIN pendaftaran.',
-						'recaptcha' => 'Isian reCAPTCHA tidak cocok.')
+						'recaptcha' => 'Isian reCAPTCHA tidak cocok.',
+						'chapter_mismatch' => 'PIN pendaftaran yang Adik masukkan berasal dari chapter yang berbeda dengan chapter tempat Adik terdaftar.')
 
 ?>
-	<strong>Perpanjangan akun gagal</strong> <?php echo $error_messages[$error] ?>
+	<strong>Perpanjangan akun gagal.</strong> <?php echo $error_messages[$error] ?>
 <?php else: ?>
 	<strong>Akun Adik telah kadaluarsa.</strong> Isilah formulir ini untuk mengaktifkan kembali akun Adik.
 <?php endif; ?>
