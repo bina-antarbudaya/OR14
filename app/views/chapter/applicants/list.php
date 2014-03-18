@@ -109,14 +109,12 @@ function LK($target) {
 	?>
 		<tr class="<?php echo $classes; ?>">
 			<!-- <td class="checkbox"></td> -->
-			<?php if ($current_stage != 'expired'): ?>
 			<td class="test-id"><?php echo ($a->finalized) ? $a->test_id : '&mdash;'; ?></td>
-			<?php endif; ?>
 			<td class="name"><b><a href="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $a->id)) ?>"><?php echo $a->sanitized_full_name ? $a->sanitized_full_name : '<span class="empty">(Belum diisi)</span>'; ?></a></b></td>
 			<td class="school"><?php echo $a->sanitized_high_school_name; ?></td>
-			<td class="expires-on"><?php echo $exp->format('j F Y'); ?></td>
-			<td class="finalized"><?php echo $a->finalized ? 'Sudah' : 'Belum' ?> finalisasi</td>
-			<td class="confirmed"><?php echo $a->confirmed ? 'Sudah' : 'Belum' ?> verifikasi berkas</td>
+			<td class="expires-on <?php if ($exp->earlier_than('now')) echo 'text-error' ?>"><?php echo $exp->format('j F Y'); ?></td>
+			<td class="finalized text-<?php echo $a->finalized ? 'success' : 'warning' ?>"><?php echo $a->finalized ? 'Sudah' : 'Belum' ?> finalisasi</td>
+			<td class="confirmed text-<?php echo $a->confirmed ? 'success' : 'warning' ?>"><?php echo $a->confirmed ? 'Sudah' : 'Belum' ?> verifikasi berkas</td>
 		</tr>
 
 	<?php endforeach; ?>
