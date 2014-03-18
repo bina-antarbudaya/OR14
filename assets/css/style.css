@@ -19,6 +19,9 @@ h1, h2, h3 {
 p strong {
 	color: #000;
 }
+.help-block strong {
+	color: #444;
+}
 strong {
 	font-weight: 600;
 }
@@ -594,6 +597,7 @@ table.counts.four-col td {
 }
 label.required {
 	font-weight: 600;
+	color: #444;
 }
 label.required:after {
 	content: ' *';

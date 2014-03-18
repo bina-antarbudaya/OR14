@@ -614,13 +614,24 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 
 					<fieldset class="pane" id="pendidikan">
 						<legend>Riwayat Pendidikan</legend>
+
+						<?php function grades_help_block() { ?>
+
+								<span class="help-block">
+									Gunakan skala <strong>0&ndash;100</strong> untuk rata-rata nilai,<br>
+									<em>atau</em> bentuk <strong>[indeks prestasi]/[skala indeks prestasi]</strong> (misal: <strong>3,45/4,00</strong>) jika sekolah Adik menggunakan sistem SKS,<br>
+									<em>atau</em> <strong>indeks abjad sesuai rapor asli</strong> jika nilai numerik tidak tersedia.
+								</span>
+
+						<?php } ?>
+
 						<h4>SMA, SMK, MA, atau sederajat</h4>
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('high_school_name', 'Nama Sekolah', 'required') ?></td>
 								<td class="field">
 									<?php $form->text('high_school_name', 'long'); ?><br>
-									<span class="help-block">Cantumkan kota. Misal: SMA <u>Negeri</u> 70 <u>Bandung</u></span>
+									<span class="help-block"><strong>Cantumkan nama kota</strong>, misal: SMA <u>Negeri</u> 2 <u><?php echo $applicant->chapter->chapter_name ?></u></span>
 									<span class="help-block">Jika Adik pernah berpindah sekolah (mutasi), tuliskan secara berurutan nama masing-masing sekolah yang pernah Adik masuki dengan memisahkannya dengan garis miring (/).</span>
 									<datalist id="high-schools" data-for="high_school_name">
 										<?php foreach ($schools as $school): ?>
@@ -662,8 +673,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						
 						<table class="academics sma subform">
 							<caption>
-								<?php $form->label('grades_y10t1_average', 'Data prestasi', 'required') ?>
-								<span class="help-block">Gunakan skala 0&ndash;100 untuk rata-rata nilai, <em>atau</em> indeks abjad sesuai rapor asli bila tidak ada nilai numerik.</span>
+								<?php $form->label('grades_y10t1_average', 'Data prestasi', 'required'); grades_help_block(); ?>
 							</caption>
 							<thead>
 								<tr>
@@ -678,8 +688,8 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tbody>
 								<tr>
 									<td class="grade">X</td>
-									<td class="term-initial average"><?php $form->text('grades_y10t1_average', 'very-short l') ?></td>
-									<td class="term-initial subjects"><?php $form->text('grades_y10t1_subjects', 'very-short r') ?></td>
+									<td class="term-initial average"><?php $form->text('grades_y10t1_average', 'very-short l', 15) ?></td>
+									<td class="term-initial subjects"><?php $form->text('grades_y10t1_subjects', 'very-short r', 15) ?></td>
 								</tr>
 							</tbody>
 						</table>
@@ -690,7 +700,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								<td class="label"><?php $form->label('junior_high_school_name', 'Nama Sekolah', 'required') ?></td>
 								<td class="field">
 									<?php $form->text('junior_high_school_name', 'long'); ?><br>
-									<span class="help-block">Cantumkan kota. Misal: SMP <u>Negeri</u> 70 <u>Bandung</u></span>
+									<span class="help-block"><strong>Cantumkan nama kota</strong>, misal: SMP <u>Negeri</u> 2 <u><?php echo $applicant->chapter->chapter_name ?></u></span>
 									<span class="help-block">Jika Adik pernah berpindah sekolah (mutasi), tuliskan secara berurutan nama masing-masing sekolah yang pernah Adik masuki dengan memisahkannya dengan garis miring (/).</span>	
 								</td>
 							</tr>
@@ -702,8 +712,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 
 						<table class="academics smp subform">
 							<caption>
-								<?php $form->label('grades_y7t1_average', 'Data prestasi', 'required') ?>
-								<span class="help-block">Gunakan skala 0&ndash;100 untuk rata-rata nilai, <em>atau</em> indeks abjad sesuai rapor asli bila tidak ada nilai numerik.</span>
+								<?php $form->label('grades_y7t1_average', 'Data prestasi', 'required'); grades_help_block(); ?>
 							</caption>
 							<thead>
 								<tr>
@@ -724,10 +733,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach($grades as $i => $g): ?>
 								<tr>
 									<td class="grade"><?php echo $g; ?></td>
-									<td class="term-initial average"><?php $form->text('grades_y' . $i . 't1_average', 'very-short l') ?></td>
-									<td class="term-initial subjects"><?php $form->text('grades_y' . $i . 't1_subjects', 'very-short r') ?></td>
-									<td class="term-final average"><?php $form->text('grades_y' . $i . 't2_average', 'very-short l') ?></td>
-									<td class="term-final subjects"><?php $form->text('grades_y' . $i . 't2_subjects', 'very-short r') ?></td>
+									<td class="term-initial average"><?php $form->text('grades_y' . $i . 't1_average', 'very-short l', 15) ?></td>
+									<td class="term-initial subjects"><?php $form->text('grades_y' . $i . 't1_subjects', 'very-short r', 15) ?></td>
+									<td class="term-final average"><?php $form->text('grades_y' . $i . 't2_average', 'very-short l', 15) ?></td>
+									<td class="term-final subjects"><?php $form->text('grades_y' . $i . 't2_subjects', 'very-short r', 15) ?></td>
 								</tr>
 								<?php endforeach; ?>
 							</tbody>
@@ -739,7 +748,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								<td class="label"><?php $form->label('elementary_school_name', 'Nama Sekolah', 'required') ?></td>
 								<td class="field">
 									<?php $form->text('elementary_school_name', 'long'); ?><br>
-									<span class="help-block">Cantumkan kota. Misal: SD <u>Negeri</u> 70 <u>Bandung</u></span>
+									<span class="help-block"><strong>Cantumkan nama kota</strong>, misal: SD <u>Negeri</u> 2 <u><?php echo $applicant->chapter->chapter_name ?></u></span>
 									<span class="help-block">Jika Adik pernah berpindah sekolah (mutasi), tuliskan secara berurutan nama masing-masing sekolah yang pernah Adik masuki dengan memisahkannya dengan garis miring (/).</span>	
 								</td>
 							</tr>
@@ -751,8 +760,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 
 						<table class="academics sd subform">
 							<caption>
-								<?php $form->label('grades_y1t1_average', 'Data prestasi', 'required') ?>
-								<span class="help-block">Gunakan skala 0&ndash;100 untuk rata-rata nilai, <em>atau</em> indeks abjad sesuai rapor asli bila tidak ada nilai numerik.</span>
+								<?php $form->label('grades_y1t1_average', 'Data prestasi', 'required'); grades_help_block(); ?>
 							</caption>
 							<thead>
 								<tr>
@@ -773,10 +781,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach($grades as $i => $g): ?>
 								<tr>
 									<td class="grade"><?php echo $g; ?></td>
-									<td class="term-initial average"><?php $form->text('grades_y' . $i . 't1_average', 'very-short l') ?></td>
-									<td class="term-initial subjects"><?php $form->text('grades_y' . $i . 't1_subjects', 'very-short r') ?></td>
-									<td class="term-final average"><?php $form->text('grades_y' . $i . 't2_average', 'very-short l') ?></td>
-									<td class="term-final subjects"><?php $form->text('grades_y' . $i . 't2_subjects', 'very-short r') ?></td>
+									<td class="term-initial average"><?php $form->text('grades_y' . $i . 't1_average', 'very-short l', 15) ?></td>
+									<td class="term-initial subjects"><?php $form->text('grades_y' . $i . 't1_subjects', 'very-short r', 15) ?></td>
+									<td class="term-final average"><?php $form->text('grades_y' . $i . 't2_average', 'very-short l', 15) ?></td>
+									<td class="term-final subjects"><?php $form->text('grades_y' . $i . 't2_subjects', 'very-short r', 15) ?></td>
 								</tr>
 								<?php endforeach; ?>
 							</tbody>
