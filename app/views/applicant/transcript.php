@@ -322,7 +322,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 		
 		<table class="academics sma subform">
 			<caption>
-				<?php $form->label('grades_y10t1_average', 'Data prestasi SMA/SMK/MA (skala 0-100)', 'required') ?>
+				<label>Data prestasi SMA/SMK/MA (skala 0-100, Indeks Prestasi, atau bentuk abjad)</label>
 			</caption>
 			<thead>
 				<tr>
@@ -361,7 +361,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 
 		<table class="academics smp subform">
 			<caption>
-				<?php $form->label('grades_y7t1_average', 'Data prestasi SMP/MTs (skala 0-100)', 'required') ?>
+				<label>Data prestasi SMP/MTs (skala 0-100, Indeks Prestasi, atau bentuk abjad)</label>
 			</caption>
 			<thead>
 				<tr>
@@ -409,8 +409,7 @@ function print_address($a, $name, $kota = true, $provinsi = true, $kodepos = tru
 
 		<table class="academics sd subform">
 			<caption>
-				<?php $form->label('grades_y1t1_average', 'Data prestasi (skala 0-100)', 'required') ?>
-				
+				<label>Data prestasi SD/MI (skala 0-100, Indeks Prestasi, atau bentuk abjad)</label>
 			</caption>
 			<thead>
 				<tr>
