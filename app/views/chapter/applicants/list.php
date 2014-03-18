@@ -110,7 +110,7 @@ function LK($target) {
 		<tr class="<?php echo $classes; ?>">
 			<!-- <td class="checkbox"></td> -->
 			<td class="test-id"><?php echo ($a->finalized) ? $a->test_id : '&mdash;'; ?></td>
-			<td class="name"><b><a href="<?php L(array('controller' => 'applicant', 'action' => 'view', 'id' => $a->id)) ?>"><?php echo $a->sanitized_full_name ? $a->sanitized_full_name : '<span class="empty">(Belum diisi)</span>'; ?></a></b></td>
+			<td class="name"><b><a href="<?php L(array('controller' => 'chapter', 'action' => 'view_applicant', 'id' => $a->id)) ?>"><?php echo $a->sanitized_full_name ? $a->sanitized_full_name : '<span class="empty">(Belum diisi)</span>'; ?></a></b></td>
 			<td class="school"><?php echo $a->sanitized_high_school_name; ?></td>
 			<td class="expires-on <?php if ($exp->earlier_than('now')) echo 'text-error' ?>"><?php echo $exp->format('j F Y'); ?></td>
 			<td class="finalized text-<?php echo $a->finalized ? 'success' : 'warning' ?>"><?php echo $a->finalized ? 'Sudah' : 'Belum' ?> finalisasi</td>

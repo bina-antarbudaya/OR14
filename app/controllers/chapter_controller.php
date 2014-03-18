@@ -501,7 +501,62 @@ IF(in_pesantren,
 		$this['search_active'] = $search_active;
 	}
 
+	public function view_applicant() {
+		$this->require_authentication();
+		$this->require_role('chapter_staff');
 
+		if ($id = $this->params['id']) {
+			$applicant = Applicant::find($id);
+		}
+		elseif ($test_id = $this->params['test_id']) {
+			$applicant = Applicant::find_by_test_id($test_id);
+		}
+		elseif ($username = $this->params['username']) {
+			$db = Helium::db();
+			// $id = $db->get_var($db->prepare("SELECT applicants.id FROM applicants INNER JOIN users ON applicants.user_id=users.id WHERE username='%s'", $username));
+			$applicant = Applicant::find($db->prepare("user_id IN (SELECT id FROM users WHERE username='%s')", $username));
+		}
+		
+		$this->session['applicant_back_to'] = $this->params;
+		
+		if (!$applicant) {
+			$error = 'not_found';
+		}
+		else {
+			$this['applicant'] = $applicant;
+			$this['picture'] = $applicant->picture;
+		}
+		
+		if (!$error && !$this->user->capable_of('national_admin') && ($applicant->chapter_id != $this->user->chapter_id)) {
+			$error = 'forbidden';
+		}
+		
+		if (!$error && $_SERVER['REQUEST_METHOD'] == 'POST') {
+			if ($_POST['finalized'])
+				$applicant->finalize();
+			else
+				$applicant->finalized = 0;
+
+			if ($_POST['force_finalize'])
+				$applicant->force_finalize();
+
+			$applicant->confirmed = $applicant->finalized ? $_POST['confirmed'] : false;
+			$applicant->save();
+		}
+		
+		if (!$error) {
+			$back_to = $this->session['back_to'];
+			if (!$back_to)
+				$back_to = array('controller' => 'chapter', 'action' => 'applicants');
+
+			$this['back_to'] = $back_to;
+
+			$this['can_edit'] = $this->user->capable_of('chapter_admin'); // && !$applicant->finalized;
+		}
+		else {
+			$this['error'] = $error;
+		}
+	}
 
 	/**
 	 * @deprecated

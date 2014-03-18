@@ -431,6 +431,41 @@ table.counts.four-col td {
 	padding-right: 60px;
 }
 
+.applicant-header {
+	margin: 0 0 15px;
+}
+.incomplete-fields {
+	overflow-y: auto;
+	max-height: 8em;
+	font-family: 'Consolas', monospace;
+	background: #f6f6f6;
+	margin: 3px 0 7px;
+	padding-left: 10px;
+	list-style: none;
+}
+.applicant-header .test-id {
+	display: block;
+	float: right;
+	color: #007ac2;
+}
+.confirm-form button {
+	font-weight: 600;
+}
+.confirm-form .help-block {
+	text-align: center;
+	padding-top: 10px;
+}
+.no-photo {
+	background: #f6f6f6;
+	font-size: 24px;
+	font-weight: 300;
+	text-align: center;
+	line-height: 24px;
+	font-style: italic;
+	padding: 160px 20px;
+	color: #999;
+}
+
 /* Stats */
 
 .stats {

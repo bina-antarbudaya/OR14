@@ -98,7 +98,7 @@
 		<div class="span4 applicant-search">
 			<h4>Pencarian Pendaftar</h4>
 			<h5>Berdasarkan nomor peserta</h5>
-			<form action="<?php L(array('controller' => 'applicant', 'action' => 'view')) ?>">
+			<form action="<?php L(array('controller' => 'chapter', 'action' => 'view_applicant')) ?>">
 				<p class="input-append">
 					<input type="text" class="input-block-level" value="YBA/YP15-16/<?php if (!$chapter->is_national_office()) echo $chapter->chapter_code . '/' ?>" name="test_id" placeholder="Nomor peserta">
 					<button type="submit" class="btn">Lacak</button>
@@ -115,7 +115,7 @@
 				</p>
 			</form>
 			<h5>Berdasarkan username</h5>
-			<form action="<?php L(array('controller' => 'applicant', 'action' => 'view')) ?>">
+			<form action="<?php L(array('controller' => 'chapter', 'action' => 'view_applicant')) ?>">
 				<p class="input-append">
 					<input type="text" class="input-block-level" value="" name="username" placeholder="Username peserta">
 					<button type="submit" class="btn">Lacak</button>
