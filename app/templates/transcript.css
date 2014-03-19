@@ -137,8 +137,8 @@ body {
 	border-top: none;
 	margin-top: 3pt;
 }
-.pane p {
-	margin: 6pt 0;
+.pane p + p {
+	margin-top: 6pt;
 }
 table {
 	width: 100%;
