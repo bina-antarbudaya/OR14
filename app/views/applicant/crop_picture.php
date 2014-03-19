@@ -1,7 +1,7 @@
 <?php
 $this->require_css('imgareaselect/imgareaselect-animated');
 // $this->require_css('applicant/crop_picture');
-$this->print_header();
+$this->print_header('Formulir Pendaftaran');
 ?>
 <header class="page-header">
 	<h2>Tahap 3 dari 4</h2>
