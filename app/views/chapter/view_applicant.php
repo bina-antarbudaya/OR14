@@ -84,7 +84,7 @@
 				<input type="hidden" name="id" value="<?php echo $applicant->id ?>">
 				<input type="hidden" name="finalized" value="1">
 				<input type="hidden" name="confirmed" value="0">
-				<button type="submit" class="btn btn-danger btn-block btn-large">Batalkan konfirmasi</button>
+				<button type="submit" class="btn btn-danger btn-block btn-large">Batalkan verifikasi berkas</button>
 			</p>
 		</form>
 		<?php
@@ -95,8 +95,8 @@
 				<input type="hidden" name="id" value="<?php echo $applicant->id ?>">
 				<input type="hidden" name="finalized" value="1">
 				<input type="hidden" name="confirmed" value="1">
-				<button type="submit" class="btn btn-success btn-block btn-large">Konfirmasi pendaftaran</button>
-				<span class="help-block">Lakukan konfirmasi hanya jika <?php echo $applicant->sanitized_full_name ?> telah melengkapi seluruh persyaratan pendaftaran.</span>
+				<button type="submit" class="btn btn-success btn-block btn-large">Verifikasi berkas pendaftaran</button>
+				<span class="help-block">Lakukan verifikasi berkas jika <?php echo $applicant->sanitized_full_name ?> telah melengkapi seluruh persyaratan pendaftaran.</span>
 			</p>
 		</form>
 		<?php if ($this->user->capable_of('chapter_admin')): ?>
@@ -105,7 +105,7 @@
 				<input type="hidden" name="id" value="<?php echo $applicant->id ?>">
 				<input type="hidden" name="finalized" value="0">
 				<input type="hidden" name="confirmed" value="0">
-				<button type="submit" class="btn btn-danger btn-block btn-large">Batalkan finalisasi</button>
+				<button type="submit" class="btn btn-danger btn-block">Batalkan finalisasi</button>
 				<span class="help-block">Pembatalan finalisasi dilakukan hanya jika <?php echo $applicant->sanitized_full_name ?> salah mengisi formulir pendaftarannya.</span>
 			</p>
 		</form>
