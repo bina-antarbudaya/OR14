@@ -378,7 +378,7 @@ class FormDisplay {
 		<?php $this->textarea($name . '_address_street', 'input-block-level') ?>
 		<?php if ($kota): ?>
 		<?php $this->label($name . '_address_city', 'Town', 'subpoint') ?>
-		<?php $this->text($name . '_address_city', 'medium') ?>
+		<?php $this->text($name . '_address_city', 'medium', 45) ?>
 		<?php
 		endif;
 		if ($provinsi):
@@ -408,7 +408,7 @@ class FormDisplay {
 		<?php $this->label($name . '_phone_areacode', 'Home Phone', 'subpoint') ?>
 		<span class="phone-number">
 		( <?php $this->tel($name . '_phone_areacode', 'very-short area-code', 4) ?> )
-		<?php $this->tel($name . '_phone_number', 'short', 12) ?>
+		<?php $this->tel($name . '_phone_number', 'short', 30) ?>
 		<!-- ext.
 		<?php $this->tel($name . '_phone_number_extension', 'very-short extension', 12) ?> -->
 		</span>
@@ -420,7 +420,7 @@ class FormDisplay {
 		<?php $this->label($name . '_fax_areacode', 'Fax', 'subpoint') ?>
 		<span class="phone-number">
 		( <?php $this->tel($name . '_fax_areacode', 'very-short', 4) ?> )
-		<?php $this->tel($name . '_fax_number', 'short', 12) ?>
+		<?php $this->tel($name . '_fax_number', 'short', 30) ?>
 		</span>
 		<?php
 		endif;
