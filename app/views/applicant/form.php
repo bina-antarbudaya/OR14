@@ -132,6 +132,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 					</div>
 					<div class="span3">
 						<input type="hidden" name="applicant_id" value="<?php echo $applicant->id ?>">
+						<input type="hidden" name="last_pane" value="<?php echo $last_pane ?>" id="lastpane">
 						<button type="submit" title="Simpan sementara isi formulir ini. Formulir yang telah disimpan sementara dapat diedit kembali selama belum melakukan finalisasi." class="btn btn-success btn-block" id="save-button"><i class="icon-ok icon-white"></i> Simpan Sementara</button>
 					</div>
 				</div>
@@ -186,22 +187,22 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr> */ ?>
 							<tr>
 								<td class="label"><?php $form->label('first_name', 'Nama Depan', 'required') ?></td>
-								<td class="field"><?php $form->text('first_name', 'input-block-level'); ?>
+								<td class="field"><?php $form->text('first_name', 'input-block-level', 45); ?>
 								<span class="help-block">Isilah sesuai akta kelahiran dan tanpa menggunakan singkatan.</span></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('middle_name', 'Nama Tengah') ?></td>
-								<td class="field"><?php $form->text('middle_name', 'input-block-level'); ?>
+								<td class="field"><?php $form->text('middle_name', 'input-block-level', 45); ?>
 								<span class="help-block">Isilah sesuai akta kelahiran dan tanpa menggunakan singkatan.</span></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('last_name', 'Nama Belakang') ?></td>
-								<td class="field"><?php $form->text('last_name', 'input-block-level'); ?>
+								<td class="field"><?php $form->text('last_name', 'input-block-level', 45); ?>
 								<span class="help-block">Isilah sesuai akta kelahiran dan tanpa menggunakan singkatan.</span></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('place_of_birth', 'Tempat Kelahiran', 'required') ?></td>
-								<td class="field"><?php $form->text('place_of_birth', 'input-block-level') ?></td>
+								<td class="field"><?php $form->text('place_of_birth', 'input-block-level', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('date_of_birth', 'Tanggal Lahir', 'required') ?></td>
@@ -221,7 +222,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('applicant_email', 'Alamat E-mail', 'required') ?></td>
-								<td class="field"><?php $form->email('applicant_email', 'long'); ?> <span class="help-block">Seluruh pengumuman mengenai seleksi akan dikirim ke alamat ini.</span></td>
+								<td class="field"><?php $form->email('applicant_email', 'input-block-level', 128); ?> <span class="help-block">Seluruh pengumuman mengenai seleksi akan dikirim ke alamat ini.</span></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('applicant_address_street', 'Alamat Lengkap', 'required') ?></td>
@@ -236,14 +237,14 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('body_height', 'Tinggi Badan', 'required') ?></td>
 								<td class="field">
-									<?php $form->number('body_height', 'short') ?>
+									<?php $form->number('body_height', 'short', 512) ?>
 									cm
 								</td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('body_weight', 'Berat Badan', 'required') ?></td>
 								<td class="field">
-									<?php $form->number('body_weight', 'short') ?>
+									<?php $form->number('body_weight', 'short', 512) ?>
 									kg
 								</td>
 							</tr>
@@ -258,7 +259,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('citizenship', 'Kewarganegaraan', 'required') ?></td>
 								<td class="field">
-									<?php $form->text('citizenship', 'long') ?>
+									<?php $form->text('citizenship', 'input-block-level', 512) ?>
 									<br>
 									<span class="help-block">Contoh: Indonesia</span>
 								</td>
@@ -266,7 +267,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('religion', 'Agama', 'required') ?></td>
 								<td class="field">
-									<?php $form->text('religion', 'long') ?>
+									<?php $form->text('religion', 'input-block-level', 512) ?>
 								</td>
 							</tr>
 						</table>
@@ -468,27 +469,27 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label($n . '_full_name', "Nama Lengkap $parent", 'required') ?></td>
 								<td class="field">
-									<?php $form->text($n . '_full_name', 'long'); ?>
+									<?php $form->text($n . '_full_name', 'long', 128); ?>
 									<br>
 									<span class="help-block">Isilah dengan nama lengkap. Apabila telah wafat, cantumkan (Alm).</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label($n . '_office_email', 'Alamat E-mail ' . $parent) ?></td>
-								<td class="field"><?php $form->text($n . '_office_email', 'long') ?></td>
+								<td class="field"><?php $form->text($n . '_office_email', 'long', 128) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label($n . '_office_mobilephone', 'Nomor Ponsel ' . $parent) ?></td>
-								<td class="field"><?php $form->tel($n . '_office_mobilephone', 'long') ?></td>
+								<td class="field"><?php $form->tel($n . '_office_mobilephone', 'long', 20) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label($n . '_education', 'Pendidikan Terakhir ' . $parent) ?></td>
-								<td class="field"><?php $form->text($n . '_education', 'long'); ?></td>
+								<td class="field"><?php $form->text($n . '_education', 'long', 128); ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label($n . '_occupation', 'Pekerjaan/Jabatan ' . $parent) ?></td>
 								<td class="field">
-									<?php $form->text($n . '_occupation', 'long'); ?>
+									<?php $form->text($n . '_occupation', 'long', 45); ?>
 									<br>
 									<span class="help-block long">Isilah dengan rinci &ndash; bila wiraswasta, cantumkan bidangnya; bila swasta, cantumkan nama perusahaannya.</span>
 								</td>
@@ -496,14 +497,14 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label($n . '_job_title', 'Pangkat/Golongan ' . $parent) ?></td>
 								<td class="field">
-									<?php $form->text($n . '_job_title', 'long'); ?>
+									<?php $form->text($n . '_job_title', 'long', 45); ?>
 									<br>
 									<span class="help-block long">Isilah dengan rinci &ndash; bila TNI, cantumkan pangkatnya; bila PNS, cantumkan golongannya; bila swasta, cantumkan jabatannya.</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label($n . '_office_name', 'Instansi/Perusahaan ' . $parent) ?></td>
-								<td class="field"><?php $form->text($n . '_office_name', 'long'); ?></td>
+								<td class="field"><?php $form->text($n . '_office_name', 'long', 45); ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label($n . '_office_address_street', 'Alamat Kantor ' . $parent) ?></td>
@@ -519,7 +520,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('guardian_full_name', "Nama Lengkap Wali") ?></td>
 								<td class="field">
-									<?php $form->text('guardian_full_name', 'long'); ?>
+									<?php $form->text('guardian_full_name', 'long', 128); ?>
 									<br>
 									<span class="help-block">Isilah dengan nama lengkap.</span>
 								</td>
@@ -527,11 +528,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							
 							<tr>
 								<td class="label"><?php $form->label('guardian_relationship_to_applicant', 'Hubungan dengan Adik') ?></td>
-								<td class="field"><?php $form->text('guardian_relationship_to_applicant', 'long'); ?></td>
+								<td class="field"><?php $form->text('guardian_relationship_to_applicant', 'long', 128); ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('guardian_email', 'Alamat E-mail Wali') ?></td>
-								<td class="field"><?php $form->text('guardian_email', 'long') ?></td>
+								<td class="field"><?php $form->text('guardian_email', 'long', 128) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('guardian_address_street', 'Alamat Wali') ?></td>
@@ -540,25 +541,29 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<?php /* The field below is in the DB schema but not the original form */ ?>
 							<tr>
 								<td class="label"><?php $form->label('guardian_education', 'Pendidikan Terakhir') ?></td>
-								<td class="field"><?php $form->text('guardian_education', 'long'); ?></td>
+								<td class="field"><?php $form->text('guardian_education', 'long', 128); ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('guardian_occupation', 'Pekerjaan/Jabatan Wali') ?></td>
 								<td class="field">
-									<?php $form->text('guardian_occupation', 'long'); ?>
+									<?php $form->text('guardian_occupation', 'long', 45); ?>
 									<br>
 									<span class="help-block long">Isilah dengan rinci &ndash; bila wiraswasta, cantumkan bidangnya; bila swasta, cantumkan jabatan dan nama perusahaannya.</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('guardian_job_title', 'Pangkat/Golongan Wali') ?></td>
-								<td class="field"><?php $form->text('guardian_job_title', 'long'); ?></td>
+								<td class="field"><?php $form->text('guardian_job_title', 'long', 45); ?></td>
 							</tr>
 							<tr>
-								<td class="label"><?php $form->label('guardian_office_name', 'Nama dan Alamat Kantor') ?></td>
+								<td class="label"><?php $form->label('guardian_office_name', 'Nama Kantor') ?></td>
 								<td class="field">
-									<?php $form->text('guardian_office_name', 'long'); ?>
-									<br>
+									<?php $form->text('guardian_office_name', 'long', 45); ?>
+								</td>
+							</tr>
+							<tr>
+								<td class="label"><?php $form->label('guardian_office_address_street', 'Nama Kantor') ?></td>
+								<td class="field">
 									<?php $form->address('guardian_office', true, true, false, true, false, true, false) ?>
 								</td>
 							</tr>
@@ -568,11 +573,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('number_of_children_in_family', 'Jumlah Anak dalam Keluarga', 'required') ?></td>
-								<td class="field"><?php $form->number('number_of_children_in_family', 'short required'); ?></td>
+								<td class="field"><?php $form->number('number_of_children_in_family', 'short required', 4); ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('nth_child', 'Adik adalah anak ke-...', 'required') ?></td>
-								<td class="field"><?php $form->number('nth_child', 'short required'); ?></td>
+								<td class="field"><?php $form->number('nth_child', 'short required', 4); ?></td>
 							</tr>
 						</table>
 						<table class="siblings-table subform">
@@ -591,22 +596,22 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach ($sibling_forms as $s):
 								?>
 								<tr class="notempty">
-									<td class="sibling-name"><?php $s->text('full_name', 'short') ?></td>
+									<td class="sibling-name"><?php $s->text('full_name', 'short', 128) ?></td>
 									<td class="sibling-dob"><?php $s->date('date_of_birth', 50) ?></td>
-									<td class="sibling-job"><?php $s->text('occupation', 'short') ?></td>
+									<td class="sibling-job"><?php $s->text('occupation', 'short', 45) ?></td>
 								</tr>
 								<?php endforeach; ?>
 								<?php for ($i = 0; $i < ($applicant->number_of_children_in_family - count($sibling_forms) - 1); $i++): $s = new FormDisplay; $s->make_subform('siblings[' . ($i + 1024) . ']') ?>
 								<tr class="phpengineered">
-									<td class="sibling-name"><?php $s->text('full_name', 'short') ?></td>
+									<td class="sibling-name"><?php $s->text('full_name', 'short', 128) ?></td>
 									<td class="sibling-dob"><?php $s->date('date_of_birth', 50) ?></td>
-									<td class="sibling-job"><?php $s->text('occupation', 'short') ?></td>
+									<td class="sibling-job"><?php $s->text('occupation', 'short', 45) ?></td>
 								</tr>
 								<?php endfor; $s = new FormDisplay; $s->make_subform('siblings[#]'); ?>
 								<tr class="prototype">
-									<td class="sibling-name"><?php $s->text('full_name', 'short') ?></td>
+									<td class="sibling-name"><?php $s->text('full_name', 'short', 128) ?></td>
 									<td class="sibling-dob"><?php $s->date('date_of_birth', 50) ?></td>
-									<td class="sibling-job"><?php $s->text('occupation', 'short') ?></td>
+									<td class="sibling-job"><?php $s->text('occupation', 'short', 45) ?></td>
 								</tr>
 							</tbody>
 						</table>
@@ -630,7 +635,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('high_school_name', 'Nama Sekolah', 'required') ?></td>
 								<td class="field">
-									<?php $form->text('high_school_name', 'long'); ?><br>
+									<?php $form->text('high_school_name', 'long', 100); ?><br>
 									<span class="help-block"><strong>Cantumkan nama kota</strong>, misal: SMA <u>Negeri</u> 2 <u><?php echo $applicant->chapter->chapter_name ?></u></span>
 									<span class="help-block">Jika Adik pernah berpindah sekolah (mutasi), tuliskan secara berurutan nama masing-masing sekolah yang pernah Adik masuki dengan memisahkannya dengan garis miring (/).</span>
 									<datalist id="high-schools" data-for="high_school_name">
@@ -699,7 +704,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('junior_high_school_name', 'Nama Sekolah', 'required') ?></td>
 								<td class="field">
-									<?php $form->text('junior_high_school_name', 'long'); ?><br>
+									<?php $form->text('junior_high_school_name', 'long', 100); ?><br>
 									<span class="help-block"><strong>Cantumkan nama kota</strong>, misal: SMP <u>Negeri</u> 2 <u><?php echo $applicant->chapter->chapter_name ?></u></span>
 									<span class="help-block">Jika Adik pernah berpindah sekolah (mutasi), tuliskan secara berurutan nama masing-masing sekolah yang pernah Adik masuki dengan memisahkannya dengan garis miring (/).</span>	
 								</td>
@@ -747,7 +752,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							<tr>
 								<td class="label"><?php $form->label('elementary_school_name', 'Nama Sekolah', 'required') ?></td>
 								<td class="field">
-									<?php $form->text('elementary_school_name', 'long'); ?><br>
+									<?php $form->text('elementary_school_name', 'long', 100); ?><br>
 									<span class="help-block"><strong>Cantumkan nama kota</strong>, misal: SD <u>Negeri</u> 2 <u><?php echo $applicant->chapter->chapter_name ?></u></span>
 									<span class="help-block">Jika Adik pernah berpindah sekolah (mutasi), tuliskan secara berurutan nama masing-masing sekolah yang pernah Adik masuki dengan memisahkannya dengan garis miring (/).</span>	
 								</td>
@@ -794,15 +799,15 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('years_speaking_english', 'Sudah berapa lama Adik belajar Bahasa Inggris?', 'required') ?></td>
-								<td class="field"><?php $form->text('years_speaking_english', 'long') ?></td>
+								<td class="field"><?php $form->text('years_speaking_english', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('other_languages', 'Bahasa lain yang Adik kuasai/pelajari') ?></td>
-								<td class="field"><?php $form->text('other_languages', 'long') ?></td>
+								<td class="field"><?php $form->text('other_languages', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('years_speaking_other_languages', 'Berapa lama?') ?></td>
-								<td class="field"><?php $form->text('years_speaking_other_languages', 'long') ?></td>
+								<td class="field"><?php $form->text('years_speaking_other_languages', 'long', 45) ?></td>
 							</tr>
 						</table>
 						
@@ -810,11 +815,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('favorite_subject', 'Mata pelajaran favorit', 'required') ?></td>
-								<td class="field"><?php $form->text('favorite_subject', 'long') ?></td>
+								<td class="field"><?php $form->text('favorite_subject', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('dream', 'Cita-cita', 'required') ?></td>
-								<td class="field"><?php $form->text('dream', 'long') ?></td>
+								<td class="field"><?php $form->text('dream', 'long', 45) ?></td>
 							</tr>
 						</table>
 					</fieldset>
@@ -849,19 +854,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach ($subforms['applicant_organizations'] as $s):
 								?>
 								<tr class="notempty">
-									<td class="name"><?php $s->text('name', 'short') ?></td>
-									<td class="kind"><?php $s->text('kind', 'short') ?></td>
-									<td class="level"><?php $s->select('level', array(
-										'' => '(Tingkat)',
-										'school' => 'Sekolah',
-										'neighborhood' => 'RT/RW',
-										'district' => 'Kecamatan',
-										'city' => 'Kabupaten/Kota',
-										'province' => 'Provinsi',
-										'national' => 'Nasional',
-										'international' => 'Internasional'
-									), 'short')?></td>
-									<td class="achv"><?php $s->text('position', 'short') ?></td>
+									<td class="name"><?php $s->text('name', 'short', 45) ?></td>
+									<td class="kind"><?php $s->text('kind', 'short', 45) ?></td>
+									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
+									<td class="achv"><?php $s->text('position', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endforeach; ?>
@@ -869,19 +865,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								$s = new FormDisplay;
 								$s->make_subform("applicant_organizations[$i]"); ?>
 								<tr>
-									<td class="name"><?php $s->text('name', 'short') ?></td>
-									<td class="kind"><?php $s->text('kind', 'short') ?></td>
-									<td class="level"><?php $s->select('level', array(
-										'' => '(Tingkat)',
-										'school' => 'Sekolah',
-										'neighborhood' => 'RT/RW',
-										'district' => 'Kecamatan',
-										'city' => 'Kabupaten/Kota',
-										'province' => 'Provinsi',
-										'national' => 'Nasional',
-										'international' => 'Internasional'
-									), 'short')?></td>
-									<td class="achv"><?php $s->text('position', 'short') ?></td>
+									<td class="name"><?php $s->text('name', 'short', 45) ?></td>
+									<td class="kind"><?php $s->text('kind', 'short', 45) ?></td>
+									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
+									<td class="achv"><?php $s->text('position', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endfor; ?>
@@ -892,11 +879,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('arts_hobby', 'Sekedar hobi', 'required') ?></td>
-								<td class="field"><?php $form->text('arts_hobby', 'long') ?></td>
+								<td class="field"><?php $form->text('arts_hobby', 'long', 60) ?></td>
 							</tr>		
 							<tr>
 								<td class="label"><?php $form->label('arts_organized', 'Ikut perkumpulan') ?></td>
-								<td class="field"><?php $form->text('arts_organized', 'long') ?></td>
+								<td class="field"><?php $form->text('arts_organized', 'long', 60) ?></td>
 							</tr>
 						</table>
 
@@ -916,10 +903,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach ($subforms['applicant_arts_achievements'] as $s):
 								?>
 								<tr class="notempty">
-									<td class="name"><?php $s->text('championship', 'short') ?></td>
-									<td class="kind"><?php $s->text('kind', 'short') ?></td>
+									<td class="name"><?php $s->text('championship', 'short', 45) ?></td>
+									<td class="kind"><?php $s->text('kind', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="achv"><?php $s->text('achievement', 'short') ?></td>
+									<td class="achv"><?php $s->text('achievement', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endforeach; ?>
@@ -927,10 +914,10 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								$s = new FormDisplay;
 								$s->make_subform("applicant_arts_achievements[$i]"); ?>
 								<tr>
-									<td class="name"><?php $s->text('championship', 'short') ?></td>
-									<td class="kind"><?php $s->text('kind', 'short') ?></td>
+									<td class="name"><?php $s->text('championship', 'short', 45) ?></td>
+									<td class="kind"><?php $s->text('kind', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="achv"><?php $s->text('achievement', 'short') ?></td>
+									<td class="achv"><?php $s->text('achievement', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endfor; ?>
@@ -942,11 +929,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('sports_hobby', 'Sekedar hobi', 'required') ?></td>
-								<td class="field"><?php $form->text('sports_hobby', 'long') ?></td>
+								<td class="field"><?php $form->text('sports_hobby', 'long', 60) ?></td>
 							</tr>		
 							<tr>
 								<td class="label"><?php $form->label('sports_organized', 'Ikut perkumpulan') ?></td>
-								<td class="field"><?php $form->text('sports_organized', 'long') ?></td>
+								<td class="field"><?php $form->text('sports_organized', 'long', 60) ?></td>
 							</tr>
 						</table>
 						<table class="achievements subform" width="620">
@@ -964,9 +951,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach ($subforms['applicant_sports_achievements'] as $s):
 								?>
 								<tr class="notempty">
-									<td class="chmp"><?php $s->text('championship', 'short') ?></td>
+									<td class="chmp"><?php $s->text('championship', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="achv"><?php $s->text('achievement', 'short') ?></td>
+									<td class="achv"><?php $s->text('achievement', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endforeach; ?>
@@ -974,9 +961,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								$s = new FormDisplay;
 								$s->make_subform("applicant_sports_achievements[$i]"); ?>
 								<tr>
-									<td class="chmp"><?php $s->text('championship', 'short') ?></td>
+									<td class="chmp"><?php $s->text('championship', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="achv"><?php $s->text('achievement', 'short') ?></td>
+									<td class="achv"><?php $s->text('achievement', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endfor; ?>
@@ -1000,9 +987,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach ($subforms['applicant_other_achievements'] as $s):
 								?>
 								<tr class="notempty">
-									<td class="chmp"><?php $s->text('activity', 'short') ?></td>
+									<td class="chmp"><?php $s->text('activity', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="achv"><?php $s->text('achievement', 'short') ?></td>
+									<td class="achv"><?php $s->text('achievement', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endforeach; ?>
@@ -1010,9 +997,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								$s = new FormDisplay;
 								$s->make_subform("applicant_other_achievements[$i]"); ?>
 								<tr>
-									<td class="chmp"><?php $s->text('activity', 'short') ?></td>
+									<td class="chmp"><?php $s->text('activity', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="achv"><?php $s->text('achievement', 'short') ?></td>
+									<td class="achv"><?php $s->text('achievement', 'short', 45) ?></td>
 									<td class="year"><?php $s->select_year('year', date('Y') - 12, date('Y')) ?></td>
 								</tr>
 								<?php endfor; ?>
@@ -1035,9 +1022,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								foreach ($subforms['applicant_work_experiences'] as $s):
 								?>
 								<tr class="notempty">
-									<td class="ngo"><?php $s->text('organization', 'short') ?></td>
+									<td class="ngo"><?php $s->text('organization', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="ngo"><?php $s->text('position', 'short') ?></td>
+									<td class="ngo"><?php $s->text('position', 'short', 45) ?></td>
 									<td class="period"><?php $s->text('period') ?></td>
 								</tr>
 								<?php endforeach; ?>
@@ -1045,9 +1032,9 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 								$s = new FormDisplay;
 								$s->make_subform("applicant_work_experiences[$i]"); ?>
 								<tr>
-									<td class="ngo"><?php $s->text('organization', 'short') ?></td>
+									<td class="ngo"><?php $s->text('organization', 'short', 45) ?></td>
 									<td class="level"><?php $s->select('level', $levels, 'short')?></td>
-									<td class="ngo"><?php $s->text('position', 'short') ?></td>
+									<td class="ngo"><?php $s->text('position', 'short', 45) ?></td>
 									<td class="period"><?php $s->text('period') ?></td>
 								</tr>
 								<?php endfor; ?>
@@ -1062,15 +1049,15 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table" data-toggle="short_term_travel_has">
 							<tr>
 								<td class="label"><?php $form->label('short_term_travel_destination', 'Ke mana?') ?></td>
-								<td class="field"><?php $form->text('short_term_travel_destination', 'long') ?></td>
+								<td class="field"><?php $form->text('short_term_travel_destination', 'long', 60) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('short_term_travel_when', 'Kapan?') ?></td>
-								<td class="field"><?php $form->text('short_term_travel_when', 'long') ?></td>
+								<td class="field"><?php $form->text('short_term_travel_when', 'long', 60) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('short_term_travel_purpose', 'Dalam rangka apa?') ?></td>
-								<td class="field"><?php $form->text('short_term_travel_purpose', 'long') ?></td>
+								<td class="field"><?php $form->text('short_term_travel_purpose', 'long', 60) ?></td>
 							</tr>
 						</table>
 						
@@ -1080,19 +1067,19 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table" data-toggle="long_term_travel_has">
 							<tr>
 								<td class="label"><?php $form->label('long_term_travel_destination', 'Ke mana?') ?></td>
-								<td class="field"><?php $form->text('long_term_travel_destination', 'long') ?></td>
+								<td class="field"><?php $form->text('long_term_travel_destination', 'long', 60) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('long_term_travel_when', 'Kapan dan berapa lama?') ?></td>
-								<td class="field"><?php $form->text('long_term_travel_when', 'long') ?></td>
+								<td class="field"><?php $form->text('long_term_travel_when', 'long', 60) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('long_term_travel_purpose', 'Dalam rangka apa?') ?></td>
-								<td class="field"><?php $form->text('long_term_travel_purpose', 'long') ?></td>
+								<td class="field"><?php $form->text('long_term_travel_purpose', 'long', 60) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('long_term_travel_activities', 'Kegiatan Adik selama di sana?') ?></td>
-								<td class="field"><?php $form->text('long_term_travel_activities', 'long') ?></td>
+								<td class="field"><?php $form->text('long_term_travel_activities', 'long', 200) ?></td>
 							</tr>
 						</table>
 					</fieldset>
@@ -1106,11 +1093,11 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table" data-toggle="relative_returnee_exists">
 							<tr>
 								<td class="label"><?php $form->label('relative_returnee_name', 'Nama') ?></td>
-								<td class="field"><?php $form->text('relative_returnee_name', 'long') ?></td>
+								<td class="field"><?php $form->text('relative_returnee_name', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('relative_returnee_relationship', 'Hubungan dengan Adik') ?></td>
-								<td class="field"><?php $form->text('relative_returnee_relationship', 'long') ?></td>
+								<td class="field"><?php $form->text('relative_returnee_relationship', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('relative_returnee_program', 'Program') ?></td>
@@ -1120,7 +1107,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('relative_returnee_destination', 'Tujuan (sending)/Asal (hosting)') ?></td>
-								<td class="field"><?php $form->text('relative_returnee_destination', 'long')  ?></td>
+								<td class="field"><?php $form->text('relative_returnee_destination', 'long', 45)  ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('relative_returnee_address_street', 'Alamat sekarang') ?></td>
@@ -1134,15 +1121,15 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table" data-toggle="past_binabud_has">
 							<tr>
 								<td class="label"><?php $form->label('past_binabud_activities_who', 'Nama') ?></td>
-								<td class="field"><?php $form->text('past_binabud_activities_who', 'long')  ?></td>
+								<td class="field"><?php $form->text('past_binabud_activities_who', 'long', 45)  ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('past_binabud_activities_relationship', 'Hubungan dengan Adik') ?></td>
-								<td class="field"><?php $form->text('past_binabud_activities_relationship', 'long')  ?></td>
+								<td class="field"><?php $form->text('past_binabud_activities_relationship', 'long', 45)  ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('past_binabud_activities', 'Kegiatan') ?></td>
-								<td class="field"><?php $form->text('past_binabud_activities', 'long')  ?></td>
+								<td class="field"><?php $form->text('past_binabud_activities', 'long', 45)  ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('past_binabud_activities_year', 'Tahun') ?></td>
@@ -1154,7 +1141,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('referrer', 'Dari mana Adik mengetahui program kami?', 'required') ?></td>
-								<td class="field"><?php $form->textarea('referrer', 'large');  ?></td>
+								<td class="field"><?php $form->textarea('referrer', 'large', 255);  ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('motivation', 'Apa motivasi Adik mengikuti seleksi dan program Bina Antarbudaya?', 'required') ?></td>
@@ -1174,7 +1161,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('recommendations_school_name', 'Nama', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_school_name', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_school_name', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_school_address', 'Alamat/Telepon', 'required') ?></td>
@@ -1182,7 +1169,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_school_occupation', 'Pekerjaan', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_school_occupation', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_school_occupation', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_school_work_address', 'Alamat pekerjaan', 'required') ?></td>
@@ -1190,14 +1177,14 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_school_relationship', 'Hubungan', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_school_relationship', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_school_relationship', 'long', 45) ?></td>
 							</tr>
 						</table>
 						<h4>Lingkungan rumah/organisasi di luar sekolah <span>(<strong>bukan keluarga,</strong> berusia sekurang-kurangnya 21 tahun)</span></h4>
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('recommendations_nonschool_name', 'Nama', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_nonschool_name', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_nonschool_name', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_nonschool_address', 'Alamat/Telepon', 'required') ?></td>
@@ -1205,7 +1192,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_nonschool_occupation', 'Pekerjaan', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_nonschool_occupation', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_nonschool_occupation', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_nonschool_work_address', 'Alamat pekerjaan'/* , 'required' */) ?></td>
@@ -1213,7 +1200,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_nonschool_relationship', 'Hubungan', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_nonschool_relationship', 'long') ?><br>
+								<td class="field"><?php $form->text('recommendations_nonschool_relationship', 'long', 45) ?><br>
 									<span class="help-block">Pastikan yang bersangkutan tidak memiliki hubungan keluarga dengan Adik.</span></td>
 							</tr>
 						</table>
@@ -1221,7 +1208,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 						<table class="form-table">
 							<tr>
 								<td class="label"><?php $form->label('recommendations_close_friend_name', 'Nama', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_close_friend_name', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_close_friend_name', 'long', 45) ?></td>
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_close_friend_address', 'Alamat/Telepon', 'required') ?></td>
@@ -1229,7 +1216,7 @@ $dob_lower_limit_yes->setDate($program_year - 18, 1, 1);
 							</tr>
 							<tr>
 								<td class="label"><?php $form->label('recommendations_close_friend_relationship', 'Hubungan', 'required') ?></td>
-								<td class="field"><?php $form->text('recommendations_close_friend_relationship', 'long') ?></td>
+								<td class="field"><?php $form->text('recommendations_close_friend_relationship', 'long', 45) ?></td>
 							</tr>
 						</table>
 					</fieldset>
