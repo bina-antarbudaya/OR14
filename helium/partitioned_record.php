@@ -215,6 +215,13 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 				$vertical_delta = array();
 				if ($this->_is_vertically_partitioned) {
 					// Find the delta of tables (list of tables that need to be modified)
+
+					// Load the current values across all partition tables first
+					foreach (array_keys($this->_vertical_partition_table_map) as $table) {
+						$this->fetch_vertical_partition_values($table);
+					}
+
+					// Compare existing values with new values
 					foreach ($this->_vertical_partition_column_map as $col => $tab) {
 						if (!in_array($tab, $vertical_delta)) {
 							$current = $this->$col;
