@@ -4,7 +4,7 @@ $this->require_css('imgareaselect/imgareaselect-animated');
 $this->print_header();
 ?>
 <header class="page-header">
-	<h2>Tahap 3/4</h2>
+	<h2>Tahap 3 dari 4</h2>
 	<h1>Formulir Pendaftaran</h1>
 </header>
 
