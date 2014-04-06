@@ -104,7 +104,7 @@ class HomeController extends AppController {
 
 	public function index() {
 		// $this->firstrun_check();
-		$this['chapters'] = Chapter::find("id != 1 && chapter_name != 'Ambon' && chapter_name != 'Pontianak'");
+		$this['chapters'] = Chapter::find("id != 1 && chapter_name != 'Ambon' && chapter_name != 'Pontianak' && chapter_name != 'Jayapura' && chapter_name != 'Pangkal Pinang' && chapter_name != 'Manado'");
 		$this['chapters']->set_order_by('chapter_name');
 		$this['chapter_count'] = $this['chapters']->count_all();
 		$this['this_year'] = Helium::conf('program_year') - 2;
