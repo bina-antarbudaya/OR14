@@ -1073,7 +1073,7 @@ $this->_vertical_partition_column_types = array (
 		
 		$chapters = Helium::db()->get_results('SELECT * FROM chapters');
 		foreach ($chapters as $chapter) {
-			$pattern = "/ {$chapter->chapter_code}/i";
+			$pattern = "/ {$chapter->chapter_code}$/i";
 			$mispell[$pattern] = $chapter->chapter_name;
 		}
 
