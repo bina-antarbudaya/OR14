@@ -218,7 +218,7 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 
 					// Load the current values across all partition tables first
 					foreach (array_keys($this->_vertical_partition_table_map) as $table) {
-						$this->fetch_vertical_partition_values($table);
+						$this->fetch_vertical_partition_values($table, false);
 					}
 
 					// Compare existing values with new values
@@ -480,7 +480,7 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 		}
 	}
 	
-	protected function fetch_vertical_partition_values($table_name) {
+	protected function fetch_vertical_partition_values($table_name, $apply_values = true) {
 		// Fill $this with values from the vertical partition contained in table $table_name
 		// We use the value parsing algorithm from RecordCollection: HeliumRecordCollection::prepare_value
 		if ($this->exists()) {
@@ -498,7 +498,7 @@ abstract class HeliumPartitionedRecord extends HeliumRecord {
 					$col_type = $this->_vertical_partition_column_types[$col];
 					$this->_vertical_partition_original_values[$col] = 	 
 						HeliumRecordCollection::prepare_value($value, $col_type);
-					if (!$this->$col)
+					if (!$this->$col && $apply_values)
 						$this->$col = $this->_vertical_partition_original_values[$col];
 				}
 			}
