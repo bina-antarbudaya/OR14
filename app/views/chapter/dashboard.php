@@ -31,33 +31,9 @@
 	<?php if ($current_phase == 'registration'): ?>
 	<div class="row">
 		<div class="span4">
-			<h4>PIN Pendaftaran</h4>
-			<table class="table counts">
-				<tr>
-					<td rowspan="3">
-						<span title="Jumlah seluruh PIN pendaftaran yang telah di-generate melalui sistem"><strong><?php echo $code_count ?></strong> <i>generated</i></span>
-					</td>
-					<td>
-						<span title="Jumlah PIN pendaftaran yang telah digunakan untuk membuat akun baru atau memperpanjang akun yang telah kadaluarsa"><strong class="text-info"><?php echo $activated_code_count ?></strong> terpakai</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span title="Jumlah PIN pendaftaran yang masih dapat digunakan"><strong class="text-success"><?php echo $available_code_count ?></strong> tersedia</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span title="Jumlah PIN yang telah kadaluarsa"><strong class="muted"><?php echo $expired_code_count ?></strong> kadaluarsa</span>
-					</td>
-				</tr>
-			</table>
-			<p>
-				<a class="btn btn-primary btn-block" href="<?php L(array('controller' => 'registration_code', 'action' => 'issue', 'chapter_id' => $id)) ?>">Terbitkan PIN baru</a>
-			</p>
-			<p>
-				<a class="btn btn-block" href="<?php L(array('controller' => 'registration_code', 'action' => 'index', 'chapter_id' => $id)) ?>">Daftar PIN yang sudah diterbitkan</a>
-			</p>
+			<h4>Persiapan Seleksi Tahap Pertama</h4>
+
+			<a class="btn btn-block btn-primary" href="<?php L(array('controller' => 'participant', 'action' => 'participant_list')) ?>">Unduh daftar seluruh peserta dalam format Excel</a>
 		</div>
 		<div class="span4">
 
