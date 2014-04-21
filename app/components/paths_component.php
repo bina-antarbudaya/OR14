@@ -33,6 +33,11 @@ class PathsComponent extends HeliumComponent {
 		$path = ltrim($path, '/');
 		$path = '/' . $path;
 
-		return Helium::conf('base_uri') . $path;
+		if (substr($path, 0, 7) == '/assets') {
+			return Helium::conf('assets_public_path') . substr($path, 7);
+		}
+		else {
+			return Helium::conf('base_uri') . $path;
+		}
 	}
 }
