@@ -43,19 +43,26 @@ class SelectionTwoController extends AppController {
 				else
 					$chapter_id = $db->escape($_POST['chapter_id']);
 				
-				$applicant_ids_query = "SELECT id, test_id, sanitized_full_name FROM applicants WHERE test_id IN $test_ids_string AND chapter_id=$chapter_id AND id IN (SELECT applicant_id FROM participants)";
+				$applicant_ids_query = "SELECT id, test_id, sanitized_full_name FROM applicants WHERE test_id IN $test_ids_string AND chapter_id=$chapter_id AND finalized=1";
 				
 				$participant_ids_query = "SELECT id FROM participants WHERE applicant_id IN (SELECT id FROM applicants WHERE test_id IN $test_ids_string AND chapter_id=$chapter_id)";
 
 				$participant_ids = $db->get_col($participant_ids_query);
 				if (!$participant_ids)
-					$participants_ids_string = '()';
+					$participant_ids_string = '()';
 				else
 					$participant_ids_string = "('" . implode("','", $participant_ids) . "')";
+
+				$applicant_ids = $db->get_col($applicant_ids_query);
+				if (!$applicant_ids)
+					$applicant_ids_string = '()';
+				else
+					$applicant_ids_string = "('" . implode("','", $applicant_ids) . "')";
 
 				$token = mt_rand();
 
 				$this->session['s2'] = array(
+					'applicant_ids_string' => $applicant_ids_string,
 					'participant_ids_string' => $participant_ids_string,
 					'announcement_date_string' => (string) $batch->announcement_date,
 					'announcement_date_follows_national' => $batch->announcement_date_follows_national,
@@ -82,13 +89,15 @@ class SelectionTwoController extends AppController {
 					else
 						$batch->chapter_id = $chapter_id;
 
+					Chapter::ensure_applicants_migrated($batch->chapter_id);
+
 					$batch->save();
 
 					$batch_id = $batch->id;
 
 					// Use a subquery to update participants table
-					$participants_update = $db->query("UPDATE participants SET passed_selection_one=1, selection_two_batch_id=$batch_id, personality_chamber_number=NULL, english_chamber_number=NULL, personality_turn_number=NULL, english_turn_number=NULL WHERE id IN $participant_ids_string");
-					
+					$participants_update = $db->query("UPDATE participants SET passed_selection_one=1, selection_two_batch_id=$batch_id, personality_chamber_number=NULL, english_chamber_number=NULL, personality_turn_number=NULL, english_turn_number=NULL WHERE applicant_id IN $applicant_ids_string");
+
 					$participants_mask = $db->query("UPDATE participants SET passed_selection_one=0 WHERE applicant_id IN (SELECT id FROM applicants WHERE chapter_id='$batch->chapter_id') AND passed_selection_one IS NULL");
 					
 					$db->commit();
