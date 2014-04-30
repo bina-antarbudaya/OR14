@@ -1,8 +1,5 @@
 <?php $this->header(); ?>
 <div class="container">
-	<?php if ($this->can_register()): ?>
-	<a href="<?php L('/daftar') ?>"><img src="<?php L('/assets/dengar.png'); ?>" alt="Dengar kata dunia. Didengar oleh dunia."></a>
-	<?php elseif ($enable_announcement || true): $form = new FormDisplay; ?>
 	<section class="announcement-form">
 		<?php if ($this->params['not_found']): ?>
 		<div class="message error">
@@ -16,7 +13,7 @@
 			<table class="form-table">
 				<tr>
 					<td class="label">Nomor Peserta</td>
-					<td class="field"><input type="text" class="medium" value="YBA/YP14-15/XXX/YYYY" placeholder="YBA/YP14-15/XXX/YYYY" name="test_id"><?php // $form->text('test_id') ?></td>
+					<td class="field"><input type="text" class="medium" value="YBA/YP15-16/XXX/YYYY" placeholder="YBA/YP15-16/XXX/YYYY" name="test_id"><?php // $form->text('test_id') ?></td>
 				</tr>
 				<tr>
 					<td class="label">Tanggal Lahir</td>
@@ -29,6 +26,5 @@
 			</table>
 		</form>
 	</section>
-	<?php endif; ?>
 </div>
 <?php $this->footer(); ?>

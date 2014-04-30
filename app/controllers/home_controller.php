@@ -117,6 +117,9 @@ class HomeController extends AppController {
 	}
 
 	public function results() {
+		if ($this->can_register())
+			$this->http_redirect('/');
+
 		$this['form'] = new FormDisplay;
 	}
 

@@ -80,6 +80,7 @@ abstract class AppController extends HeliumController {
 	}
 	
 	protected function can_register() {
-		return !Helium::db()->get_var('SELECT COUNT(*) FROM participants');
+		return (new HeliumDateTime(Helium::conf('selection_one_announcement_date')))->later_than('now');
+		// return !Helium::db()->get_var('SELECT COUNT(*) FROM participants');
 	}
 }

@@ -51,7 +51,7 @@
 				 	<div class="span3">
 				 		<?php if (!$can_register): ?>
 				 		<section class="results-form">
-				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'home', 'action' => 'results')) ?>">Lihat Hasil Seleksi</a></p>
+				 			<p><a class="btn btn-primary btn-large btn-block" href="<?php L(array('controller' => 'home', 'action' => 'results')) ?>">Pengumuman Hasil Seleksi</a></p>
 				 		</section>
 				 		<?php elseif ($this->is_logged_in() && $this->user->applicant):
 				 		?>
