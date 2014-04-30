@@ -83,10 +83,13 @@ class RegistrationCodeController extends AppController {
 		$this->require_role('chadmin');
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if ($this->session->user->capable_of('admin'))
+			if ($this->session->user->capable_of('admin')) {
 				$chapter_id = (int) $_POST['chapter_id'];
-			else
+				$is_national_admin = true;
+			}
+			else {
 				$chapter_id = $this->session->user->chapter_id;
+			}
 
 			$db = Helium::db();
 
@@ -105,8 +108,9 @@ class RegistrationCodeController extends AppController {
 				$expires_on = new HeliumDateTime($datestring, $timezone);
 				
 				// Latest expiry is set in config.php
+				// Ignore this for national admin
 				$max_expiry = new HeliumDateTime(Helium::conf('registration_deadline'), $timezone);
-				if ($expires_on->later_than($max_expiry)) {
+				if ($expires_on->later_than($max_expiry) && !$is_national_admin) {
 					$expiry_flag = true;
 					$expires_on = $max_expiry;
 				}

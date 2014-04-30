@@ -31,9 +31,21 @@
 	<?php if ($current_phase == 'registration'): ?>
 	<div class="row">
 		<div class="span4">
-			<h4>Persiapan Seleksi Tahap Pertama</h4>
+			<h4>Persiapan Seleksi Tahap Kedua</h4>
 
 			<a class="btn btn-block btn-primary" href="<?php L(array('controller' => 'participant', 'action' => 'participant_list')) ?>">Unduh daftar seluruh peserta dalam format Excel</a>
+			<a class="btn btn-block btn-primary" href="<?php L(array('controller' => 'chapter', 'action' => 'participant_tab')) ?>">Unduh template tabulasi standar dalam format Excel</a>
+
+			<h4>PIN Pendaftaran</h4>
+			<p>
+				<a class="btn btn-block" href="<?php L(array('controller' => 'registration_code', 'action' => 'index', 'chapter_id' => $id)) ?>">Daftar PIN yang sudah diterbitkan</a>
+			</p>
+
+			<?php if ($chapter->is_national_office()): ?>
+			<p>
+				<a class="btn btn-block" href="<?php L(array('controller' => 'registration_code', 'action' => 'issue')) ?>">Terbitkan PIN baru (outreach)</a>
+			</p>
+			<?php endif; ?>
 		</div>
 		<div class="span4">
 
