@@ -186,6 +186,25 @@ if ($this->user->chapter->is_national_office()) {
 
 <?php print_statbox('Asal Kota', $stats['city']['data']['series'], 'kota') ?>
 
+<?php
+
+foreach (Helium::conf('partners') as $region => $countries) {
+	$n_countries = count($countries);
+	$key_base = 'pref_' . $region . '_';
+	for ($i = 1; $i <= $n_countries; $i++) {
+		$key = $key_base . $i;
+		$region_names = array('asia' => 'Kawasan Asia', 'americas' => 'Kawasan Amerika', 'europe' => 'Kawasan Eropa');
+		if (is_array($stats[$key]['data']['series'])) {
+			print_statbox('Pilihan Negara ' . $region_names[$region] . ' Ke-' . $i, $stats[$key]['data']['series'], 'negara', 0.01, $countries);
+		}
+	}
+}
+
+if ($stats['country_preferences_other']['data']) {
+	print_statbox('Pilihan Negara Lainnya', $stats['country_preferences_other']['data']['series'], 'negara');
+}
+?>
+
 <?php /*
 <article class="statbox countries">
 	<header>Pilihan Negara</header>

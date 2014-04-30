@@ -109,12 +109,10 @@ class RegistrationCodeController extends AppController {
 				
 				// Latest expiry is set in config.php
 				// Ignore this for national admin
-				if (!$is_national_admin) {
-					$max_expiry = new HeliumDateTime(Helium::conf('registration_deadline'), $timezone);
-					if ($expires_on->later_than($max_expiry)) {
-						$expiry_flag = true;
-						$expires_on = $max_expiry;
-					}
+				$max_expiry = new HeliumDateTime(Helium::conf('registration_deadline'), $timezone);
+				if ($expires_on->later_than($max_expiry) && !$is_national_admin) {
+					$expiry_flag = true;
+					$expires_on = $max_expiry;
 				}
 
 				$expires_on->setTimezone(Helium::conf('site_timezone'));

@@ -379,6 +379,19 @@ IF(in_pesantren,
 					),
 				);
 
+				foreach (Helium::conf('partners') as $region => $countries) {
+					$n_countries = count($countries);
+					$key_base = 'pref_' . $region . '_';
+					for ($i = 1; $i <= $n_countries; $i++) {
+						$key = $key_base . $i;
+						$stats[$key] = array(
+							'type' => 'pie',
+							'field' => $key,
+							'partition' => 'applicant_program_choices'
+						);
+					}
+				}
+
 				if ($constraints)
 					$constraint_string = '(' . implode(') AND (', $constraints) . ')';
 				else
@@ -416,6 +429,35 @@ IF(in_pesantren,
 					$stats[$key]['data'] = compact('series', 'total');
 				}
 				
+				// Other contry preferences - special stats
+				$additional_country_preferences_base_query =
+					"SELECT country_preference_other FROM applicants INNER JOIN applicant_program_choices ON applicant_program_choices.applicant_id = applicants.id WHERE %s";
+
+				$the_query = sprintf($additional_country_preferences_base_query, $constraint_string);
+				$values = $db->get_col($the_query);
+				if (is_array($values)) {
+					$series = array();
+					$total = 0;
+					foreach ($values as $country_preferences) {
+						$countries = trim($country_preferences);
+						$countries = preg_split("/\s*[;,\/]\s*/", $countries);
+
+						foreach ($countries as $country) {
+							if ($series[$country])
+								$series[$country]++;
+							else
+								$series[$country] = 1;
+
+							$total++;
+						}
+					}
+					$stats['country_preferences_other'] = array();
+					$stats['country_preferences_other']['data'] = compact('series', 'total');
+				}
+				else {
+					$stats['country_preferences_other'] = array('series' => array(), 'total' => 0);
+				}
+
 				// country preferences - special stats
 				/*
 				$countries = $db->get_col("SELECT country_preference_1, COUNT(*) AS rows  FROM applicant_program_choices WHERE country_preference_1 IS NOT NULL AND country_preference_1 != '' GROUP BY country_preference_1 ORDER BY rows DESC");
