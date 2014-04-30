@@ -9,9 +9,9 @@
 
 $batch_count = $this->get_batch_count();
 if ($batch_count == 0)
-	$nav_array = array(	'create_batch' => 'Masukkan Data Kelulusan' );
+	$nav_array = array(	'create_batch' => 'Masukkan Daftar Kelulusan' );
 elseif ($batch_count == 1)
-	$nav_array = array(	'edit_batch' => 'Pengaturan Seleksi',
+	$nav_array = array(	'edit_batch' => 'Pengaturan Ruangan Seleksi Tahap Kedua',
 						'create_batch' => 'Tambahkan Gelombang Pengumuman', );
 else
 	$nav_array = array(	'index' => 'Daftar Gelombang Pengumuman',
