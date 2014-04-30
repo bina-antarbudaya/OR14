@@ -95,5 +95,25 @@ class Chapter extends HeliumRecord {
 		$participants->include_association('applicant');
 		$participants->narrow(array('applicants.chapter_id' => $this->id));
 	}
+
+	public static function ensure_applicants_migrated($chapter_id) {
+		$db = Helium::db();
+		$chapter_id = intval($chapter_id);
+		if (!$chapter_id) {
+			throw new HeliumException('No chapter_id provided in Chapter::ensure_applicants_migrated.');
+		}
+
+		$check_query = "SELECT COUNT(*) FROM participants WHERE applicant_id IN (" .
+					   "SELECT id FROM applicants WHERE chapter_id=$chapter_id )";
+
+		if (intval($db->get_var($check_query)) > 0) {
+			return;
+		}
+
+		$query = "INSERT INTO participants (applicant_id) " .
+				 "SELECT id FROM applicants WHERE applicants.finalized=1 AND applicants.chapter_id=$chapter_id";
+
+		$try = $db->query($query);
+	}
 }
 
