@@ -247,48 +247,76 @@
 					<td rowspan="4">
 						<span title="Siswa yang telah menyelesaikan pendaftaran">
 							<strong><?php echo $finalized_applicant_count ?></strong>
-							peserta total (sudah finalisasi)
+							peserta total<br>
+							(peserta yang sudah finalisasi)
 						</span>
 					</td>
-					<td rowspan="3" data-stage="active">
+					<td rowspan="3" data-stage="selection_2">
 						<span title="Siswa yang telah lulus Seleksi Tahap Pertama dan berhak mengikuti Seleksi Tahap Kedua">
-							<strong class="text-success"><?php echo $participant_count_passed_1 ?></strong>
+							<strong class="text-success"><?php
+								if ($participant_count_passed_1)
+									echo $participant_count_passed_1;
+								else
+									echo '&mdash;';
+							?></strong>
 							lulus seleksi tahap pertama
 						</span>
 					</td>
-					<td rowspan="2" data-stage="finalized">
+					<td rowspan="2" data-stage="selection_3">
 						<span title="Siswa yang telah lulus Seleksi Tahap Kedua dan berhak mengikuti Seleksi Tahap Ketiga">
-							<strong class="text-success"><?php echo $participant_count_passed_2 ?></strong>
+							<strong class="text-success"><?php
+								if ($participant_count_passed_2)
+									echo $participant_count_passed_2;
+								else
+									echo '&mdash;';
+							?></strong>
 							lulus seleksi tahap kedua
 						</span>
 					</td>
-					<td data-stage="confirmed">
+					<td data-stage="national_candidate">
 						<span title="Siswa yang telah lulus Seleksi Tahap Ketiga dan menjadi Kandidat Chapter untuk Seleksi Nasional">
-							<strong class="text-success"><?php echo $participant_count_passed_3 ?></strong>
+							<strong class="text-success"><?php
+								if ($participant_count_passed_3)
+									echo $participant_count_passed_3;
+								else
+									echo '&mdash;';
+							?></strong>
 							lulus seleksi tahap ketiga
 						</span>
 					</td>
 				</tr>
 				<tr>
-					<td data-stage="not_yet_confirmed">
+					<td data-stage="failed_selection_3">
 						<span title="Siswa yang tidak lulus Seleksi Tahap Ketiga">
-							<strong class="text-warning"><?php echo $participant_count_passed_2 - $participant_count_passed_3 ?></strong>
+							<strong class="text-warning"><?php
+								if ($participant_count_failed_3)
+									echo $participant_count_failed_3;
+								else
+									echo '&mdash;' ?></strong>
 							gagal seleksi tahap ketiga
 						</span>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" data-stage="incomplete">
+					<td colspan="2" data-stage="failed_selection_2">
 						<span title="Siswa yang tidak lulus Seleksi Tahap Kedua">
-							<strong class="text-warning"><?php echo $participant_count_passed_1 - $participant_count_passed_2 ?></strong>
+							<strong class="text-warning"><?php
+								if ($participant_count_failed_2)
+									echo $participant_count_failed_2;
+								else
+									echo '&mdash;' ?></strong>
 							gagal seleksi tahap kedua
 						</span>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3" data-stage="expired">
+					<td colspan="3" data-stage="failed_selection_1">
 						<span title="Siswa yang tidak lulus Seleksi Tahap Pertama">
-							<strong class="text-warning"><?php echo $finalized_applicant_count - $participant_count_passed_1 ?></strong>
+							<strong class="text-warning"><?php
+								if ($participant_count_failed_1)
+									echo $participant_count_failed_1;
+								else
+									echo '&mdash;' ?></strong>
 							gagal seleksi tahap pertama
 						</span>
 					</td>

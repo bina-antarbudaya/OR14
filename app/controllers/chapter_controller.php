@@ -157,7 +157,9 @@ class ChapterController extends AppController {
 			$this['participant_count_passed_1'] = $db->get_var($participant_count_query . ' AND passed_selection_one=1');
 			$this['participant_count_passed_2'] = $db->get_var($participant_count_query . ' AND passed_selection_two=1');
 			$this['participant_count_passed_3'] = $db->get_var($participant_count_query . ' AND passed_selection_three=1');
-			$selection_fields = 
+			$this['participant_count_failed_1'] = $db->get_var($participant_count_query . ' AND passed_selection_one=0');
+			$this['participant_count_failed_2'] = $db->get_var($participant_count_query . ' AND passed_selection_two=0');
+			$this['participant_count_failed_3'] = $db->get_var($participant_count_query . ' AND passed_selection_three=0');
 
 			$selection_dates = array(
 				3 => date_create(Helium::conf('selection_three_date')),
@@ -237,11 +239,20 @@ class ChapterController extends AppController {
 			case 'selection_1':
 				$constraints[] = 'finalized=1';
 				break;
+			case 'failed_selection_1':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_one=0)';
+				break;
 			case 'selection_2':
 				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_one=1)';
 				break;
+			case 'failed_selection_2':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_two=0 AND passed_selection_one=1)';
+				break;
 			case 'selection_3':
 				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_two=1)';
+				break;
+			case 'failed_selection_3':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_two=0 AND passed_selection_two=1 AND passed_selection_one=1)';
 				break;
 			case 'national_selection':
 				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_three=1)';

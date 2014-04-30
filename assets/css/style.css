@@ -37,6 +37,10 @@ strong {
 	margin-bottom: 5px;
 }
 
+.nav-tabs > li.disabled > a:hover {
+	border-color: transparent;
+}
+
 /* Form extensions */
 .long {
 	display: block;

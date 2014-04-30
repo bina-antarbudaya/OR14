@@ -46,7 +46,10 @@ function LL($target) {
 		'selection_2' => 'Peserta Seleksi 2 (Lulus Seleksi 1)',
 		'selection_3' => 'Peserta Seleksi 3 (Lulus Seleksi 2)',
 		'national_selection' => 'Peserta Seleksi Nasional (Kandidat Chapter)',
-		'national_candidate' => 'Kandidat Nasional'
+		'national_candidate' => 'Kandidat Nasional',
+		'failed_selection_1' => 'Gagal Seleksi 1',
+		'failed_selection_2' => 'Gagal Seleksi 2',
+		'failed_selection_3' => 'Gagal Seleksi 3',
 	);
 	$sel_active = $sel_dropdown[$current_stage];
 	?>
