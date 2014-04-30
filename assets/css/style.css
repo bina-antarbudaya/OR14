@@ -393,6 +393,21 @@ table.counts.four-col td {
 	color: #666;
 }
 
+.chapter-dashboard .selection-todos dd {
+	padding-left: 15px;
+	padding-bottom: 6px;
+}
+.chapter-dashboard .selection-todos dd strong {
+	color: #000;
+}
+.chapter-dashboard .selection-todos dt {
+	padding-bottom: 9px;
+	padding-top: 9px;
+}
+.chapter-dashboard .selection-todos dt:first-child {
+	padding-top: 0;
+}
+
 .chapter-dashboard .applicant-search form {
 	margin-bottom: 4px;
 }

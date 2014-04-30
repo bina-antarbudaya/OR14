@@ -65,9 +65,12 @@ class HeliumCommonConfiguration extends HeliumDefaults {
 	public $selection_one_date = '2014-04-28';
 	public $selection_two_date = '2014-05-19';
 	public $selection_three_date = '2014-06-09';
-	public $selection_one_announcement_date = '2014-05-03 00:00:00'; // chapter time
-	public $selection_two_announcement_date = '2014-05-13 00:00:00'; // chapter time
-	public $selection_three_announcement_date = '2014-05-13 00:00:00'; // chapter time
+	public $selection_one_announcement_date = '2014-05-10 00:00:00'; // chapter time
+	public $selection_two_announcement_date = '2014-06-30 00:00:00'; // chapter time, NOT YET DECIDED
+	public $selection_three_announcement_date = '2014-06-30 00:00:00'; // chapter time, NOT YET DECIDED
+	public $results_deadline_selection_1 = '2014-05-07';
+	public $results_deadline_selection_2 = '2014-06-30';
+	public $results_deadline_selection_3 = '2014-06-30';
 
 	public $programs = array('afs', 'yes');
 	public $partners = array(

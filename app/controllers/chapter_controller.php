@@ -31,6 +31,16 @@ class ChapterController extends AppController {
 
 	/**
 	 * Dashboard
+	 * 
+	 * There are two 'phases', each with different functions on the dashboard:
+	 * - registration (before conf[registration_deadline]):
+	 *   Expose PIN generation, applicant count based on status
+	 *   (active, expired, finalized, etc)
+	 * - post_registration (after conf[registration_deadline]):
+	 *   Expose list of actions to prepare for selections
+	 *   (download tabulation template, upload participants that pass)
+	 *   as well as participant count based on selection stage
+	 *   (all, pass selection 1, pass selection 2, etc)
 	 */
 	public function dashboard() {
 		$this->require_authentication();
@@ -60,8 +70,13 @@ class ChapterController extends AppController {
 			$error = 'not_found';
 		}
 
-		// TODO change this
-		$current_phase = 'registration';
+		$registration_deadline = new HeliumDateTime(Helium::conf('registration_deadline'));
+		if ($registration_deadline->later_than('now')) {
+			$current_phase = 'registration';
+		}
+		else {
+			$current_phase = 'post_registration';
+		}
 
 		$this['current_phase'] = $current_phase;
 
@@ -72,89 +87,90 @@ class ChapterController extends AppController {
 				$this[$col] = $chapter->$col;
 			}
 
-			if ($this->can_register()) {
+			// Quick stats for registration phase
+			$this['registration_codes'] = $chapter->registration_codes;
+			$this['code_count'] = $chapter->registration_codes->count_all();
 
-				$this['registration_codes'] = $chapter->registration_codes;
-				$this['code_count'] = $chapter->registration_codes->count_all();
+			$ac = clone $chapter->registration_codes;
+			$ac->narrow('availability=0');
+			$this['ac'] = $ac;
+			$this['activated_code_count'] = $ac->count_all();
 
-				$ac = clone $chapter->registration_codes;
-				$ac->narrow('availability=0');
-				$this['ac'] = $ac;
-				$this['activated_code_count'] = $ac->count_all();
+			$now = new HeliumDateTime;
+			$ec = clone $chapter->registration_codes;
+			$ec->narrow("availability=1 AND expires_on < '$now'");
+			$this['expired_code_count'] = $ec->count_all();
 
-				$now = new HeliumDateTime;
-				$ec = clone $chapter->registration_codes;
-				$ec->narrow("availability=1 AND expires_on < '$now'");
-				$this['expired_code_count'] = $ec->count_all();
+			$vc = clone $chapter->registration_codes;
+			$vc->narrow("availability=1 AND expires_on > '$now'");
+			$this['available_code_count'] = $vc->count_all();
 
-				$vc = clone $chapter->registration_codes;
-				$vc->narrow("availability=1 AND expires_on > '$now'");
-				$this['available_code_count'] = $vc->count_all();
+			$this['applicants'] = $chapter->applicants;
+			$this['total_applicant_count'] = $chapter->applicants->count_all();
 
-				$this['applicants'] = $chapter->applicants;
-				$this['total_applicant_count'] = $chapter->applicants->count_all();
+			$aa = clone $chapter->applicants;
+			$aa->narrow("(finalized=1 OR expires_on > '$now')");
+			$this['active_applicant_count'] = $aa->count_all();
 
-				$aa = clone $chapter->applicants;
-				$aa->narrow("(finalized=1 OR expires_on > '$now')");
-				$this['active_applicant_count'] = $aa->count_all();
+			$ca = clone $chapter->applicants;
+			$ca->narrow('confirmed=1');
+			$this['confirmed_applicant_count'] = $ca->count_all();
 
-				$ca = clone $chapter->applicants;
-				$ca->narrow('confirmed=1');
-				$this['confirmed_applicant_count'] = $ca->count_all();
+			$this['applicant_tipping_point'] = $ca->count_all() == $aa->count_all();
 
-				$this['applicant_tipping_point'] = $ca->count_all() == $aa->count_all();
+			$fa = clone $chapter->applicants;
+			$fa->narrow('finalized=1');
+			$this['finalized_applicant_count'] = $fa->count_all();
 
-				$fa = clone $chapter->applicants;
-				$fa->narrow('finalized=1');
-				$this['finalized_applicant_count'] = $fa->count_all();
+			$this['incomplete_applicant_count'] = $aa->count_all() - $fa->count_all();
 
-				$this['incomplete_applicant_count'] = $aa->count_all() - $fa->count_all();
+			$nca = clone $chapter->applicants;
+			$nca->narrow('finalized=1 && confirmed=0');
+			$this['not_yet_confirmed_applicant_count'] = $nca->count_all();
 
-				$nca = clone $chapter->applicants;
-				$nca->narrow('finalized=1 && confirmed=0');
-				$this['not_yet_confirmed_applicant_count'] = $nca->count_all();
+			$ea = clone $chapter->applicants;
+			$ea->narrow("finalized=0 AND expires_on < '$now'");
+			$this['expired_applicant_count'] = $ea->count_all();
 
-				$ea = clone $chapter->applicants;
-				$ea->narrow("finalized=0 AND expires_on < '$now'");
-				$this['expired_applicant_count'] = $ea->count_all();
+			// Weird
+			$na = clone $chapter->applicants;
+			$na->narrow("confirmed=0 AND finalized=1 AND expires_on <'$now'");
+			$this['anomalous_applicant_count'] = $na->count_all();
 
-				// Weird
-				$na = clone $chapter->applicants;
-				$na->narrow("confirmed=0 AND finalized=1 AND expires_on <'$now'");
-				$this['anomalous_applicant_count'] = $na->count_all();
+			$na = clone $chapter->applicants;
+			$na->set_order_by('id');
+			$na->set_order('DESC');
+			$na->narrow("sanitized_full_name != ''");
+			$na->set_batch_length(10);
 
-				$na = clone $chapter->applicants;
-				$na->set_order_by('id');
-				$na->set_order('DESC');
-				$na->narrow("sanitized_full_name != ''");
-				$na->set_batch_length(10);
+			$this['na'] = $na;
 
-				$this['na'] = $na;
+			// Quick stats post-registration
+			$db = Helium::db();
+			$participant_count_query =
+				'SELECT COUNT(*) FROM applicants INNER JOIN participants ' .
+				'ON applicants.id=participants.applicant_id WHERE applicants.finalized=1';
+			if (!$this['national'])
+				$participant_count_query .= ' AND chapter_id=' . $this->user->chapter_id;
+
+			$this['participant_count'] = $db->get_var($participant_count_query);
+			$this['participant_count_passed_1'] = $db->get_var($participant_count_query . ' AND passed_selection_one=1');
+			$this['participant_count_passed_2'] = $db->get_var($participant_count_query . ' AND passed_selection_two=1');
+			$this['participant_count_passed_3'] = $db->get_var($participant_count_query . ' AND passed_selection_three=1');
+			$selection_fields = 
+
+			$selection_dates = array(
+				3 => date_create(Helium::conf('selection_three_date')),
+				2 => date_create(Helium::conf('selection_two_date')),
+				1 => date_create(Helium::conf('selection_one_date')) );
+			$now = new DateTime('now');
+			
+			$next_selection_stage = 'national';
+			foreach ($selection_dates as $n => $date) {
+				if ($now < $date)
+					$next_selection_stage = $n;
 			}
-			else {
-				$db = Helium::db();
-				$pcq = 'SELECT COUNT(*) FROM participants INNER JOIN applicants ON applicants.id=participants.applicant_id WHERE 1 ';
-				if (!$this['national'])
-					$pcq .= 'AND chapter_id=' . $this->user->chapter_id;
-
-				$this['participant_count'] = $db->get_var($pcq);
-				$this['participant_count_2'] = $db->get_var($pcq . ' AND passed_selection_one=1');
-				$this['participant_count_3'] = $db->get_var($pcq . ' AND passed_selection_two=1');
-				$this['participant_count_4'] = $db->get_var($pcq . ' AND passed_selection_three=1');
-				$selection_fields = 
-
-				$selection_dates = array(
-					3 => date_create(Helium::conf('selection_three_date')),
-					2 => date_create(Helium::conf('selection_two_date')),
-					1 => date_create(Helium::conf('selection_one_date')), );
-				$now = new DateTime('now');
-				
-				foreach ($selection_dates as $n => $date) {
-					if ($now < $date)
-						$next_selection_stage = $n;
-				}
-				$this['next_selection_stage'] = $next_selection_stage;
-			}
+			$this['next_selection_stage'] = $next_selection_stage;
 			
 			$this->session['chapter_back_to'] = $this->params;
 		}
@@ -359,22 +375,22 @@ class ChapterController extends AppController {
 					'school_education_type' => array(
 						'type' => 'pie',
 						'field' => "
-IF(in_pesantren,
-	'Pesantren',
-	IF(sanitized_high_school_name != '',
-		IF(sanitized_high_school_name LIKE 'SMA%',
-			'SMA',
-			IF (sanitized_high_school_name LIKE 'SMK %',
-				'SMK',
-				IF(sanitized_high_school_name LIKE 'MA %',
-					'MA',
-					'Sekolah internasional, home schooling, atau jenis sekolah lainnya'
-				)
-			)
-		),
-		''
-	)
-)",
+							IF(in_pesantren,
+								'Pesantren',
+								IF(sanitized_high_school_name != '',
+									IF(sanitized_high_school_name LIKE 'SMA%',
+										'SMA',
+										IF (sanitized_high_school_name LIKE 'SMK %',
+											'SMK',
+											IF(sanitized_high_school_name LIKE 'MA %',
+												'MA',
+												'Sekolah internasional, home schooling, atau jenis sekolah lainnya'
+											)
+										)
+									),
+									''
+								)
+							)",
 						'partition' => 'applicant_program_choices'
 					),
 				);
