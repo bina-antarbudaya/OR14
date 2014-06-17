@@ -22,7 +22,7 @@ $(function() {
 	
 	<?php if (!$stage): ?>
 	<section class="intro">
-		<h1>Pemasukan data kelulusan</h1>
+		<h1>Pemasukan Daftar Kelulusan Seleksi Tahap Kedua</h1>
 
 		<p>Pengumuman kelulusan Seleksi Tahap Kedua dapat dilakukan serentak atau secara bergelombang. Untuk melakukan pengumuman serentak, cukup mengisi formulir ini satu kali. Untuk melakukan pengumuman secara bergelombang, kembali ke laman ini setelah mengisi formulir ini.</p>
 		
@@ -45,14 +45,16 @@ $(function() {
 					<td class="label"><label for="test_ids">Nomor peserta yang lulus Seleksi Tahap Kedua</label></td>
 					<td class="field">
 					<?php $form->textarea('test_ids', 'large') ?><br>
-					<span class="instruction">Salin langsung satu kolom dari Excel, atau pisahkan dengan spasi, tanda koma, atau baris baru.</span>
+					<span class="instruction">Salin langsung satu kolom dari Excel, atau pisahkan nomor peserta dengan spasi, tanda koma, atau baris baru.</span>
 					</td>
 				</tr>
 				<tr>
 					<td class="label"><label for="announcement_date">Tanggal pengumuman (pukul 00.00 WIB)</label></td>
 					<td class="field">
 					<!-- <div id="announcement-date"><?php $form->date('announcement_date') ?></div>
-										<?php $form->checkbox('announcement_date_follows_national') ?> --><input type="checkbox" checked disabled> Ikuti Kantor Nasional
+										<?php $form->checkbox('announcement_date_follows_national') ?> -->
+						<input type="checkbox" checked disabled> Ikuti Kantor Nasional
+						<strong>(<?php echo $default_announcement_date->format('l, j F Y') ?>)</strong>
 					</td>
 				</tr>
 				<tr>
@@ -65,7 +67,7 @@ $(function() {
 	
 	<?php elseif ($stage == 'confirm'): ?>
 		<section class="intro">
-			<h1><?php echo (int) count($participants); ?> peserta</h1>
+			<h1><?php echo (int) count($participants); ?> peserta ditemukan</h1>
 
 			<p>Periksa kembali data peserta di sebelah kanan. Jika sesuai dengan keputusan Dewan Juri Chapter, tekan Simpan.</p>
 			
