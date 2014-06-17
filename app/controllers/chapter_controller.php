@@ -262,6 +262,17 @@ class ChapterController extends AppController {
 				break;
 		}
 
+		// Interested in volunteering/hosting
+		$interested_in = $this->params['interested_in'] ? $this->params['interested_in'] : '';
+		switch ($interested_in) {
+			case 'volunteering':
+				$constraints[] = 'id IN (SELECT applicant_id FROM applicant_referral WHERE interested_volunteering=1)';
+				break;
+			case 'hosting':
+				$constraints[] = 'id IN (SELECT applicant_id FROM applicant_referral WHERE interested_hosting=1)';
+				break;
+		}
+
 		// Other, free-text filters
 		$filter = $this->params;
 		if ($filter['name'] || $filter['school_name'] || $filter['combo']) {
