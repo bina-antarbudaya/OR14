@@ -10,12 +10,16 @@
 	
 	<?php if (!$stage): ?>
 	<section class="intro">
-		<h1>Pemasukan data kelulusan</h1>
-		<p>Silakan masukkan nomor-nomor peserta yang lulus Seleksi Tahap Ketiga.</p>
+		<h1>Pemasukan Daftar Kelulusan Seleksi Tahap Ketiga</h1>
+
+		<p>Pengumuman kelulusan Seleksi Tahap Ketiga hanya dapat dilakukan secara <strong>serentak</strong>.
+		Jika daftar kelulusan Seleksi Tahap Ketiga sudah pernah dimasukkan Kakak sebelumnya,
+		maka daftar kelulusan yang Kakak isi pada laman ini akan menimpa (<i>override</i>) daftar tersebut.</p>
+
 		<p>Pada halaman berikutnya, Kakak akan diberi kesempatan untuk memastikan keabsahan dari data yang Kakak masukkan.</p>
-		<?php if ($this->get_batch_count() == 1): ?>
+		<?php /* if ($this->get_batch_count() == 1): ?>
 		<p><?php echo $this->user->chapter->get_title(); ?> sudah memasukkan daftar kelulusan sebelumnya. Isi formulir ini untuk menambahkan gelombang pengumuman kelulusan baru, atau <a href="<?php L(array('action' => 'index')) ?>">edit yang sudah ada</a>.</p>
-		<?php endif; ?>
+		<?php endif; */ ?>
 	</section>
 	
 	<section class="form">
@@ -31,7 +35,7 @@
 					<td class="label"><label for="test_ids">Nomor peserta yang lulus Seleksi Tahap Ketiga</label></td>
 					<td class="field">
 					<?php $form->textarea('test_ids', 'large') ?><br>
-					<span class="instruction">Salin langsung satu kolom dari Excel, atau pisahkan dengan spasi, tanda koma, atau baris baru.</span>
+					<span class="instruction">Salin langsung satu kolom dari Excel, atau pisahkan nomor peserta dengan spasi, tanda koma, atau baris baru.</span>
 					</td>
 				</tr>
 				<tr>
@@ -44,7 +48,7 @@
 	
 	<?php elseif ($stage == 'confirm'): ?>
 		<section class="intro">
-			<h1><?php echo (int) count($participants); ?> peserta</h1>
+			<h1><?php echo (int) count($participants); ?> peserta ditemukan</h1>
 
 			<p>Periksa kembali data peserta di sebelah kanan. Jika sesuai dengan keputusan Dewan Juri Chapter, tekan Simpan.</p>
 			

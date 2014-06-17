@@ -196,7 +196,7 @@
 				else
 					echo 'Tahap Pertama';
 			?></h4>
-			<dl class='selection-todos'>
+			<dl class="selection-todos">
 				<dt>
 					<a href="<?php L(array('controller' => 'chapter', 'action' => 'participant_tab')) ?>"
 					   class="btn btn-block btn-primary">Unduh <strong>lembar tabulasi standar</strong> (Format MS Excel)</a>
@@ -210,7 +210,34 @@
 					<strong><?php echo $results_deadline->format('l, j F Y') ?></strong>.
 				</dd>
 		<?php if ($next_selection_stage > 3): ?>
+				<dt>
+					<a href="<?php L(array('controller' => 'selection_three_announcement', 'action' => 'announce')) ?>"
+					   class="btn btn-block btn-primary">Masukkan <strong>daftar kelulusan</strong> Seleksi Tahap Ketiga</a>
+				</dt>
+				<dd>
+					Daftar tersebut berbeda dengan lembar tabulasi dan digunakan untuk mengumumkan
+					kelulusan peserta melalui web ini.
+				</dd>
 		<?php elseif ($next_selection_stage > 2): ?>
+				<dt>
+					<a href="<?php L(array('controller' => 'selection_three', 'action' => 'create_batch')) ?>"
+					   class="btn btn-block btn-primary">Masukkan <strong>daftar kelulusan</strong> Seleksi Tahap Kedua</a>
+				</dt>
+				<dd>
+					Daftar tersebut berbeda dengan lembar tabulasi dan digunakan untuk mengumumkan
+					kelulusan peserta melalui web ini.
+				</dd>
+			</dl>
+			<h4>Persiapan Seleksi Tahap Kedua Bergelombang</h4>
+			<dl class="selection-todos">
+				<dt>
+					<a href="<?php L(array('controller' => 'selection_two', 'action' => 'create_batch')) ?>"
+					   class="btn btn-block btn-primary">Masukkan <strong>daftar kelulusan</strong> Seleksi Tahap Pertama</a>
+				</dt>
+				<dd>
+					Pranala di atas hanya untuk digunakan chapter yang memilih untuk menyelenggarakan
+					Seleksi Tahap Kedua secara bergelombang.
+				</dd>
 		<?php elseif ($next_selection_stage > 1):
 			$announcement_date = new HeliumDateTime(Helium::conf('selection_one_announcement_date'));
 		?>

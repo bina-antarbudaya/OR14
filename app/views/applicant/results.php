@@ -41,7 +41,7 @@
 				<?php if ($selection_to_announce < 3): ?>
 				<p>Adik lulus Seleksi Tahap <?php echo $m[$selection_to_announce] ?> Bina Antarbudaya.</p>
 				<?php else: ?>
-				<p>Adik telah lulus seluruh rangkaian seleksi tingkat chapter! Selanjutnya, Adik akan dijadikan finalis dari <?php echo $applicant->chapter->get_title(); ?> untuk melanjutkan seleksi ke Tingkat Nasional. Tunggu pengumuman selanjutnya.</p>
+				<p>Adik telah lulus seluruh rangkaian seleksi tingkat chapter! Selanjutnya, Adik akan menjadi salah satu kandidat dari <?php echo $applicant->chapter->get_title(); ?> untuk melanjutkan seleksi ke tingkat nasional. Tunggu pengumuman selanjutnya!</p>
 				<?php endif; ?>
 			</section>
 			<?php

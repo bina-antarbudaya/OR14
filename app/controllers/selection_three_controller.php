@@ -131,6 +131,8 @@ class SelectionThreeController extends AppController {
 
 			$this['chapters'] = $ch;
 		}
+
+		$this['default_announcement_date'] = new HeliumDateTime(Helium::conf('selection_two_announcement_date'));
 	}
 
 	public function view_batch() {

@@ -167,7 +167,7 @@ class ChapterController extends AppController {
 				1 => date_create(Helium::conf('selection_one_date')) );
 			$now = new DateTime('now');
 			
-			$next_selection_stage = 'national';
+			$next_selection_stage = 4;
 			foreach ($selection_dates as $n => $date) {
 				if ($now < $date)
 					$next_selection_stage = $n;
@@ -258,6 +258,7 @@ class ChapterController extends AppController {
 				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_selection_three=1)';
 				break;
 			case 'national_candidate':
+				$constraints[] = 'id IN (SELECT applicant_id FROM participants WHERE passed_national_selection=1)';
 				break;
 		}
 
@@ -966,7 +967,7 @@ class ChapterController extends AppController {
 	}
 
 	public function participant_tab() {
-		$q = 'SELECT test_id, sanitized_full_name, sanitized_high_school_name, grades_y10t1_average FROM applicants INNER JOIN applicant_secondary_school_grade_history ON applicants.id=applicant_secondary_school_grade_history.applicant_id WHERE id IN (SELECT applicant_id FROM participants) ';
+		$q = 'SELECT test_id, sanitized_full_name, sanitized_high_school_name, grades_y10t1_average FROM applicants INNER JOIN applicant_secondary_school_grade_history ON applicants.id=applicant_secondary_school_grade_history.applicant_id WHERE finalized=1 ';
 		
 		if ($this->session->user->capable_of('national_admin') && $this->params['chapter_id'])
 			$q .= 'AND chapter_id=' . (int) $this->params['chapter_id'];
