@@ -300,7 +300,7 @@
 							lulus seleksi tahap kedua
 						</span>
 					</td>
-					<td data-stage="national_candidate">
+					<td data-stage="national_selection">
 						<span title="Siswa yang telah lulus Seleksi Tahap Ketiga dan menjadi Kandidat Chapter untuk Seleksi Nasional">
 							<strong class="text-success"><?php
 								if ($participant_count_passed_3)
