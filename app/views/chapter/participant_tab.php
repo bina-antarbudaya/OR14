@@ -38,6 +38,9 @@ foreach ($weighted_cols as $l => $w)
 	$cells[$l . '5'] = 'Nilai terbobot (' . ($w * 100) . '%)';
 
 // load data
+if (!$participants)
+	$participants = array();
+
 foreach ($participants as $a) {
 	$cells['B' . $i] = $a->test_id;
 	$cells['C' . $i] = str_replace('  ', ' ', $a->sanitized_full_name);
