@@ -2,3 +2,4 @@
 uploads/
 /app/config.cloud.php
 app/error.log
+app/vendor/
